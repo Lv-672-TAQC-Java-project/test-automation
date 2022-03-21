@@ -1,7 +1,6 @@
 package com.softserveinc.ita.RomanVytrykush;
 
 import com.codeborne.selenide.*;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Selenide.$x;
