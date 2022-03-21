@@ -20,9 +20,9 @@ public class GoogleTest {
         $x(inputFieldPath).sendKeys(searchTerm);
         $x(inputFieldPath).sendKeys(ENTER);
 
-        $x("//a[@aria-label = 'Page 2']").shouldBe(Condition.visible, Duration.ofSeconds(20));
+        $x("//span[contains(text(),'Next')]").isDisplayed();
         $x("//a[@aria-label = 'Page 4']").click();
-        $x("//a[@aria-label = 'Page 1']").shouldBe(Condition.visible, Duration.ofSeconds(20));
+        $x("//span[contains(text(),'Previous')]").isDisplayed();
 
     }
 }
