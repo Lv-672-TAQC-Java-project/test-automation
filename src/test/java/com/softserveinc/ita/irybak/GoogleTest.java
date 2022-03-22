@@ -15,12 +15,13 @@ public class GoogleTest {
         Configuration.timeout = 30 * 1000;
         open("https://google.com");
 
-        String searchTerm = "funny kitten";
+        String searchTerm = "funny dogs";
         String inputFieldPath = "//input[@name = 'q']";
         $x(inputFieldPath).sendKeys(searchTerm);
         $x(inputFieldPath).sendKeys(ENTER);
 
-        $x("//h2[@class ='Uo8X3b OhScic zsYMMe']/..//div[@class = 'ct3b9e']//h3[@class = 'LC20lb MBeuO DKV0Md']")
-                .shouldBe(visible);
+        $x("//*[@id='pnnext']/span[2]")
+                .shouldBe(visible
+                        .because("The next link should be displayed"));
     }
 }
