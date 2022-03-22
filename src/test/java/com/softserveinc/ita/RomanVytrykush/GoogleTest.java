@@ -8,13 +8,12 @@ import static com.codeborne.selenide.Selenide.$x;
 public class GoogleTest {
 
     @Test
-    public void verifyThatGoogleLogoIsPresent () {
+    public void verifyThatGoogleLogoIsPresent() {
         Configuration.browser = "chrome";
         Configuration.timeout = 10000;
         Selenide.open("https://www.google.com/");
 
-        $x("//*[@name = 'q']").sendKeys("funny dogs");
-        $x("//*[@name = 'q']").pressEnter();
+        $x("//*[@name = 'q']").setValue("funny dogs").pressEnter();
         $x("//*[@id = 'logo']").shouldBe(Condition.visible);
 
         WebDriverRunner.getWebDriver().quit();
