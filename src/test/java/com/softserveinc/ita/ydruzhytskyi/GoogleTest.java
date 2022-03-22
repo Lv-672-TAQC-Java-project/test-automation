@@ -22,6 +22,5 @@ public class GoogleTest {
 
         $x("(//div[@class='g dFd2Tb'])[9]/descendant::div[@class='ct3b9e']/a")
                 .shouldHave(attributeMatching("href", "^https?:\\/\\/[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"));
-
     }
 }
