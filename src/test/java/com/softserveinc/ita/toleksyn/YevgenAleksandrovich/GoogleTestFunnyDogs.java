@@ -19,6 +19,10 @@ public class GoogleTestFunnyDogs {
         $(By.name("q")).val("funny dogs").pressEnter();
         $$("#employees tbody tr").shouldHave(
                 texts("funny dogs"));
+        $x("(//div[@class='g dFd2Tb'])[9]/descendant::div[@class='ct3b9e']/a")
+                .shouldHave(attribute("href"))
+                .shouldHave(text("https://")
+                        .because("URL should be valid"));
     }
 
 }
