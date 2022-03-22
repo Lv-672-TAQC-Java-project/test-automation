@@ -3,14 +3,9 @@ package com.softserveinc.ita.ydruzhytskyi;
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.Test;
 
-import java.net.MalformedURLException;
-import java.net.URISyntaxException;
-import java.net.URL;
-
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.open;
+import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.*;
 import static org.openqa.selenium.Keys.ENTER;
-import static org.testng.Assert.assertTrue;
 
 public class GoogleTest {
 
@@ -25,17 +20,8 @@ public class GoogleTest {
         $x(inputFieldPath).sendKeys(searchTerm);
         $x(inputFieldPath).sendKeys(ENTER);
 
-        String url = $x("(//div[@class='g dFd2Tb'])[9]/descendant::div[@class='ct3b9e']/a").getAttribute("href");
-        assertTrue(isValidURL(url));
-    }
+        $x("(//div[@class='g dFd2Tb'])[9]/descendant::div[@class='ct3b9e']/a")
+                .shouldHave(attributeMatching("href", "^https?:\\/\\/[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]"));
 
-    private boolean isValidURL(String url) {
-        try {
-            new URL(url).toURI();
-        } catch (MalformedURLException | URISyntaxException e) {
-            return false;
-        }
-
-        return true;
     }
 }
