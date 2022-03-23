@@ -1,3 +1,5 @@
+package com.softserveinc.ita;
+
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
