@@ -7,6 +7,7 @@ import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
 public class GoogleTest {
+
     @Test
     public void verifyThatNextAndPreviousLinkIsDisplayed(){
         Configuration.browser = "chrome";
