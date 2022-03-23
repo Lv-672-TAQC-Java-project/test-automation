@@ -1,20 +1,16 @@
 package com.softserveinc.ita.ydruzhytskyi;
 
-import com.codeborne.selenide.Configuration;
+import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.*;
 import static org.openqa.selenium.Keys.ENTER;
 
-public class GoogleTest {
+public class GoogleTest extends TestRunner {
 
     @Test
     public void verifyThatLinkHasHrefAttributeWithValidUrl() {
-        Configuration.browser = "chrome";
-        Configuration.timeout = 30 * 1000;
-        open("https://google.com");
-
         String searchTerm = "funny dogs";
         String inputFieldPath = "//input[@class='gLFyf gsfi']";
         $x(inputFieldPath).sendKeys(searchTerm);
