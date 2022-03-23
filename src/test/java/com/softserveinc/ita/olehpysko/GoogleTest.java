@@ -1,18 +1,16 @@
-package com.softserveinc.ita.OlehPysko;
+package com.softserveinc.ita.olehpysko;
 
-import com.codeborne.selenide.*;
+import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
-public class GoogleTest {
+public class GoogleTest extends TestRunner {
 
     @Test
-    public void verifyThatNextAndPreviousLinkIsDisplayed(){
-        Configuration.browser = "chrome";
-        Selenide.open("https://google.com");
-
+    public void verifyThatNextAndPreviousLinkIsDisplayed() {
         String searchTerm = "funny dogs";
         String inputFieldPath = "//input[@class='gLFyf gsfi']";
         $x(inputFieldPath).sendKeys(searchTerm);
