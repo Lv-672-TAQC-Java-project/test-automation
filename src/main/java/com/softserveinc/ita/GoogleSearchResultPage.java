@@ -27,4 +27,10 @@ public class GoogleSearchResultPage {
 
         return $x(linkText).text();
     }
+
+    public GoogleHomePage backToHomePageByLogo() {
+        $x("//div[@class='logo']").click();
+
+        return new GoogleHomePage();
+    }
 }
