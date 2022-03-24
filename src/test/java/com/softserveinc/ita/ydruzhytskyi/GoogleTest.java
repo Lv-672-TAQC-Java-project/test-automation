@@ -1,24 +1,21 @@
 package com.softserveinc.ita.ydruzhytskyi;
 
+import com.softserveinc.ita.GoogleHomePage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
-import static org.openqa.selenium.Keys.ENTER;
+import static org.testng.Assert.assertTrue;
 
 public class GoogleTest extends TestRunner {
 
     @Test
-    public void verifyThatLinkHasHrefAttributeWithValidUrl() {
+    public void verifyThatLinkHasHrefAttributeWithValidUrl_PO() {
+        GoogleHomePage googleHomePage = new GoogleHomePage().open("https://google.com");
         String searchTerm = "funny dogs";
-        String inputFieldPath = "//input[@class='gLFyf gsfi']";
-        $x(inputFieldPath).sendKeys(searchTerm);
-        $x(inputFieldPath).sendKeys(ENTER);
+        String hrefValue = googleHomePage
+                .search(searchTerm)
+                .getHrefAttributeFromElement(9);
 
-        $x("(//div[@class='g dFd2Tb'])[9]/descendant::div[@class='ct3b9e']/a")
-                .shouldHave(attribute("href"))
-                .shouldHave(text("https://")
-                        .because("URL should be valid"));
+        assertTrue(hrefValue.contains("https://"));
     }
 }
