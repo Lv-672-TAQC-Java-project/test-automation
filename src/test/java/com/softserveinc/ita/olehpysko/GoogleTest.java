@@ -1,23 +1,24 @@
 package com.softserveinc.ita.olehpysko;
 
+import com.softserveinc.ita.GoogleGoToPage;
+import com.softserveinc.ita.GoogleHomePage;
+import com.softserveinc.ita.GoogleSearchResultPage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$x;
-import static org.openqa.selenium.Keys.ENTER;
+import static org.testng.Assert.*;
 
 public class GoogleTest extends TestRunner {
 
     @Test
     public void verifyThatNextAndPreviousLinkIsDisplayed() {
         String searchTerm = "funny dogs";
-        String inputFieldPath = "//input[@class='gLFyf gsfi']";
-        $x(inputFieldPath).sendKeys(searchTerm);
-        $x(inputFieldPath).sendKeys(ENTER);
+        GoogleSearchResultPage googleSearchResultPage = new GoogleHomePage()
+                .search(searchTerm);
 
-        $x("(//a[@id='pnnext']/span)[2]").shouldBe(visible.because("link Next is displayed"));
-        $x("//a[@aria-label = 'Page 4']").click();
-        $x("(//a[@id='pnprev']/span)[2]").shouldBe(visible.because("link Previous is displayed"));
+        assertNotNull(googleSearchResultPage.getNextLink(), "link Next is displayed");
+        GoogleGoToPage googleGoToPage = new GoogleGoToPage()
+                .goToPage(2);
+        assertNotNull(googleGoToPage.getPreviousLink(), "link Previous is displayed");
     }
 }

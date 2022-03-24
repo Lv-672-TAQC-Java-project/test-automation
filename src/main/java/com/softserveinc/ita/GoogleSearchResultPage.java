@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
 import static com.codeborne.selenide.Condition.empty;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
@@ -26,5 +27,11 @@ public class GoogleSearchResultPage {
         String linkText = String.format("(//div[@class = 'g dFd2Tb']) [%s]", numberOfLink);
 
         return $x(linkText).text();
+    }
+
+    public GoogleSearchResultPage getNextLink() {
+        $x("(//a[@id='pnnext']/span)[2]").shouldBe(visible);
+
+        return this;
     }
 }
