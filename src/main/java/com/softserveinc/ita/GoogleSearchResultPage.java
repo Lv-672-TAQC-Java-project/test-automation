@@ -33,5 +33,4 @@ public class GoogleSearchResultPage {
     public WebElement getGoogleLogo() {
         return $x("//*[@id = 'logo']");
     }
-
 }
