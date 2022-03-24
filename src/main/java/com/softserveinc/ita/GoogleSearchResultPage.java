@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import org.openqa.selenium.WebElement;
+
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
@@ -27,4 +29,9 @@ public class GoogleSearchResultPage {
 
         return $x(linkText).text();
     }
+
+    public WebElement getGoogleLogo() {
+        return $x("//*[@id = 'logo']");
+    }
+
 }
