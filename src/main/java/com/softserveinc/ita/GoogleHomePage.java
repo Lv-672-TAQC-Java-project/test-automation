@@ -13,7 +13,7 @@ public class GoogleHomePage {
     }
 
     public GoogleSearchResultPage search(String term) {
-        String inputFieldPath = "//input[@name='q']";
+        String inputFieldPath = "//input[@class='gLFyf gsfi']";
         $x(inputFieldPath).sendKeys(term);
         $x(inputFieldPath).sendKeys(ENTER);
 
