@@ -1,6 +1,6 @@
 package com.softserveinc.ita.dstoyko;
 
-import com.codeborne.selenide.Configuration;
+import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
@@ -10,14 +10,10 @@ import static com.codeborne.selenide.Selenide.*;
 import static java.time.Duration.ofSeconds;
 import static org.openqa.selenium.Keys.ENTER;
 
-public class GoogleTest {
+public class GoogleTest extends TestRunner {
 
     @Test
     public void verifyThatFirstLinkNameContainsKittenNotDogs() {
-        Configuration.browser = "chrome";
-        Configuration.timeout = 30 * 1000;
-        open("https://google.com");
-
         String inputFieldPath = "//input[@class='gLFyf gsfi']";
         String searchFirstTerm = "funny dogs";
         $x(inputFieldPath).sendKeys(searchFirstTerm);
@@ -31,8 +27,8 @@ public class GoogleTest {
         $x(inputFieldPath).sendKeys(ENTER);
 
         Duration duration = ofSeconds(4);
-        String firstLink = "(//div[@class = 'g dFd2Tb']) [1]";
-        $x(firstLink)
+        String firstLinkPath = "(//div[@class = 'g dFd2Tb']) [1]";
+        $x(firstLinkPath)
                 .shouldBe(visible, enabled)
                 .shouldNotHave(text("dogs")
                         .because("First link name should not contain 'dogs'"), duration)
