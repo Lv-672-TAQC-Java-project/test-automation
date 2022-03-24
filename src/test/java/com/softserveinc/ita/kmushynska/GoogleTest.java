@@ -18,16 +18,15 @@ public class GoogleTest extends TestRunner {
 
         $x("//div[@class='logo']").click();
 
-        String message = "Google home page is opened";
         $x("//img[@class='lnXdpd']")
-                .shouldBe(visible.because(message));
+                .shouldBe(visible.because("Google img should be displayed"));
         $x("//div[@class='RNNXgb']")
-                .shouldBe(visible.because(message));
+                .shouldBe(visible.because("Search field should be displayed"));
         $x("(//input[@class='gNO89b'])[2]")
-                .shouldBe(visible.because(message));
+                .shouldBe(visible.because("Button 'Google Search' should be displayed"));
         $x("(//input[@class='RNmpXc'])[2]")
-                .shouldBe(visible.because(message));
+                .shouldBe(visible.because("Button 'I'm Feeling Lucky' should be displayed"));
         $x("//div[@id='SIvCob']")
-                .shouldBe(visible.because(message));
+                .shouldBe(visible.because("'Google offered in' should be displayed"));
     }
 }
