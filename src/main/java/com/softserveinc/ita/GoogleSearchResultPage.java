@@ -28,6 +28,12 @@ public class GoogleSearchResultPage {
         return $x(linkText).text();
     }
 
+    public GoogleSearchResultPage goToPage5() {
+        $x("//a[@aria-label = 'Page 5']").click();
+
+        return this;
+    }
+
     public boolean hasValidLink(int numberOfLink) {
         String linkAttribute = String.format("(//div[@class='g dFd2Tb'])[%d]/descendant::div[@class='ct3b9e']/a", numberOfLink);
 
