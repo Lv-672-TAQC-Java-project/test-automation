@@ -28,9 +28,8 @@ public class GoogleSearchResultPage {
         return $x(linkText).text();
     }
 
-    public GoogleSearchResultPage goToPage5() {
-        $x("//a[@aria-label = 'Page 5']").click();
-
+    public GoogleSearchResultPage goToPage(int numberOfPage) {
+        $x(String.format("//a[@aria-label = 'Page %s']", numberOfPage)).click();
         return this;
     }
 

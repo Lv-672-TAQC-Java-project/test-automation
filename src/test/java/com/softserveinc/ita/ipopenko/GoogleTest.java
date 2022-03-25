@@ -15,7 +15,7 @@ public class GoogleTest extends TestRunner {
                 .search(searchTerm);
 
         String linkText = googleSearchResultPage
-                .goToPage5()
+                .goToPage(5)
                 .getTextFromLink(1);
 
         assertTrue(linkText.contains("dogs"), "First link should contain dogs");
