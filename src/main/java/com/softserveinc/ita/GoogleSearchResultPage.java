@@ -30,6 +30,7 @@ public class GoogleSearchResultPage {
 
     public GoogleSearchResultPage goToPage(int numberOfPage) {
         $x(String.format("//a[@aria-label = 'Page %s']", numberOfPage)).click();
+
         return this;
     }
 
