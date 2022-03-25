@@ -9,13 +9,13 @@ import static org.testng.Assert.assertTrue;
 public class GoogleTest extends TestRunner {
 
     @Test
-    public void verifyThatLinkHasHrefAttributeWithValidUrl_PO() {
-        GoogleHomePage googleHomePage = new GoogleHomePage().open("https://google.com");
+    public void verifyThatLinkHasHrefAttributeWithValidUrl() {
         String searchTerm = "funny dogs";
-        String hrefValue = googleHomePage
+        boolean isValidLink = new GoogleHomePage()
+                .open()
                 .search(searchTerm)
-                .getHrefAttributeFromElement(9);
+                .hasValidLink(9);
 
-        assertTrue(hrefValue.contains("https://"));
+        assertTrue(isValidLink, "URL should be valid");
     }
 }
