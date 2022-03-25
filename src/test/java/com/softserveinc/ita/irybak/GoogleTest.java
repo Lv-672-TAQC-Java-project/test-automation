@@ -1,6 +1,5 @@
 package com.softserveinc.ita.irybak;
 
-import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.GoogleHomePage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
