@@ -30,8 +30,8 @@ public class GoogleSearchResultPage {
         return $x(linkText).text();
     }
 
-    public SelenideElement getNextLink() {
-
-        return $x("//*[@id='pnnext']/span[2]");
+    public boolean isNextLinkDisplayed() {
+        String nextLink = "//*[@id='pnnext']/span[2]";
+        return $x(nextLink).isDisplayed();
     }
 }

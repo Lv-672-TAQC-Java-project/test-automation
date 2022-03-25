@@ -11,10 +11,10 @@ public class GoogleTest extends TestRunner {
     @Test
     public void verifyThatNextLinkIsDisplayed() {
         String searchTerm = "funny dogs";
-        SelenideElement nextLink = new GoogleHomePage()
+        boolean isNextLink = new GoogleHomePage()
                 .search(searchTerm)
-                .getNextLink();
+                .isNextLinkDisplayed();
 
-        assertTrue(nextLink.isDisplayed());
+        assertTrue(isNextLink);
     }
 }
