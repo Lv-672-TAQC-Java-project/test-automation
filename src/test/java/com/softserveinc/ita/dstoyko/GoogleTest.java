@@ -1,38 +1,27 @@
 package com.softserveinc.ita.dstoyko;
 
+import com.softserveinc.ita.GoogleHomePage;
+import com.softserveinc.ita.GoogleSearchResultPage;
 import com.softserveinc.ita.TestRunner;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.time.Duration;
-
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.*;
-import static java.time.Duration.ofSeconds;
-import static org.openqa.selenium.Keys.ENTER;
 
 public class GoogleTest extends TestRunner {
 
     @Test
     public void verifyThatFirstLinkNameContainsKittenNotDogs() {
-        String inputFieldPath = "//input[@class='gLFyf gsfi']";
+        GoogleHomePage googleHomePage = new GoogleHomePage().open("https://www.google.com");;
         String searchFirstTerm = "funny dogs";
-        $x(inputFieldPath).sendKeys(searchFirstTerm);
-        $x(inputFieldPath).sendKeys(ENTER);
-
-        $x(inputFieldPath).clear();
-        $x(inputFieldPath).shouldBe(empty);
-
         String searchSecondTerm = "funny kitten";
-        $x(inputFieldPath).sendKeys(searchSecondTerm);
-        $x(inputFieldPath).sendKeys(ENTER);
 
-        Duration duration = ofSeconds(4);
-        String firstLinkPath = "(//div[@class = 'g dFd2Tb']) [1]";
-        $x(firstLinkPath)
-                .shouldBe(visible, enabled)
-                .shouldNotHave(text("dogs")
-                        .because("First link name should not contain 'dogs'"), duration)
-                .shouldHave(text("kitten")
-                        .because("First link name should contain 'kitten'"), duration);
+        GoogleSearchResultPage searchResultPage = googleHomePage
+                .search(searchFirstTerm)
+                .clearSearchField()
+                .search(searchSecondTerm);
+
+        String linkText = searchResultPage.getTextFromLink(1);
+
+        Assert.assertTrue(linkText.contains("kitten"), "First link should contain kitten");
+        Assert.assertFalse(linkText.contains("dogs"), "First link should not contain dogs");
     }
 }
