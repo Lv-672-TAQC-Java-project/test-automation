@@ -2,8 +2,9 @@ package com.softserveinc.ita.kmushynska;
 
 import com.softserveinc.ita.GoogleHomePage;
 import com.softserveinc.ita.TestRunner;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
 
 public class GoogleTest extends TestRunner {
 
@@ -14,10 +15,10 @@ public class GoogleTest extends TestRunner {
                 .search(searchTerm)
                 .backToHomePageByLogo();
 
-        Assert.assertTrue(openedGoogleHomePage.getGoogleImgElement().isDisplayed());
-        Assert.assertTrue(openedGoogleHomePage.getSearchInputElement().isDisplayed());
-        Assert.assertTrue(openedGoogleHomePage.getButtonGoogleSearch().isDisplayed());
-        Assert.assertTrue(openedGoogleHomePage.getButtonImFeelingLucky().isDisplayed());
-        Assert.assertTrue(openedGoogleHomePage.getGoogleOfferedInElement().isDisplayed());
+        assertTrue(openedGoogleHomePage.isGoogleImgElementDisplayed());
+        assertTrue(openedGoogleHomePage.isSearchInputElementDisplayed());
+        assertTrue(openedGoogleHomePage.isButtonGoogleSearchDisplayed());
+        assertTrue(openedGoogleHomePage.isButtonImFeelingLuckyDisplayed());
+        assertTrue(openedGoogleHomePage.isGoogleOfferedInElementDisplayed());
     }
 }
