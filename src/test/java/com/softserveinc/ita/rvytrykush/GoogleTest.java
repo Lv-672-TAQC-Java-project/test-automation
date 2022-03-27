@@ -1,22 +1,21 @@
 package com.softserveinc.ita.rvytrykush;
 
-import com.softserveinc.ita.GoogleSearchResultPage;
+import com.softserveinc.ita.GoogleHomePage;
 import com.softserveinc.ita.TestRunner;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import static org.testng.Assert.assertTrue;
 
 public class GoogleTest extends TestRunner {
 
     @Test
     public void verifyThatGoogleLogoIsPresent() {
-        GoogleSearchResultPage searchResultPage = new GoogleSearchResultPage();
         String searchLine = "funny dogs";
-        WebElement googleLogo = searchResultPage.getGoogleLogo();
 
-        searchResultPage
-                .search(searchLine);
+        boolean isGoogleLogoPresent = new GoogleHomePage()
+                .search(searchLine)
+                .isGoogleLogoVisible();
 
-        Assert.assertTrue(googleLogo.isDisplayed());
+        assertTrue(isGoogleLogoPresent);
     }
 }
