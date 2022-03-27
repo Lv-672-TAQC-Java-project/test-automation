@@ -6,8 +6,8 @@ import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
 public class GoogleHomePage {
-    public GoogleHomePage open(String url) {
-        Selenide.open(url);
+    public GoogleHomePage open() {
+        Selenide.open("https://www.google.com/");
 
         return this;
     }
