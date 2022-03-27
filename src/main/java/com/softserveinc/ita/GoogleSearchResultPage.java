@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
