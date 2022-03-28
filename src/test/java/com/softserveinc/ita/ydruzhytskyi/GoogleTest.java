@@ -1,6 +1,5 @@
 package com.softserveinc.ita.ydruzhytskyi;
 
-import com.softserveinc.ita.GoogleHomePage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
@@ -11,8 +10,7 @@ public class GoogleTest extends TestRunner {
     @Test
     public void verifyThatLinkHasHrefAttributeWithValidUrl() {
         String searchTerm = "funny dogs";
-        boolean isValidLink = new GoogleHomePage()
-                .open()
+        boolean isValidLink = googleHomePage
                 .search(searchTerm)
                 .hasValidLink(9);
 
