@@ -1,6 +1,5 @@
 package com.softserveinc.ita.rvytrykush;
 
-import com.softserveinc.ita.GoogleHomePage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
@@ -12,10 +11,10 @@ public class GoogleTest extends TestRunner {
     public void verifyThatGoogleLogoIsPresent() {
         String searchLine = "funny dogs";
 
-        boolean isGoogleLogoPresent = new GoogleHomePage()
+        boolean checkVisibilityOfGoogleLogo = googleHomePage
                 .search(searchLine)
                 .isGoogleLogoVisible();
 
-        assertTrue(isGoogleLogoPresent);
+        assertTrue(checkVisibilityOfGoogleLogo);
     }
 }
