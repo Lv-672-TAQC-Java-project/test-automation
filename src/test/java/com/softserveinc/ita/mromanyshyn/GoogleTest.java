@@ -11,7 +11,7 @@ public class GoogleTest extends TestRunner {
 
     @Test
     public void verifyThatFirstLinkContainsKittenNotDogs_PO() {
-        GoogleHomePage googleHomePage = new GoogleHomePage().open();
+        GoogleHomePage googleHomePage = new GoogleHomePage();
         String firstTerm = "funny dogs";
         String secondTerm = "funny kitten";
 

@@ -7,6 +7,8 @@ import org.testng.annotations.BeforeSuite;
 import static com.codeborne.selenide.Selenide.open;
 
 public class TestRunner {
+    GoogleHomePage googleHomePage = new GoogleHomePage();
+
     @BeforeSuite
     public void driverConfigurationAndTimeout() {
         Configuration.browser = "chrome";
@@ -15,6 +17,6 @@ public class TestRunner {
 
     @BeforeMethod
     public void navigateToUrl() {
-        open("https://google.com");
+        googleHomePage.open("https://google.com");
     }
 }
