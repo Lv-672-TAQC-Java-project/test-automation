@@ -1,6 +1,5 @@
 package com.softserveinc.ita.olehpysko;
 
-import com.softserveinc.ita.GoogleHomePage;
 import com.softserveinc.ita.GoogleSearchResultPage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
@@ -13,7 +12,7 @@ public class GoogleTest extends TestRunner {
     public void verifyThatNextAndPreviousLinkIsDisplayed() {
         String searchTerm = "funny dogs";
 
-        GoogleSearchResultPage googleSearchResultPage = new GoogleHomePage()
+        GoogleSearchResultPage googleSearchResultPage = googleHomePage
                 .search(searchTerm);
 
         assertTrue(googleSearchResultPage
