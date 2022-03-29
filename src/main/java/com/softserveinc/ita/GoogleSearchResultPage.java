@@ -1,7 +1,6 @@
 package com.softserveinc.ita;
 
-import static com.codeborne.selenide.Condition.empty;
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
@@ -31,6 +30,6 @@ public class GoogleSearchResultPage {
 
     public boolean isGoogleLogoVisible() {
         String googleLogoXpath = "//*[@id = 'logo']";
-        return $x(googleLogoXpath).is(visible);
+        return $x(googleLogoXpath).shouldBe(visible).isDisplayed();
     }
 }
