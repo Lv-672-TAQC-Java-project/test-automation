@@ -1,6 +1,9 @@
 package com.softserveinc.ita;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.empty;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
@@ -29,7 +32,10 @@ public class GoogleSearchResultPage {
     }
 
     public boolean isNextLinkDisplayed() {
-        String nextLink = "//*[@id='pnnext']/span[2]";
-        return $x(nextLink).isDisplayed();
+        String nextLinkPath = "//*[@id='pnnext']/span[2]";
+
+        return $x(nextLinkPath)
+                .shouldBe(visible, Duration.ofSeconds(10))
+                .isDisplayed();
     }
 }
