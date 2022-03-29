@@ -1,6 +1,5 @@
 package com.softserveinc.ita.dstoyko;
 
-import com.softserveinc.ita.GoogleHomePage;
 import com.softserveinc.ita.GoogleSearchResultPage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.Assert;
@@ -10,7 +9,6 @@ public class GoogleTest extends TestRunner {
 
     @Test
     public void verifyThatFirstLinkNameContainsKittenNotDogs() {
-        GoogleHomePage googleHomePage = new GoogleHomePage().open();
         String searchFirstTerm = "funny dogs";
         String searchSecondTerm = "funny kitten";
 
