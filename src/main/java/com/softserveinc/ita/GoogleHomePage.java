@@ -20,33 +20,33 @@ public class GoogleHomePage {
         return new GoogleSearchResultPage();
     }
 
-    public boolean isGoogleImgElementDisplayed() {
-        String googleImgElement = "//img[@class='lnXdpd']";
+    public boolean isGoogleLogoDisplayed() {
+        String googleLogoPath = "//img[@class='lnXdpd']";
 
-        return $x(googleImgElement).isDisplayed();
+        return $x(googleLogoPath).isDisplayed();
     }
 
-    public boolean isSearchInputElementDisplayed() {
-        String searchInputElement = "//div[@class='RNNXgb']";
+    public boolean isSearchInputFieldDisplayed() {
+        String searchInputFieldPath = "//div[@class='RNNXgb']";
 
-        return $x(searchInputElement).isDisplayed();
+        return $x(searchInputFieldPath).isDisplayed();
     }
 
     public boolean isButtonGoogleSearchDisplayed() {
-        String buttonGoogleSearch = "(//input[@class='gNO89b'])[2]";
+        String buttonGoogleSearchPath = "(//input[@class='gNO89b'])[2]";
 
-        return $x(buttonGoogleSearch).isDisplayed();
+        return $x(buttonGoogleSearchPath).isDisplayed();
     }
 
     public boolean isButtonImFeelingLuckyDisplayed() {
-        String buttonImFeelingLucky = "(//input[@class='RNmpXc'])[2]";
+        String buttonImFeelingLuckyPath = "(//input[@class='RNmpXc'])[2]";
 
-        return $x(buttonImFeelingLucky).isDisplayed();
+        return $x(buttonImFeelingLuckyPath).isDisplayed();
     }
 
     public boolean isGoogleOfferedInElementDisplayed() {
-        String googleOfferedInElement = "//div[@id='SIvCob']";
+        String googleOfferedInPath = "//div[@id='SIvCob']";
 
-        return $x(googleOfferedInElement).isDisplayed();
+        return $x(googleOfferedInPath).isDisplayed();
     }
 }

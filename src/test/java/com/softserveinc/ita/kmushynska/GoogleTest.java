@@ -11,14 +11,14 @@ public class GoogleTest extends TestRunner {
     @Test
     public void verifyThatGoogleHomePageIsOpen() {
         String searchTerm = "funny dogs";
-        GoogleHomePage openedGoogleHomePage = new GoogleHomePage()
+        GoogleHomePage googleHomePage = new GoogleHomePage()
                 .search(searchTerm)
                 .backToHomePageByLogo();
 
-        assertTrue(openedGoogleHomePage.isGoogleImgElementDisplayed());
-        assertTrue(openedGoogleHomePage.isSearchInputElementDisplayed());
-        assertTrue(openedGoogleHomePage.isButtonGoogleSearchDisplayed());
-        assertTrue(openedGoogleHomePage.isButtonImFeelingLuckyDisplayed());
-        assertTrue(openedGoogleHomePage.isGoogleOfferedInElementDisplayed());
+        assertTrue(googleHomePage.isGoogleLogoDisplayed());
+        assertTrue(googleHomePage.isSearchInputFieldDisplayed());
+        assertTrue(googleHomePage.isButtonGoogleSearchDisplayed());
+        assertTrue(googleHomePage.isButtonImFeelingLuckyDisplayed());
+        assertTrue(googleHomePage.isGoogleOfferedInElementDisplayed());
     }
 }
