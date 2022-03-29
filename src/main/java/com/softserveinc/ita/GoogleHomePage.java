@@ -45,9 +45,9 @@ public class GoogleHomePage {
         return $x(buttonImFeelingLuckyPath).shouldBe(visible).isDisplayed();
     }
 
-    public boolean isGoogleOfferedInElementDisplayed() {
-        String googleOfferedInPath = "//div[@id='SIvCob']";
+    public boolean isGoogleLanguageFieldDisplayed() {
+        String googleLanguageFieldPath = "//div[@id='SIvCob']";
 
-        return $x(googleOfferedInPath).shouldBe(visible).isDisplayed();
+        return $x(googleLanguageFieldPath).shouldBe(visible).isDisplayed();
     }
 }

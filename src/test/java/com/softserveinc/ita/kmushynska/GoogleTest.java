@@ -1,6 +1,5 @@
 package com.softserveinc.ita.kmushynska;
 
-import com.softserveinc.ita.GoogleHomePage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
@@ -11,7 +10,7 @@ public class GoogleTest extends TestRunner {
     @Test
     public void verifyThatGoogleHomePageIsOpen() {
         String searchTerm = "funny dogs";
-        GoogleHomePage googleHomePage = new GoogleHomePage()
+        googleHomePage
                 .search(searchTerm)
                 .backToHomePageByLogo();
 
@@ -19,6 +18,6 @@ public class GoogleTest extends TestRunner {
         assertTrue(googleHomePage.isSearchInputFieldDisplayed());
         assertTrue(googleHomePage.isButtonGoogleSearchDisplayed());
         assertTrue(googleHomePage.isButtonImFeelingLuckyDisplayed());
-        assertTrue(googleHomePage.isGoogleOfferedInElementDisplayed());
+        assertTrue(googleHomePage.isGoogleLanguageFieldDisplayed());
     }
 }
