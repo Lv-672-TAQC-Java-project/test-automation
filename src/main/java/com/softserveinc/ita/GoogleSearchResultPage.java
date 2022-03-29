@@ -27,4 +27,12 @@ public class GoogleSearchResultPage {
 
         return $x(linkText).text();
     }
+
+    public boolean hasValidLink(int numberOfLink) {
+        String linkAttribute = String.format("(//div[@class='g dFd2Tb'])[%d]/descendant::div[@class='ct3b9e']/a", numberOfLink);
+
+        return $x(linkAttribute)
+                .getAttribute("href")
+                .contains("https://");
+    }
 }
