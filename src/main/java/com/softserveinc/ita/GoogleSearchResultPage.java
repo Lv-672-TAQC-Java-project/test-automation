@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -41,6 +43,7 @@ public class GoogleSearchResultPage {
         return $x("(//a[@id='pnnext']/span)[2]").shouldBe(visible).isDisplayed();
     }
 
+    @Step("Сheck if the previous link is displayed")
     public boolean isPreviousLinkDisplayed() {
 
         return $x("(//a[@id='pnprev']/span)[2]").shouldBe(visible).isDisplayed();
