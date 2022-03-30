@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -9,6 +11,7 @@ public class GoogleSearchResultPage {
 
     private final String inputFieldPath = "//input[@class='gLFyf gsfi']";
 
+    @Step("Searched for {term}")
     public GoogleSearchResultPage search(String term) {
         $x(inputFieldPath).sendKeys(term);
         $x(inputFieldPath).sendKeys(ENTER);
