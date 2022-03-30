@@ -39,6 +39,18 @@ public class GoogleSearchResultPage {
                 .isDisplayed();
     }
   
+    public GoogleSearchResultPage goToPage(int number) {
+        String numberOfPage = String.format("//a[@aria-label = 'Page %s']", number);
+        $x(numberOfPage).click();
+
+        return this;
+    }
+
+    public boolean isPreviousLinkDisplayed() {
+
+        return $x("(//a[@id='pnprev']/span)[2]").shouldBe(visible).isDisplayed();
+    }
+
     public boolean hasValidLink(int numberOfLink) {
         String linkAttribute = String.format("(//div[@class='g dFd2Tb'])[%d]/descendant::div[@class='ct3b9e']/a", numberOfLink);
 
