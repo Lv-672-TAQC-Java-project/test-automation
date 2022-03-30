@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
 import static com.codeborne.selenide.Condition.empty;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
@@ -28,10 +29,21 @@ public class GoogleSearchResultPage {
         return $x(linkText).text();
     }
 
-    public GoogleSearchResultPage goToPage(int numberOfPage) {
-        $x(String.format("//a[@aria-label = 'Page %s']", numberOfPage)).click();
+    public GoogleSearchResultPage goToPage(int number) {
+        String numberOfPage = String.format("//a[@aria-label = 'Page %s']", number);
+        $x(numberOfPage).click();
 
         return this;
+    }
+
+    public boolean isNextLinkDisplayed() {
+
+        return $x("(//a[@id='pnnext']/span)[2]").shouldBe(visible).isDisplayed();
+    }
+
+    public boolean isPreviousLinkDisplayed() {
+
+        return $x("(//a[@id='pnprev']/span)[2]").shouldBe(visible).isDisplayed();
     }
 
     public boolean hasValidLink(int numberOfLink) {
@@ -41,4 +53,5 @@ public class GoogleSearchResultPage {
                 .getAttribute("href")
                 .contains("https://");
     }
+
 }
