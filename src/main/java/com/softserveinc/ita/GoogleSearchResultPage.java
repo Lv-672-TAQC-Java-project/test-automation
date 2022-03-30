@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -36,6 +38,7 @@ public class GoogleSearchResultPage {
         return this;
     }
 
+    @Step("Verified presence of the google logo on the search results page")
     public boolean isGoogleLogoVisible() {
         String googleLogoXpath = "//*[@id = 'logo']";
         return $x(googleLogoXpath).shouldBe(visible).isDisplayed();
