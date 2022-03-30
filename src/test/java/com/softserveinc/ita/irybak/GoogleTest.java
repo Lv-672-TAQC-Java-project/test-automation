@@ -10,7 +10,7 @@ public class GoogleTest extends TestRunner {
     @Test
     public void verifyThatNextLinkIsDisplayed() {
         String searchTerm = "funny dogs";
-        boolean isNextLink = new GoogleHomePage()
+        boolean isNextLink = googleHomePage
                 .search(searchTerm)
                 .isNextLinkDisplayed();
 
