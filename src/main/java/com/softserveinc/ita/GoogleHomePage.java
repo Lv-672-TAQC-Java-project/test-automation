@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
 import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -13,6 +14,7 @@ public class GoogleHomePage {
         return this;
     }
 
+    @Step("Input {term} in search field and return result page")
     public GoogleSearchResultPage search(String term) {
         String inputFieldPath = "//input[@class='gLFyf gsfi']";
         $x(inputFieldPath).sendKeys(term);
@@ -21,30 +23,35 @@ public class GoogleHomePage {
         return new GoogleSearchResultPage();
     }
 
+    @Step("Verify that Google logo displayed on home page")
     public boolean isGoogleLogoDisplayed() {
         String googleLogoPath = "//img[@class='lnXdpd']";
 
         return $x(googleLogoPath).shouldBe(visible).isDisplayed();
     }
 
+    @Step("Verify that search input field displayed on home page")
     public boolean isSearchInputFieldDisplayed() {
         String searchInputFieldPath = "//div[@class='RNNXgb']";
 
         return $x(searchInputFieldPath).shouldBe(visible).isDisplayed();
     }
 
+    @Step("Verify that button Google search displayed on home page")
     public boolean isButtonGoogleSearchDisplayed() {
         String buttonGoogleSearchPath = "(//input[@class='gNO89b'])[2]";
 
         return $x(buttonGoogleSearchPath).shouldBe(visible).isDisplayed();
     }
 
+    @Step("Verify that button I'm Feeling Lucky displayed on home page")
     public boolean isButtonImFeelingLuckyDisplayed() {
         String buttonImFeelingLuckyPath = "(//input[@class='RNmpXc'])[2]";
 
         return $x(buttonImFeelingLuckyPath).shouldBe(visible).isDisplayed();
     }
 
+    @Step("Verify that Google language field displayed on home page")
     public boolean isGoogleLanguageFieldDisplayed() {
         String googleLanguageFieldPath = "//div[@id='SIvCob']";
 

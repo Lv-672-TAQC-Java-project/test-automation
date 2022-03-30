@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -54,6 +56,7 @@ public class GoogleSearchResultPage {
                 .contains("https://");
     }
 
+    @Step("Click on Google logo and back to the home page")
     public GoogleHomePage backToHomePageByLogo() {
         $x("//div[@class='logo']").click();
 
