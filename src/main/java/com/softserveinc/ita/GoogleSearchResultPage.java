@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -46,6 +48,7 @@ public class GoogleSearchResultPage {
         return $x("(//a[@id='pnprev']/span)[2]").shouldBe(visible).isDisplayed();
     }
 
+    @Step("Verify that {numberOfLink} link contains valid URL")
     public boolean hasValidLink(int numberOfLink) {
         String linkAttribute = String.format("(//div[@class='g dFd2Tb'])[%d]/descendant::div[@class='ct3b9e']/a", numberOfLink);
 
@@ -53,5 +56,4 @@ public class GoogleSearchResultPage {
                 .getAttribute("href")
                 .contains("https://");
     }
-
 }
