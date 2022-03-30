@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -29,6 +31,7 @@ public class GoogleSearchResultPage {
         return $x(linkText).text();
     }
 
+    @Step("Go to page {number}")
     public GoogleSearchResultPage goToPage(int number) {
         String numberOfPage = String.format("//a[@aria-label = 'Page %s']", number);
         $x(numberOfPage).click();
