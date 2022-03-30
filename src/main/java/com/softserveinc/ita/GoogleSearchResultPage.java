@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import io.qameta.allure.Step;
+
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.empty;
@@ -31,6 +33,7 @@ public class GoogleSearchResultPage {
         return $x(linkText).text();
     }
 
+    @Step("Сheck if the next link is displayed")
     public boolean isNextLinkDisplayed() {
         String nextLinkPath = "//*[@id='pnnext']/span[2]";
 
