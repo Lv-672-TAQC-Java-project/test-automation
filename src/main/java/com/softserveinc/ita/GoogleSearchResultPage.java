@@ -36,6 +36,11 @@ public class GoogleSearchResultPage {
         return this;
     }
 
+    public boolean isGoogleLogoVisible() {
+        String googleLogoXpath = "//*[@id = 'logo']";
+        return $x(googleLogoXpath).shouldBe(visible).isDisplayed();
+    }
+
     public boolean isNextLinkDisplayed() {
 
         return $x("(//a[@id='pnnext']/span)[2]").shouldBe(visible).isDisplayed();
