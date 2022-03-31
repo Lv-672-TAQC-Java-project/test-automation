@@ -8,6 +8,8 @@ import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
 public class GoogleHomePage {
+
+    @Step("Opened Google home page")
     public GoogleHomePage open() {
         Selenide.open("https://www.google.com/");
 
