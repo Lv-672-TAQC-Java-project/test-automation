@@ -11,6 +11,7 @@ public class GoogleSearchResultPage {
 
     private final String inputFieldPath = "//input[@class='gLFyf gsfi']";
 
+    @Step("Searched for {term}")
     public GoogleSearchResultPage search(String term) {
         $x(inputFieldPath).sendKeys(term);
         $x(inputFieldPath).sendKeys(ENTER);
