@@ -33,6 +33,7 @@ public class GoogleSearchResultPage {
         return $x(linkText).text();
     }
 
+    @Step("Go to page {number}")
     public GoogleSearchResultPage goToPage(int number) {
         String numberOfPage = String.format("//a[@aria-label = 'Page %s']", number);
         $x(numberOfPage).click();
