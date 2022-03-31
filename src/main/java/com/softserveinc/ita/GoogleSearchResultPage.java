@@ -35,7 +35,6 @@ public class GoogleSearchResultPage {
         return $x(linkText).text();
     }
 
-    @Step("Сheck if the next link is displayed")
     public boolean isNextLinkDisplayed() {
         String nextLinkPath = "//*[@id='pnnext']/span[2]";
 
