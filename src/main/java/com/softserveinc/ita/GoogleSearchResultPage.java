@@ -46,6 +46,7 @@ public class GoogleSearchResultPage {
         return $x("(//a[@id='pnnext']/span)[2]").shouldBe(visible).isDisplayed();
     }
 
+    @Step("Сheck if the previous link is displayed")
     public boolean isPreviousLinkDisplayed() {
 
         return $x("(//a[@id='pnprev']/span)[2]").shouldBe(visible).isDisplayed();
