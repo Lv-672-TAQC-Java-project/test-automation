@@ -3,7 +3,7 @@ package com.softserveinc.ita.rvytrykush;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoogleTest extends TestRunner {
 
@@ -11,10 +11,11 @@ public class GoogleTest extends TestRunner {
     public void verifyThatGoogleLogoIsVisible() {
         String searchLine = "funny dogs";
 
-        boolean isVisible = googleHomePage
+        boolean isGoogleLogoVisible = googleHomePage
                 .search(searchLine)
                 .isGoogleLogoVisible();
 
-        assertTrue(isVisible);
+        assertThat(isGoogleLogoVisible)
+                .isTrue();
     }
 }

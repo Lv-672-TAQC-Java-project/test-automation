@@ -41,7 +41,6 @@ public class GoogleSearchResultPage {
         return this;
     }
 
-    @Step("Verified presence of the google logo on the search results page")
     public boolean isGoogleLogoVisible() {
         String googleLogoXpath = "//*[@id = 'logo']";
         return $x(googleLogoXpath).shouldBe(visible).isDisplayed();
