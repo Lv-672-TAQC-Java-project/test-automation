@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -16,6 +18,7 @@ public class GoogleSearchResultPage {
         return this;
     }
 
+    @Step("Cleared search field")
     public GoogleSearchResultPage clearSearchField() {
         $x(inputFieldPath).clear();
         $x(inputFieldPath).shouldBe(empty);
