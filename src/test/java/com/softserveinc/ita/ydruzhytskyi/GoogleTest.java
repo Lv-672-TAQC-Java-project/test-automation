@@ -3,6 +3,7 @@ package com.softserveinc.ita.ydruzhytskyi;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.testng.Assert.assertTrue;
 
 public class GoogleTest extends TestRunner {
@@ -14,6 +15,8 @@ public class GoogleTest extends TestRunner {
                 .search(searchTerm)
                 .hasValidLink(9);
 
-        assertTrue(isValidLink, "URL should be valid");
+        assertThat(isValidLink)
+                .as("URL should be valid")
+                .isTrue();
     }
 }
