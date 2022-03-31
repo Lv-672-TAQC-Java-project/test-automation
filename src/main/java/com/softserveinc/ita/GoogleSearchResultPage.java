@@ -13,6 +13,7 @@ public class GoogleSearchResultPage {
 
     private final String inputFieldPath = "//input[@class='gLFyf gsfi']";
 
+    @Step("Searched for {term}")
     public GoogleSearchResultPage search(String term) {
         $x(inputFieldPath).sendKeys(term);
         $x(inputFieldPath).sendKeys(ENTER);
@@ -20,6 +21,7 @@ public class GoogleSearchResultPage {
         return this;
     }
 
+    @Step("Cleared search field")
     public GoogleSearchResultPage clearSearchField() {
         $x(inputFieldPath).clear();
         $x(inputFieldPath).shouldBe(empty);
@@ -42,6 +44,7 @@ public class GoogleSearchResultPage {
                 .isDisplayed();
     }
 
+    @Step("Go to page {number}")
     public GoogleSearchResultPage goToPage(int number) {
         String numberOfPage = String.format("//a[@aria-label = 'Page %s']", number);
         $x(numberOfPage).click();
@@ -54,6 +57,7 @@ public class GoogleSearchResultPage {
         return $x("(//a[@id='pnprev']/span)[2]").shouldBe(visible).isDisplayed();
     }
 
+    @Step("Verify that {numberOfLink} link contains valid URL")
     public boolean hasValidLink(int numberOfLink) {
         String linkAttribute = String.format("(//div[@class='g dFd2Tb'])[%d]/descendant::div[@class='ct3b9e']/a", numberOfLink);
 

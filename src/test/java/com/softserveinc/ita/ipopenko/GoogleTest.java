@@ -1,24 +1,22 @@
 package com.softserveinc.ita.ipopenko;
 
+import com.softserveinc.ita.GoogleSearchResultPage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$x;
-import static org.openqa.selenium.Keys.ENTER;
+import static org.testng.Assert.assertTrue;
 
 public class GoogleTest extends TestRunner {
     @Test
     public void verifyThatFirstLinkContainsPartOfTheSearchTerm() {
         String searchTerm = "funny dogs";
-        String inputFieldPath = "//input[@name='q']";
-        $x(inputFieldPath).sendKeys(searchTerm);
-        $x(inputFieldPath).sendKeys(ENTER);
+        GoogleSearchResultPage googleSearchResultPage = googleHomePage
+                .search(searchTerm);
 
-        $x("//a[@aria-label = 'Page 5']").click();
+        String linkText = googleSearchResultPage
+                .goToPage(5)
+                .getTextFromLink(1);
 
-        $x("(//a[h3])[1]")
-                .shouldHave(text("dogs")
-                        .because("First link should contain dogs"));
+        assertTrue(linkText.contains("dogs"), "First link should contain dogs");
     }
 }
