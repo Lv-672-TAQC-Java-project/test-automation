@@ -4,7 +4,6 @@ import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.Assert.assertTrue;
 
 public class GoogleTest extends TestRunner {
 
