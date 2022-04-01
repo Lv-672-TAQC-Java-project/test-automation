@@ -2,6 +2,8 @@ package com.softserveinc.ita;
 
 import io.qameta.allure.Step;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.empty;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
@@ -33,17 +35,20 @@ public class GoogleSearchResultPage {
         return $x(linkText).text();
     }
 
+    public boolean isNextLinkDisplayed() {
+        String nextLinkPath = "//*[@id='pnnext']/span[2]";
+
+        return $x(nextLinkPath)
+                .shouldBe(visible, Duration.ofSeconds(10))
+                .isDisplayed();
+    }
+
     @Step("Go to page {number}")
     public GoogleSearchResultPage goToPage(int number) {
         String numberOfPage = String.format("//a[@aria-label = 'Page %s']", number);
         $x(numberOfPage).click();
 
         return this;
-    }
-
-    public boolean isNextLinkDisplayed() {
-
-        return $x("(//a[@id='pnnext']/span)[2]").shouldBe(visible).isDisplayed();
     }
 
     public boolean isPreviousLinkDisplayed() {
