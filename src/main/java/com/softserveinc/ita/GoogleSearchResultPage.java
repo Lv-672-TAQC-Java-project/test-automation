@@ -60,7 +60,7 @@ public class GoogleSearchResultPage {
                 .contains("https://");
     }
 
-    @Step("Click on Google logo and back to the home page")
+    @Step("Return to the home page by logo")
     public GoogleHomePage backToHomePageByLogo() {
         $x("//div[@class='logo']").click();
 
