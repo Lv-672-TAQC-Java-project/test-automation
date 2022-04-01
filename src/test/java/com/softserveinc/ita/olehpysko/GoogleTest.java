@@ -4,7 +4,7 @@ import com.softserveinc.ita.GoogleSearchResultPage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoogleTest extends TestRunner {
 
@@ -15,10 +15,10 @@ public class GoogleTest extends TestRunner {
         GoogleSearchResultPage googleSearchResultPage = googleHomePage
                 .search(searchTerm);
 
-        assertTrue(googleSearchResultPage
-                .isNextLinkDisplayed(), "link Next is displayed");
+        assertThat(googleSearchResultPage.isNextLinkDisplayed())
+                .as("link Next should be displayed").isTrue();
         googleSearchResultPage.goToPage(2);
-        assertTrue(googleSearchResultPage
-                .isPreviousLinkDisplayed(), "link Previous is displayed");
+        assertThat(googleSearchResultPage.isPreviousLinkDisplayed())
+                .as("link Previous should be displayed").isTrue();
     }
 }
