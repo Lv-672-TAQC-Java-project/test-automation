@@ -4,7 +4,7 @@ import com.softserveinc.ita.GoogleSearchResultPage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoogleTest extends TestRunner {
     @Test
@@ -17,6 +17,9 @@ public class GoogleTest extends TestRunner {
                 .goToPage(5)
                 .getTextFromLink(1);
 
-        assertTrue(linkText.contains("dogs"), "First link should contain dogs");
+        String expectedString = "dogs";
+        assertThat(linkText)
+                .as("First link should contain " + expectedString)
+                .contains(expectedString);
     }
 }

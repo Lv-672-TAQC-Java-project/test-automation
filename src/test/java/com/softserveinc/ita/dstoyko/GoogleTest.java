@@ -2,7 +2,7 @@ package com.softserveinc.ita.dstoyko;
 
 import com.softserveinc.ita.GoogleSearchResultPage;
 import com.softserveinc.ita.TestRunner;
-import org.testng.Assert;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;
 
 public class GoogleTest extends TestRunner {
@@ -19,7 +19,12 @@ public class GoogleTest extends TestRunner {
 
         String linkText = searchResultPage.getTextFromLink(1);
 
-        Assert.assertTrue(linkText.contains("kitten"), "First link should contain kitten");
-        Assert.assertFalse(linkText.contains("dogs"), "First link should not contain dogs");
+        String expectedString = "kitten";
+        String unexpectedString = "dogs";
+        assertThat(linkText)
+                .as("Link text should contain " + expectedString)
+                .contains(expectedString)
+                .as("Link text should not contain " + unexpectedString)
+                .doesNotContain(unexpectedString);
     }
 }
