@@ -16,6 +16,7 @@ public class GoogleTest extends TestRunner {
                 .isGoogleLogoVisible();
 
         assertThat(isGoogleLogoVisible)
+                .as("Google logo should be visible")
                 .isTrue();
     }
 }
