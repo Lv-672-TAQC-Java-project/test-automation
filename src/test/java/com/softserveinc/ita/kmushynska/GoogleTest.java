@@ -3,7 +3,7 @@ package com.softserveinc.ita.kmushynska;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoogleTest extends TestRunner {
 
@@ -14,10 +14,20 @@ public class GoogleTest extends TestRunner {
                 .search(searchTerm)
                 .backToHomePageByLogo();
 
-        assertTrue(googleHomePage.isGoogleLogoDisplayed());
-        assertTrue(googleHomePage.isSearchInputFieldDisplayed());
-        assertTrue(googleHomePage.isButtonGoogleSearchDisplayed());
-        assertTrue(googleHomePage.isButtonImFeelingLuckyDisplayed());
-        assertTrue(googleHomePage.isGoogleLanguageFieldDisplayed());
+        assertThat(googleHomePage.isGoogleLogoDisplayed())
+                .as("Google logo should be displayed")
+                .isTrue();
+        assertThat(googleHomePage.isSearchInputFieldDisplayed())
+                .as("Search input field should be displayed")
+                .isTrue();
+        assertThat(googleHomePage.isButtonGoogleSearchDisplayed())
+                .as("Button 'Google Search' should be displayed")
+                .isTrue();
+        assertThat(googleHomePage.isButtonImFeelingLuckyDisplayed())
+                .as("Button 'I'm Feeling Lucky' should be displayed")
+                .isTrue();
+        assertThat(googleHomePage.isGoogleLanguageFieldDisplayed())
+                .as("Google language field should be displayed")
+                .isTrue();
     }
 }
