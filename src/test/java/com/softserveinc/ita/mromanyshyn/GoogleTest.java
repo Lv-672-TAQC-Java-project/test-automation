@@ -4,8 +4,7 @@ import com.softserveinc.ita.GoogleSearchResultPage;
 import com.softserveinc.ita.TestRunner;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertFalse;
-import static org.testng.Assert.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class GoogleTest extends TestRunner {
 
@@ -20,8 +19,13 @@ public class GoogleTest extends TestRunner {
                 .search(secondTerm);
 
         String linkText = googleSearchResultPage.getTextFromLink(1);
+        String notExpectedTerm = "dogs";
+        String expectedTerm = "kitten";
 
-        assertFalse(linkText.contains("dogs"));
-        assertTrue(linkText.contains("kitten"));
+        assertThat(linkText)
+                .as("First link text should not contain " + notExpectedTerm)
+                .doesNotContain(notExpectedTerm)
+                .as("First link text should not contain " + expectedTerm)
+                .contains(expectedTerm);
     }
 }
