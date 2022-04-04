@@ -69,4 +69,11 @@ public class GoogleSearchResultPage {
                 .getAttribute("href")
                 .contains("https://");
     }
+
+    @Step("Return to the home page by logo")
+    public GoogleHomePage backToHomePageByLogo() {
+        $x("//div[@class='logo']").click();
+
+        return new GoogleHomePage();
+    }
 }
