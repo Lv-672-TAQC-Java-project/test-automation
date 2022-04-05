@@ -1,4 +1,4 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.deprecated;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;

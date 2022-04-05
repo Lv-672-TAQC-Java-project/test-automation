@@ -1,7 +1,7 @@
-package com.softserveinc.ita.olehpysko;
+package com.softserveinc.ita.deprecated.olehpysko;
 
-import com.softserveinc.ita.GoogleSearchResultPage;
-import com.softserveinc.ita.TestRunner;
+import com.softserveinc.ita.deprecated.GoogleSearchResultPage;
+import com.softserveinc.ita.deprecated.TestRunner;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

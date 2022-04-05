@@ -1,6 +1,6 @@
-package com.softserveinc.ita.kmushynska;
+package com.softserveinc.ita.deprecated.kmushynska;
 
-import com.softserveinc.ita.TestRunner;
+import com.softserveinc.ita.deprecated.TestRunner;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
