@@ -15,21 +15,21 @@ public class HeaderPage {
         return new SearchResultPage();
     }
 
-    @Step("Open catalog")
+    @Step("Opened catalog")
     public Catalog openCatalog() {
         $x("//*[@id='fat-menu']").click();
 
         return new Catalog();
     }
 
-    @Step("Open comparison")
-    public Comparison openComparison() {
+    @Step("Opened comparison")
+    public ComparisonPage openComparison() {
         $x("//rz-comparison/button").click();
 
-        return new Comparison();
+        return new ComparisonPage();
     }
 
-    @Step("Open cart")
+    @Step("Opened cart")
     public Cart openCart() {
         $x("//rz-cart/button").click();
 

@@ -5,5 +5,5 @@ package com.softserveinc.ita;
  * but different tests need different elements and methods from this class,
  * so we added it but left it empty
  */
-public class Catalog {
+public class ComparisonPage {
 }
