@@ -1,4 +1,4 @@
 package com.softserveinc.ita;
 
-public class CartComponent {
+public class Catalog {
 }

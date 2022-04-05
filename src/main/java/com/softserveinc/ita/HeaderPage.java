@@ -15,24 +15,24 @@ public class HeaderPage {
         return new SearchResultPage();
     }
 
-    @Step("Go to catalog")
-    public CatalogComponent goToCatalog() {
+    @Step("Open catalog")
+    public Catalog openCatalog() {
         $x("//*[@id='fat-menu']").click();
 
-        return new CatalogComponent();
+        return new Catalog();
     }
 
-    @Step("Go to comparison")
-    public ComparisonComponent goToComparison() {
+    @Step("Open comparison")
+    public Comparison openComparison() {
         $x("//rz-comparison/button").click();
 
-        return new ComparisonComponent();
+        return new Comparison();
     }
 
-    @Step("Go to cart")
-    public CartComponent goToCart() {
+    @Step("Open cart")
+    public Cart openCart() {
         $x("//rz-cart/button").click();
 
-        return new CartComponent();
+        return new Cart();
     }
 }
