@@ -1,7 +1,7 @@
-package com.softserveinc.ita.dstoyko;
+package com.softserveinc.ita.deprecated.dstoyko;
 
-import com.softserveinc.ita.GoogleSearchResultPage;
-import com.softserveinc.ita.TestRunner;
+import com.softserveinc.ita.deprecated.GoogleSearchResultPage;
+import com.softserveinc.ita.deprecated.TestRunner;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.testng.annotations.Test;
 

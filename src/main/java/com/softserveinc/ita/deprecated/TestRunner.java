@@ -1,4 +1,4 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.deprecated;
 
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeMethod;
@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeSuite;
 
 public class TestRunner {
 
-    protected final HomePage homePage = new HomePage();
+    protected final GoogleHomePage googleHomePage = new GoogleHomePage();
 
     @BeforeSuite
     public void driverConfigurationAndTimeout() {
@@ -16,6 +16,6 @@ public class TestRunner {
 
     @BeforeMethod
     public void navigateToUrl() {
-        homePage.open();
+        googleHomePage.open();
     }
 }

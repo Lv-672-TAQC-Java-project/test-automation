@@ -1,6 +1,6 @@
-package com.softserveinc.ita.rvytrykush;
+package com.softserveinc.ita.deprecated.rvytrykush;
 
-import com.softserveinc.ita.TestRunner;
+import com.softserveinc.ita.deprecated.TestRunner;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

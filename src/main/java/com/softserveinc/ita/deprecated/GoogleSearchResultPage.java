@@ -1,4 +1,4 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.deprecated;
 
 import io.qameta.allure.Step;
 
