@@ -5,11 +5,7 @@ import io.qameta.allure.Step;
 
 public class HomePage {
 
-    private HeaderPage headerPage;
-
-    public HomePage() {
-        headerPage = new HeaderPage();
-    }
+    private Header header = new Header();
 
     @Step("Opened home page")
     public HomePage open() {

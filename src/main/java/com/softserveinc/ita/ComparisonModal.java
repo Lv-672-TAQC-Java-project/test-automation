@@ -1,5 +1,5 @@
 package com.softserveinc.ita;
 
-public class Cart {
+public class ComparisonModal {
     // to be extended
 }

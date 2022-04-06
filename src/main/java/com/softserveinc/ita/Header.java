@@ -5,7 +5,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
-public class HeaderPage {
+public class Header {
     @Step("Searched for {term}")
     public SearchResultPage search(String term) {
         String inputFieldPath = "//*[@name='search']";
@@ -22,11 +22,11 @@ public class HeaderPage {
         return new Catalog();
     }
 
-    @Step("Opened comparison")
-    public ComparisonPage openComparison() {
+    @Step("Opened comparison modal")
+    public ComparisonModal openComparisonModal() {
         $x("//rz-comparison/button").click();
 
-        return new ComparisonPage();
+        return new ComparisonModal();
     }
 
     @Step("Opened cart")
