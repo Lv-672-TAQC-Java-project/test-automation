@@ -12,12 +12,11 @@ public class SearchResultPage {
 
     private Header header = new Header();
 
-    public SearchResultPage addNotebooksToComparisonModal() {
-        String addToComparisonModalLocator = "//*[@class ='compare-button ng-star-inserted']";
-        String firstNotebookLocator = "//*[@data-goods-id  = '334830985'] " + addToComparisonModalLocator;
-        String secondNotebookLocator = "//*[@data-goods-id  = '332149516'] " + addToComparisonModalLocator;
-        $x(firstNotebookLocator).shouldBe(visible, Duration.ofSeconds(10)).click();
-        $x(secondNotebookLocator).shouldBe(visible, Duration.ofSeconds(10)).click();
+    public SearchResultPage addProductToComparisonModal(int index) {
+        String productNumber = String.format("(//div[@class='goods-tile__inner'])[%s]", index);
+        String addToComparisonModalButton = "//*[@class ='compare-button ng-star-inserted']";
+        String addProductToComparisonModal = productNumber + addToComparisonModalButton;
+        $x(addProductToComparisonModal).shouldBe(visible, Duration.ofSeconds(10)).click();
         return this;
     }
 }

@@ -11,11 +11,11 @@ public class ProductsComparisonTest extends TestRunner{
         ComparisonPage comparisonPage = homePage
                 .getHeader()
                 .search(searchTerm)
-                .addNotebooksToComparisonModal()
+                .addProductToComparisonModal(1)
+                .addProductToComparisonModal(2)
                 .getHeader()
                 .openComparisonModal()
                 .goToNotebooksComparisonPage();
-
 
         assertThat(comparisonPage.getAllCharacteristicsList())
                 .as("Only different products characteristics should be displayed")
