@@ -28,8 +28,4 @@ public class ComparisonPage {
         showOnlyDifferences();
         return $x(characteristicsLocator).getText();
     }
-
-//    public boolean areCharacteristicsDifferent() {
-//        return getAllCharacteristicsList().equals(getOnlyDifferentCharacteristicsList());
-//    }
 }
