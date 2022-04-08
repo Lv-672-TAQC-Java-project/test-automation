@@ -2,7 +2,9 @@ package com.softserveinc.ita;
 
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;
+import lombok.Getter;
 
+@Getter
 public class HomePage {
 
     private Header header = new Header();
