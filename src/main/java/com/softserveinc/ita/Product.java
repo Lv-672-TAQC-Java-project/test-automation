@@ -1,17 +1,18 @@
 package com.softserveinc.ita;
 
-import com.codeborne.selenide.SelenideElement;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class Product {
 
-    private final SelenideElement rootElement;
+    private final String rootElementPath;
 
-    public Product(SelenideElement element) {
-        this.rootElement = element;
+    public Product(String element) {
+        this.rootElementPath = element;
     }
 
     public String getProductName() {
 
-        return rootElement.$x(".//span[contains(@class, 'goods-tile__title')]").text();
+        return $x(String.format("(%s)[%s]", rootElementPath,".//span[contains(@class, 'goods-tile__title')]"))
+                .text();
     }
 }
