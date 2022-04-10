@@ -20,7 +20,5 @@ public class ProductsComparisonTest extends TestRunner{
         assertThat(comparisonPage.getAllCharacteristicsText())
                 .as("Only different products characteristics should be displayed")
                 .isNotEqualTo(comparisonPage.showOnlyDifferences().getAllCharacteristicsText());
-
-
     }
 }
