@@ -3,11 +3,10 @@ package com.softserveinc.ita;
 import com.codeborne.selenide.Selenide;
 import io.qameta.allure.Step;
 import lombok.Getter;
+
 import static com.codeborne.selenide.Selenide.$x;
 
 @Getter
-
-
 public class HomePage {
 
     private Header header = new Header();
@@ -19,13 +18,12 @@ public class HomePage {
         return this;
     }
 
-    @Step("Opened product page from Menu")
-    public MenuCategories openLinkInMenu(String linkMenu){
-        String linkText = String.format("//ul[@class='menu-categories menu-categories_type_main']" +
-                "/li[@class='menu-categories__item ng-star-inserted']/a[contains(text(),'%s')]", linkMenu);
+    @Step("Opened product from Menu")
+    public SubCatalog openMenu(String nameLinkMenu) {
+        String linkText = String.format("//div[@class = 'fat-wrap']//a[text() = '%s']", nameLinkMenu);
         $x(linkText).click();
 
-        return new MenuCategories();
+        return new SubCatalog();
     }
 
 }

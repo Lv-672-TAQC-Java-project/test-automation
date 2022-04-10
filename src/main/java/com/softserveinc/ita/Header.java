@@ -25,6 +25,7 @@ public class Header {
     @Step("Opened comparison modal")
     public ComparisonModal openComparisonModal() {
         $x("//rz-comparison/button").click();
+        $x("//a[@class = 'comparison-modal__link']").click();
 
         return new ComparisonModal();
     }
@@ -35,4 +36,6 @@ public class Header {
 
         return new Cart();
     }
+
+
 }
