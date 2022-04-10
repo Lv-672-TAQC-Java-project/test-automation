@@ -13,19 +13,13 @@ public class ComparisonPage {
     private Header header = new Header();
 
     public ComparisonPage showOnlyDifferences() {
-        String locator = "//*[contains (text(), ' Тільки відмінності')]";
-        $x(locator).shouldBe(visible, Duration.ofSeconds(10)).click();
+        String locator = "//*[@class = 'comparison-settings'] //*[@type = 'button'][1]";
+        $x(locator).click();
         return this;
     }
 
-    public String getAllCharacteristicsList() {
+    public String getAllCharacteristicsText() {
         String characteristicsLocator = "//*[@class = 'characteristic-list']";
-        return $x(characteristicsLocator).getText();
-    }
-
-    public String getOnlyDifferentCharacteristicsList() {
-        String characteristicsLocator = "//*[@class = 'characteristic-list']";
-        showOnlyDifferences();
-        return $x(characteristicsLocator).getText();
+        return $x(characteristicsLocator).text();
     }
 }

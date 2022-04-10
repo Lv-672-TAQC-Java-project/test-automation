@@ -15,11 +15,11 @@ public class ProductsComparisonTest extends TestRunner{
                 .addProductToComparisonModal(2)
                 .getHeader()
                 .openComparisonModal()
-                .goToNotebooksComparisonPage();
+                .openComparisonPage();
 
-        assertThat(comparisonPage.getAllCharacteristicsList())
+        assertThat(comparisonPage.getAllCharacteristicsText())
                 .as("Only different products characteristics should be displayed")
-                .isNotEqualTo(comparisonPage.getOnlyDifferentCharacteristicsList());
+                .isNotEqualTo(comparisonPage.showOnlyDifferences().getAllCharacteristicsText());
 
 
     }
