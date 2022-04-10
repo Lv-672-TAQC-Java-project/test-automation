@@ -6,8 +6,8 @@ public class Product {
 
     private final String rootElementPath;
 
-    public Product(String element) {
-        this.rootElementPath = element;
+    public Product(String rootElementPath) {
+        this.rootElementPath = rootElementPath;
     }
 
     public String getProductName() {
