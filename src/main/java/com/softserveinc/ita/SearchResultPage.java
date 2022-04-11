@@ -1,7 +1,7 @@
 package com.softserveinc.ita;
 
 import java.time.Duration;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
@@ -12,7 +12,7 @@ public class SearchResultPage {
     private Header header = new Header();
 
     public List<Product> getProducts() {
-        List<Product> products = new ArrayList<>();
+        List<Product> products = new LinkedList<>();
         String productsPath = "//div[@class='goods-tile__inner']";
         int amountOfProducts = $$x(productsPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(5)).size();

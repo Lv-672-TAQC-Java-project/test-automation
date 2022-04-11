@@ -16,7 +16,7 @@ public class SearchTest extends TestRunner {
                 .getProducts();
 
         for (Product product : products) {
-            String productName = product.getProductName();
+            String productName = product.getName();
             assertThat(productName)
                     .as(productName + " should contain " + searchTerm)
                     .containsIgnoringCase(searchTerm);
