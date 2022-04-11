@@ -1,25 +1,16 @@
 package com.softserveinc.ita;
 
-import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+import lombok.Getter;
 
-import java.util.List;
-
-import static com.codeborne.selenide.Selenide.$x;
-
+@Getter
 public class SearchResultPage {
 
     private Header header = new Header();
 
     private Filter filter = new Filter();
 
-    public Header getHeader() {
-        return header;
-    }
-
-    public Filter getFilter() {
-        return filter;
-    }
-
+    @Step("get {index} product")
     public Product getProduct(int index){
         String productPath = String.format("(//*[contains(@class, 'goods-tile__inner')])[%d]",index);
 

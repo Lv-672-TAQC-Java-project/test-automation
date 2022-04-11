@@ -1,35 +1,40 @@
 package com.softserveinc.ita;
 
-import com.codeborne.selenide.Condition;
+import io.qameta.allure.Step;
+import lombok.Getter;
 
 import java.time.Duration;
 
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
+@Getter
 public class ComparisonPage {
     private Header header = new Header();
 
-    public Header getHeader() {
-        return header;
-    }
+    private String productsPath = "//rz-products-section//li";
 
+    @Step("add more products to the comparison")
     public SearchResultPage addMoreProduct() {
+
         $x("//a/span[@class = 'comparison-settings__label']")
-                .shouldBe(Condition.visible, Duration.ofSeconds(10))
                 .click();
 
         return new SearchResultPage();
     }
 
+    public int getSize(){
+
+        return $$x(productsPath).shouldHave(sizeGreaterThan(0), Duration.ofSeconds(3)).size();
+    }
+
     public boolean areProductsDisplayed() {
         boolean isProductDisplayed = false;
-        String productsPath = "//rz-products-section//li";
-        int size = $$x(productsPath).size();
-
-        for (int index = 0; index < size; index++) {
+        for (int index = 0; index < getSize(); index++) {
             isProductDisplayed = $x(String.format("%s[%d]", productsPath, index + 1))
-                    .shouldBe(Condition.visible, Duration.ofSeconds(10))
+                    .shouldBe(visible, Duration.ofSeconds(10))
                     .isDisplayed();
         }
         return isProductDisplayed;

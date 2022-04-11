@@ -15,7 +15,4 @@ public class HomePage {
 
         return this;
     }
-    public Header getHeader(){
-       return header;
-    }
 }
