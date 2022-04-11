@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductsComparisonTest extends TestRunner{
     @Test
-    public void showOnlyDifferencesComparisonTest() {
+    public void verifyShowOnlyDifferencesFunctionality() {
         String searchTerm = "notebook";
         ComparisonPage comparisonPage = homePage
                 .getHeader()
@@ -17,8 +17,8 @@ public class ProductsComparisonTest extends TestRunner{
                 .openComparisonModal()
                 .openComparisonPage();
 
-        assertThat(comparisonPage.getAllCharacteristicsText())
+        assertThat(comparisonPage.getAllCharacteristicsList())
                 .as("Only different products characteristics should be displayed")
-                .isNotEqualTo(comparisonPage.showOnlyDifferences().getAllCharacteristicsText());
+                .isNotEqualTo(comparisonPage.showOnlyDifferences().getAllCharacteristicsList());
     }
 }
