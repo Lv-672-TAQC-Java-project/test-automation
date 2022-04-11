@@ -15,9 +15,9 @@ public class Product {
     }
 
     public SearchResultPage addProductToComparisonList() {
+
         String comparisonButtonPath = String.format("%s//button[contains(@class, 'compare-button')]", productPath);
         $x(comparisonButtonPath)
-                .shouldBe(Condition.visible, Duration.ofSeconds(10))
                 .click();
 
         return new SearchResultPage();
