@@ -5,6 +5,7 @@ import lombok.Getter;
 
 import java.util.List;
 
+import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -21,8 +22,8 @@ public class ComparisonPage {
     }
 
     @Step("Get list of currently displayed characteristics")
-    public List<String> getAllCharacteristicsList() {
+    public List<String> getAllProductsCharacteristicsList() {
         String characteristicsListLocator = "//li[@class = 'ng-star-inserted']";
-        return $$x(characteristicsListLocator).texts();
+        return $$x(characteristicsListLocator).shouldHave(sizeGreaterThan(0)).texts();
     }
 }

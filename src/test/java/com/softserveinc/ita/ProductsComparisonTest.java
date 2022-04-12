@@ -8,6 +8,8 @@ public class ProductsComparisonTest extends TestRunner{
     @Test
     public void verifyShowOnlyDifferencesFunctionality() {
         String searchTerm = "notebook";
+        String productCategory = "Ноутбуки";
+
         ComparisonPage comparisonPage = homePage
                 .getHeader()
                 .search(searchTerm)
@@ -15,10 +17,11 @@ public class ProductsComparisonTest extends TestRunner{
                 .addProductToComparisonModal(2)
                 .getHeader()
                 .openComparisonModal()
-                .openComparisonPage();
+                .openComparisonPage(productCategory);
 
-        assertThat(comparisonPage.getAllCharacteristicsList())
+
+        assertThat(comparisonPage.getAllProductsCharacteristicsList())
                 .as("Only different products characteristics should be displayed")
-                .isNotEqualTo(comparisonPage.showOnlyDifferences().getAllCharacteristicsList());
+                .isNotEqualTo(comparisonPage.showOnlyDifferences().getAllProductsCharacteristicsList());
     }
 }
