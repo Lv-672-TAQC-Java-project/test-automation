@@ -1,5 +1,9 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.Cart;
+import com.softserveinc.ita.pageobjects.InCartProduct;
+import com.softserveinc.ita.pageobjects.Product;
+import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -7,25 +11,33 @@ import static org.assertj.core.api.Assertions.*;
 public class CartTest extends TestRunner {
 
     @Test
-    public void verifyRemoveFunctionInCart() {
+    public void verifyRemovalFunctionalityInTheCart() {
 
-        Cart addedProductToCart = homePage.getHeader()
+        Product firstProductFromSearch = homePage
+                .getHeader()
                 .search("Фотоапарати")
-                .getProduct(1)
+                .getProduct(1);
+
+        String firstProductTitleOfTheSearchResult  = firstProductFromSearch.getName();
+
+        InCartProduct firstProductInTheCart = firstProductFromSearch
                 .addToCart()
                 .getHeader()
-                .openCart();
+                .openCart()
+                .getProduct(1);
 
-        assertThat(addedProductToCart.isCartContainsAddedCountOfProduct(1))
-                .as("Cart should contain one product")
-                .isTrue();
+        String firstProductTitleInTheCart = firstProductInTheCart.getName();
 
-        Cart cartAfterRemoving = addedProductToCart
+        assertThat(firstProductTitleOfTheSearchResult )
+                .as("The cart should contain added product")
+                .isEqualTo(firstProductTitleInTheCart);
+
+        Cart cartAfterRemovingTheProduct = firstProductInTheCart
                 .openCartProductActions()
-                .removeOption();
+                .removeProductFromCart();
 
-        assertThat(cartAfterRemoving.isCartEmpty())
-                .as("In the cart should be displayed the message 'Кошик порожній'")
+        assertThat(cartAfterRemovingTheProduct.isCartEmpty())
+                .as("Cart should be empty")
                 .isTrue();
     }
 }
