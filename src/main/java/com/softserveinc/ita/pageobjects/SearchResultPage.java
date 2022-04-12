@@ -1,7 +1,5 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.softserveinc.ita.Header;
-
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,6 +23,11 @@ public class SearchResultPage {
         }
 
         return products;
+    }
+
+    public Product getProduct(int index) {
+
+        return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
     }
 
     public String getSearchTermLabel() {
