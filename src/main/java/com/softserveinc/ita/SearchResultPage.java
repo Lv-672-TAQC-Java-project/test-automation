@@ -6,7 +6,7 @@ public class SearchResultPage {
 
     private Header header = new Header();
 
-    public String getSearchedProductItemName() {
+    public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
 }
