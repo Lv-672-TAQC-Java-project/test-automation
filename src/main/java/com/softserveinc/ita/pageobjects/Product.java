@@ -1,5 +1,7 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.SearchResultPage;
+import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -21,6 +23,7 @@ public class Product {
                 "//span[@class = 'goods-tile__price-value']")).text();
     }
 
+    @Step("Added product to cart")
     public SearchResultPage addToCart() {
         $x(String.format("%s%s", rootElementPath,
                 "//button[contains(@class, 'goods-tile__buy-button')]")).click();
@@ -28,6 +31,7 @@ public class Product {
         return new SearchResultPage();
     }
 
+    @Step("Added product to list of comparisons")
     public SearchResultPage addToListOfComparisons() {
         $x(String.format("%s%s", rootElementPath,
                 "//button[contains(@class, 'compare-button')]")).click();
