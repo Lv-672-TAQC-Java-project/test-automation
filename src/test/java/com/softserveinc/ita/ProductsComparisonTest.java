@@ -1,10 +1,12 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.ComparisonPage;
+import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProductsComparisonTest extends TestRunner{
+public class ProductsComparisonTest extends TestRunner {
     @Test
     public void verifyShowOnlyDifferencesFunctionality() {
         String searchTerm = "notebook";
@@ -13,12 +15,13 @@ public class ProductsComparisonTest extends TestRunner{
         ComparisonPage comparisonPage = homePage
                 .getHeader()
                 .search(searchTerm)
-                .addProductToComparisonModal(1)
-                .addProductToComparisonModal(2)
+                .getProduct(1)
+                .addToListOfComparisons()
+                .getProduct(2)
+                .addToListOfComparisons()
                 .getHeader()
                 .openComparisonModal()
                 .openComparisonPage(productCategory);
-
 
         assertThat(comparisonPage.getAllProductsCharacteristicsList())
                 .as("Only different products characteristics should be displayed")

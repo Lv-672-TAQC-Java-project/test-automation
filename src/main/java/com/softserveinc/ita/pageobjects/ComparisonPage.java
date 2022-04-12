@@ -1,4 +1,4 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.pageobjects;
 
 import io.qameta.allure.Step;
 import lombok.Getter;
