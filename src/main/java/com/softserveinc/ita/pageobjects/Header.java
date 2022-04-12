@@ -1,4 +1,4 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.pageobjects;
 
 import com.softserveinc.ita.pageobjects.Cart;
 import io.qameta.allure.Step;
