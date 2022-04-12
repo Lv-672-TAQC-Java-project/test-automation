@@ -6,6 +6,10 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class Filter {
+    public SearchResultPage getSearchResultPage() {
+        return new SearchResultPage();
+    }
+
     @Step("Filtered products by \"{filterCategoryName}\" Category and \"{filterCheckboxName}\" Checkbox")
     public Filter filterByCategory(String filterCategoryName, String filterCheckboxName) {
         if ($x(String.format("//div[@class='sidebar-block sidebar-block_state_collapsed ng-star-inserted']" +
