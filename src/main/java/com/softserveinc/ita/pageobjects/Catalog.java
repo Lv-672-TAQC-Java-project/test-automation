@@ -1,4 +1,4 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.pageobjects;
 
 public class Catalog {
     // to be extended
