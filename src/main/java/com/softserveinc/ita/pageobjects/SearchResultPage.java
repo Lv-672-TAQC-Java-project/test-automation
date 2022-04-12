@@ -1,6 +1,4 @@
-package com.softserveinc.ita;
-
-import com.softserveinc.ita.pageobjects.Product;
+package com.softserveinc.ita.pageobjects;
 
 import java.time.Duration;
 import java.util.LinkedList;
