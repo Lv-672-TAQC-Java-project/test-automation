@@ -1,5 +1,5 @@
 package com.softserveinc.ita;
 
-public class CartTest {
+public class CartTest extends TestRunner {
     // to be extended
 }
