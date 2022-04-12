@@ -1,4 +1,4 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.pageobjects;
 
 import io.qameta.allure.Step;
 
@@ -15,7 +15,7 @@ public class Filter {
         }
         $x(String.format("//li//a[@data-id='%s']", filterCheckboxName)).click();
 
-        return new Filter();
+        return this;
     }
 
     @Step("Filtered products by amount of price from {filterPriceMinNumber} to {filterPriceMaxNumber}")
