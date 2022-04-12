@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.Product;
+import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -18,7 +19,6 @@ public class SearchTest extends TestRunner {
 
         for (Product product : products) {
             String productName = product.getName();
-            System.out.println(productName);
             assertThat(productName)
                     .as(productName + " should contain " + searchTerm)
                     .containsIgnoringCase(searchTerm);
