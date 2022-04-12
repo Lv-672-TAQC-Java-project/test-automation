@@ -6,9 +6,12 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class ComparisonModal {
 
-    @Step("Opened comparison page")
-    public ComparisonPage openComparisonPage() {
-        $x("//a[@class = 'comparison-modal__link']").click();
+    @Step("Opened Comparison Page {category}")
+    public ComparisonPage openComparisonPage(String category) {
+
+        String categoryLinkPath = String.format("//*[contains(@class, 'comparison-modal__list')]//a[contains(text(), '%s')]", category);
+        $x(categoryLinkPath).click();
+
         return new ComparisonPage();
     }
 }
