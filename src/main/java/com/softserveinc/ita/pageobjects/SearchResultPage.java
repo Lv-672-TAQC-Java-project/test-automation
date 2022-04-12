@@ -1,5 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
+import io.qameta.allure.Step;
+
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
@@ -27,5 +29,13 @@ public class SearchResultPage {
     public Product getProduct(int index) {
 
         return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
+    }
+
+    @Step("added {amount} products to comparison")
+    public Header addAmountProductsToComparison(int amount) {
+        for (int i = 1; i <= amount; i++)
+            getProduct(i).addToListOfComparisons();
+
+        return new Header();
     }
 }

@@ -1,7 +1,6 @@
 package com.softserveinc.ita.olehpysko;
 
-import com.softserveinc.ita.ComparisonModal;
-import com.softserveinc.ita.TestRunner;
+import com.softserveinc.ita.pageobjects.*;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -10,21 +9,21 @@ public class DeleteInComparisonListTest extends TestRunner {
 
     @Test
     public void verifyDeleteFunctionInComparisonList() {
-
-        ComparisonModal plumbigAndRepairPage = homePage
+        String productString = "Ванни";
+        ComparisonPage comparisonPage = homePage
                 .openMenu("Сантехніка та ремонт")
-                .openSubMenu("Ванни")
+                .openSubMenu(productString)
                 .addAmountProductsToComparison(3)
-                .openComparisonModal();
+                .openComparisonModal()
+                .openComparisonPage(productString);
 
-        assertThat(plumbigAndRepairPage.isLastProductDisplayed())
-                .as("should be visible").isTrue();
-        assertThat(plumbigAndRepairPage.checkAmountAddedProducts())
-                .as("should be three products").isEqualTo(3);
-        plumbigAndRepairPage.deleteAmountProducts(1);
-        assertThat(plumbigAndRepairPage.isLastProductDisplayed())
-                .as("should be visible").isTrue();
-        assertThat(plumbigAndRepairPage.checkAmountAddedProducts())
-                .as("should be two products").isEqualTo(2);
+        String expectedString = "Ванна";
+        assertThat(comparisonPage.isHeadingProductContainText(expectedString))
+                .as("heading in comparison should contain text " + expectedString).isTrue();
+        assertThat(comparisonPage.getAmountAddedProducts())
+                .as("should be three added products").isEqualTo(3);
+        comparisonPage.deleteAmountAddedProducts(1);
+        assertThat(comparisonPage.getAmountAddedProducts())
+                .as("should be two added products").isEqualTo(2);
     }
 }
