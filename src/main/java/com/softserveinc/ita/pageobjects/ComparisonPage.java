@@ -14,7 +14,7 @@ public class ComparisonPage {
 
     private Header header = new Header();
 
-    @Step("Showed only differentiating products characteristics")
+    @Step("Showed only distinctive products characteristics")
     public ComparisonPage showOnlyDifferences() {
         String showOnlyDifferencesLocator = "//*[@class = 'comparison-settings'] //*[@type = 'button'][1]";
         $x(showOnlyDifferencesLocator).click();
