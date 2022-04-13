@@ -20,12 +20,11 @@ public class FilterTest extends TestRunner {
                 .search("мобільний телефон")
                 .getFilter()
                 .filterByCategory("Виробник", "Apple")
-                .getSearchResultPage()
                 .getProducts();
 
         String expectedTerm = "iPhone";
         filteredProductsList.forEach(product -> assertThat(product.getName())
-                .describedAs("Product name should contains \"" + expectedTerm + "\"")
+                .as("Product name should contains \"" + expectedTerm + "\"")
                 .containsIgnoringCase(expectedTerm));
     }
 }
