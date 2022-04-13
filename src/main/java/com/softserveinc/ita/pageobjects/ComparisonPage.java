@@ -1,4 +1,4 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.pageobjects;
 
 import io.qameta.allure.Step;
 import lombok.Getter;
@@ -12,13 +12,12 @@ import static com.codeborne.selenide.Selenide.$x;
 
 @Getter
 public class ComparisonPage {
-    private Header header = new Header();
 
+    private Header header = new Header();
     private String productsPath = "//rz-products-section//li";
 
     @Step("add more products to the comparison")
     public SearchResultPage addMoreProduct() {
-
         $x("//a/span[@class = 'comparison-settings__label']")
                 .click();
 
@@ -26,7 +25,6 @@ public class ComparisonPage {
     }
 
     public int getSize(){
-
         return $$x(productsPath).shouldHave(sizeGreaterThan(0), Duration.ofSeconds(3)).size();
     }
 
@@ -39,6 +37,5 @@ public class ComparisonPage {
         }
         return isProductDisplayed;
     }
-
 
 }
