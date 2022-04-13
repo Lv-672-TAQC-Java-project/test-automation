@@ -31,10 +31,16 @@ public class SearchResultPage {
         return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
     }
 
-    @Step("added {amount} products to comparison")
-    public Header addAmountProductsToComparison(int amount) {
-        for (int i = 1; i <= amount; i++)
-            getProduct(i).addToListOfComparisons();
+    public Product getProduct(String productName) {
+
+        return new Product(String.format("//span[starts-with(text(),' %s')]/../..", productName));
+    }
+
+    @Step("added products to comparison")
+    public Header addProductsToComparison(String[] productsNames) {
+        for (String productName: productsNames) {
+            getProduct(productName).addToListOfComparisons();
+        }
 
         return new Header();
     }

@@ -4,12 +4,12 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class SubCatalog {
+public class SubCategory {
 
-    @Step("Opened sub menu")
-    public SearchResultPage openSubMenu(String nameLinkProduct) {
+    @Step("Opened sub category")
+    public SearchResultPage openSubCategory(String nameSubCategory) {
         String linkText = String.format(
-                "//div[@class='tile-cats']//a[contains(text(),'%s')]", nameLinkProduct);
+                "//div[@class='tile-cats']//a[contains(text(),'%s')]", nameSubCategory);
         $x(linkText).click();
 
         return new SearchResultPage();
