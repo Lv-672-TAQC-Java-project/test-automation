@@ -17,11 +17,9 @@ public class SearchTest extends TestRunner {
                 .search(searchTerm)
                 .getProducts();
 
-        for (Product product : products) {
-            String productName = product.getName();
-            assertThat(productName)
-                    .as(productName + " should contain " + searchTerm)
-                    .containsIgnoringCase(searchTerm);
-        }
+        assertThat(products)
+                .allSatisfy(product -> assertThat(product.getName())
+                        .as(product.getName() + " should contain " + searchTerm)
+                        .containsIgnoringCase(searchTerm));
     }
 }
