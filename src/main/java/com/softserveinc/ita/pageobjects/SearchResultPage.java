@@ -6,6 +6,7 @@ import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
 
 public class SearchResultPage {
 
@@ -27,5 +28,9 @@ public class SearchResultPage {
     public Product getProduct(int index) {
 
         return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
+    }
+
+    public String getSearchTermLabel() {
+        return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
 }
