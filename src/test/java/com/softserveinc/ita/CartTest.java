@@ -17,13 +17,10 @@ public class CartTest extends TestRunner {
                 .as("Search term label should be displayed")
                 .contains(searchTerm);
 
-        String firstProductItemName = searchResultPage
-                .getProduct(1)
-                .getName();
+        Product firstProductItem = searchResultPage.getProduct(1);
+        String firstProductItemName = firstProductItem.getName();
 
-        searchResultPage
-                .getProduct(1)
-                .addToCart();
+        firstProductItem.addToCart();
 
         Cart cart = header.openCart();
 
