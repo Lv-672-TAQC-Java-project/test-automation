@@ -36,10 +36,10 @@ public class ProductsComparisonTest extends TestRunner {
                 .openComparisonModal()
                 .openComparisonPage(productCategory);
 
-        int firstProductFullCharacteristicSize = comparisonPage
+        int firstProductFullCharacteristicListSize = comparisonPage
                 .getProductCharacteristics(firstProductName)
                 .size();
-        int secondProductFullCharacteristicSize = comparisonPage
+        int secondProductFullCharacteristicListSize = comparisonPage
                 .getProductCharacteristics(secondProductName)
                 .size();
 
@@ -48,11 +48,11 @@ public class ProductsComparisonTest extends TestRunner {
                 .isNotEqualTo(comparisonPage
                         .getProductCharacteristics(secondProductName));
 
-        assertThat(firstProductFullCharacteristicSize)
+        assertThat(firstProductFullCharacteristicListSize)
                 .isGreaterThan(comparisonPage
                         .getProductCharacteristics(firstProductName).size());
 
-        assertThat(secondProductFullCharacteristicSize)
+        assertThat(secondProductFullCharacteristicListSize)
                 .isGreaterThan(comparisonPage
                         .getProductCharacteristics(secondProductName).size());
     }
