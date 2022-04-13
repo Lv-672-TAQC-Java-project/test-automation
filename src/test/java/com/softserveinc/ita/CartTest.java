@@ -1,9 +1,6 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.Cart;
-import com.softserveinc.ita.pageobjects.InCartProduct;
-import com.softserveinc.ita.pageobjects.Product;
-import com.softserveinc.ita.pageobjects.TestRunner;
+import com.softserveinc.ita.pageobjects.*;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,31 +9,29 @@ public class CartTest extends TestRunner {
 
     @Test
     public void verifyRemovalFunctionalityInTheCart() {
+        var header = homePage.getHeader();
 
-        Product firstProductFromSearch = homePage
-                .getHeader()
+        Product firstProductFromSearch = header
                 .search("Фотоапарати")
                 .getProduct(1);
 
-        String firstProductTitleOfTheSearchResult = firstProductFromSearch.getName();
+        String firstProductTitle = firstProductFromSearch.getName();
 
-        InCartProduct firstProductInTheCart = firstProductFromSearch
-                .addToCart()
-                .getHeader()
+        firstProductFromSearch.addToCart();
+
+        InCartProduct firstProductInTheCart = header
                 .openCart()
                 .getProduct(1);
 
         String firstProductTitleInTheCart = firstProductInTheCart.getName();
 
-        assertThat(firstProductTitleOfTheSearchResult)
+        assertThat(firstProductTitle)
                 .as("The cart should contain added product")
                 .isEqualTo(firstProductTitleInTheCart);
 
-        Cart cartAfterRemovingTheProduct = firstProductInTheCart
-                .openCartProductActions()
-                .removeProductFromCart();
+        Cart cart = firstProductInTheCart.remove();
 
-        assertThat(cartAfterRemovingTheProduct.isCartEmpty())
+        assertThat(cart.isCartEmpty())
                 .as("Cart should be empty")
                 .isTrue();
     }

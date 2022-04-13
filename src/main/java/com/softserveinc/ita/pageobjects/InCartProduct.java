@@ -16,18 +16,11 @@ public class InCartProduct {
                 "//div[@class='cart-product__main']/a")).text();
     }
 
-    @Step("Opened the product actions menu in the cart")
-    public InCartProduct openCartProductActions() {
+    @Step("Removed product from the cart")
+    public Cart remove() {
         $x(String.format("%s%s", rootElementPath,
                 "//rz-popup-menu/button")).click();
-
-        return this;
-    }
-
-    @Step("Removed product from the cart")
-    public Cart removeProductFromCart() {
-        $x(String.format("%s%s", rootElementPath,
-                "//rz-popup-menu//li[@class='popup-menu__item ng-star-inserted']//button")).click();
+        $x("//li[@class='popup-menu__item ng-star-inserted']//button").click();
 
         return new Cart();
     }
