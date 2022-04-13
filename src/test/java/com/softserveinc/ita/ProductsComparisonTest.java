@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.ComparisonPage;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
 
@@ -11,20 +12,23 @@ public class ProductsComparisonTest extends TestRunner {
     public void verifyShowOnlyDifferencesFunctionality() {
         String searchTerm = "notebook";
         String productCategory = "Ноутбуки";
+        var header = homePage.getHeader();
 
-        ComparisonPage comparisonPage = homePage
-                .getHeader()
+        SearchResultPage searchResultPage = header
                 .search(searchTerm)
                 .getProduct(1)
                 .addToListOfComparisons()
                 .getProduct(2)
-                .addToListOfComparisons()
-                .getHeader()
+                .addToListOfComparisons();
+
+        ComparisonPage comparisonPage = header
                 .openComparisonModal()
                 .openComparisonPage(productCategory);
 
         assertThat(comparisonPage.getAllProductsCharacteristicsList())
                 .as("Only different products characteristics should be displayed")
-                .isNotEqualTo(comparisonPage.showOnlyDifferences().getAllProductsCharacteristicsList());
+                .isNotEqualTo(comparisonPage
+                        .showOnlyDifferences()
+                        .getAllProductsCharacteristicsList());
     }
 }
