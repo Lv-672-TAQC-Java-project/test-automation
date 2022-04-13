@@ -1,7 +1,5 @@
 package com.softserveinc.ita.pageobjects;
 
-import java.time.Duration;
-
 import static com.codeborne.selenide.Selenide.$x;
 import static com.codeborne.selenide.Condition.visible;
 
@@ -14,7 +12,7 @@ public class Cart {
 
     public boolean isOpened() {
         return $x("//div[@class='modal__header']")
-                .shouldBe(visible, Duration.ofSeconds(10))
+                .shouldBe(visible)
                 .isDisplayed();
     }
 }
