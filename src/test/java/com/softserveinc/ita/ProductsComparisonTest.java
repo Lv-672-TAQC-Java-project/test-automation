@@ -17,12 +17,12 @@ public class ProductsComparisonTest extends TestRunner {
         Header header = homePage.getHeader();
 
         SearchResultPage searchResultPage =
-        header
-                .search(searchTerm)
-                .getProduct(1)
-                .addToListOfComparisons()
-                .getProduct(2)
-                .addToListOfComparisons();
+                header
+                        .search(searchTerm)
+                        .getProduct(1)
+                        .addToListOfComparisons()
+                        .getProduct(2)
+                        .addToListOfComparisons();
 
         String firstProductName = searchResultPage
                 .getProduct(1)
@@ -32,9 +32,9 @@ public class ProductsComparisonTest extends TestRunner {
                 .getName();
 
         ComparisonPage comparisonPage =
-        header
-                .openComparisonModal()
-                .openComparisonPage(productCategory);
+                header
+                        .openComparisonModal()
+                        .openComparisonPage(productCategory);
 
         int firstProductFullCharacteristicListSize = comparisonPage
                 .getProductCharacteristics(firstProductName)
