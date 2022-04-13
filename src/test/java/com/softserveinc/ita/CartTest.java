@@ -6,7 +6,7 @@ import com.softserveinc.ita.pageobjects.Product;
 import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartTest extends TestRunner {
 
@@ -18,7 +18,7 @@ public class CartTest extends TestRunner {
                 .search("Фотоапарати")
                 .getProduct(1);
 
-        String firstProductTitleOfTheSearchResult  = firstProductFromSearch.getName();
+        String firstProductTitleOfTheSearchResult = firstProductFromSearch.getName();
 
         InCartProduct firstProductInTheCart = firstProductFromSearch
                 .addToCart()
@@ -28,7 +28,7 @@ public class CartTest extends TestRunner {
 
         String firstProductTitleInTheCart = firstProductInTheCart.getName();
 
-        assertThat(firstProductTitleOfTheSearchResult )
+        assertThat(firstProductTitleOfTheSearchResult)
                 .as("The cart should contain added product")
                 .isEqualTo(firstProductTitleInTheCart);
 
