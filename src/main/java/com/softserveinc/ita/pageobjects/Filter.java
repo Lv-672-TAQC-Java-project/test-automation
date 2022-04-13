@@ -11,7 +11,7 @@ public class Filter {
     }
 
     @Step("Filtered products by \"{filterCategoryName}\" Category and \"{filterCheckboxName}\" Checkbox")
-    public Filter filterByCategory(String filterCategoryName, String filterCheckboxName) {
+    public SearchResultPage filterByCategory(String filterCategoryName, String filterCheckboxName) {
         if ($x(String.format("//div[@class='sidebar-block sidebar-block_state_collapsed ng-star-inserted']" +
                 "//span[contains(text(),'%s')]", filterCategoryName)).is(exist)) {
             $x(String.format("//span[@class='sidebar-block__toggle-title'][contains(text(),'%s')]", filterCategoryName))
@@ -19,11 +19,11 @@ public class Filter {
         }
         $x(String.format("//li//a[@data-id='%s']", filterCheckboxName)).click();
 
-        return this;
+        return new SearchResultPage();
     }
 
     @Step("Filtered products by amount of price from {filterPriceMinNumber} to {filterPriceMaxNumber}")
-    public Filter filterByPrice(String filterPriceMinNumber, String filterPriceMaxNumber) {
+    public SearchResultPage filterByPrice(String filterPriceMinNumber, String filterPriceMaxNumber) {
         String filterPriceFormPath = "//form[@class='slider-filter__form ng-untouched ng-pristine ng-valid']";
 
         if ($x(filterPriceFormPath).is(not(visible))) {
@@ -40,6 +40,6 @@ public class Filter {
         $x(filterPriceMaxPath).clear();
         $x(filterPriceMaxPath).setValue(filterPriceMaxNumber).pressEnter();
 
-        return this;
+        return new SearchResultPage();
     }
 }

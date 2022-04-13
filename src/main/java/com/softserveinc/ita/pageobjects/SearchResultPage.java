@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import lombok.Getter;
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
@@ -7,9 +8,11 @@ import java.util.List;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 
+@Getter
 public class SearchResultPage {
 
     private Header header = new Header();
+    private Filter filter = new Filter();
 
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<>();
