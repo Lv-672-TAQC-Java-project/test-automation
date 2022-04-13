@@ -1,7 +1,5 @@
 package com.softserveinc.ita.pageobjects;
 
-import static java.lang.String.format;
-
 public class Cart {
 
     public InCartProduct getProduct(int index) {
