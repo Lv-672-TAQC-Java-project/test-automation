@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.ComparisonPage;
+import com.softserveinc.ita.pageobjects.Header;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
@@ -12,23 +13,47 @@ public class ProductsComparisonTest extends TestRunner {
     public void verifyShowOnlyDifferencesFunctionality() {
         String searchTerm = "notebook";
         String productCategory = "Ноутбуки";
-        var header = homePage.getHeader();
 
-        SearchResultPage searchResultPage = header
+        Header header = homePage.getHeader();
+
+        SearchResultPage searchResultPage =
+        header
                 .search(searchTerm)
                 .getProduct(1)
                 .addToListOfComparisons()
                 .getProduct(2)
                 .addToListOfComparisons();
 
-        ComparisonPage comparisonPage = header
+        String firstProductName = searchResultPage
+                .getProduct(1)
+                .getName();
+        String secondProductName = searchResultPage
+                .getProduct(2)
+                .getName();
+
+        ComparisonPage comparisonPage =
+        header
                 .openComparisonModal()
                 .openComparisonPage(productCategory);
 
-        assertThat(comparisonPage.getAllProductsCharacteristicsList())
-                .as("Only different products characteristics should be displayed")
+        int firstProductFullCharacteristicSize = comparisonPage
+                .getProductCharacteristics(firstProductName)
+                .size();
+        int secondProductFullCharacteristicSize = comparisonPage
+                .getProductCharacteristics(secondProductName)
+                .size();
+
+        assertThat(comparisonPage.showOnlyDifferences()
+                .getProductCharacteristics(firstProductName))
                 .isNotEqualTo(comparisonPage
-                        .showOnlyDifferences()
-                        .getAllProductsCharacteristicsList());
+                        .getProductCharacteristics(secondProductName));
+
+        assertThat(firstProductFullCharacteristicSize)
+                .isGreaterThan(comparisonPage
+                        .getProductCharacteristics(firstProductName).size());
+
+        assertThat(secondProductFullCharacteristicSize)
+                .isGreaterThan(comparisonPage
+                        .getProductCharacteristics(secondProductName).size());
     }
 }

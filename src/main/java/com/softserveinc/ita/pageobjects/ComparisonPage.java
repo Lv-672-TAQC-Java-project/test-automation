@@ -21,9 +21,10 @@ public class ComparisonPage {
         return this;
     }
 
-    @Step("Get list of currently displayed characteristics")
-    public List<String> getAllProductsCharacteristicsList() {
-        String characteristicsListLocator = "//li[@class = 'ng-star-inserted']";
-        return $$x(characteristicsListLocator).shouldHave(sizeGreaterThan(0)).texts();
+    public List<String> getProductCharacteristics(String name) {
+        String charsLocator = String.format("//*[@class = 'comparison-characteristic__label'" +
+                "and contains(text(), '%s')]" +
+                "/following-sibling::dd[1]", name);
+        return $$x(charsLocator).shouldHave(sizeGreaterThan(0)).texts();
     }
 }
