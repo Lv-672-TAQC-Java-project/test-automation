@@ -1,4 +1,4 @@
-package com.softserveinc.ita;
+package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.Configuration;
 import org.testng.annotations.BeforeMethod;
