@@ -1,7 +1,5 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.ex.ElementNotFound;
-
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -12,12 +10,13 @@ public class Cart {
         return new InCartProduct(String.format("(//div[@class='cart-product ng-star-inserted'])[%s]", index));
     }
 
-    public boolean isCartEmpty() {
+    public boolean isEmpty() {
         String cartHeadingPath = "//div[@data-testid='empty-cart']/h4";
         try {
-            return $x(cartHeadingPath).shouldBe(visible)
+            return $x(cartHeadingPath)
+                    .shouldBe(visible)
                     .isDisplayed();
-        } catch (ElementNotFound elementNotFound) {
+        } catch (AssertionError assertionError) {
             return false;
         }
     }

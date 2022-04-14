@@ -11,27 +11,27 @@ public class CartTest extends TestRunner {
     public void verifyRemovalFunctionalityInTheCart() {
         var header = homePage.getHeader();
 
-        Product firstProductFromSearch = header
+        Product firstProduct = header
                 .search("Фотоапарати")
                 .getProduct(1);
 
-        String firstProductTitle = firstProductFromSearch.getName();
+        String firstProductName = firstProduct.getName();
 
-        firstProductFromSearch.addToCart();
+        firstProduct.addToCart();
 
-        InCartProduct firstProductInTheCart = header
+        InCartProduct firstProductInCart = header
                 .openCart()
                 .getProduct(1);
 
-        String firstProductTitleInTheCart = firstProductInTheCart.getName();
+        String firstProductNameInCart = firstProductInCart.getName();
 
-        assertThat(firstProductTitle)
-                .as("The cart should contain added product")
-                .isEqualTo(firstProductTitleInTheCart);
+        assertThat(firstProductName)
+                .as("The product name in the cart should be equal to the name of added product")
+                .isEqualTo(firstProductNameInCart);
 
-        Cart cart = firstProductInTheCart.remove();
+        Cart cart = firstProductInCart.remove();
 
-        assertThat(cart.isCartEmpty())
+        assertThat(cart.isEmpty())
                 .as("Cart should be empty")
                 .isTrue();
     }
