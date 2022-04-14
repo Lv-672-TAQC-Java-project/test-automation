@@ -17,10 +17,10 @@ public class CartTest extends TestRunner {
                 .as("Search term label should be displayed")
                 .contains(searchTerm);
 
-        Product firstProductItem = searchResultPage.getProduct(1);
-        String firstProductItemName = firstProductItem.getName();
+        Product firstProduct = searchResultPage.getProduct(1);
+        String firstProductName = firstProduct.getName();
 
-        firstProductItem.addToCart();
+        firstProduct.addToCart();
 
         Cart cart = header.openCart();
 
@@ -28,12 +28,12 @@ public class CartTest extends TestRunner {
                 .as("Cart modal should be displayed")
                 .isTrue();
 
-        String productItemNameInCart = cart
+        String productNameInCart = cart
                 .getProduct(1)
                 .getName();
 
-        assertThat(productItemNameInCart)
+        assertThat(productNameInCart)
                 .as("Added item name should be equal to item name from the cart")
-                .isEqualTo(firstProductItemName);
+                .isEqualTo(firstProductName);
     }
 }

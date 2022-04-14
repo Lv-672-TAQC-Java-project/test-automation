@@ -12,7 +12,7 @@ public class Cart {
 
     public boolean isOpened() {
         return $x("//div[@class='modal__header']")
-                .shouldBe(visible)
+                .shouldBe(visible.because("Cart should be displayed"))
                 .isDisplayed();
     }
 }
