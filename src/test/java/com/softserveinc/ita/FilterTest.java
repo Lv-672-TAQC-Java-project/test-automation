@@ -24,7 +24,7 @@ public class FilterTest extends TestRunner {
 
         String expectedTerm = "iPhone";
         filteredProductsList.forEach(product -> assertThat(product.getName())
-                .as("Product name should contains \"" + expectedTerm + "\"")
+                .as("Product name should contains " + expectedTerm)
                 .containsIgnoringCase(expectedTerm));
     }
 }
