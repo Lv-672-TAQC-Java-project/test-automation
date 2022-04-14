@@ -1,7 +1,8 @@
 package com.softserveinc.ita.deprecated.irybak;
 
-import com.softserveinc.ita.ComparisonPage;
-import com.softserveinc.ita.TestRunner;
+
+import com.softserveinc.ita.pageobjects.ComparisonPage;
+import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,12 +19,12 @@ public class AddFunctionInComparisonTest extends TestRunner {
                 .getFilter()
                 .chooseOneOfCategory(searchTerm)
                 .getProduct(1)
-                .addProductToComparisonList()
+                .addToListOfComparisons()
                 .getProduct(2)
-                .addProductToComparisonList()
+                .addToListOfComparisons()
                 .getHeader()
                 .openComparisonModal()
-                .chooseProductFromComparisonList(searchTerm);
+                .openComparisonPage(searchTerm);
 
         assertThat(productList.getSize())
                 .as("The 2 products should be in comparison")
@@ -35,10 +36,10 @@ public class AddFunctionInComparisonTest extends TestRunner {
         productList
                 .addMoreProduct()
                 .getProduct(1)
-                .addProductToComparisonList()
+                .addToListOfComparisons()
                 .getHeader()
                 .openComparisonModal()
-                .chooseProductFromComparisonList(searchTerm)
+                .openComparisonPage(searchTerm)
                 .areProductsDisplayed();
 
         assertThat(productList.getSize())

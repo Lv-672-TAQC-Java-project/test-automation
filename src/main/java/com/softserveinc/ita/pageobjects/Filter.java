@@ -6,6 +6,15 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class Filter {
+    @Step("choose {product} category in the filter")
+    public SearchResultPage chooseOneOfCategory(String product) {
+        String productLinkPath = String.format("//li[contains(@class, 'categories-filter__item')]//span[text() = '%s']", product);
+        $x(productLinkPath)
+                .click();
+
+        return new SearchResultPage();
+    }
+
     @Step("Filtered products by \"{filterCategoryName}\" Category and \"{filterCheckboxName}\" Checkbox")
     public SearchResultPage filterByCategory(String filterCategoryName, String filterCheckboxName) {
         if ($x(String.format("//div[@class='sidebar-block sidebar-block_state_collapsed ng-star-inserted']" +
