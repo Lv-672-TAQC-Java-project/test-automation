@@ -2,16 +2,20 @@ package com.softserveinc.ita.pageobjects;
 
 import io.qameta.allure.Step;
 
+import lombok.Getter;
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
 
+@Getter
 public class SearchResultPage {
 
     private Header header = new Header();
+    private Filter filter = new Filter();
 
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<>();
@@ -27,9 +31,9 @@ public class SearchResultPage {
     }
 
     public Product getProduct(int index) {
-
         return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
     }
+
 
     public Product getProduct(String productName) {
 
@@ -43,5 +47,10 @@ public class SearchResultPage {
         }
 
         return new Header();
+    }
+      
+    public String getSearchTermLabel() {
+        return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
+
     }
 }
