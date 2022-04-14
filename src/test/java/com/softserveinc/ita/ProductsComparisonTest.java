@@ -6,6 +6,8 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductsComparisonTest extends TestRunner {
@@ -36,24 +38,26 @@ public class ProductsComparisonTest extends TestRunner {
                         .openComparisonModal()
                         .openComparisonPage(productCategory);
 
-        int firstProductFullCharacteristicListSize = comparisonPage
-                .getProductCharacteristics(firstProductName)
-                .size();
-        int secondProductFullCharacteristicListSize = comparisonPage
-                .getProductCharacteristics(secondProductName)
-                .size();
+        List<String> firstProductFullCharacteristicListSize = comparisonPage
+                .getProductCharacteristics(firstProductName);
+        List<String> secondProductFullCharacteristicListSize = comparisonPage
+                .getProductCharacteristics(secondProductName);
 
-        assertThat(comparisonPage.showOnlyDifferences()
+        assertThat(comparisonPage
+                .showOnlyDifferences()
                 .getProductCharacteristics(firstProductName))
-                .isNotEqualTo(comparisonPage
+                .as("products characteristics lists should display only distinctive characteristics")
+                .doesNotContainSequence(comparisonPage
                         .getProductCharacteristics(secondProductName));
 
         assertThat(firstProductFullCharacteristicListSize)
-                .isGreaterThan(comparisonPage
+                .as("full characteristics list should have greater size than list which displays only differences")
+                .hasSizeGreaterThan(comparisonPage
                         .getProductCharacteristics(firstProductName).size());
 
         assertThat(secondProductFullCharacteristicListSize)
-                .isGreaterThan(comparisonPage
+                .as("full characteristics list should have greater size than list which displays only differences")
+                .hasSizeGreaterThan(comparisonPage
                         .getProductCharacteristics(secondProductName).size());
     }
 }
