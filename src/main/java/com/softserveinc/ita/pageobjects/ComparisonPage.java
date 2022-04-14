@@ -14,7 +14,7 @@ public class ComparisonPage {
 
     private Header header = new Header();
 
-    public ComparisonPageProduct getComparisonPageProduct(int index) {
+    public ComparisonPageProduct getProduct(int index) {
         return new ComparisonPageProduct(
                 String.format("//*[@class='products-grid__cell ng-star-inserted'][%s]", index));
     }
