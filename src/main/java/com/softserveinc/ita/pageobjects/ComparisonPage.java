@@ -1,43 +1,38 @@
 package com.softserveinc.ita.pageobjects;
 
-import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.time.Duration;
+import java.util.LinkedList;
+import java.util.List;
 
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
-import static com.codeborne.selenide.Selenide.$x;
 
 @Getter
 public class ComparisonPage {
 
     private Header header = new Header();
 
-    @Step("amount added of products to the comparison")
-    public int getAmountAddedProducts() {
-
-        return $$x("//a[@class='product__heading']")
-                .shouldHave(sizeGreaterThan(0), Duration.ofSeconds(3)).size();
-
+    public ComparisonPageProduct getProduct(int index) {
+        return new ComparisonPageProduct(
+                String.format("//*[@class='products-grid__cell ng-star-inserted'][%s]", index));
     }
 
-    @Step("if heading product had Text")
-    public boolean isHeadingProductContainText(String heading) {
-        for (int i = 1; i <= getAmountAddedProducts(); i++) {
-            return $x(String.format("(//a[@class='product__heading'])[%d]", i)).text().contains(heading);
+    public ComparisonPageProduct getProduct(String name) {
+        return new ComparisonPageProduct(
+                String.format("//a[normalize-space(text()) = '%s']//ancestor::li", name));
+    }
+
+    public List<ComparisonPageProduct> getAllComparisonPageProducts() {
+        List<ComparisonPageProduct> comparisonPageProducts = new LinkedList<>();
+        String productsPath = "//*[@class='products-grid__cell ng-star-inserted']";
+        int amountOfProducts = $$x(productsPath)
+                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
+
+        for (int i = 1; i <= amountOfProducts; i++) {
+            comparisonPageProducts.add(new ComparisonPageProduct(String.format("(%s)[%s]", productsPath, i)));
         }
-
-        return false;
-    }
-
-    @Step("amount deleted products from comparison")
-    public ComparisonPage deleteAddedProducts(String titleProduct) {
-           $x(String.format("//a[starts-with(text(),' %s')]/../..//rz-popup-menu[@class='product__actions']", titleProduct))
-                    .click();
-           $x("//li[@class='popup-menu__item ng-star-inserted']//button[@type='button']")
-                   .click();
-
-        return this;
+        return comparisonPageProducts;
     }
 }
