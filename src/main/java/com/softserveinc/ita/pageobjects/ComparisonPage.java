@@ -21,7 +21,7 @@ public class ComparisonPage {
 
     public ComparisonPageProduct getProduct(String name) {
         return new ComparisonPageProduct(
-                String.format("//a[@class='product__heading' and contains(text(), '[%s]')]", name));
+                String.format("//a[normalize-space(text()) = '%s']", name));
     }
 
     public List<ComparisonPageProduct> getAllComparisonPageProducts() {
