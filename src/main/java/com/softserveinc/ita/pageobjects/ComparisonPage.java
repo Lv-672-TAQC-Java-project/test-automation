@@ -21,7 +21,7 @@ public class ComparisonPage {
 
     public ComparisonPageProduct getProduct(String name) {
         return new ComparisonPageProduct(
-                String.format("//a[normalize-space(text()) = '%s']", name));
+                String.format("//a[normalize-space(text()) = '%s']//ancestor::li", name));
     }
 
     public List<ComparisonPageProduct> getAllComparisonPageProducts() {
