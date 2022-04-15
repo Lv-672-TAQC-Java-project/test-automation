@@ -19,6 +19,11 @@ public class ComparisonPage {
                 String.format("//*[@class='products-grid__cell ng-star-inserted'][%s]", index));
     }
 
+    public ComparisonPageProduct getProduct(String name) {
+        return new ComparisonPageProduct(
+                String.format("//a[@class='product__heading' and contains(text(), '[%s]')]", name));
+    }
+
     public List<ComparisonPageProduct> getAllComparisonPageProducts() {
         List<ComparisonPageProduct> comparisonPageProducts = new LinkedList<>();
         String productsPath = "//*[@class='products-grid__cell ng-star-inserted']";
