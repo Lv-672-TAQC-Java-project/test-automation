@@ -10,6 +10,11 @@ public class Cart {
         return new InCartProduct(String.format("(//div[@class='cart-product ng-star-inserted'])[%s]", index));
     }
 
+    public InCartProduct getProduct(String name) {
+
+        return new InCartProduct(String.format("//a[@title='%s']/ancestor::div[@class='cart-product ng-star-inserted']", name));
+    }
+
     public boolean isEmpty() {
         String cartHeadingPath = "//div[@data-testid='empty-cart']/h4";
         try {

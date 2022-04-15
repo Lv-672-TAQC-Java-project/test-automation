@@ -19,17 +19,17 @@ public class CartTest extends TestRunner {
 
         firstProduct.addToCart();
 
-        InCartProduct firstProductInCart = header
+        InCartProduct productInCart = header
                 .openCart()
-                .getProduct(1);
+                .getProduct(firstProductName);
 
-        String firstProductNameInCart = firstProductInCart.getName();
+        String productNameInCart = productInCart.getName();
 
         assertThat(firstProductName)
                 .as("The product name in the cart should be equal to the name of added product")
-                .isEqualTo(firstProductNameInCart);
+                .isEqualTo(productNameInCart);
 
-        Cart cart = firstProductInCart.remove();
+        Cart cart = productInCart.remove();
 
         assertThat(cart.isEmpty())
                 .as("Cart should be empty")
