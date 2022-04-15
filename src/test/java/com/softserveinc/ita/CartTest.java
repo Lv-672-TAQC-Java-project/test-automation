@@ -32,12 +32,12 @@ public class CartTest extends TestRunner {
                 .as("Product name in cart should be same as name of added product to it")
                 .contains(firstProductItem.getName());
 
-        float totalPrice = cart.getTotalPrice();
-        float totalPriceUpdated = firstCartProduct
-                .selectFirstService()
+        int totalPrice = cart.getTotalPrice();
+        int totalPriceUpdated = firstCartProduct
+                .selectFirstAdditionalProductService()
                 .getTotalPrice();
 
-        assertThat(firstCartProduct.getFirstServicePrice())
+        assertThat(firstCartProduct.getPriceOfFirstAdditionalProductService())
                 .as("Total price should be increased by the cost of the first selected additional service")
                 .isEqualTo(totalPriceUpdated-totalPrice);
     }

@@ -16,21 +16,21 @@ public class InCartProduct {
                 "//div[@class='cart-product__main']/a")).text();
     }
 
-    public float getFirstServicePrice(){
+    @Step("Selected first additional service of product")
+    public Cart selectFirstAdditionalProductService(){
+        $x(String.format("%s%s", rootElementPath,
+                "//rz-service-item/div/label")).click();
+
+        return new Cart();
+    }
+
+    public float getPriceOfFirstAdditionalProductService(){
         String price = $x(String.format("%s%s", rootElementPath,
                 "//span[@class='cart-service__prices']/span[1]"))
                 .text()
                 .replace("₴", "")
                 .replace(" ", "");
 
-        return Float.parseFloat(price);
-    }
-
-    @Step("Selected first additional service")
-    public Cart selectFirstService(){
-        $x(String.format("%s%s", rootElementPath,
-                "//rz-service-item/div/label")).click();
-
-        return new Cart();
+        return Integer.parseInt(price);
     }
 }
