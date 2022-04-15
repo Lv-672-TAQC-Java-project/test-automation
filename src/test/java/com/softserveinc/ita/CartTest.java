@@ -1,5 +1,6 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.Header;
 import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
@@ -12,19 +13,16 @@ public class CartTest extends TestRunner {
     public void verifyThatTotalProductsPriceHasDoubled() {
         Header header = homePage.getHeader();
         String searchTerm = "Asus";
-        int first = 1;
         header
                 .search(searchTerm)
-                .getProduct(first)
+                .getProduct(1)
                 .addToCart();
 
-        int totalPrice = header
-                .openCart()
-                .getTotalPrice();
+        Cart cart = header.openCart();
+        int totalPrice = cart.getTotalPrice();
 
-        int totalPriceUpdated = header
-                .openCart()
-                .getProduct(first)
+        int totalPriceUpdated = cart
+                .getProduct(1)
                 .addOneMoreProduct()
                 .getTotalPrice();
 
