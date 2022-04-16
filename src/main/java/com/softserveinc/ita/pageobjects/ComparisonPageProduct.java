@@ -21,9 +21,4 @@ public class ComparisonPageProduct {
         String charsLocator = String.format("//*[contains(text(), '%s')]//following-sibling::dd", productName);
         return $$x(charsLocator).shouldHave(sizeGreaterThan(0)).texts();
     }
-//    Not Working
-//    public List<String> getCharacteristics() {
-//        String charsLocator = String.format("%s%s", rootElementPath, "//following::ul //*[contains(text(), '%s')]");
-//        return $$x(charsLocator).shouldHave(sizeGreaterThan(0)).texts();
-//    }
 }

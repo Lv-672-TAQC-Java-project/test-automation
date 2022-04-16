@@ -38,31 +38,22 @@ public class ProductsComparisonTest extends TestRunner {
                         .openComparisonModal()
                         .openComparisonPage(productCategory);
 
-//        List<String> firstProductFullCharacteristicListSize = comparisonPage
-//                .getProductCharacteristics(firstProductName);
-//        List<String> secondProductFullCharacteristicListSize = comparisonPage
-//                .getProductCharacteristics(secondProductName);
-
         List<String> firstProductFullCharacteristicList = comparisonPage
-                .getProduct(firstProductName)
-                .getCharacteristics();
+                .getProductCharacteristics(firstProductName);
         List<String> secondProductFullCharacteristicList = comparisonPage
-                .getProduct(secondProductName)
-                .getCharacteristics();
+                .getProductCharacteristics(secondProductName);
 
         assertThat(comparisonPage
                 .showOnlyDifferences()
-                .getProduct(firstProductName)
-                .getCharacteristics())
+                .getProductCharacteristics(firstProductName))
                 .as("products characteristics lists should display only distinctive characteristics")
                 .doesNotContainSequence(comparisonPage
-                        .getProduct(secondProductName)
-                        .getCharacteristics());
+                        .getProductCharacteristics(secondProductName));
 
         assertThat(firstProductFullCharacteristicList)
                 .as("full characteristics list should have greater size than list which displays only differences")
                 .hasSizeGreaterThan(comparisonPage
-                        .getProduct(firstProductName).getCharacteristics().size());
+                        .getProductCharacteristics(firstProductName).size());
 
         assertThat(secondProductFullCharacteristicList)
                 .as("full characteristics list should have greater size than list which displays only differences")
