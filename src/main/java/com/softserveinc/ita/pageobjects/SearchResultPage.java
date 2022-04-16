@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import lombok.Getter;
+
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
@@ -14,6 +15,7 @@ public class SearchResultPage {
 
     private Header header = new Header();
     private Filter filter = new Filter();
+    //private ProductsSidebar productsSidebar = new ProductsSidebar();
 
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<>();
@@ -35,5 +37,21 @@ public class SearchResultPage {
 
     public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
+    }
+
+    public List<Integer> getAllProductsPrices(List<Product> list) {
+        List<Integer> productsPrices = new LinkedList<>();
+        int amountOfPrices = list.size();
+        int i = 0;
+        while (i != amountOfPrices) {
+            i++;
+            productsPrices.add(Integer.valueOf(getProduct(i).getPrice().replaceAll(" ", "")));
+
+        }
+        return productsPrices;
+    }
+
+    public SearchResultSidebar getSearchResultSidebar() {
+        return new SearchResultSidebar();
     }
 }
