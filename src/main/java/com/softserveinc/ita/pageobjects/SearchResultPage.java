@@ -15,7 +15,6 @@ public class SearchResultPage {
 
     private Header header = new Header();
     private Filter filter = new Filter();
-    //private ProductsSidebar productsSidebar = new ProductsSidebar();
 
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<>();
@@ -46,12 +45,11 @@ public class SearchResultPage {
         while (i != amountOfPrices) {
             i++;
             productsPrices.add(Integer.valueOf(getProduct(i).getPrice().replaceAll(" ", "")));
-
         }
         return productsPrices;
     }
 
     public SearchResultSidebar getSearchResultSidebar() {
-        return new SearchResultSidebar();
+        return new SearchResultSidebar("//*[@class = 'sidebar ng-star-inserted']");
     }
 }

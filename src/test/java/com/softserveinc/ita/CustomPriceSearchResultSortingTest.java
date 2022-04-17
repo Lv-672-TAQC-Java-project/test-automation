@@ -5,23 +5,24 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CustomPriceSortingTest extends TestRunner {
+public class CustomPriceSearchResultSortingTest extends TestRunner {
 
     @Test
     public void verifyCustomPriceSortingFunctionality() {
         String searchTerm = "Asus";
-        String priceRangeMinimum = "1000";
-        String priceRangeMaximum = "27600";
+        String priceRangeMinimum = "2000";
+        String priceRangeMaximum = "24000";
 
         SearchResultPage searchResultPage = homePage
                 .getHeader()
                 .search(searchTerm)
                 .getSearchResultSidebar()
-                .getPriceRangeComponent()
+                .getPriceRangeSidebarComponent()
                 .typeInMinimumPriceRange(priceRangeMinimum)
                 .typeInMaximumPriceRange(priceRangeMaximum)
                 .sortSearchResultsByPriceRange();
