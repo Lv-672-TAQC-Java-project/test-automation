@@ -25,4 +25,9 @@ public class Cart {
             return false;
         }
     }
+
+    public RecommendedProduct getRecommendedProduct(int index) {
+        return new RecommendedProduct(String.format("//div[@class='modal__content']" +
+                "//li[@class='simple-slider__item ng-star-inserted'][%d]", index));
+    }
 }
