@@ -29,6 +29,7 @@ public class SearchResultPage {
     }
 
     public Product getProduct(int index) {
+
         return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
     }
 

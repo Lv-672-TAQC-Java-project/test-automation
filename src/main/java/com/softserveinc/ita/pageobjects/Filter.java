@@ -8,10 +8,11 @@ import static com.codeborne.selenide.Selenide.$x;
 public class Filter {
     @Step("Filtered products by \"{filterCategoryName}\" Category and \"{filterCheckboxName}\" Checkbox")
     public SearchResultPage filterByCategory(String filterCategoryName, String filterCheckboxName) {
-        if ($x(String.format("//div[@class='sidebar-block sidebar-block_state_collapsed ng-star-inserted']" +
-                "//span[contains(text(),'%s')]", filterCategoryName)).is(exist)) {
-            $x(String.format("//span[@class='sidebar-block__toggle-title'][contains(text(),'%s')]", filterCategoryName))
-                    .click();
+        String filterMinimizedCategoryPath = String.format("//div[@class='sidebar-block sidebar-block_state_collapsed ng-star-inserted']" +
+                "//span[contains(text(),'%s')]", filterCategoryName);
+
+        if ($x(filterMinimizedCategoryPath).is(exist)) {
+            $x(filterMinimizedCategoryPath).click();
         }
         $x(String.format("//li//a[@data-id='%s']", filterCheckboxName)).click();
 
