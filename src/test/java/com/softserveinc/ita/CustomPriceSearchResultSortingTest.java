@@ -21,11 +21,8 @@ public class CustomPriceSearchResultSortingTest extends TestRunner {
         SearchResultPage searchResultPage = homePage
                 .getHeader()
                 .search(searchTerm)
-                .getSearchResultSidebar()
-                .getPriceRangeSidebarComponent()
-                .typeInMinimumPriceRange(priceRangeMinimum)
-                .typeInMaximumPriceRange(priceRangeMaximum)
-                .sortSearchResultsByPriceRange();
+                .getFilter()
+                .filterByPrice(priceRangeMinimum, priceRangeMaximum);
 
         List<Product> products = searchResultPage.getProducts();
         List<Integer> pricesList = searchResultPage

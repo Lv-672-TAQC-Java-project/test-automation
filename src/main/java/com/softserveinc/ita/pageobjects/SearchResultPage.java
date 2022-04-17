@@ -48,8 +48,4 @@ public class SearchResultPage {
         }
         return productsPrices;
     }
-
-    public SearchResultSidebar getSearchResultSidebar() {
-        return new SearchResultSidebar("//*[@class = 'sidebar ng-star-inserted']");
-    }
 }
