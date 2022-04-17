@@ -44,7 +44,7 @@ public class Cart {
 
     public List<InCartProduct> getInCartProducts() {
         List<InCartProduct> inCartProducts = new LinkedList<>();
-        String inCartProductsPath = "//div[@class='cart-product__body']";
+        String inCartProductsPath = "//div[@class='cart-product ng-star-inserted']";
         int amountOfInCartProducts = $$x(inCartProductsPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
