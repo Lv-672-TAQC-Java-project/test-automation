@@ -6,11 +6,12 @@ import static com.codeborne.selenide.Selenide.$x;
 
 public class Category {
 
-    @Step("Opened product from Category")
-    public SubCategory openCategory(String nameCategory) {
-        String linkText = String.format("//div[@class = 'fat-wrap']//a[text() = '%s']", nameCategory);
+    @Step("Opened sub category")
+    public SearchResultPage openSubCategory(String nameSubCategory) {
+        String linkText = String.format(
+                "//div[@class='tile-cats']//a[contains(text(),'%s')]", nameSubCategory);
         $x(linkText).click();
 
-        return new SubCategory();
+        return new SearchResultPage();
     }
 }

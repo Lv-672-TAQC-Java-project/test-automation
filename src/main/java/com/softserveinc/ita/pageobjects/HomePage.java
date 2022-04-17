@@ -8,7 +8,7 @@ import lombok.Getter;
 public class HomePage {
 
     private Header header = new Header();
-    private Category category = new Category();
+    private SideBarCategory sidebarCategory = new SideBarCategory();
 
     @Step("Opened home page")
     public HomePage open() {
