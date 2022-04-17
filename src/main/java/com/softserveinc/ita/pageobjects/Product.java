@@ -37,5 +37,12 @@ public class Product {
 
         return new SearchResultPage();
     }
+
+    @Step("Opened product details page")
+    public ProductDetailsPage openProductDetailsPage() {
+        $x(String.format("%s%s", rootElementPath, "//descendant::span[@class='goods-tile__title']")).click();
+
+        return new ProductDetailsPage();
+    }
 }
 
