@@ -3,15 +3,26 @@ package com.softserveinc.ita.pageobjects;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class Filter {
-    @Step("choose {product} category in the filter")
-    public SearchResultPage chooseOneOfCategory(String product) {
-        String productLinkPath = String.format("//li[contains(@class, 'categories-filter__item')]//span[text() = '%s']", product);
-        $x(productLinkPath)
-                .click();
-
+    @Step("filtered products by \"{subCategoryLink}\" or \"{categoryLink}\"")
+    public SearchResultPage filterByCategoryLink(String categoryLink, String subCategoryLink) {
+        String itemLinkPath = "//li[contains(@class, 'categories-filter__item')]//span[text() = \"%s\"]";
+        if ($x(String.format(itemLinkPath, subCategoryLink)).isDisplayed()) {
+            $x(String.format(itemLinkPath, subCategoryLink)).click();
+        } else {
+            String allCategoryLinkPath = "(//button[contains(@class, 'button_type_link categories-filter')])";
+            $$x(allCategoryLinkPath).last().click();
+            if ($x(String.format(itemLinkPath, categoryLink)).is((exist)) && $x(String.format(itemLinkPath + "//ancestor::li" +
+                    "//button", categoryLink)).is((exist))) {
+                $x(String.format(itemLinkPath + "//ancestor::li//button", categoryLink)).click();
+                $x(String.format(itemLinkPath, subCategoryLink)).click();
+            } else {
+                $x(String.format(itemLinkPath, categoryLink)).click();
+            }
+        }
         return new SearchResultPage();
     }
 
