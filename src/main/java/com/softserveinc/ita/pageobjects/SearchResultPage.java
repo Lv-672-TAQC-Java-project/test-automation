@@ -33,6 +33,11 @@ public class SearchResultPage {
         return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
     }
 
+    public Product getProduct(String name) {
+
+        return new Product(String.format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
+    }
+
     public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }

@@ -37,5 +37,12 @@ public class Product {
 
         return new SearchResultPage();
     }
+
+    @Step("Opened product reviews page")
+    public ProductReviews openProductReviews(){
+        $x(String.format("%s%s", rootElementPath, "//span[@class='goods-tile__reviews-link']")).click();
+
+        return new ProductReviews();
+    }
 }
 
