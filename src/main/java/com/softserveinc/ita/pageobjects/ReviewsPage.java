@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Condition.selected;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
-public class ProductReviews {
+public class ReviewsPage {
 
     public List<Review> getReviews() {
         List<Review> reviews = new LinkedList<>();
@@ -33,7 +33,7 @@ public class ProductReviews {
     }
 
     @Step("Choose {sortingName} and get sorted reviews on the ProductReviews page")
-    public ProductReviews sortBy(String sortingName){
+    public ReviewsPage sortBy(String sortingName){
         String sortOptionPath = String.format("//select/option[contains(text(),'%s')]", sortingName);
         $x(sortOptionPath).click();
         $x(sortOptionPath)

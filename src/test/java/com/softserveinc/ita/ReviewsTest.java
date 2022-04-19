@@ -20,7 +20,7 @@ public class ReviewsTest extends TestRunner {
                 .search("Acer")
                 .getProduct(productName);
 
-        ProductReviews productReviews = product.openProductReviews();
+        ReviewsPage productReviews = product.openReviewsPage();
 
         String productTitleInReviews = productReviews.getTitle();
 

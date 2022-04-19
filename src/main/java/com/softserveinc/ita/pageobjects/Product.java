@@ -39,10 +39,10 @@ public class Product {
     }
 
     @Step("Opened product reviews page")
-    public ProductReviews openProductReviews(){
+    public ReviewsPage openReviewsPage(){
         $x(String.format("%s%s", rootElementPath, "//span[@class='goods-tile__reviews-link']")).click();
 
-        return new ProductReviews();
+        return new ReviewsPage();
     }
 }
 
