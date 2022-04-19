@@ -1,5 +1,8 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.Selenide;
+import io.qameta.allure.Step;
+
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,12 +32,14 @@ public class ProductReviews {
         return $x("//h2[@class='product-tabs__heading']").text();
     }
 
+    @Step("Choose {sortingName} and get sorted reviews on the ProductReviews page")
     public ProductReviews sortBy(String sortingName){
         String sortOptionPath = String.format("//select/option[contains(text(),'%s')]", sortingName);
         $x(sortOptionPath).click();
         $x(sortOptionPath)
                 .shouldBe(selected)
                 .isDisplayed();
+        Selenide.sleep(5000);
 
         return this;
     }
