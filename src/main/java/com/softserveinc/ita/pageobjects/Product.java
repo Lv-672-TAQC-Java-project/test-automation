@@ -38,4 +38,3 @@ public class Product {
         return new SearchResultPage();
     }
 }
-

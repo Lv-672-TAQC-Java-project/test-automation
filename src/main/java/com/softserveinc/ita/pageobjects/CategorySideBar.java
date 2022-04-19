@@ -4,13 +4,13 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class SideBarCategory {
+public class CategorySideBar {
 
-    @Step("Opened product from SideBarCategory")
-    public Category openCategory(String nameCategory) {
+    @Step("Opened category page")
+    public CategoryPage openCategoryPage(String nameCategory) {
         String linkText = String.format("//div[@class = 'fat-wrap']//a[text() = '%s']", nameCategory);
         $x(linkText).click();
 
-        return new Category();
+        return new CategoryPage();
     }
 }

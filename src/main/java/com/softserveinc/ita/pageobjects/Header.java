@@ -35,6 +35,4 @@ public class Header {
 
         return new Cart();
     }
-
-
 }
