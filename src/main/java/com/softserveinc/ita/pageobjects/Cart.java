@@ -1,5 +1,8 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
@@ -8,6 +11,8 @@ import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.pageobjects.WebElementUtil.isDisplayed;
+import static java.time.Duration.ofSeconds;
 
 public class Cart {
 
@@ -59,5 +64,16 @@ public class Cart {
         }
 
         return inCartProducts;
+    }
+
+    @Step("Closed cart")
+    public SearchResultPage close() {
+        SelenideElement closeButton = $x("//button[@class='modal__close']");
+
+        if(isDisplayed(closeButton, ofSeconds(5))){
+            closeButton.click();
+        }
+
+        return new SearchResultPage();
     }
 }

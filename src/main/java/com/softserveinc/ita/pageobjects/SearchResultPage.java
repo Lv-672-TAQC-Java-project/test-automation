@@ -36,4 +36,9 @@ public class SearchResultPage {
     public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
+
+    public Product getProduct(String name) {
+
+        return new Product(String.format("//span[contains(text(),'%s')]/../..", name));
+    }
 }

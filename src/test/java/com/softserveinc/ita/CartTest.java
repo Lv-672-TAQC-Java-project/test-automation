@@ -3,12 +3,8 @@ package com.softserveinc.ita;
 import com.softserveinc.ita.pageobjects.*;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.List;
 
-import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$x;
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartTest extends TestRunner {
@@ -75,22 +71,19 @@ public class CartTest extends TestRunner {
         Header header = homePage.getHeader();
         String searchTerm = "Asus";
 
-        header
-                .search(searchTerm)
-                .getProduct("Ноутбук ASUS TUF Gaming F15 FX506HCB-HN161 (90NR0723-M04940) Eclipse Gray")
-                .addToCart();
         Cart cart = header.openCart();
-        while(!cart.isEmpty()) {
+        while (!cart.isEmpty()) {
             cart
                     .getProduct(1)
                     .remove();
         }
-        cart.closeCart();
+        cart.close();
 
         header
                 .search(searchTerm)
                 .getProduct("Ноутбук ASUS TUF Gaming F15 FX506HCB-HN161 (90NR0723-M04940) Eclipse Gray")
                 .addToCart();
+
         header.openCart();
         int totalPrice = cart.getTotalPrice();
 
