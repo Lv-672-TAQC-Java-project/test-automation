@@ -32,6 +32,12 @@ public class Cart {
         }
     }
 
+    public int getTotalPrice() {
+        $x("//div[@class='modal__content modal__content--locked']").shouldNotBe(visible);
+
+        return Integer.parseInt($x("//div[@class='cart-receipt__sum-price']/span").text());
+    }
+  
     public boolean isOpened() {
         try {
             return $x("//div[@class='modal__header']")
