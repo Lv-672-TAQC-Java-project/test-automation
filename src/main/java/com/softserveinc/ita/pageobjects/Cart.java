@@ -26,8 +26,11 @@ public class Cart {
         }
     }
 
-    public RecommendedProduct getRecommendedProduct(int index) {
-        return new RecommendedProduct(String.format("//div[@class='modal__content']" +
-                "//li[@class='simple-slider__item ng-star-inserted'][%d]", index));
+    public RecommendedProduct getRecommendedProduct(int elementNumber) {
+        return new RecommendedProduct(elementNumber);
+    }
+
+    public void closePopup() {
+        $x("//button[@class='modal__close']").click();
     }
 }

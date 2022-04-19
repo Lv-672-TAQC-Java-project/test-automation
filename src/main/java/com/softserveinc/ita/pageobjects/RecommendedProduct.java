@@ -7,8 +7,12 @@ import static com.codeborne.selenide.Selenide.$x;
 
 @AllArgsConstructor
 public class RecommendedProduct {
+    private String rootElementPath;
 
-    private final String rootElementPath;
+    public RecommendedProduct(int elementNumber) {
+        rootElementPath = String.format("//div[@class='modal__content']" +
+                "//li[@class='simple-slider__item ng-star-inserted'][%d]", elementNumber);
+    }
 
     @Step("Added product from recommended list to cart")
     public Cart addToCart() {
