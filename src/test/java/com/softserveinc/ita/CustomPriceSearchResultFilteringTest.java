@@ -10,10 +10,10 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CustomPriceSearchResultSortingTest extends TestRunner {
+public class CustomPriceSearchResultFilteringTest extends TestRunner {
 
     @Test
-    public void verifyCustomPriceSortingFunctionality() {
+    public void verifyCustomPriceFilteringFunctionality() {
         String searchTerm = "Asus";
         String priceRangeMinimum = "2000";
         String priceRangeMaximum = "24000";
