@@ -1,25 +1,22 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.pageobjects.WebElementUtil.isDisplayed;
+import static java.time.Duration.ofSeconds;
 
 public class ProductDetailsPage {
 
-    public boolean isProductDetailsPageDisplayed() {
-        try {
-            return $x("//product-tab-main[@class='ng-star-inserted']")
-                    .shouldBe(visible)
-                    .isDisplayed();
-        } catch (AssertionError assertionError) {
+    private final SelenideElement productNameLabel = $x("//div[@class='product__heading']/child::h1");
 
-            return false;
-        }
+    public boolean isOpened() {
+        return isDisplayed($x("//product-tab-main[@class='ng-star-inserted']"), ofSeconds(5));
     }
 
     public String getProductName() {
-        return $x("//div[@class='product__heading']/child::h1[@class='product__title']").getText();
+        return productNameLabel.getText();
     }
 
     @Step("Added product to cart")
@@ -28,5 +25,11 @@ public class ProductDetailsPage {
 
         return new Cart();
     }
-}
 
+    @Step("Scrolled to product name")
+    public ProductDetailsPage scrollToProductName() {
+        productNameLabel.scrollIntoView(true);
+
+        return this;
+    }
+}

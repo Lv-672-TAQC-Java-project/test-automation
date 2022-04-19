@@ -2,9 +2,10 @@ package com.softserveinc.ita.pageobjects;
 
 import io.qameta.allure.Step;
 
-import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.pageobjects.WebElementUtil.isDisplayed;
 import static java.lang.String.format;
+import static java.time.Duration.ofSeconds;
 
 public class OrderPlacementPage {
 
@@ -16,14 +17,7 @@ public class OrderPlacementPage {
     }
 
     public boolean isOpened() {
-        try {
-            return $x("//div[@class='central-wrapper']/h1")
-                    .shouldBe(visible)
-                    .isDisplayed();
-        } catch (AssertionError assertionError) {
-
-            return false;
-        }
+        return isDisplayed($x("//div[@class='central-wrapper']/h1"), ofSeconds(5));
     }
 
     public boolean isFieldRequired(String fieldName) {
