@@ -22,6 +22,14 @@ public class Product {
                 "//span[@class = 'goods-tile__price-value']")).text();
     }
 
+    public int getIntegerPrice() {
+        String price = $x(String.format("%s%s", rootElementPath, "//span[@class = 'goods-tile__price-value']"))
+                .text()
+                .replace(" ", "");
+
+        return Integer.parseInt(price);
+    }
+
     @Step("Added product to cart")
     public SearchResultPage addToCart() {
         $x(String.format("%s%s", rootElementPath,

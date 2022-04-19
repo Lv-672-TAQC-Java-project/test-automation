@@ -1,7 +1,9 @@
 package com.softserveinc.ita.pageobjects;
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,5 +37,33 @@ public class SearchResultPage {
 
     public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
+    }
+
+    @Step("Sorted products from cheap to expensive")
+    public SearchResultPage sortProductsFromCheapToExpensive() {
+        $x("//select").selectOptionByValue("1: cheap");
+
+        return new SearchResultPage();
+    }
+
+    public List<Integer> getPricesOfProducts(List<Product> productsList) {
+        List<Integer> productPricesList = new ArrayList<>();
+        for (Product product : productsList) {
+            productPricesList.add(product.getIntegerPrice());
+        }
+
+        return productPricesList;
+    }
+
+    public boolean isPricesOfProductsIncreasing(List<Integer> prices) {
+        for (int i = 0; i <= prices.size() - 2; i++) {
+            Integer firstPrice = prices.get(i);
+            Integer secondPrice= prices.get(i + 1);
+
+            if (firstPrice > secondPrice) {
+                return false;
+            }
+        }
+        return true;
     }
 }
