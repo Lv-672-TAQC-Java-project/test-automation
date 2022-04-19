@@ -42,6 +42,10 @@ public class Cart {
         return Integer.parseInt($x("//div[@class='cart-receipt__sum-price']/span").text());
     }
 
+    public boolean isOpened() {
+        return isDisplayed($x("//div[@class='modal__header']"), ofSeconds(5));
+    }
+
     public List<InCartProduct> getInCartProducts() {
         List<InCartProduct> inCartProducts = new LinkedList<>();
         String inCartProductsPath = "//div[@class='cart-product ng-star-inserted']";
@@ -60,9 +64,5 @@ public class Cart {
         $x("//div[@class='cart-receipt ng-star-inserted']/a").click();
 
         return new OrderPlacementPage();
-    }
-
-    public boolean isOpened() {
-        return isDisplayed($x("//div[@class='modal__header']"), ofSeconds(5));
     }
 }
