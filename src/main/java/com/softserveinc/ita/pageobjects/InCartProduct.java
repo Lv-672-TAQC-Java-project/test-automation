@@ -22,4 +22,10 @@ public class InCartProduct {
 
         return new Cart();
     }
+
+    public InCartProductAdditionalService getAdditionalProductService(int index){
+        String additionalServicePath = String.format("//li[%s]/rz-service-item", index);
+
+        return new InCartProductAdditionalService(String.format("%s%s", rootElementPath, additionalServicePath));
+    }
 }
