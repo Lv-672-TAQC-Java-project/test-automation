@@ -13,10 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductsComparisonTest extends TestRunner {
     @Test
     public void verifyShowOnlyDifferencesFunctionality() {
-        String searchTerm = "notebook";
-        String productCategory = "Ноутбуки";
-
         Header header = homePage.getHeader();
+        String searchTerm = "notebook";
 
         SearchResultPage searchResultPage =
                 header
@@ -33,31 +31,40 @@ public class ProductsComparisonTest extends TestRunner {
                 .getProduct(2)
                 .getName();
 
+        String productCategory = "Ноутбуки";
         ComparisonPage comparisonPage =
                 header
                         .openComparisonModal()
                         .openComparisonPage(productCategory);
 
-        List<String> firstProductFullCharacteristicList = comparisonPage
-                .getProductCharacteristics(firstProductName);
-        List<String> secondProductFullCharacteristicList = comparisonPage
-                .getProductCharacteristics(secondProductName);
+        List<String> firstProductBeforeChangeCharacteristicList = comparisonPage
+                .getProduct(firstProductName)
+                .getCharacteristics();
+        List<String> secondProductBeforeChangeCharacteristicList = comparisonPage
+                .getProduct(secondProductName)
+                .getCharacteristics();
 
-        assertThat(comparisonPage
-                .showOnlyDifferences()
-                .getProductCharacteristics(firstProductName))
-                .as("products characteristics lists should display only distinctive characteristics")
-                .doesNotContainSequence(comparisonPage
-                        .getProductCharacteristics(secondProductName));
+        comparisonPage.showOnlyDifferences();
 
-        assertThat(firstProductFullCharacteristicList)
+        List<String> firstProductAfterChangeCharacteristicList = comparisonPage
+                .getProduct(firstProductName)
+                .getCharacteristics();
+        List<String> secondProductAfterChangeCharacteristicList = comparisonPage
+                .getProduct(secondProductName)
+                .getCharacteristics();
+
+        assertThat(firstProductAfterChangeCharacteristicList)
+                .as("After change products characteristics lists should display only distinctive characteristics")
+                .doesNotContainSequence(secondProductAfterChangeCharacteristicList);
+
+        assertThat(firstProductBeforeChangeCharacteristicList)
+                .as("Before change characteristics list should have greater size than list which displays only differences")
+                .hasSizeGreaterThan(firstProductAfterChangeCharacteristicList
+                        .size());
+
+        assertThat(secondProductBeforeChangeCharacteristicList)
                 .as("full characteristics list should have greater size than list which displays only differences")
-                .hasSizeGreaterThan(comparisonPage
-                        .getProductCharacteristics(firstProductName).size());
-
-        assertThat(secondProductFullCharacteristicList)
-                .as("full characteristics list should have greater size than list which displays only differences")
-                .hasSizeGreaterThan(comparisonPage
-                        .getProductCharacteristics(secondProductName).size());
+                .hasSizeGreaterThan(secondProductAfterChangeCharacteristicList
+                        .size());
     }
 }

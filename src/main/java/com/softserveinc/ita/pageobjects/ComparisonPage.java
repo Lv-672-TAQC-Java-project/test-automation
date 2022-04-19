@@ -44,10 +44,6 @@ public class ComparisonPage {
         $x(showOnlyDifferencesLocator).click();
         return this;
     }
-
-    public List<String> getProductCharacteristics(String productName) {
-        return getProduct(productName).getCharacteristics();
-    }
 }
 
 

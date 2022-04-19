@@ -19,6 +19,8 @@ public class ComparisonPageProduct {
     public List<String> getCharacteristics() {
         String productName = getProductName();
         String charsLocator = String.format("//*[contains(text(), '%s')]//following-sibling::dd", productName);
-        return $$x(charsLocator).shouldHave(sizeGreaterThan(0)).texts();
+        return $$x(charsLocator)
+                .shouldHave(sizeGreaterThan(0))
+                .texts();
     }
 }
