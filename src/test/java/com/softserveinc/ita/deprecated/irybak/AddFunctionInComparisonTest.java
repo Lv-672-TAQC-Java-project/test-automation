@@ -12,13 +12,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class AddFunctionInComparisonTest extends TestRunner {
     @Test
     public void verifyThatProductsInComparisonListAreDisplayed() {
-
-        String searchTerm = "Планшет";
-        String productMaker = "Lenovo";
+        String searchFirstTerm = "Lenovo";
+        String searchSecondTerm = "Планшет";
 
         List<ComparisonPageProduct> productList = homePage
                 .getHeader()
-                .search(productMaker)
+                .search(searchFirstTerm)
                 .getFilter()
                 .filterByCategoryLink("Комп'ютери та ноутбуки", "Планшети")
                 .getProduct(1)
@@ -27,7 +26,7 @@ public class AddFunctionInComparisonTest extends TestRunner {
                 .addToListOfComparisons()
                 .getHeader()
                 .openComparisonModal()
-                .openComparisonPage(searchTerm)
+                .openComparisonPage(searchSecondTerm)
                 .getAllComparisonPageProducts();
 
         assertThat(productList.size())
@@ -35,8 +34,8 @@ public class AddFunctionInComparisonTest extends TestRunner {
                 .isEqualTo(2);
 
         productList.forEach(product -> assertThat(product.getProductName())
-                .as("All products should contain " + productMaker)
-                .containsIgnoringCase(productMaker));
+                .as("All products should contain " + searchFirstTerm)
+                .containsIgnoringCase(searchFirstTerm));
 
 
         productList = new ComparisonPage()
@@ -45,7 +44,7 @@ public class AddFunctionInComparisonTest extends TestRunner {
                 .addToListOfComparisons()
                 .getHeader()
                 .openComparisonModal()
-                .openComparisonPage(searchTerm)
+                .openComparisonPage(searchSecondTerm)
                 .getAllComparisonPageProducts();
 
         assertThat(productList.size())
@@ -53,8 +52,8 @@ public class AddFunctionInComparisonTest extends TestRunner {
                 .isEqualTo(3);
 
         productList.forEach(product -> assertThat(product.getProductName())
-                .as("All products should contain " + searchTerm)
-                .containsIgnoringCase(searchTerm));
+                .as("All products should contain " + searchSecondTerm)
+                .containsIgnoringCase(searchSecondTerm));
 
     }
 }

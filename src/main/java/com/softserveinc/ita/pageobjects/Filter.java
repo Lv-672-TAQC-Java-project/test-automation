@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class Filter {
-    @Step("filtered products by \"{subCategoryLink}\" or \"{categoryLink}\"")
+    @Step("filtered products by \"{categoryLink}\" \"{subCategoryLink}\"")
     public SearchResultPage filterByCategoryLink(String categoryLink, String subCategoryLink) {
         String itemLinkPath = "//li[contains(@class, 'categories-filter__item')]//span[text() = \"%s\"]";
         if ($x(String.format(itemLinkPath, subCategoryLink)).isDisplayed()) {
