@@ -3,6 +3,8 @@ package com.softserveinc.ita;
 import com.softserveinc.ita.pageobjects.*;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartTest extends TestRunner {
@@ -34,5 +36,33 @@ public class CartTest extends TestRunner {
         assertThat(cart.isEmpty())
                 .as("Cart should be empty")
                 .isTrue();
+    }
+
+    @Test
+    public void verifyThatProductItemAddedToTheCart() {
+        String searchTerm = "DeWALT";
+        Header header = homePage.getHeader();
+        SearchResultPage searchResultPage = header.search(searchTerm);
+
+        assertThat(searchResultPage.getSearchTermLabel())
+                .as("Search term label should be displayed")
+                .contains(searchTerm);
+
+        Product firstProduct = searchResultPage.getProduct(1);
+        String firstProductName = firstProduct.getName();
+
+        firstProduct.addToCart();
+
+        Cart cart = header.openCart();
+
+        assertThat(cart.isOpened())
+                .as("Cart modal should be displayed")
+                .isTrue();
+
+        List<InCartProduct> inCartProducts = cart.getInCartProducts();
+        assertThat(inCartProducts)
+                .anySatisfy(product -> assertThat(product.getName())
+                        .as(product.getName() + " should contain " + firstProductName)
+                        .containsIgnoringCase(firstProductName));
     }
 }
