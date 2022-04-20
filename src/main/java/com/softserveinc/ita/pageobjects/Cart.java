@@ -73,4 +73,13 @@ public class Cart {
 
         return new HomePage();
     }
+
+    @Step("Cleaned cart")
+    public Cart clean() {
+        while (!isEmpty()) {
+            getProduct(1)
+                    .remove();
+        }
+        return this;
+    }
 }
