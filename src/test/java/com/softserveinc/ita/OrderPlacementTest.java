@@ -28,7 +28,6 @@ public class OrderPlacementTest extends TestRunner {
                 .as("Product name should be the same for search result page and product details page")
                 .isEqualTo(firstProductName);
 
-        productDetailsPage.scrollToProductName();
         Cart cart = productDetailsPage.addToCart();
 
         assertThat(cart.isOpened())

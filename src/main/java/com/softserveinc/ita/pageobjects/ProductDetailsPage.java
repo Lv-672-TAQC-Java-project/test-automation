@@ -21,15 +21,9 @@ public class ProductDetailsPage {
 
     @Step("Added product to cart")
     public Cart addToCart() {
+        productNameLabel.scrollIntoView(true);
         $x("//button[contains(@class,'buy-button button button--with-icon')]").click();
 
         return new Cart();
-    }
-
-    @Step("Scrolled to product name")
-    public ProductDetailsPage scrollToProductName() {
-        productNameLabel.scrollIntoView(true);
-
-        return this;
     }
 }
