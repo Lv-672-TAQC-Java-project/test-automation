@@ -1,5 +1,8 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -58,5 +61,15 @@ public class Cart {
 
     public RecommendedProduct getRecommendedProduct(int recommendedProductNumber) {
         return new RecommendedProduct(recommendedProductNumber);
+      
+    @Step("Closed cart")
+    public HomePage close() {
+        SelenideElement closeButton = $x("//button[@class='modal__close']");
+        //sometimes page opens instead of popup
+        if(isDisplayed(closeButton, ofSeconds(5))){
+            closeButton.click();
+        }
+
+        return new HomePage();
     }
 }
