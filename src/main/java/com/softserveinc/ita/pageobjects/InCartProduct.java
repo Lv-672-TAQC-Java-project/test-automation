@@ -9,6 +9,7 @@ import static com.codeborne.selenide.Selenide.$x;
 public class InCartProduct {
 
     private final String rootElementPath;
+    final String additionalServicePath = "//li[%s]/rz-service-item";
 
     public String getName() {
 
@@ -23,9 +24,8 @@ public class InCartProduct {
         return new Cart();
     }
 
-    public InCartProductAdditionalService getAdditionalProductService(int index){
-        String additionalServicePath = String.format("//li[%s]/rz-service-item", index);
+    public ProductAdditionalService getAdditionalProductService(int index) {
 
-        return new InCartProductAdditionalService(String.format("%s%s", rootElementPath, additionalServicePath));
+        return new ProductAdditionalService(String.format("%s%s", rootElementPath, String.format(additionalServicePath, index)));
     }
 }

@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import static com.codeborne.selenide.Selenide.$x;
 
 @AllArgsConstructor
-public class InCartProductAdditionalService {
+public class ProductAdditionalService {
 
     private final String rootElementPath;
 

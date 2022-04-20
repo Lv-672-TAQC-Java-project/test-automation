@@ -5,7 +5,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
-import static com.codeborne.selenide.Selenide.sleep;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartTest extends TestRunner {
@@ -56,20 +55,21 @@ public class CartTest extends TestRunner {
         firstProduct.addToCart();
 
         Cart cart = header.openCart();
-        InCartProduct firstCartProduct = cart.getProduct(1);
+        String FirstProductName = firstProduct.getName();
+        InCartProduct cartProduct = cart.getProduct(FirstProductName);
 
-        assertThat(firstCartProduct.getName())
+        assertThat(cartProduct.getName())
                 .as("Product name in cart should be same as name of added product to it")
-                .contains(firstProduct.getName());
+                .contains(FirstProductName);
 
         int totalPrice = cart.getTotalPrice();
-        InCartProductAdditionalService firstAdditionalProductService = firstCartProduct.getAdditionalProductService(1);
+        ProductAdditionalService firstAdditionalProductService = cartProduct.getAdditionalProductService(1);
         firstAdditionalProductService.select();
         int totalPriceUpdated = cart.getTotalPrice();
         int priceOfFirstAdditionalProductService = firstAdditionalProductService.getPrice();
 
         assertThat(priceOfFirstAdditionalProductService)
                 .as("Total price should be increased by the cost of the first selected additional service")
-                .isEqualTo(totalPriceUpdated-totalPrice);
+                .isEqualTo(totalPriceUpdated - totalPrice);
     }
 }
