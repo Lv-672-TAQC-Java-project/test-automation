@@ -3,6 +3,7 @@ package com.softserveinc.ita.pageobjects;
 import io.qameta.allure.Step;
 
 import lombok.Getter;
+
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
@@ -35,12 +36,6 @@ public class SearchResultPage {
         return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
     }
 
-
-    public Product getProduct(String productName) {
-
-        return new Product(String.format("//span[starts-with(text(),' %s')]/../..", productName));
-    }
-
     @Step("added products to comparison")
     public Header addProductsToComparison(String[] productsNames) {
         for (String productName: productsNames) {
@@ -49,9 +44,13 @@ public class SearchResultPage {
 
         return new Header();
     }
-      
+
+    public Product getProduct(String name) {
+
+        return new Product(String.format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
+    }
+
     public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
-
     }
 }

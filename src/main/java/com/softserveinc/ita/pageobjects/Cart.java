@@ -1,6 +1,8 @@
 package com.softserveinc.ita.pageobjects;
 
-import java.time.Duration;
+import com.codeborne.selenide.SelenideElement;
+import io.qameta.allure.Step;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,6 +10,8 @@ import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.pageobjects.WebElementUtil.isDisplayed;
+import static java.time.Duration.ofSeconds;
 
 public class Cart {
 
@@ -22,14 +26,8 @@ public class Cart {
     }
 
     public boolean isEmpty() {
-        String cartHeadingPath = "//div[@data-testid='empty-cart']/h4";
-        try {
-            return $x(cartHeadingPath)
-                    .shouldBe(visible)
-                    .isDisplayed();
-        } catch (AssertionError assertionError) {
-            return false;
-        }
+
+        return isDisplayed($x("//div[@data-testid='empty-cart']/h4"), ofSeconds(5));
     }
 
     public int getTotalPrice() {
@@ -37,7 +35,7 @@ public class Cart {
 
         return Integer.parseInt($x("//div[@class='cart-receipt__sum-price']/span").text());
     }
-  
+
     public boolean isOpened() {
         try {
             return $x("//div[@class='modal__header']")
@@ -52,12 +50,27 @@ public class Cart {
         List<InCartProduct> inCartProducts = new LinkedList<>();
         String inCartProductsPath = "//div[@class='cart-product ng-star-inserted']";
         int amountOfInCartProducts = $$x(inCartProductsPath)
-                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
+                .shouldHave(sizeNotEqual(0), ofSeconds(10)).size();
 
         for (int i = 1; i <= amountOfInCartProducts; i++) {
             inCartProducts.add(new InCartProduct(String.format("(%s)[%s]", inCartProductsPath, i)));
         }
 
         return inCartProducts;
+    }
+
+    public RecommendedProduct getRecommendedProduct(int recommendedProductNumber) {
+        return new RecommendedProduct(recommendedProductNumber);
+    }
+      
+    @Step("Closed cart")
+    public HomePage close() {
+        SelenideElement closeButton = $x("//button[@class='modal__close']");
+        //sometimes page opens instead of popup
+        if(isDisplayed(closeButton, ofSeconds(5))){
+            closeButton.click();
+        }
+
+        return new HomePage();
     }
 }
