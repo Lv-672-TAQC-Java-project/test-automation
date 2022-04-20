@@ -38,14 +38,13 @@ public class SearchResultPage {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
 
-    public List<Integer> getAllProductsPrices(List<Product> list) {
+    public List<Integer> getDisplayedProductsPrices(List<Product> list) {
         List<Integer> productsPrices = new LinkedList<>();
-        int amountOfPrices = list.size();
-        int i = 0;
-        while (i != amountOfPrices) {
-            i++;
-            productsPrices.add(Integer.valueOf(getProduct(i).getPrice().replaceAll(" ", "")));
-        }
+        list.stream().forEach((product) -> productsPrices.add(Integer
+                .valueOf(product
+                        .getPrice()
+                        .replaceAll(" ", ""))));
+
         return productsPrices;
     }
 }
