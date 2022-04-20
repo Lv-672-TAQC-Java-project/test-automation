@@ -38,7 +38,9 @@ public class AddFunctionInComparisonTest extends TestRunner {
 
         productList.forEach(product -> assertThat(product.getProductName())
                 .as("All products should contain " + searchFirstTerm)
-                .containsIgnoringCase(searchFirstTerm));
+                .containsIgnoringCase(searchFirstTerm)
+                .as("All products should contain " + searchSecondTerm)
+                .containsIgnoringCase(searchSecondTerm));
 
         productList = comparisonPage
                 .addMoreModels()
