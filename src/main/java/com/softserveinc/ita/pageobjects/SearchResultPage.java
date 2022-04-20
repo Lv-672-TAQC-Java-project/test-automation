@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import lombok.Getter;
+
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
