@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import lombok.Getter;
+
 import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,12 +34,12 @@ public class SearchResultPage {
         return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
     }
 
-    public String getSearchTermLabel() {
-        return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
-    }
-
     public Product getProduct(String name) {
 
-        return new Product(String.format("//span[contains(text(),'%s')]/../..", name));
+        return new Product(String.format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
+    }
+
+    public String getSearchTermLabel() {
+        return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
 }

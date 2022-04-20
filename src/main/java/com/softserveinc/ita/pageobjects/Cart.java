@@ -3,7 +3,6 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
-import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,14 +26,8 @@ public class Cart {
     }
 
     public boolean isEmpty() {
-        String cartHeadingPath = "//div[@data-testid='empty-cart']/h4";
-        try {
-            return $x(cartHeadingPath)
-                    .shouldBe(visible)
-                    .isDisplayed();
-        } catch (AssertionError assertionError) {
-            return false;
-        }
+
+        return isDisplayed($x("//div[@data-testid='empty-cart']/h4"), ofSeconds(5));
     }
 
     public int getTotalPrice() {
@@ -57,7 +50,7 @@ public class Cart {
         List<InCartProduct> inCartProducts = new LinkedList<>();
         String inCartProductsPath = "//div[@class='cart-product ng-star-inserted']";
         int amountOfInCartProducts = $$x(inCartProductsPath)
-                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
+                .shouldHave(sizeNotEqual(0), ofSeconds(10)).size();
 
         for (int i = 1; i <= amountOfInCartProducts; i++) {
             inCartProducts.add(new InCartProduct(String.format("(%s)[%s]", inCartProductsPath, i)));
@@ -67,13 +60,13 @@ public class Cart {
     }
 
     @Step("Closed cart")
-    public SearchResultPage close() {
+    public HomePage close() {
         SelenideElement closeButton = $x("//button[@class='modal__close']");
-
+        //sometimes page opens instead of popup
         if(isDisplayed(closeButton, ofSeconds(5))){
             closeButton.click();
         }
 
-        return new SearchResultPage();
+        return new HomePage();
     }
 }
