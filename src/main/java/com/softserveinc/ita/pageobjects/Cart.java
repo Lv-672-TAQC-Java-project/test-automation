@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
-
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
