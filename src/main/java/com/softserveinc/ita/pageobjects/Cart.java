@@ -59,8 +59,4 @@ public class Cart {
     public RecommendedProduct getRecommendedProduct(int recommendedProductNumber) {
         return new RecommendedProduct(recommendedProductNumber);
     }
-
-    public void closePopup() {
-        $x("//button[@class='modal__close']").click();
-    }
 }
