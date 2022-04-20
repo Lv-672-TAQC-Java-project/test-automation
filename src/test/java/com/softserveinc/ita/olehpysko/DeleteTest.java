@@ -19,7 +19,7 @@ public class DeleteTest extends TestRunner {
 
         ComparisonPage products = homePage
                 .getCategorySideBar()
-                .openCategoryPage(PLUMBING_AND_REPAIR.getNameCategory())
+                .openCategoryPage(PLUMBING_AND_REPAIR)
                 .openSubCategoryPage("Ванни")
                 .addProductsToComparison(productNames)
                 .openComparisonModal()

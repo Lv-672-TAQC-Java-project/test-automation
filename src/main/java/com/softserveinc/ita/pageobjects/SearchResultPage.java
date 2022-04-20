@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.time.Duration;
@@ -41,5 +42,14 @@ public class SearchResultPage {
 
     public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
+    }
+
+    @Step("added products to comparison")
+    public Header addProductsToComparison(String[] productsNames) {
+        for (String productName: productsNames) {
+            getProduct(productName).addToListOfComparisons();
+        }
+
+        return new Header();
     }
 }
