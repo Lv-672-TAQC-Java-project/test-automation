@@ -16,10 +16,12 @@ public class Product {
                 "//span[@class = 'goods-tile__title']")).text();
     }
 
-    public String getPrice() {
+    public int getPrice() {
+        String price = $x(String.format("%s%s", rootElementPath, "//span[@class = 'goods-tile__price-value']"))
+                .text()
+                .replace(" ", "");
 
-        return $x(String.format("%s%s", rootElementPath,
-                "//span[@class = 'goods-tile__price-value']")).text();
+        return Integer.parseInt(price);
     }
 
     @Step("Added product to cart")
