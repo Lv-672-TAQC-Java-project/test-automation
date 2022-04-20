@@ -61,6 +61,7 @@ public class Cart {
 
     public RecommendedProduct getRecommendedProduct(int recommendedProductNumber) {
         return new RecommendedProduct(recommendedProductNumber);
+    }
       
     @Step("Closed cart")
     public HomePage close() {
