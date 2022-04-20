@@ -56,8 +56,8 @@ public class Cart {
         return inCartProducts;
     }
 
-    public RecommendedProduct getRecommendedProduct(int elementNumber) {
-        return new RecommendedProduct(elementNumber);
+    public RecommendedProduct getRecommendedProduct(int recommendedProductNumber) {
+        return new RecommendedProduct(recommendedProductNumber);
     }
 
     public void closePopup() {
