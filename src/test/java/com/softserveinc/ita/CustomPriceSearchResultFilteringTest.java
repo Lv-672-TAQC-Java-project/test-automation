@@ -28,17 +28,24 @@ public class CustomPriceSearchResultFilteringTest extends TestRunner {
         List<Integer> pricesList = searchResultPage
                 .getDisplayedProductsPrices(products);
 
-        String highestPrice = String.valueOf(Collections.max(pricesList));
-        String lowestPrice = String.valueOf(Collections.min(pricesList));
+        int highestPrice = Collections.max(pricesList);
+        int lowestPrice = Collections.min(pricesList);
+
+        int intPriceRangeMaximum = Integer.valueOf(priceRangeMaximum);
+        int intPriceRangeMinimum = Integer.valueOf(priceRangeMinimum);
+
+        assertThat(priceRangeMaximum)
+                .as("Filter option won't be available if minimal desirable price is higher than maximal")
+                .isGreaterThan(priceRangeMinimum);
 
         assertThat(highestPrice)
                 .as("Highest price in the list shouldn't be more expensive than maximum custom price range value")
-                .isLessThanOrEqualTo(priceRangeMaximum)
-                .isGreaterThan(priceRangeMinimum);
+                .isLessThanOrEqualTo(intPriceRangeMaximum)
+                .isGreaterThanOrEqualTo(intPriceRangeMinimum);
 
         assertThat(lowestPrice)
                 .as("Lowest price in the list shouldn't be less expensive than minimum custom price range value")
-                .isGreaterThanOrEqualTo(priceRangeMinimum)
-                .isLessThan(priceRangeMaximum);
+                .isGreaterThanOrEqualTo(intPriceRangeMinimum)
+                .isLessThanOrEqualTo(intPriceRangeMaximum);
     }
 }
