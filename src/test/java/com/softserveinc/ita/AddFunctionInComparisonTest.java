@@ -1,7 +1,8 @@
-package com.softserveinc.ita.deprecated.irybak;
+package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.ComparisonPage;
 import com.softserveinc.ita.pageobjects.ComparisonPageProduct;
+import com.softserveinc.ita.pageobjects.Header;
 import com.softserveinc.ita.pageobjects.TestRunner;
 import org.testng.annotations.Test;
 
@@ -15,8 +16,9 @@ public class AddFunctionInComparisonTest extends TestRunner {
         String searchFirstTerm = "Lenovo";
         String searchSecondTerm = "Планшет";
 
-        List<ComparisonPageProduct> productList = homePage
-                .getHeader()
+        Header header = homePage.getHeader();
+
+        ComparisonPage comparisonPage = header
                 .search(searchFirstTerm)
                 .getFilter()
                 .filterByCategoryLink("Комп'ютери та ноутбуки", "Планшети")
@@ -26,19 +28,19 @@ public class AddFunctionInComparisonTest extends TestRunner {
                 .addToListOfComparisons()
                 .getHeader()
                 .openComparisonModal()
-                .openComparisonPage(searchSecondTerm)
-                .getAllComparisonPageProducts();
+                .openComparisonPage(searchSecondTerm);
 
-        assertThat(productList.size())
+        List<ComparisonPageProduct> productList = comparisonPage.getAllComparisonPageProducts();
+
+        assertThat(productList)
                 .as("The 2 products should be in comparison")
-                .isEqualTo(2);
+                .hasSize(2);
 
         productList.forEach(product -> assertThat(product.getProductName())
                 .as("All products should contain " + searchFirstTerm)
                 .containsIgnoringCase(searchFirstTerm));
 
-
-        productList = new ComparisonPage()
+        productList = comparisonPage
                 .addMoreModels()
                 .getProduct(3)
                 .addToListOfComparisons()
@@ -47,13 +49,12 @@ public class AddFunctionInComparisonTest extends TestRunner {
                 .openComparisonPage(searchSecondTerm)
                 .getAllComparisonPageProducts();
 
-        assertThat(productList.size())
+        assertThat(productList)
                 .as("The 3 products should be in comparison")
-                .isEqualTo(3);
+                .hasSize(3);
 
         productList.forEach(product -> assertThat(product.getProductName())
                 .as("All products should contain " + searchSecondTerm)
                 .containsIgnoringCase(searchSecondTerm));
-
     }
 }

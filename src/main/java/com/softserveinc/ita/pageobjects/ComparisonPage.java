@@ -21,8 +21,6 @@ public class ComparisonPage {
                 String.format("//*[@class='products-grid__cell ng-star-inserted'][%s]", index));
     }
 
-    private String productsPath = "//rz-products-section//li";
-
     @Step("add more models to the comparison")
     public SearchResultPage addMoreModels() {
         $x("//a/span[@class = 'comparison-settings__label']").click();
