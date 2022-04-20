@@ -16,13 +16,7 @@ public class Product {
                 "//span[@class = 'goods-tile__title']")).text();
     }
 
-    public String getPrice() {
-
-        return $x(String.format("%s%s", rootElementPath,
-                "//span[@class = 'goods-tile__price-value']")).text();
-    }
-
-    public int getIntegerPrice() {
+    public int getPrice() {
         String price = $x(String.format("%s%s", rootElementPath, "//span[@class = 'goods-tile__price-value']"))
                 .text()
                 .replace(" ", "");
