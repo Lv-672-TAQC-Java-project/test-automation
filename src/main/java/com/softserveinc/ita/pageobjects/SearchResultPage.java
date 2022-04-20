@@ -45,7 +45,7 @@ public class SearchResultPage {
 
     public List<Integer> getDisplayedProductsPrices(List<Product> list) {
         List<Integer> productsPrices = new LinkedList<>();
-        list.stream().forEach((product) -> productsPrices.add(product
+        list.forEach((product) -> productsPrices.add(product
                 .getPrice()));
 
         return productsPrices;

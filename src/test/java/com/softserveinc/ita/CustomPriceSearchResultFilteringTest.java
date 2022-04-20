@@ -34,18 +34,14 @@ public class CustomPriceSearchResultFilteringTest extends TestRunner {
         int intPriceRangeMaximum = Integer.valueOf(priceRangeMaximum);
         int intPriceRangeMinimum = Integer.valueOf(priceRangeMinimum);
 
-        assertThat(priceRangeMaximum)
-                .as("Filter option won't be available if minimal desirable price is higher than maximal")
-                .isGreaterThan(priceRangeMinimum);
-
         assertThat(highestPrice)
                 .as("Highest price in the list shouldn't be more expensive than maximum custom price range value")
                 .isLessThanOrEqualTo(intPriceRangeMaximum)
-                .isGreaterThanOrEqualTo(intPriceRangeMinimum);
+                .isGreaterThan(intPriceRangeMinimum);
 
         assertThat(lowestPrice)
                 .as("Lowest price in the list shouldn't be less expensive than minimum custom price range value")
                 .isGreaterThanOrEqualTo(intPriceRangeMinimum)
-                .isLessThanOrEqualTo(intPriceRangeMaximum);
+                .isLessThan(intPriceRangeMaximum);
     }
 }
