@@ -35,7 +35,7 @@ public class Cart {
 
         return Integer.parseInt($x("//div[@class='cart-receipt__sum-price']/span").text());
     }
-  
+
     public boolean isOpened() {
         try {
             return $x("//div[@class='modal__header']")
@@ -63,10 +63,19 @@ public class Cart {
     public HomePage close() {
         SelenideElement closeButton = $x("//button[@class='modal__close']");
         //sometimes page opens instead of popup
-        if(isDisplayed(closeButton, ofSeconds(5))){
+        if (isDisplayed(closeButton, ofSeconds(5))) {
             closeButton.click();
         }
 
         return new HomePage();
+    }
+
+    @Step("Cleaned cart")
+    public Cart clean() {
+        while (!isEmpty()) {
+            getProduct(1)
+                    .remove();
+        }
+        return this;
     }
 }

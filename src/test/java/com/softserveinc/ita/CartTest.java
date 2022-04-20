@@ -69,13 +69,10 @@ public class CartTest extends TestRunner {
     @Test
     public void verifyThatTotalProductsPriceHasDoubled() {
         Header header = homePage.getHeader();
-        Cart cart = header.openCart();
-        while (!cart.isEmpty()) {
-            cart
-                    .getProduct(1)
-                    .remove();
-        }
-        cart.close();
+        header
+                .openCart()
+                .clean()
+                .close();
 
         String searchTerm = "Asus";
         String productName = "Ноутбук ASUS TUF Gaming F15 FX506HCB-HN161 (90NR0723-M04940) Eclipse Gray";
@@ -84,7 +81,7 @@ public class CartTest extends TestRunner {
                 .getProduct(productName)
                 .addToCart();
 
-        header.openCart();
+        Cart cart = header.openCart();
         int totalPrice = cart.getTotalPrice();
 
         int totalPriceUpdated = cart
