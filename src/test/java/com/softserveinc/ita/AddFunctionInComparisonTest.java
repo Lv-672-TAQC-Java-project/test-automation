@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AddFunctionInComparisonTest extends TestRunner {
     @Test
-    public void verifyThatProductsInComparisonListAreDisplayed() {
+    public void verifyThatProductsAddedToTheComparison() {
         String searchFirstTerm = "Lenovo";
         String searchSecondTerm = "Планшет";
 
