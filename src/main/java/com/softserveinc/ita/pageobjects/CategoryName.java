@@ -23,5 +23,5 @@ public enum CategoryName {
     ALCOHOLIC_BEVERAGES_AND_PRODUCTS("alkoholnie-napitki-i-produkty/c4626923/"),
     GOODS_FOR_BUSINESS_AND_SERVICES("tovary-dlya-biznesa/c4627851/");
 
-    private final String categoryName;
+    private final String categoryPath;
 }
