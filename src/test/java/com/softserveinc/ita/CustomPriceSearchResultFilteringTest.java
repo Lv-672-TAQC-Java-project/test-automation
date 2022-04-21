@@ -25,8 +25,7 @@ public class CustomPriceSearchResultFilteringTest extends TestRunner {
                 .filterByPrice(priceRangeMinimum, priceRangeMaximum);
 
         List<Product> products = searchResultPage.getProducts();
-        List<Integer> pricesList = searchResultPage
-                .getDisplayedProductsPrices(products);
+        List<Integer> pricesList = searchResultPage.getProductsPrices(products);
 
         int highestPrice = Collections.max(pricesList);
         int lowestPrice = Collections.min(pricesList);

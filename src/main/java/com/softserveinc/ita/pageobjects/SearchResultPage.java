@@ -43,9 +43,10 @@ public class SearchResultPage {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
 
-    public List<Integer> getDisplayedProductsPrices(List<Product> list) {
+    public List<Integer> getProductsPrices(List<Product> list) {
         List<Integer> productsPrices = new LinkedList<>();
-        list.forEach((product) -> productsPrices.add(product
+        list.forEach((product) -> productsPrices
+                .add(product
                 .getPrice()));
 
         return productsPrices;
