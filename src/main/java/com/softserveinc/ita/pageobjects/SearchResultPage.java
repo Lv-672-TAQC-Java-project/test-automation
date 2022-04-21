@@ -2,6 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import io.qameta.allure.Step;
 import lombok.Getter;
+
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -33,6 +34,11 @@ public class SearchResultPage {
     public Product getProduct(int index) {
 
         return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
+    }
+
+    public Product getProduct(String name) {
+
+        return new Product(String.format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
     }
 
     public String getSearchTermLabel() {
