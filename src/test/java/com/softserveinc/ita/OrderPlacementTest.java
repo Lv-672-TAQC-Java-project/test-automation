@@ -21,7 +21,7 @@ public class OrderPlacementTest extends TestRunner {
         Product firstProduct = searchResultPage.getProduct(1);
         String firstProductName = firstProduct.getName();
 
-        ProductDetailsPage productDetailsPage = firstProduct.openProductDetailsPage();
+        ProductDetailsPage productDetailsPage = firstProduct.openDetailsPage();
         String productName = productDetailsPage.getProductName();
 
         assertThat(productName)

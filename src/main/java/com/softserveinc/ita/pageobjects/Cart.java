@@ -68,6 +68,14 @@ public class Cart {
         return new HomePage();
     }
 
+    @Step("Emptied cart")
+    public Cart empty() {
+        while (!isEmpty()) {
+            getProduct(1).remove();
+        }
+        return this;
+    }
+
     @Step("Submitted an order")
     public OrderPlacementPage submitOrder() {
         $x("//div[@class='cart-receipt ng-star-inserted']/a").click();
