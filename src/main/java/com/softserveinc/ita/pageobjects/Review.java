@@ -16,16 +16,15 @@ public class Review {
 
     @Step("Get a rating of the review")
     public int getRating() {
-        int amountOfFilledStars = $$x(String.format("%s%s", rootElementPath, "//*[name()='path' and @fill='#ffa900']"))
+
+        return $$x(String.format("%s%s", rootElementPath, "//*[name()='path' and @fill='#ffa900']"))
                 .shouldHave(sizeGreaterThanOrEqual(0), ofSeconds(20))
                 .size();
-
-        return amountOfFilledStars;
     }
 
     public boolean isRatingDisplayed() {
         String rating = String.format("%s%s", rootElementPath, "//ul[@class='rating-stars']");
 
-        return isDisplayed($x(rating), ofSeconds(10));
+        return isDisplayed($x(rating), ofSeconds(30));
     }
 }

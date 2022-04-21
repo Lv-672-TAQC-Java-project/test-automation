@@ -41,9 +41,9 @@ public class ReviewsPage {
         return new Review(String.format("(//div[@class='comment'])[last()]"));
     }
 
-    @Step("Choose {optionName} and get sorted reviews on the Reviews page")
-    public ReviewsPage sortBy(ReviewSortingOption optionName) {
-        String sortOptionPath = String.format("//select/option[contains(text(),'%s')]", optionName.getSortingName());
+    @Step("Choose {option} and get sorted reviews on the Reviews page")
+    public ReviewsPage sortBy(SortingOption option) {
+        String sortOptionPath = String.format("//select/option[@value='%s']", option.getOptionName());
         $x(sortOptionPath).click();
         $x(sortOptionPath).shouldBe(selected);
 

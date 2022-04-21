@@ -13,37 +13,34 @@ public class ReviewsTest extends TestRunner {
 
     @Test
     public void verifySortingReviewsByMostHelpful() {
-        String productName = "Ноутбук Acer Nitro 5 AN517-54-58CY";
+        String productName = "Ноутбук HP Pavilion Gaming 15-ec2013ua";
         Product product = homePage
                 .getHeader()
-                .search("Acer")
+                .search("Ноутбук HP")
                 .getProduct(productName);
 
-        ReviewsPage productReviews = product.openReviewsPage();
+        ReviewsPage reviewsPage = product.openReviewsPage();
 
-        String productTitleInReviews = productReviews.getTitle();
+        String productTitleInReviews = reviewsPage.getTitle();
 
         assertThat(productTitleInReviews)
-                .as("Title in productReviews should contain product name")
+                .as("The title on the reviews page should contain " + productName)
                 .contains(productName);
 
-        List<Review> reviews = productReviews.getReviews();
+        List<Review> reviews = reviewsPage.getReviews();
 
         List<Integer> sortedReviewsRating = reviews.stream()
                 .map(Review::getRating)
                 .sorted(Collections.reverseOrder())
                 .collect(Collectors.toList());
 
-        productReviews.sortBy(ReviewSortingOption.HELPFUL);
+        reviewsPage.sortBy(SortingOption.HELPFUL);
 
-        Review firstReview = productReviews.getReview(1);
-        Review lastReview = productReviews.getLastReview();
-
-        assertThat(firstReview.isRatingDisplayed())
-                .as("First review should have rating after sorting by 'Helpful'")
+        assertThat(reviewsPage.getReview(1).isRatingDisplayed())
+                .as("First review should have a rating after sorting by 'Helpful'")
                 .isTrue();
-        assertThat(lastReview.isRatingDisplayed())
-                .as("Last review should not have a rating")
+        assertThat(reviewsPage.getLastReview().isRatingDisplayed())
+                .as("Last review should not have a rating after sorting by 'Helpful'")
                 .isFalse();
 
         List<Integer> reviewsRatingByMostHelpful = reviews.stream()
