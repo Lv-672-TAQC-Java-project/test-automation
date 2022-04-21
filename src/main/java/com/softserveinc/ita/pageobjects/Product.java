@@ -3,6 +3,7 @@ package com.softserveinc.ita.pageobjects;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 
 @AllArgsConstructor
@@ -16,9 +17,11 @@ public class Product {
                 "//span[@class = 'goods-tile__title']")).text();
     }
 
-    public String getStatus(){
+    public String getAvailability(){
 
-        return $x(String.format("%s//div[contains(@class, 'goods-tile__availability')]", rootElementPath)).text();
+        return $x(String.format("%s//div[contains(@class, 'goods-tile__availability')]", rootElementPath))
+                .shouldBe(visible)
+                .text();
     }
 
     public int getPrice() {

@@ -1,5 +1,6 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.CategoryName;
 import com.softserveinc.ita.pageobjects.Product;
 import com.softserveinc.ita.pageobjects.TestRunner;
 import io.qameta.allure.Description;
@@ -40,7 +41,7 @@ public class FilterTest extends TestRunner {
                 .filterByCategory("Статус товару",expectedStatus)
                 .getProducts();
 
-        filteredProducts.forEach(product -> assertThat(product.getStatus())
+        filteredProducts.forEach(product -> assertThat(product.getAvailability())
                 .as("Product name should contain " + expectedStatus)
                 .containsIgnoringCase(expectedStatus));
     }
