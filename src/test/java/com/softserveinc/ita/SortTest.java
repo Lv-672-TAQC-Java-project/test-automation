@@ -25,16 +25,16 @@ public class SortTest extends TestRunner {
                 .contains(searchTerm);
 
         List<Product> products = searchResultPage.getProducts();
-        List<Integer> pricesOfProducts = searchResultPage.getPricesOfProducts(products);
-        Collections.sort(pricesOfProducts);
+        List<Integer> productPrices = searchResultPage.getProductPrices(products);
+        Collections.sort(productPrices);
 
         List<Product> sortedProductsFromCheap = searchResultPage
-                .sort(SearchResultPage.SortOrder.FROM_CHEAP)
+                .sort(SortOrder.FROM_CHEAP)
                 .getProducts();
-        List<Integer> pricesOfSortedProductsFromCheap = searchResultPage.getPricesOfProducts(sortedProductsFromCheap);
+        List<Integer> sortedProductsFromCheapPrices = searchResultPage.getProductPrices(sortedProductsFromCheap);
 
-        assertThat(pricesOfSortedProductsFromCheap)
+        assertThat(sortedProductsFromCheapPrices)
                 .as("Prices of sorted products (from cheap to expensive) should increase")
-                .isEqualTo(pricesOfProducts);
+                .isEqualTo(productPrices);
     }
 }

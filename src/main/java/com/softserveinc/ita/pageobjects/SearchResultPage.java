@@ -45,31 +45,14 @@ public class SearchResultPage {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
 
-    public enum SortOrder {
-        FROM_CHEAP,
-        FROM_EXPENSIVE,
-        BY_RELEVANCE
-    }
-
     @Step("Sorted products {order}")
     public SearchResultPage sort(SortOrder order) {
-        String sortButtonPath = "//select";
-        switch (order) {
-            case FROM_CHEAP:
-                $x(sortButtonPath).selectOptionByValue("1: cheap");
-                break;
-            case FROM_EXPENSIVE:
-                $x(sortButtonPath).selectOptionByValue("2: expensive");
-                break;
-            case BY_RELEVANCE:
-                $x(sortButtonPath).selectOptionByValue("3: relevance");
-                break;
-        }
+        $x("//select").selectOptionByValue(order.getSortOrder());
 
         return this;
     }
 
-    public List<Integer> getPricesOfProducts(List<Product> productsList) {
+    public List<Integer> getProductPrices(List<Product> productsList) {
         List<Integer> productPricesList = new ArrayList<>();
         for (Product product : productsList) {
             productPricesList.add(product.getPrice());
