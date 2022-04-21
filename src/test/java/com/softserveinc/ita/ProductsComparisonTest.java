@@ -1,9 +1,6 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.ComparisonPage;
-import com.softserveinc.ita.pageobjects.Header;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
-import com.softserveinc.ita.pageobjects.TestRunner;
+import com.softserveinc.ita.pageobjects.*;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -16,21 +13,19 @@ public class ProductsComparisonTest extends TestRunner {
         Header header = homePage.getHeader();
         String searchTerm = "notebook";
 
-        SearchResultPage searchResultPage =
-                header
-                        .search(searchTerm)
-                        .getProduct(1)
-                        .addToListOfComparisons()
-                        .getProduct(2)
-                        .addToListOfComparisons();
+        SearchResultPage searchResultPage = header.search(searchTerm);
 
-        String firstProductName = searchResultPage
-                .getProduct(1)
-                .getName();
-        String secondProductName = searchResultPage
-                .getProduct(2)
-                .getName();
+        Product firstProduct = searchResultPage.getProduct(1);
+        Product secondProduct = searchResultPage.getProduct(2);
 
+        firstProduct.addToListOfComparisons();
+        secondProduct.addToListOfComparisons();
+
+        String firstProductName = firstProduct
+                .getName();
+        String secondProductName = secondProduct
+                .getName();
+        
         String productCategory = "Ноутбуки";
         ComparisonPage comparisonPage =
                 header
