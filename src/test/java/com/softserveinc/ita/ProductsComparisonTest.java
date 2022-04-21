@@ -21,10 +21,8 @@ public class ProductsComparisonTest extends TestRunner {
         firstProduct.addToListOfComparisons();
         secondProduct.addToListOfComparisons();
 
-        String firstProductName = firstProduct
-                .getName();
-        String secondProductName = secondProduct
-                .getName();
+        String firstProductName = firstProduct.getName();
+        String secondProductName = secondProduct.getName();
         
         String productCategory = "Ноутбуки";
         ComparisonPage comparisonPage =
