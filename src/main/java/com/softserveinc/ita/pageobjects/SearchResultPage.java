@@ -39,6 +39,15 @@ public class SearchResultPage {
         return new Product(String.format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
     }
 
+    public List<Integer> getProductsPrices(List<Product> products) {
+        List<Integer> productsPrices = new LinkedList<>();
+        products.forEach((product) -> productsPrices
+                                .add(product
+                                .getPrice()));
+
+        return productsPrices;
+    }
+
     public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
