@@ -16,6 +16,11 @@ public class Product {
                 "//span[@class = 'goods-tile__title']")).text();
     }
 
+    public String getStatus(){
+
+        return $x(String.format("%s//div[contains(@class, 'goods-tile__availability')]", rootElementPath)).text();
+    }
+
     public int getPrice() {
         String price = $x(String.format("%s%s", rootElementPath, "//span[@class = 'goods-tile__price-value']"))
                 .text()

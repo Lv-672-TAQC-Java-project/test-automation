@@ -27,4 +27,21 @@ public class FilterTest extends TestRunner {
                 .as("Product name should contains " + expectedTerm)
                 .containsIgnoringCase(expectedTerm));
     }
+
+    @Test
+    public void verifyThatProductStatusContainsExpected() {
+        String expectedStatus = "Закінчився";
+
+        List<Product> filteredProducts = homePage
+                .getHeader()
+                .openCatalog()
+                .openSubCategoryPage("Побутова техніка", "Холодильники")
+                .getFilter()
+                .filterByCategory("Статус товару",expectedStatus)
+                .getProducts();
+
+        filteredProducts.forEach(product -> assertThat(product.getStatus())
+                .as("Product name should contain " + expectedStatus)
+                .containsIgnoringCase(expectedStatus));
+    }
 }
