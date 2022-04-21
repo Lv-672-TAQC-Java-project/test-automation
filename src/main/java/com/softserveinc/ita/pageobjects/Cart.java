@@ -59,6 +59,10 @@ public class Cart {
         return inCartProducts;
     }
 
+    public RecommendedProduct getRecommendedProduct(int recommendedProductNumber) {
+        return new RecommendedProduct(recommendedProductNumber);
+    }
+      
     @Step("Closed cart")
     public HomePage close() {
         SelenideElement closeButton = $x("//button[@class='modal__close']");
