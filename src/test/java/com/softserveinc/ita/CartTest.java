@@ -3,6 +3,7 @@ package com.softserveinc.ita;
 import com.softserveinc.ita.pageobjects.*;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -71,7 +72,7 @@ public class CartTest extends TestRunner {
         Header header = homePage.getHeader();
         header
                 .openCart()
-                .clean()
+                .empty()
                 .close();
 
         String searchTerm = "Asus";
