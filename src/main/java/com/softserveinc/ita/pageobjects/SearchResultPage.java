@@ -37,7 +37,7 @@ public class SearchResultPage {
     }
 
     @Step("added products to comparison")
-    public Header addProductsToComparison(String[] productsNames) {
+    public Header addProductsToComparison(List<String> productsNames) {
         for (String productName: productsNames) {
             getProduct(productName).addToListOfComparisons();
         }

@@ -8,11 +8,13 @@ public class CategorySideBar {
 
     @Step("Opened category page")
     public CategoryPage openCategoryPage(CategoryName categoryName) {
-        if (categoryName.getCategoryName().split("/")[0].equals("https:")) {
-            $x(String.format("//div[@class = 'fat-wrap']//a[@href='%s']", categoryName.getCategoryName()))
+        if (categoryName
+                .getCategoryPath()
+                .contains("https:")) {
+            $x(String.format("//div[@class = 'fat-wrap']//a[@href='%s']", categoryName.getCategoryPath()))
                     .click();
         } else {
-            $x(String.format("//div[@class = 'fat-wrap']//a[@href='https://rozetka.com.ua/ua/%s']", categoryName.getCategoryName()))
+            $x(String.format("//div[@class = 'fat-wrap']//a[@href='https://rozetka.com.ua/ua/%s']", categoryName.getCategoryPath()))
                     .click();
         }
 
