@@ -1,9 +1,6 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.ComparisonPage;
-import com.softserveinc.ita.pageobjects.ComparisonPageProduct;
-import com.softserveinc.ita.pageobjects.Header;
-import com.softserveinc.ita.pageobjects.TestRunner;
+import com.softserveinc.ita.pageobjects.*;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -18,15 +15,16 @@ public class AddFunctionInComparisonTest extends TestRunner {
 
         Header header = homePage.getHeader();
 
-        ComparisonPage comparisonPage = header
+        SearchResultPage searchResultPage = header
                 .search(searchFirstTerm)
                 .getFilter()
-                .filterByCategoryLink("Комп'ютери та ноутбуки", "Планшети")
+                .filterBySubCategoryLink("Планшети")
                 .getProduct(1)
                 .addToListOfComparisons()
                 .getProduct(2)
-                .addToListOfComparisons()
-                .getHeader()
+                .addToListOfComparisons();
+
+        ComparisonPage comparisonPage = header
                 .openComparisonModal()
                 .openComparisonPage(searchSecondTerm);
 
@@ -42,11 +40,11 @@ public class AddFunctionInComparisonTest extends TestRunner {
                 .as("All products should contain " + searchSecondTerm)
                 .containsIgnoringCase(searchSecondTerm));
 
-        productList = comparisonPage
+        comparisonPage
                 .addMoreModels()
                 .getProduct(3)
-                .addToListOfComparisons()
-                .getHeader()
+                .addToListOfComparisons();
+        productList = header
                 .openComparisonModal()
                 .openComparisonPage(searchSecondTerm)
                 .getAllComparisonPageProducts();

@@ -6,26 +6,37 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class Filter {
-    @Step("filtered products by \"{categoryLink}\" \"{subCategoryLink}\"")
-    public SearchResultPage filterByCategoryLink(String categoryLink, String subCategoryLink) {
-        String itemLinkPath = "//li[contains(@class, 'categories-filter__item')]//span[text() = \"%s\"]";
 
-        String subCategoryLinkPath = String.format(itemLinkPath, subCategoryLink);
-        if ($x(subCategoryLinkPath).isDisplayed()) {
-            $x(subCategoryLinkPath).click();
-        } else {
-            String allCategoryButtonPath = "//li[contains(@class, 'categories-filter__toggle-main')]//button";
-            $x(allCategoryButtonPath).click();
+    private String categoryLinkPath = "//li[contains(@class, 'categories-filter__item')]//span[text() = \"%s\"]";
 
-            String categoryLinkPath = String.format(itemLinkPath, categoryLink);
-            String moreSubCategoriesButtonPath = String.format(itemLinkPath + "//ancestor::li//button", categoryLink);
-            if ($x(categoryLinkPath).is((exist)) && $x(moreSubCategoriesButtonPath).is((exist))) {
-                $x(moreSubCategoriesButtonPath).click();
-                $x(subCategoryLinkPath).click();
-            } else {
-                $x(categoryLinkPath).click();
-            }
-        }
+    @Step("Expanded all categories list")
+    public Filter expandAllCategoriesList() {
+        String allCategoriesButtonPath = "//li[contains(@class, 'categories-filter__toggle-main')]//button";
+        $x(allCategoriesButtonPath).click();
+
+        return new Filter();
+    }
+
+    @Step("Filtered by {categoryName}")
+    public SearchResultPage filterByCategoryLink(String categoryName) {
+        $x(String.format(categoryLinkPath, categoryName)).click();
+
+        return new SearchResultPage();
+    }
+
+    @Step("Expanded sub categories list in {categoryName}")
+    public Filter expandAllSubCategoriesList(String categoryName) {
+        String allSubCategoriesButtonPath = String.format(categoryLinkPath + "//ancestor::li[contains(@class, 'categories-filter')]//button", categoryName);
+        $x(allSubCategoriesButtonPath).click();
+
+        return new Filter();
+    }
+
+    @Step("Filtered by {subCategoryName}")
+    public SearchResultPage filterBySubCategoryLink(String subCategoryName) {
+        String subCategoryLinkPath = String.format("//li[contains(@class, 'categories-filter__item')]/ul//span[text() = \"%s\"]", subCategoryName);
+        $x(subCategoryLinkPath).click();
+
         return new SearchResultPage();
     }
 
