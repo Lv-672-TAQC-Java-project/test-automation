@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
@@ -9,7 +10,6 @@ import static com.codeborne.selenide.Selenide.$x;
 public class InCartProduct {
 
     private final String rootElementPath;
-    final String additionalServicePath = "//li[%s]/rz-service-item";
 
     public String getName() {
 
@@ -24,8 +24,22 @@ public class InCartProduct {
         return new Cart();
     }
 
-    public ProductAdditionalService getAdditionalProductService(int index) {
+    @Step("Opened additional services")
+    public Cart openAdditionalServices() {
+        SelenideElement additionalServicesButton = $x(String.format("%s%s", rootElementPath,
+                "//button[contains(@class, 'cart-services__toggle')]"));
+        SelenideElement hiddenAdditionalServicesList = $x(String.format("%s%s", rootElementPath,
+                "//ul[@Class='cart-services__list display-none']"));
 
-        return new ProductAdditionalService(String.format("%s%s", rootElementPath, String.format(additionalServicePath, index)));
+        if (hiddenAdditionalServicesList.exists()) {
+            additionalServicesButton.click();
+        }
+
+        return new Cart();
+    }
+
+    public AdditionalProductService getAdditionalProductService(int index) {
+
+        return new AdditionalProductService(index, rootElementPath);
     }
 }

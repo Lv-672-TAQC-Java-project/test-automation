@@ -85,15 +85,16 @@ public class CartTest extends TestRunner {
         firstProduct.addToCart();
 
         Cart cart = header.openCart();
-        String FirstProductName = firstProduct.getName();
-        InCartProduct cartProduct = cart.getProduct(FirstProductName);
+        String firstProductName = firstProduct.getName();
+        InCartProduct cartProduct = cart.getProduct(firstProductName);
 
         assertThat(cartProduct.getName())
                 .as("Product name in cart should be same as name of added product to it")
-                .contains(FirstProductName);
+                .contains(firstProductName);
 
         int totalPrice = cart.getTotalPrice();
-        ProductAdditionalService firstAdditionalProductService = cartProduct.getAdditionalProductService(1);
+        cartProduct.openAdditionalServices();
+        AdditionalProductService firstAdditionalProductService = cartProduct.getAdditionalProductService(1);
         firstAdditionalProductService.select();
         int totalPriceUpdated = cart.getTotalPrice();
         int priceOfFirstAdditionalProductService = firstAdditionalProductService.getPrice();
