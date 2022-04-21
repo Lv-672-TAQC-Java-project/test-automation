@@ -11,11 +11,10 @@ public class CategorySideBar {
         if (categoryName
                 .getCategoryPath()
                 .contains("https:")) {
-            $x(String.format("//div[@class = 'fat-wrap']//a[@href='%s']", categoryName.getCategoryPath()))
-                    .click();
+            $x(String.format("//div[@class = 'fat-wrap']//a[@href='%s']", categoryName.getCategoryPath())).click();
         } else {
-            $x(String.format("//div[@class = 'fat-wrap']//a[@href='https://rozetka.com.ua/ua/%s']", categoryName.getCategoryPath()))
-                    .click();
+            $x(String.format("//div[@class = 'fat-wrap']//a[@href='https://rozetka.com.ua/ua/%s']",
+                    categoryName.getCategoryPath())).click();
         }
 
         return new CategoryPage();
