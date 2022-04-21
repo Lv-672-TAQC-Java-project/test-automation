@@ -74,8 +74,8 @@ public class Cart {
         return new HomePage();
     }
 
-    @Step("Cleaned cart")
-    public Cart clean() {
+    @Step("Emptied cart")
+    public Cart empty() {
         while (!isEmpty()) {
             getProduct(1).remove();
         }
