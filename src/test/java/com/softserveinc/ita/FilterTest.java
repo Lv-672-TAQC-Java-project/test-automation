@@ -29,7 +29,7 @@ public class FilterTest extends TestRunner {
     }
 
     @Test
-    public void verifyThatProductStatusContainsExpected() {
+    public void verifyThatFilteredProductsContainExpectedStatus() {
         String expectedStatus = "Закінчився";
 
         List<Product> filteredProducts = homePage
