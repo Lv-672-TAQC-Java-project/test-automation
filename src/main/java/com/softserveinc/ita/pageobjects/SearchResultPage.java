@@ -15,6 +15,8 @@ import java.util.List;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
 public class SearchResultPage {
@@ -43,6 +45,15 @@ public class SearchResultPage {
     public Product getProduct(String name) {
 
         return new Product(String.format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
+    }
+
+    public List<Integer> getProductsPrices(List<Product> products) {
+        SearchResultPage searchResultPage = this;
+        return rangeClosed(1, products.size())
+                .mapToObj(product -> searchResultPage
+                        .getProduct(product)
+                        .getPrice())
+                        .collect(toList());
     }
 
     public String getSearchTermLabel() {
