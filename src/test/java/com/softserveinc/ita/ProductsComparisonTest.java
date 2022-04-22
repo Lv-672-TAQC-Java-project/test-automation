@@ -1,6 +1,9 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.*;
+import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.product.Product;
+import com.softserveinc.ita.utils.TestRunner;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -10,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class ProductsComparisonTest extends TestRunner {
     @Test
     public void verifyShowOnlyDifferencesFunctionality() {
-        Header header = homePage.getHeader();
+        Header header = new Header();
         String searchTerm = "notebook";
 
         SearchResultPage searchResultPage = header.search(searchTerm);
@@ -23,7 +26,7 @@ public class ProductsComparisonTest extends TestRunner {
 
         String firstProductName = firstProduct.getName();
         String secondProductName = secondProduct.getName();
-        
+
         String productCategory = "Ноутбуки";
         ComparisonPage comparisonPage =
                 header
