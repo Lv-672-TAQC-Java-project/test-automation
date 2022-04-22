@@ -1,5 +1,8 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.components;
 
+import com.softserveinc.ita.pageobjects.Cart;
+import com.softserveinc.ita.pageobjects.ComparisonModal;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;

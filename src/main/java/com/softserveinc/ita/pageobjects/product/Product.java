@@ -1,5 +1,7 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.product;
 
+import com.softserveinc.ita.pageobjects.ProductDetailsPage;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
@@ -38,6 +40,13 @@ public class Product {
                 "//button[contains(@class, 'compare-button')]")).click();
 
         return new SearchResultPage();
+    }
+
+    @Step("Opened product details page")
+    public ProductDetailsPage openDetailsPage() {
+        $x(String.format("%s%s", rootElementPath, "//descendant::span[@class='goods-tile__title']")).click();
+
+        return new ProductDetailsPage();
     }
 
     @Step("Opened product reviews page")
