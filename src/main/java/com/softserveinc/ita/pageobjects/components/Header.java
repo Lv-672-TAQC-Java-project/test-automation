@@ -39,21 +39,4 @@ public class Header {
 
         return new Cart();
     }
-
-    /**
-     * Cart testing precondition.
-     * Use this method to empty the cart before the test.
-     */
-    @Step("Emptied cart and close popup")
-    public HomePage emptyCart() {
-        HomePage homePage = new HomePage();
-
-        homePage
-                .getHeader()
-                .openCart()
-                .empty()
-                .close();
-
-        return new HomePage();
-    }
 }
