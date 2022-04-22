@@ -47,15 +47,6 @@ public class SearchResultPage {
                         .getProduct(product)
                         .getPrice())
                         .collect(toList());
-
-//        return IntStream.of(1, products.size()).collect(product -> productsPrices.add(product.getPrice()));
-
-//        List<Integer> productsPrices = new LinkedList<>();
-//        products.forEach((product) -> productsPrices
-//                                .add(product
-//                                .getPrice()));
-//
-//        return productsPrices;
     }
 
     public String getSearchTermLabel() {
