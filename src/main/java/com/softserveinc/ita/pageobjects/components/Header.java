@@ -2,6 +2,7 @@ package com.softserveinc.ita.pageobjects.components;
 
 import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.ComparisonModal;
+import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 
@@ -37,5 +38,22 @@ public class Header {
         $x("//rz-cart/button").click();
 
         return new Cart();
+    }
+
+    /**
+     * Cart testing precondition.
+     * Use this method to empty the cart before the test.
+     */
+    @Step("Emptied cart and close popup")
+    public HomePage emptyCart() {
+        HomePage homePage = new HomePage();
+
+        homePage
+                .getHeader()
+                .openCart()
+                .empty()
+                .close();
+
+        return new HomePage();
     }
 }
