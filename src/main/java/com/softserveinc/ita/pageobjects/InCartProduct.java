@@ -25,12 +25,14 @@ public class InCartProduct {
     }
 
     @Step("Opened additional services")
-    public Cart openAdditionalServices() {
+    public Cart expandAdditionalServicesSection() {
         SelenideElement additionalServicesButton = $x(String.format("%s%s", rootElementPath,
                 "//button[contains(@class, 'cart-services__toggle')]"));
         SelenideElement hiddenAdditionalServicesList = $x(String.format("%s%s", rootElementPath,
                 "//ul[@Class='cart-services__list display-none']"));
 
+        //If there is more than one product in the cart, the sections of additional services are hidden and need to be
+        //expanded. And if there is one product in the cart, its section is not hidden and does not need to be expanded.
         if (hiddenAdditionalServicesList.exists()) {
             additionalServicesButton.click();
         }
@@ -38,8 +40,8 @@ public class InCartProduct {
         return new Cart();
     }
 
-    public AdditionalProductService getAdditionalProductService(int index) {
+    public AdditionalProductService getAdditionalProductService(String productName, int index) {
 
-        return new AdditionalProductService(index, rootElementPath);
+        return new AdditionalProductService(productName, index);
     }
 }

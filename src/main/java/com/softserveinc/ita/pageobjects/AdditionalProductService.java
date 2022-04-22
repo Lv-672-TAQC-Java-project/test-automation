@@ -9,14 +9,17 @@ import static com.codeborne.selenide.Selenide.$x;
 public class AdditionalProductService {
     private String rootElementPath;
 
-    protected AdditionalProductService(int index, String cartProductPath) {
+    public AdditionalProductService(String productName, int index) {
+        String product = String.format("//a[@title='%s']/ancestor::div[@class='cart-product ng-star-inserted']", productName);
 
-        this.rootElementPath = String.format("%s%s", cartProductPath, String.format("//li[%s]/rz-service-item", index));
+        this.rootElementPath = String.format("%s%s", product, String.format("//li[%s]/rz-service-item", index));
     }
 
     @Step("Selected additional service")
     public Cart select() {
-        $x(rootElementPath).scrollIntoView(true).click();
+        $x(rootElementPath)
+                .scrollIntoView(true)
+                .click();
 
         return new Cart();
     }
