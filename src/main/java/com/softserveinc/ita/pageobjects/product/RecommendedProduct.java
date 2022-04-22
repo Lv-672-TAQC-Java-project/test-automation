@@ -1,13 +1,14 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.product;
 
+import com.softserveinc.ita.pageobjects.Cart;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 
 public class RecommendedProduct {
-    private String rootElementPath;
+    private final String rootElementPath;
 
-    protected RecommendedProduct(int recommendedProductNumber) {
+    public RecommendedProduct(int recommendedProductNumber) {
         this.rootElementPath = String.format("//div[@class='modal__content']" +
                 "//li[@class='simple-slider__item ng-star-inserted'][%d]", recommendedProductNumber);
     }
