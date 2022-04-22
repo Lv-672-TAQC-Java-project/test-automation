@@ -9,6 +9,8 @@ import java.util.List;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
 public class SearchResultPage {
@@ -40,12 +42,20 @@ public class SearchResultPage {
     }
 
     public List<Integer> getProductsPrices(List<Product> products) {
-        List<Integer> productsPrices = new LinkedList<>();
-        products.forEach((product) -> productsPrices
-                                .add(product
-                                .getPrice()));
+        return rangeClosed(1, products.size())
+                .mapToObj(product -> new SearchResultPage()
+                        .getProduct(product)
+                        .getPrice())
+                        .collect(toList());
 
-        return productsPrices;
+//        return IntStream.of(1, products.size()).collect(product -> productsPrices.add(product.getPrice()));
+
+//        List<Integer> productsPrices = new LinkedList<>();
+//        products.forEach((product) -> productsPrices
+//                                .add(product
+//                                .getPrice()));
+//
+//        return productsPrices;
     }
 
     public String getSearchTermLabel() {
