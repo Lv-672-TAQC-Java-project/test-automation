@@ -9,6 +9,8 @@ import java.util.List;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
 public class SearchResultPage {
@@ -43,12 +45,11 @@ public class SearchResultPage {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
 
-    public List<Integer> getProductsPrices(List<Product> list) {
-        List<Integer> productsPrices = new LinkedList<>();
-        list.forEach((product) -> productsPrices
-                .add(product
-                .getPrice()));
-
-        return productsPrices;
+    public List<Integer> getProductsPrices(List<Product> products) {
+        return rangeClosed(1, products.size())
+                .mapToObj(product -> new SearchResultPage()
+                        .getProduct(product)
+                        .getPrice())
+                        .collect(toList());
     }
 }
