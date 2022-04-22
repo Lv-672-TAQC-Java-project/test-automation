@@ -29,26 +29,42 @@ public class ReviewsTest extends TestRunner {
 
         List<Review> reviews = reviewsPage.getReviews();
 
-        List<Integer> sortedReviewsRating = reviews.stream()
+        String firstComment = reviewsPage
+                .getReview(1)
+                .getComment();
+
+        String lastComment = reviewsPage
+                .getLastReview()
+                .getComment();
+
+        List<Integer> sortedReviewsRating = reviews
+                .stream()
                 .map(Review::getRating)
                 .sorted(Collections.reverseOrder())
                 .collect(Collectors.toList());
 
         reviewsPage.sortBy(SortingOption.HELPFUL);
 
-        assertThat(reviewsPage.getReview(1).isRatingDisplayed())
-                .as("First review should have a rating after sorting by 'Helpful'")
-                .isTrue();
-        assertThat(reviewsPage.getLastReview().isRatingDisplayed())
-                .as("Last review should not have a rating after sorting by 'Helpful'")
-                .isFalse();
+        sortingWait(firstComment, lastComment, reviewsPage);
 
-        List<Integer> reviewsRatingByMostHelpful = reviews.stream()
+        List<Integer> reviewsRatingByMostHelpful = reviews
+                .stream()
                 .map(Review::getRating)
                 .collect(Collectors.toList());
 
         assertThat(sortedReviewsRating)
                 .as("The sorted reviews should be equal to the sorted reviews by 'Most helpful'")
                 .isEqualTo(reviewsRatingByMostHelpful);
+    }
+
+    public static void sortingWait(String firstComment, String lastComment, ReviewsPage reviewsPage) {
+
+        int count = 0;
+
+        while (count < 1) {
+            if (!firstComment.equals(reviewsPage.getReview(1).getComment()) || !lastComment.equals(reviewsPage.getLastReview().getComment())) {
+                count++;
+            }
+        }
     }
 }

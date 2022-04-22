@@ -4,6 +4,7 @@ import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.pageobjects.WebElementUtil.isDisplayed;
@@ -26,5 +27,11 @@ public class Review {
         String rating = String.format("%s%s", rootElementPath, "//ul[@class='rating-stars']");
 
         return isDisplayed($x(rating), ofSeconds(30));
+    }
+
+    public String getComment(){
+        return $x(String.format("%s%s", rootElementPath, "/div[@class='comment__inner']//div/p"))
+                .shouldBe(visible,ofSeconds(10))
+                .text();
     }
 }

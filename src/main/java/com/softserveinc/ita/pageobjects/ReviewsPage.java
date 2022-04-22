@@ -8,6 +8,7 @@ import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.selected;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -17,8 +18,8 @@ public class ReviewsPage {
         List<Review> reviews = new LinkedList<>();
         String reviewPath = "//div[@class='comment']";
         int amountOfReviews = $$x(reviewPath)
-                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(30)).size();
-
+                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(30))
+                .size();
         for (int i = 1; i <= amountOfReviews; i++) {
             reviews.add(new Review(String.format("(%s)[%s]", reviewPath, i)));
         }
@@ -28,7 +29,9 @@ public class ReviewsPage {
 
     public String getTitle() {
 
-        return $x("//h2[@class='product-tabs__heading']").text();
+        return $x("//h2[@class='product-tabs__heading']")
+                .shouldBe(visible)
+                .text();
     }
 
     public Review getReview(int index) {
