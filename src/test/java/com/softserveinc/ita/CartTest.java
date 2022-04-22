@@ -1,8 +1,13 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.*;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import com.softserveinc.ita.pageobjects.Cart;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.product.InCartProduct;
+import com.softserveinc.ita.pageobjects.product.Product;
+import com.softserveinc.ita.utils.TestRunner;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -72,9 +77,9 @@ public class CartTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-4")
     @Test(description = "LVTAQC672-4")
     public void verifyThatTotalProductsPriceHasDoubled() {
-        Header header = homePage.getHeader();
-        header.emptyCart();
+        homePage.emptyCart();
 
+        Header header = homePage.getHeader();
         String searchTerm = "Asus";
         String productName = "Ноутбук ASUS TUF Gaming F15 FX506HCB-HN161 (90NR0723-M04940) Eclipse Gray";
         header

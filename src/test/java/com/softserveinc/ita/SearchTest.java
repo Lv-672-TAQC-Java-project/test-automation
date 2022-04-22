@@ -1,7 +1,7 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.Product;
-import com.softserveinc.ita.pageobjects.TestRunner;
+import com.softserveinc.ita.pageobjects.product.Product;
+import com.softserveinc.ita.utils.TestRunner;
 import org.testng.annotations.Test;
 
 import java.util.List;

@@ -1,20 +1,28 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.components.Filter;
+import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.models.SortOrder;
+import com.softserveinc.ita.pageobjects.product.Product;
+import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
 public class SearchResultPage {
 
-    private Header header = new Header();
-    private Filter filter = new Filter();
+    private final Header header = new Header();
+    private final Filter filter = new Filter();
 
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<>();
@@ -39,7 +47,32 @@ public class SearchResultPage {
         return new Product(String.format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
     }
 
+    public List<Integer> getProductsPrices(List<Product> products) {
+        SearchResultPage searchResultPage = this;
+        return rangeClosed(1, products.size())
+                .mapToObj(product -> searchResultPage
+                        .getProduct(product)
+                        .getPrice())
+                        .collect(toList());
+    }
+
     public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
+    }
+
+    @Step("Sorted products {order}")
+    public SearchResultPage sort(SortOrder order) {
+        $x("//select").selectOptionByValue(order.getSortOrderOption());
+
+        return this;
+    }
+
+    public List<Integer> getProductPrices(List<Product> productsList) {
+        List<Integer> productPricesList = new ArrayList<>();
+        for (Product product : productsList) {
+            productPricesList.add(product.getPrice());
+        }
+
+        return productPricesList;
     }
 }

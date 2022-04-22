@@ -1,12 +1,13 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.product;
 
 import com.codeborne.selenide.SelenideElement;
+import com.softserveinc.ita.pageobjects.Cart;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.pageobjects.WebElementUtil.isDisplayed;
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
