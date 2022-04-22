@@ -16,4 +16,18 @@ public class HomePage {
 
         return this;
     }
+
+    /**
+     * Cart testing precondition.
+     * Use this method to empty the cart before the test.
+     */
+    @Step("Emptied cart and close popup")
+    public HomePage emptyCart() {
+        header
+                .openCart()
+                .empty()
+                .close();
+
+        return this;
+    }
 }
