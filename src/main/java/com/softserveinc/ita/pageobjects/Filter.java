@@ -6,30 +6,30 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class Filter {
-
-    private String categoryLinkPath = "//li[contains(@class, 'categories-filter__item')]//span[text() = \"%s\"]";
+    private String categoryLinkPath = "//li[contains(@class, 'categories-filter__item')]//a[contains(@href, '%s')]";
 
     @Step("Expanded all categories list")
     public Filter expandAllCategoriesList() {
         String allCategoriesButtonPath = "//li[contains(@class, 'categories-filter__toggle-main')]//button";
         $x(allCategoriesButtonPath).click();
 
-        return new Filter();
+        return this;
     }
 
     @Step("Filtered by {categoryName}")
-    public SearchResultPage filterByCategoryLink(String categoryName) {
-        $x(String.format(categoryLinkPath, categoryName)).click();
+    public SearchResultPage filterByCategoryLink(CategoryNameInFilter categoryName) {
+        $x(String.format(categoryLinkPath, categoryName.getCategorySectionId())).click();
 
         return new SearchResultPage();
     }
 
     @Step("Expanded sub categories list in {categoryName}")
-    public Filter expandAllSubCategoriesList(String categoryName) {
-        String allSubCategoriesButtonPath = String.format(categoryLinkPath + "//ancestor::li[contains(@class, 'categories-filter')]//button", categoryName);
+    public Filter expandAllSubCategoriesList(CategoryNameInFilter categoryName) {
+        String allSubCategoriesButtonPath = String.format(categoryLinkPath + "//ancestor::li[contains(@class, 'categories-filter')]" +
+                "//button", categoryName.getCategorySectionId());
         $x(allSubCategoriesButtonPath).click();
 
-        return new Filter();
+        return this;
     }
 
     @Step("Filtered by {subCategoryName}")
