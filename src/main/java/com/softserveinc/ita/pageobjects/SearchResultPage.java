@@ -42,7 +42,7 @@ public class SearchResultPage {
     }
 
     public List<Integer> getProductsPrices(List<Product> products) {
-        SearchResultPage searchResultPage = new SearchResultPage();
+        SearchResultPage searchResultPage = this;
         return rangeClosed(1, products.size())
                 .mapToObj(product -> searchResultPage
                         .getProduct(product)
