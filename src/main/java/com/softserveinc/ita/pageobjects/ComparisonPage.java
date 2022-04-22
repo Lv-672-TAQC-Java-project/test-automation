@@ -1,10 +1,9 @@
 package com.softserveinc.ita.pageobjects;
 
-import io.qameta.allure.Step;
-import lombok.Getter;
-
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
+import lombok.Getter;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 import java.util.LinkedList;
