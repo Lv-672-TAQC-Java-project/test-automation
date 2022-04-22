@@ -33,6 +33,7 @@ public class FilterTest extends TestRunner {
     public void verifyThatFilteredProductsContainExpectedStatus() {
         String expectedStatus = "Закінчився";
 
+        // common method 'openSubCategoryPage' with enum in progress
         List<Product> filteredProducts = homePage
                 .getHeader()
                 .openCatalog()
