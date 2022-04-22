@@ -1,9 +1,10 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.*;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -67,13 +68,12 @@ public class CartTest extends TestRunner {
                         .containsIgnoringCase(firstProductName));
     }
 
-    @Test
+    @Description("Verify that the total products price has doubled after adding one more product from the cart.")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-4")
+    @Test(description = "LVTAQC672-4")
     public void verifyThatTotalProductsPriceHasDoubled() {
         Header header = homePage.getHeader();
-        header
-                .openCart()
-                .empty()
-                .close();
+        header.emptyCart();
 
         String searchTerm = "Asus";
         String productName = "Ноутбук ASUS TUF Gaming F15 FX506HCB-HN161 (90NR0723-M04940) Eclipse Gray";
