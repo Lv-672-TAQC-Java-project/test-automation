@@ -37,13 +37,7 @@ public class Cart {
     }
 
     public boolean isOpened() {
-        try {
-            return $x("//div[@class='modal__header']")
-                    .shouldBe(visible)
-                    .isDisplayed();
-        } catch (AssertionError assertionError) {
-            return false;
-        }
+        return isDisplayed($x("//div[@class='modal__header']"), ofSeconds(5));
     }
 
     public List<InCartProduct> getInCartProducts() {
@@ -62,7 +56,7 @@ public class Cart {
     public RecommendedProduct getRecommendedProduct(int recommendedProductNumber) {
         return new RecommendedProduct(recommendedProductNumber);
     }
-      
+
     @Step("Closed cart")
     public HomePage close() {
         SelenideElement closeButton = $x("//button[@class='modal__close']");
@@ -80,5 +74,12 @@ public class Cart {
             getProduct(1).remove();
         }
         return this;
+    }
+
+    @Step("Submitted an order")
+    public OrderPlacementPage submitOrder() {
+        $x("//div[@class='cart-receipt ng-star-inserted']/a").click();
+
+        return new OrderPlacementPage();
     }
 }
