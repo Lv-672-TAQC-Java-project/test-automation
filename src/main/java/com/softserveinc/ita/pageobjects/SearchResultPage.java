@@ -47,7 +47,7 @@ public class SearchResultPage {
 
     @Step("Sorted products {order}")
     public SearchResultPage sort(SortOrder order) {
-        $x("//select").selectOptionByValue(order.getSortOrder());
+        $x("//select").selectOptionByValue(order.getSortOrderOption());
 
         return this;
     }
