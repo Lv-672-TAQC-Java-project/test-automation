@@ -1,5 +1,9 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.components.Filter;
+import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.models.SortOrder;
+import com.softserveinc.ita.pageobjects.product.Product;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
@@ -15,8 +19,8 @@ import static com.codeborne.selenide.Selenide.$x;
 @Getter
 public class SearchResultPage {
 
-    private Header header = new Header();
-    private Filter filter = new Filter();
+    private final Header header = new Header();
+    private final Filter filter = new Filter();
 
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<>();

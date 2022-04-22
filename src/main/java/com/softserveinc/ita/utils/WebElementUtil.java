@@ -1,10 +1,10 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.utils;
 
 import com.codeborne.selenide.SelenideElement;
 
-import static com.codeborne.selenide.Condition.visible;
-
 import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 
 public class WebElementUtil {
 

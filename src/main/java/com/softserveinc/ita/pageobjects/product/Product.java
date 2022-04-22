@@ -1,5 +1,7 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.product;
 
+import com.softserveinc.ita.pageobjects.ProductDetailsPage;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
