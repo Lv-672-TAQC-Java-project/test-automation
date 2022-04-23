@@ -7,6 +7,8 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import static java.lang.String.format;
@@ -14,7 +16,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderPlacementTest extends TestRunner {
 
-    @Test
+    @Description("Verify that it's impossible to place an order without populating required data")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-2")
+    @Test(description = "LVTAQC672-2")
     public void verifyThatImpossibleToPlaceAnOrderWithoutRequiredData() {
         String searchTerm = "DeWALT";
         Header header = homePage.getHeader();
