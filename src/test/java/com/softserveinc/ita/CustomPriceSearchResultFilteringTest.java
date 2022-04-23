@@ -4,6 +4,8 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
@@ -13,7 +15,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CustomPriceSearchResultFilteringTest extends TestRunner {
 
-    @Test
+    @Description("Verify filtering products by custom price functionality")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-7")
+    @Test(description = "LVTAQC672-7")
     public void verifyCustomPriceFilteringFunctionality() {
         Header header = new Header();
         String searchTerm = "Asus";
