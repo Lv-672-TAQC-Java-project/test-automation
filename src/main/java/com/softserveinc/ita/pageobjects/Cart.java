@@ -38,8 +38,12 @@ public class Cart {
         return Integer.parseInt($x("//div[@class='cart-receipt__sum-price']/span").text());
     }
 
+    //Sometimes cart is not opened in modal view
     public boolean isOpened() {
-        return isDisplayed($x("//div[@class='modal__header']"), ofSeconds(5));
+        boolean isModalView = isDisplayed($x("//div[@class='modal__header']"), ofSeconds(5));
+        boolean isFullScreenView = isDisplayed($x("//h1[@class='cart-page__heading']"), ofSeconds(5));
+
+        return isModalView || isFullScreenView;
     }
 
     public List<InCartProduct> getInCartProducts() {
