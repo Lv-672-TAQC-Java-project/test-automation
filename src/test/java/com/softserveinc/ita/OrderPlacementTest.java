@@ -36,6 +36,11 @@ public class OrderPlacementTest extends TestRunner {
 
         Cart cart = productDetailsPage.addToCart();
 
+        //Sometimes cart is not opened automatically after adding product to cart from details page
+        if (!cart.isOpened()) {
+            header.openCart();
+        }
+
         assertThat(cart.isOpened())
                 .as("Cart modal should be displayed")
                 .isTrue();
