@@ -1,8 +1,9 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.Product;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
-import com.softserveinc.ita.pageobjects.TestRunner;
+import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.product.Product;
+import com.softserveinc.ita.utils.TestRunner;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
@@ -14,12 +15,12 @@ public class CustomPriceSearchResultFilteringTest extends TestRunner {
 
     @Test
     public void verifyCustomPriceFilteringFunctionality() {
+        Header header = new Header();
         String searchTerm = "Asus";
         String priceRangeMinimum = "2000";
         String priceRangeMaximum = "24000";
 
-        SearchResultPage searchResultPage = homePage
-                .getHeader()
+        SearchResultPage searchResultPage = header
                 .search(searchTerm)
                 .getFilter()
                 .filterByPrice(priceRangeMinimum, priceRangeMaximum);
