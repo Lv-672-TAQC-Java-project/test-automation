@@ -4,6 +4,8 @@ import com.softserveinc.ita.pageobjects.*;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -11,9 +13,12 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductsComparisonTest extends TestRunner {
-    @Test
+
+    @Description("Verify 'show only differences' functionality when comparing products")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-6")
+    @Test(description = "LVTAQC672-6")
     public void verifyShowOnlyDifferencesFunctionality() {
-        Header header = new Header();
+        Header header = homePage.getHeader();
         String searchTerm = "notebook";
 
         SearchResultPage searchResultPage = header.search(searchTerm);
