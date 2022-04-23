@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class CustomPriceSearchResultFilteringTest extends TestRunner {
+public class CustomPriceProductsFilteringTest extends TestRunner {
 
     @Description("Verify filtering products by custom price functionality")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-7")
