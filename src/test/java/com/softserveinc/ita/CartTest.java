@@ -1,6 +1,11 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.*;
+import com.softserveinc.ita.pageobjects.Cart;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.product.InCartProduct;
+import com.softserveinc.ita.pageobjects.product.Product;
+import com.softserveinc.ita.utils.TestRunner;
 import org.testng.annotations.Test;
 
 import java.util.List;
