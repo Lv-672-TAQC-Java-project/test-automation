@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.models.CategoryName;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;

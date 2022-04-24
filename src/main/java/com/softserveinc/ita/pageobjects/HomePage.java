@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.Selenide;
+import com.softserveinc.ita.pageobjects.components.Header;
 import io.qameta.allure.Step;
 import lombok.Getter;
 

@@ -14,7 +14,7 @@ public class ComparisonPageProduct {
     }
 
     @Step("removed product from comparison page")
-    public ComparisonPageProduct remove(){
+    public ComparisonPageProduct remove() {
         $x("//rz-popup-menu[@class='product__actions']/button").click();
         $x("//li[@class='popup-menu__item ng-star-inserted']//button").click();
 
