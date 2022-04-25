@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 
 public class Filter {
-    @Step("Filtered products by \"{filterCategoryName}\" Category and \"{filterCheckboxName}\" Checkbox")
+    @Step("Filtered products by '{filterCategoryName}' Category and '{filterCheckboxName}' Checkbox")
     public SearchResultPage filterByCategory(String filterCategoryName, String filterCheckboxName) {
         String filterMinimizedCategoryPath = String.format("//div[@class='sidebar-block sidebar-block_state_collapsed ng-star-inserted']" +
                 "//span[contains(text(),'%s')]", filterCategoryName);
