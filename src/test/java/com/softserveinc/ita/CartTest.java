@@ -101,12 +101,12 @@ public class CartTest extends TestRunner {
 
         int totalPrice = cart.getTotalPrice();
         cartProduct.expandAdditionalServicesSection();
-        AdditionalProductService firstAdditionalProductService = cartProduct.getAdditionalProductService(cartProductName, 1);
-        firstAdditionalProductService.select();
+        AdditionalProductService additionalProductService = cartProduct.getAdditionalProductService(cartProductName, 1);
+        additionalProductService.select();
         int totalPriceUpdated = cart.getTotalPrice();
-        int priceOfFirstAdditionalProductService = firstAdditionalProductService.getPrice();
+        int additionalProductServiceCost = additionalProductService.getPrice();
 
-        assertThat(priceOfFirstAdditionalProductService)
+        assertThat(additionalProductServiceCost)
                 .as("Total price should be increased by the cost of the first selected additional service")
                 .isEqualTo(totalPriceUpdated - totalPrice);
     }
