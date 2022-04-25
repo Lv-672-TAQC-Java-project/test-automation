@@ -3,9 +3,13 @@ package com.softserveinc.ita;
 import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.models.CategoryName;
 import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.Product;
+import com.softserveinc.ita.pageobjects.product.RecommendedProduct;
 import com.softserveinc.ita.utils.TestRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -69,5 +73,38 @@ public class CartTest extends TestRunner {
                 .anySatisfy(product -> assertThat(product.getName())
                         .as(product.getName() + " should contain " + firstProductName)
                         .containsIgnoringCase(firstProductName));
+    }
+
+    @Description("Verify that product items quantity and summary price in the 'Кошик' pop-up window increased" +
+            "after adding first product from 'Також рекомендуємо' section.")
+    @Issue("https://jira.softserve.academy/projects/LVTAQC672/issues/LVTAQC672-10")
+    @Test
+    public void verifyAddingProductFromRecommendationsSection() {
+//      Test precondition
+        homePage.emptyCart();
+
+        Header header = homePage.getHeader();
+        header
+                .openCatalog()
+                .openSubCategoryPage(CategoryName.SPORTS_AND_HOBBIES, "Ракетки для настільного тенісу")
+                .getProduct(1)
+                .addToCart();
+
+        Cart cart = header.openCart();
+
+        int productPrice = cart.getTotalPrice();
+
+        RecommendedProduct recommendedProduct = cart.getRecommendedProduct(1);
+
+        int recommendedProductPrice = recommendedProduct.getPrice();
+
+        int totalPriceAfterAddingRecommendedProduct = recommendedProduct
+                .addToCart()
+                .getTotalPrice();
+
+        assertThat(totalPriceAfterAddingRecommendedProduct)
+                .as("Total price after adding recommended product should increase " +
+                        "in amount of recommended product price")
+                .isEqualTo(productPrice + recommendedProductPrice);
     }
 }
