@@ -19,12 +19,12 @@ public class CustomPriceProductsFilteringTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-7")
     @Test(description = "LVTAQC672-7")
     public void verifyCustomPriceFilteringFunctionality() {
-        Header header = homePage.getHeader();
         String searchTerm = "Asus";
         String priceRangeMinimum = "2000";
         String priceRangeMaximum = "24000";
 
-        SearchResultPage searchResultPage = header
+        SearchResultPage searchResultPage = homePage
+                .getHeader()
                 .search(searchTerm)
                 .getFilter()
                 .filterByPrice(priceRangeMinimum, priceRangeMaximum);
