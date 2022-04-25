@@ -1,6 +1,12 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.*;
+import com.softserveinc.ita.pageobjects.AdditionalProductService;
+import com.softserveinc.ita.pageobjects.Cart;
+import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.product.InCartProduct;
+import com.softserveinc.ita.pageobjects.product.Product;
+import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
@@ -95,7 +101,7 @@ public class CartTest extends TestRunner {
 
         int totalPrice = cart.getTotalPrice();
         cartProduct.expandAdditionalServicesSection();
-        AdditionalProductService firstAdditionalProductService = cartProduct.getAdditionalProductService(cartProductName,1);
+        AdditionalProductService firstAdditionalProductService = cartProduct.getAdditionalProductService(cartProductName, 1);
         firstAdditionalProductService.select();
         int totalPriceUpdated = cart.getTotalPrice();
         int priceOfFirstAdditionalProductService = firstAdditionalProductService.getPrice();

@@ -1,5 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
 import lombok.Getter;
 
 import java.time.Duration;
@@ -12,7 +14,7 @@ import static com.codeborne.selenide.Selenide.$$x;
 @Getter
 public class ComparisonPage {
 
-    private Header header = new Header();
+    private final Header header = new Header();
 
     public ComparisonPageProduct getProduct(int index) {
         return new ComparisonPageProduct(

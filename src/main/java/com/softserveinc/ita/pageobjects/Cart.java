@@ -1,6 +1,8 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
+import com.softserveinc.ita.pageobjects.product.InCartProduct;
+import com.softserveinc.ita.pageobjects.product.RecommendedProduct;
 import io.qameta.allure.Step;
 
 import java.util.LinkedList;
@@ -10,7 +12,7 @@ import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.pageobjects.WebElementUtil.isDisplayed;
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.time.Duration.ofSeconds;
 
 public class Cart {
@@ -37,20 +39,15 @@ public class Cart {
     }
 
     public boolean isOpened() {
-        try {
-            return $x("//div[@class='modal__header']")
-                    .shouldBe(visible)
-                    .isDisplayed();
-        } catch (AssertionError assertionError) {
-            return false;
-        }
+        return isDisplayed($x("//div[@class='modal__header']"), ofSeconds(5));
     }
 
     public List<InCartProduct> getInCartProducts() {
         List<InCartProduct> inCartProducts = new LinkedList<>();
         String inCartProductsPath = "//div[@class='cart-product ng-star-inserted']";
         int amountOfInCartProducts = $$x(inCartProductsPath)
-                .shouldHave(sizeNotEqual(0), ofSeconds(10)).size();
+                .shouldHave(sizeNotEqual(0), ofSeconds(10))
+                .size();
 
         for (int i = 1; i <= amountOfInCartProducts; i++) {
             inCartProducts.add(new InCartProduct(String.format("(%s)[%s]", inCartProductsPath, i)));
@@ -67,10 +64,25 @@ public class Cart {
     public HomePage close() {
         SelenideElement closeButton = $x("//button[@class='modal__close']");
         //sometimes page opens instead of popup
-        if(isDisplayed(closeButton, ofSeconds(5))){
+        if (isDisplayed(closeButton, ofSeconds(5))) {
             closeButton.click();
         }
 
         return new HomePage();
+    }
+
+    @Step("Emptied cart")
+    public Cart empty() {
+        while (!isEmpty()) {
+            getProduct(1).remove();
+        }
+        return this;
+    }
+
+    @Step("Submitted an order")
+    public OrderPlacementPage submitOrder() {
+        $x("//div[@class='cart-receipt ng-star-inserted']/a").click();
+
+        return new OrderPlacementPage();
     }
 }
