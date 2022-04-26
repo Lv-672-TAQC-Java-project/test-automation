@@ -28,6 +28,7 @@ public class Filter {
 
         while (!filteredProductsSubCategoryTag.exists() || cycleCounter >= 3) {
             isDisplayed(filteredProductsSubCategoryTag, Duration.ofSeconds(5));
+            cycleCounter++;
         }
 
         return new SearchResultPage();
