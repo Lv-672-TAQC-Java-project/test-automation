@@ -34,7 +34,7 @@ public class CustomPriceProductsFilteringTest extends TestRunner {
         int intPriceRangeMinimum = Integer.valueOf(priceRangeMinimum);
 
         assertThat(intPriceRangeMaximum)
-                .as("Maximal custom price value can't be lower than minimal custom price value")
+                .as("Maximal custom price range value can't be lower than minimal custom price range value")
                 .isGreaterThanOrEqualTo(intPriceRangeMinimum);
 
         pricesList.forEach(productPrice -> assertThat(productPrice)
