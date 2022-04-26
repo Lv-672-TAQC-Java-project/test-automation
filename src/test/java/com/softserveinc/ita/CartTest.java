@@ -47,7 +47,9 @@ public class CartTest extends TestRunner {
                 .isTrue();
     }
 
-    @Test
+    @Description("Verify that product item added to the cart")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-1")
+    @Test(description = "LVTAQC672-1")
     public void verifyThatProductItemAddedToTheCart() {
         String searchTerm = "DeWALT";
         Header header = homePage.getHeader();
