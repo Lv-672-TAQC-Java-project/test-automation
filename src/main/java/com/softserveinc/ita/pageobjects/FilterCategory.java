@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum CategoryNameInFilter {
+public enum FilterCategory {
     LAPTOPS_AND_COMPUTERS("section_id=80253"),
     SMARTPHONES_TV_AND_ELECTRONICS("section_id=4627949"),
     SERVICES("section_id=4630262"),

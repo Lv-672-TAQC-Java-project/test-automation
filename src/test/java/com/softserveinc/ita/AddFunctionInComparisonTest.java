@@ -1,6 +1,8 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.*;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -8,7 +10,9 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AddFunctionInComparisonTest extends TestRunner {
-    @Test
+    @Description("Verify that products added to the comparison")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-12")
+    @Test(description = "LVTAQC672-12")
     public void verifyThatProductsAddedToTheComparison() {
         String searchFirstTerm = "Lenovo";
         String searchSecondTerm = "Планшет";

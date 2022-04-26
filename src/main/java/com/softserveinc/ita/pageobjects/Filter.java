@@ -17,14 +17,14 @@ public class Filter {
     }
 
     @Step("Filtered by {categoryName}")
-    public SearchResultPage filterByCategoryLink(CategoryNameInFilter categoryName) {
+    public SearchResultPage filterByCategoryLink(FilterCategory categoryName) {
         $x(String.format(categoryLinkPath, categoryName.getCategorySectionId())).click();
 
         return new SearchResultPage();
     }
 
     @Step("Expanded sub categories list in {categoryName}")
-    public Filter expandAllSubCategoriesList(CategoryNameInFilter categoryName) {
+    public Filter expandAllSubCategoriesList(FilterCategory categoryName) {
         String allSubCategoriesButtonPath = String.format(categoryLinkPath + "//ancestor::li[contains(@class, 'categories-filter')]" +
                 "//button", categoryName.getCategorySectionId());
         $x(allSubCategoriesButtonPath).click();
