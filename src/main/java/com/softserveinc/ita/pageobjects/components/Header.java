@@ -2,6 +2,7 @@ package com.softserveinc.ita.pageobjects.components;
 
 import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.ComparisonModal;
+import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 
@@ -37,5 +38,14 @@ public class Header {
         $x("//rz-cart/button").click();
 
         return new Cart();
+    }
+
+    @Step("Searched for {nameOfProduct}")
+    public ProductDetailsPage searchBy(String nameOfProduct) {
+        String inputFieldPath = "//*[@name='search']";
+        $x(inputFieldPath).sendKeys(nameOfProduct);
+        $x(inputFieldPath).sendKeys(ENTER);
+
+        return new ProductDetailsPage();
     }
 }

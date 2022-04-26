@@ -1,6 +1,8 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.*;
+import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
+import com.softserveinc.ita.utils.TestRunner;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
@@ -14,12 +16,10 @@ public class ReviewsTest extends TestRunner {
     @Test
     public void verifySortingReviewsByMostHelpful() {
         String productName = "Ноутбук HP Pavilion Gaming 15-ec2013ua";
-        Product product = homePage
+        ReviewsPage reviewsPage = homePage
                 .getHeader()
-                .search("Ноутбук HP")
-                .getProduct(productName);
-
-        ReviewsPage reviewsPage = product.openReviewsPage();
+                .searchBy(productName)
+                .openReviewsPage();
 
         String productTitleInReviews = reviewsPage.getTitle();
 
@@ -29,23 +29,13 @@ public class ReviewsTest extends TestRunner {
 
         List<Review> reviews = reviewsPage.getReviews();
 
-        String firstComment = reviewsPage
-                .getReview(1)
-                .getComment();
-
-        String lastComment = reviewsPage
-                .getLastReview()
-                .getComment();
-
         List<Integer> sortedReviewsRating = reviews
                 .stream()
                 .map(Review::getRating)
                 .sorted(Collections.reverseOrder())
                 .collect(Collectors.toList());
 
-        reviewsPage.sortBy(SortingOption.HELPFUL);
-
-        sortingWait(firstComment, lastComment, reviewsPage);
+        reviewsPage.sortBy(ReviewSortingOption.HELPFUL, reviews);
 
         List<Integer> reviewsRatingByMostHelpful = reviews
                 .stream()
@@ -55,16 +45,5 @@ public class ReviewsTest extends TestRunner {
         assertThat(sortedReviewsRating)
                 .as("The sorted reviews should be equal to the sorted reviews by 'Most helpful'")
                 .isEqualTo(reviewsRatingByMostHelpful);
-    }
-
-    public static void sortingWait(String firstComment, String lastComment, ReviewsPage reviewsPage) {
-
-        int count = 0;
-
-        while (count < 1) {
-            if (!firstComment.equals(reviewsPage.getReview(1).getComment()) || !lastComment.equals(reviewsPage.getLastReview().getComment())) {
-                count++;
-            }
-        }
     }
 }

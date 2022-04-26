@@ -7,7 +7,6 @@ import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.pageobjects.WebElementUtil.isDisplayed;
 import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
@@ -21,12 +20,6 @@ public class Review {
         return $$x(String.format("%s%s", rootElementPath, "//*[name()='path' and @fill='#ffa900']"))
                 .shouldHave(sizeGreaterThanOrEqual(0), ofSeconds(20))
                 .size();
-    }
-
-    public boolean isRatingDisplayed() {
-        String rating = String.format("%s%s", rootElementPath, "//ul[@class='rating-stars']");
-
-        return isDisplayed($x(rating), ofSeconds(30));
     }
 
     public String getComment(){
