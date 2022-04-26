@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -15,15 +14,15 @@ public class FilterTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-11")
     @Test(description = "LVTAQC672-11")
     public void verifyThatFilteredProductsContainsExpectedTerm() {
-        SearchResultPage searchResultPage = homePage
+        List<Product> filteredProductsList = homePage
                 .getHeader()
                 .search("мобільний телефон")
                 .getFilter()
-                .filterByCategory("Виробник", "Apple");
+                .filterByCategory("Виробник", "Apple")
+                .getProducts();
 
         String expectedTerm = "iPhone";
 
-        List<Product> filteredProductsList = searchResultPage.getProducts();
         filteredProductsList
                 .forEach(product -> assertThat(product.getName())
                 .as("Product name should contains " + expectedTerm)
