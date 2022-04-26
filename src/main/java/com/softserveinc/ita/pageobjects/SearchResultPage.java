@@ -44,7 +44,7 @@ public class SearchResultPage {
 
     @Step("added products to comparison")
     public Header addProductsToComparison(List<String> productsNames) {
-        productsNames.forEach(this::accept);
+        productsNames.forEach(productName -> getProduct(productName).addToListOfComparisons());
 
         return new Header();
     }
@@ -81,9 +81,5 @@ public class SearchResultPage {
         }
 
         return productPricesList;
-    }
-
-    private void accept(String productName) {
-        getProduct(productName).addToListOfComparisons();
     }
 }
