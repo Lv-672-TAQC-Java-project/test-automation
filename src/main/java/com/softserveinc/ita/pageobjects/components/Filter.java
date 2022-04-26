@@ -1,10 +1,14 @@
 package com.softserveinc.ita.pageobjects.components;
 
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 
 public class Filter {
     @Step("Filtered products by '{filterCategoryName}' Category and '{filterCheckboxName}' Checkbox")
@@ -16,6 +20,15 @@ public class Filter {
             $x(filterMinimizedCategoryPath).click();
         }
         $x(String.format("//li//a[@data-id='%s']", filterCheckboxName)).click();
+
+        SelenideElement filteredProductsSubCategoryTag = $x(String.format("//a[@class='catalog-selection__link' " +
+                "and contains(text(), '%s')]", filterCheckboxName));
+
+        int cycleCounter = 0;
+
+        while (!filteredProductsSubCategoryTag.exists() || cycleCounter >= 3) {
+            isDisplayed(filteredProductsSubCategoryTag, Duration.ofSeconds(5));
+        }
 
         return new SearchResultPage();
     }
