@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects.product;
 
+import com.softserveinc.ita.pageobjects.ProductAvailability;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
@@ -19,9 +20,9 @@ public class Product {
                 "//span[@class = 'goods-tile__title']")).text();
     }
 
-    public String getAvailability(){
+    public String getAvailability(ProductAvailability productAvailability){
 
-        return $x(String.format("%s//div[contains(@class, 'goods-tile__availability')]", rootElementPath))
+        return $x(String.format("%s//div[contains(@class, '%s')]", rootElementPath, productAvailability.getAvailabilityName()))
                 .shouldBe(visible)
                 .text();
     }

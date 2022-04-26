@@ -1,5 +1,7 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.ProductAvailability;
+import com.softserveinc.ita.pageobjects.models.CategoryName;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -28,20 +30,21 @@ public class FilterTest extends TestRunner {
                 .containsIgnoringCase(expectedTerm));
     }
 
-    @Test
+    @Description("Verify that filtered products contain 'Закінчився' status")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-13")
+    @Test(description = "LVTAQC672-13")
     public void verifyThatFilteredProductsContainExpectedStatus() {
         String expectedStatus = "Закінчився";
 
-        // common method 'openSubCategoryPage' with enum in progress
         List<Product> filteredProducts = homePage
                 .getHeader()
                 .openCatalog()
-                .openSubCategoryPage("Побутова техніка", "Холодильники")
+                .openSubCategoryPage(CategoryName.HOUSEHOLD_APPLIANCES, "Холодильники")
                 .getFilter()
                 .filterByCategory("Статус товару",expectedStatus)
                 .getProducts();
 
-        filteredProducts.forEach(product -> assertThat(product.getAvailability())
+        filteredProducts.forEach(product -> assertThat(product.getAvailability(ProductAvailability.OUT_OF_STOCK))
                 .as("Product name should contain " + expectedStatus)
                 .containsIgnoringCase(expectedStatus));
     }
