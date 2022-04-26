@@ -5,6 +5,8 @@ import com.softserveinc.ita.pageobjects.Cart;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
@@ -30,13 +32,13 @@ public class InCartProduct {
 
     @Step("Add one more product from the cart")
     public Cart addOneMoreProduct() {
-        $x(String.format("%s%s", rootElementPath, "//button[@data-testid='cart-counter-increment-button']")).click();
+        $x(String.format("%s//button[@data-testid='cart-counter-increment-button']", rootElementPath)).click();
         SelenideElement loadSpinner = $x("//div[@class='modal__content modal__content--locked']");
+        Duration tenSeconds = ofSeconds(10);
 
         //sometimes page opens instead of popup
-        if (isDisplayed(loadSpinner, ofSeconds(5))) {
-            loadSpinner.shouldBe(visible, ofSeconds(10));
-            loadSpinner.shouldNotBe(visible, ofSeconds(10));
+        if (isDisplayed(loadSpinner, tenSeconds)) {
+            loadSpinner.shouldNotBe(visible, tenSeconds);
         }
 
         return new Cart();
