@@ -1,14 +1,12 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.SearchResultPage;
-import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
-import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -32,20 +30,16 @@ public class CustomPriceProductsFilteringTest extends TestRunner {
         List<Product> products = searchResultPage.getProducts();
         List<Integer> pricesList = searchResultPage.getProductsPrices(products);
 
-        int highestPrice = Collections.max(pricesList);
-        int lowestPrice = Collections.min(pricesList);
-
         int intPriceRangeMaximum = Integer.valueOf(priceRangeMaximum);
         int intPriceRangeMinimum = Integer.valueOf(priceRangeMinimum);
 
-        assertThat(highestPrice)
-                .as("Highest price in the list shouldn't be more expensive than maximum custom price range value")
-                .isLessThanOrEqualTo(intPriceRangeMaximum)
-                .isGreaterThan(intPriceRangeMinimum);
+        assertThat(intPriceRangeMaximum)
+                .as("Maximal custom price value can't be lower than minimal custom price value")
+                .isGreaterThanOrEqualTo(intPriceRangeMinimum);
 
-        assertThat(lowestPrice)
-                .as("Lowest price in the list shouldn't be less expensive than minimum custom price range value")
-                .isGreaterThanOrEqualTo(intPriceRangeMinimum)
-                .isLessThan(intPriceRangeMaximum);
+        pricesList.forEach(productPrice -> assertThat(productPrice)
+                        .as("products prices should not exceed or be lower than custom price range")
+                        .isGreaterThanOrEqualTo(intPriceRangeMinimum)
+                        .isLessThanOrEqualTo(intPriceRangeMaximum));
     }
 }
