@@ -38,21 +38,16 @@ public class ProductsComparisonTest extends TestRunner {
                         .openComparisonModal()
                         .openComparisonPage(productCategory);
 
-        List<String> firstProductCharacteristics = comparisonPage
-                .getProduct(firstProductName)
-                .getCharacteristics();
-        List<String> secondProductCharacteristics = comparisonPage
-                .getProduct(secondProductName)
-                .getCharacteristics();
+        var firstComparableProduct = comparisonPage.getProduct(firstProductName);
+        var secondComparableProduct = comparisonPage.getProduct(secondProductName);
+
+        List<String> firstProductCharacteristics = firstComparableProduct.getCharacteristics();
+        List<String> secondProductCharacteristics = secondComparableProduct.getCharacteristics();
 
         comparisonPage.showOnlyDifferences();
 
-        List<String> firstProductCharacteristicsAfterChange = comparisonPage
-                .getProduct(firstProductName)
-                .getCharacteristics();
-        List<String> secondProductCharacteristicsAfterChange = comparisonPage
-                .getProduct(secondProductName)
-                .getCharacteristics();
+        List<String> firstProductCharacteristicsAfterChange = firstComparableProduct.getCharacteristics();
+        List<String> secondProductCharacteristicsAfterChange = secondComparableProduct.getCharacteristics();
 
         assertThat(firstProductCharacteristicsAfterChange)
                 .as("After change products characteristics lists should display only distinctive characteristics")
