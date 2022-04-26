@@ -5,6 +5,7 @@ import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.RecommendedProduct;
 import io.qameta.allure.Step;
 
+import java.time.Duration;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
@@ -40,10 +41,10 @@ public class Cart {
         return Integer.parseInt($x("//div[@class='cart-receipt__sum-price']/span").text());
     }
 
-    //Sometimes cart is not opened in modal view
     public boolean isOpened() {
-        boolean isModalView = isDisplayed($x("//div[@class='modal__header']"), ofSeconds(5));
-        boolean isFullScreenView = isDisplayed($x("//h1[@class='cart-page__heading']"), ofSeconds(5));
+        Duration time = ofSeconds(5);
+        boolean isModalView = isDisplayed($x("//div[@class='modal__header']"), time);
+        boolean isFullScreenView = isDisplayed($x("//h1[@class='cart-page__heading']"), time);
 
         return isModalView || isFullScreenView;
     }
