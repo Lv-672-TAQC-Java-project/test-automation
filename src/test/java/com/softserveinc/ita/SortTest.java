@@ -29,13 +29,13 @@ public class SortTest extends TestRunner {
                 .contains(searchTerm);
 
         List<Product> products = searchResultPage.getProducts();
-        List<Integer> productPrices = searchResultPage.getProductPrices(products);
+        List<Integer> productPrices = searchResultPage.getProductsPrices(products);
         Collections.sort(productPrices);
 
         List<Product> sortedProductsFromCheap = searchResultPage
                 .sort(SortOrder.FROM_CHEAP)
                 .getProducts();
-        List<Integer> sortedProductsFromCheapPrices = searchResultPage.getProductPrices(sortedProductsFromCheap);
+        List<Integer> sortedProductsFromCheapPrices = searchResultPage.getProductsPrices(sortedProductsFromCheap);
 
         assertThat(sortedProductsFromCheapPrices)
                 .as("Prices of sorted products (from cheap to expensive) should increase")
