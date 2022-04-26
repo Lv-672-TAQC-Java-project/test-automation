@@ -26,4 +26,11 @@ public class ProductDetailsPage {
 
         return new Cart();
     }
+
+    @Step("Opened product question page")
+    public ProductQuestionPage openProductQuestionPage (String tabQuestion){
+
+        $x(String.format("//ul[@class='tabs__list']//a[starts-with(text(),' %s ')]", tabQuestion)).click();
+        return new ProductQuestionPage();
+    }
 }
