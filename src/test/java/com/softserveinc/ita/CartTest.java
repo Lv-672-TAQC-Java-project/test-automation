@@ -6,6 +6,8 @@ import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -43,7 +45,9 @@ public class CartTest extends TestRunner {
                 .isTrue();
     }
 
-    @Test
+    @Description("Verify that product item added to the cart")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-1")
+    @Test(description = "LVTAQC672-1")
     public void verifyThatProductItemAddedToTheCart() {
         String searchTerm = "DeWALT";
         Header header = homePage.getHeader();
