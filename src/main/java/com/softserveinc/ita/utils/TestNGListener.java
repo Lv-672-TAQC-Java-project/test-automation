@@ -16,10 +16,10 @@ public class TestNGListener implements ITestListener {
 
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] screenshot() {
-        String screenshot = Selenide.screenshot(OutputType.BASE64);
+        String screenshotAsBase64 = Selenide.screenshot(OutputType.BASE64);
 
         return Base64
                 .getDecoder()
-                .decode(screenshot);
+                .decode(screenshotAsBase64);
     }
 }
