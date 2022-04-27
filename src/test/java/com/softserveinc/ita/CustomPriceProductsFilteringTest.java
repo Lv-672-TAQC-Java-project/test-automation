@@ -18,8 +18,12 @@ public class CustomPriceProductsFilteringTest extends TestRunner {
     @Test(description = "LVTAQC672-7")
     public void verifyCustomPriceFilteringFunctionality() {
         String searchTerm = "Asus";
-        String priceRangeMinimum = "2000";
-        String priceRangeMaximum = "24000";
+        int priceRangeMinimum = 2000;
+        int priceRangeMaximum = 24000;
+
+        assertThat(priceRangeMaximum)
+                .as("Maximal custom price range value can't be lower than minimal custom price range value")
+                .isGreaterThanOrEqualTo(priceRangeMinimum);
 
         SearchResultPage searchResultPage = homePage
                 .getHeader()
@@ -30,16 +34,9 @@ public class CustomPriceProductsFilteringTest extends TestRunner {
         List<Product> products = searchResultPage.getProducts();
         List<Integer> pricesList = searchResultPage.getProductsPrices(products);
 
-        int intPriceRangeMaximum = Integer.valueOf(priceRangeMaximum);
-        int intPriceRangeMinimum = Integer.valueOf(priceRangeMinimum);
-
-        assertThat(intPriceRangeMaximum)
-                .as("Maximal custom price range value can't be lower than minimal custom price range value")
-                .isGreaterThanOrEqualTo(intPriceRangeMinimum);
-
         pricesList.forEach(productPrice -> assertThat(productPrice)
                         .as("products prices should not exceed or be lower than custom price range")
-                        .isGreaterThanOrEqualTo(intPriceRangeMinimum)
-                        .isLessThanOrEqualTo(intPriceRangeMaximum));
+                        .isGreaterThanOrEqualTo(priceRangeMinimum)
+                        .isLessThanOrEqualTo(priceRangeMaximum));
     }
 }
