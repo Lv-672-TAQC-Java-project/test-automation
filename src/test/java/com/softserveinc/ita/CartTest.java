@@ -106,8 +106,8 @@ public class CartTest extends TestRunner {
         int totalPriceUpdated = cart.getTotalPrice();
         int additionalProductServiceCost = additionalProductService.getPrice();
 
-        assertThat(additionalProductServiceCost)
+        assertThat(totalPriceUpdated)
                 .as("Total price should be increased by the cost of the first selected additional service")
-                .isEqualTo(totalPriceUpdated - totalPrice);
+                .isEqualTo(totalPrice + additionalProductServiceCost);
     }
 }
