@@ -10,7 +10,7 @@ import static java.time.Duration.*;
 
 public class Filter {
     @Step("Filtered products by '{filterCheckboxName}' Checkbox")
-    public SearchResultPage filterBySectionCheckbox(FilterSectionName filterSectionName, String filterCheckboxName) {
+    public SearchResultPage filterBySection(FilterSectionName filterSectionName, String filterCheckboxName) {
         String filterMinimizedSectionPath = String.format("//div[@class='sidebar-block sidebar-block_state_collapsed " +
                 "ng-star-inserted'][@data-filter-name='%s']", filterSectionName.getFilterSectionPath());
 

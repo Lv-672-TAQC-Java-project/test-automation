@@ -20,7 +20,7 @@ public class FilterTest extends TestRunner {
                 .getHeader()
                 .search("мобільний телефон")
                 .getFilter()
-                .filterBySectionCheckbox(PRODUCER, "Apple")
+                .filterBySection(MANUFACTURER, "Apple")
                 .getProducts();
 
         String expectedTerm = "iPhone";

@@ -6,7 +6,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum FilterSectionName {
-    PRODUCER("producer"),
+    MANUFACTURER("producer"),
     DISPLAY_TYPE("31565");
 
     private final String filterSectionPath;
