@@ -8,13 +8,13 @@ import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.lang.String.*;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
@@ -31,7 +31,7 @@ public class SearchResultPage {
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
         for (int i = 1; i <= amountOfProducts; i++) {
-            products.add(new Product(String.format("(%s)[%s]", productsPath, i)));
+            products.add(new Product(format("(%s)[%s]", productsPath, i)));
         }
 
         return products;
@@ -39,7 +39,7 @@ public class SearchResultPage {
 
     public Product getProduct(int index) {
 
-        return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
+        return new Product(format("(//div[@class='goods-tile__inner'])[%s]", index));
     }
 
     @Step("added products to comparison")
@@ -52,7 +52,7 @@ public class SearchResultPage {
 
     public Product getProduct(String name) {
 
-        return new Product(String.format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
+        return new Product(format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
     }
 
     public List<Integer> getProductsPrices(List<Product> products) {
@@ -61,7 +61,7 @@ public class SearchResultPage {
                 .mapToObj(product -> searchResultPage
                         .getProduct(product)
                         .getPrice())
-                        .collect(toList());
+                .collect(toList());
     }
 
     public String getSearchTermLabel() {
