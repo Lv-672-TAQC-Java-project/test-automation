@@ -21,7 +21,7 @@ public class Filter {
     }
 
     @Step("Filtered products by amount of price from {filterPriceMinNumber} to {filterPriceMaxNumber}")
-    public SearchResultPage filterByPrice(String filterPriceMinNumber, String filterPriceMaxNumber) {
+    public SearchResultPage filterByPrice(int filterPriceMinNumber, int filterPriceMaxNumber) {
         String filterPriceFormPath = "//form[@class='slider-filter__form ng-untouched ng-pristine ng-valid']";
 
         if ($x(filterPriceFormPath).is(not(visible))) {
@@ -31,12 +31,12 @@ public class Filter {
         String filterPriceMinPath = "//input[@formcontrolname='min']";
         $x(filterPriceMinPath).click();
         $x(filterPriceMinPath).clear();
-        $x(filterPriceMinPath).setValue(filterPriceMinNumber);
+        $x(filterPriceMinPath).setValue(String.valueOf(filterPriceMinNumber));
 
         String filterPriceMaxPath = "//input[@formcontrolname='max']";
         $x(filterPriceMaxPath).click();
         $x(filterPriceMaxPath).clear();
-        $x(filterPriceMaxPath).setValue(filterPriceMaxNumber).pressEnter();
+        $x(filterPriceMaxPath).setValue(String.valueOf(filterPriceMaxNumber)).pressEnter();
 
         return new SearchResultPage();
     }
