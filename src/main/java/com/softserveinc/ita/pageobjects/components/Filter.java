@@ -6,6 +6,7 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.time.Duration.*;
 
 public class Filter {
     @Step("Filtered products by '{filterCheckboxName}' Checkbox")
@@ -19,6 +20,9 @@ public class Filter {
 
         $x(String.format("//div[@data-filter-name='%s']//a[@data-id='%s']", filterSectionName.getFilterSectionPath(),
                 filterCheckboxName)).click();
+
+        $x(String.format("//a[@class='catalog-selection__link' and contains(text(), '%s')]",
+                filterCheckboxName)).shouldBe(visible, ofSeconds(10));
 
         return new SearchResultPage();
     }
