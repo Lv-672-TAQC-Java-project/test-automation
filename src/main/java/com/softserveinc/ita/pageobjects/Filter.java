@@ -33,7 +33,7 @@ public class Filter {
     }
 
     @Step("Filtered by {subCategoryName}")
-    public SearchResultPage filterBySubCategoryLink(String subCategoryName) {
+    public SearchResultPage filterBySubCategory(String subCategoryName) {
         // used \" to make the locator work correctly
         String subCategoryLinkPath = String.format("//li[contains(@class, 'categories-filter__item')]/ul//span[text() = \"%s\"]", subCategoryName);
         $x(subCategoryLinkPath).click();

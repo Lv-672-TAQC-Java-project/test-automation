@@ -10,24 +10,25 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class AddFunctionInComparisonTest extends TestRunner {
+
     @Description("Verify that products added to the comparison")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-12")
     @Test(description = "LVTAQC672-12")
     public void verifyThatProductsAddedToTheComparison() {
         String searchFirstTerm = "Lenovo";
-        String searchSecondTerm = "Планшет";
 
         Header header = homePage.getHeader();
 
         SearchResultPage searchResultPage = header
                 .search(searchFirstTerm)
                 .getFilter()
-                .filterBySubCategoryLink("Планшети")
-                .getProduct(1)
+                .filterBySubCategory("Планшети")
+                .getProduct("Планшет Lenovo Tab M10 FHD Plus (2nd Gen) Wi-Fi 64 GB Platinum Grey (ZA5T0417UA)")
                 .addToListOfComparisons()
-                .getProduct(2)
+                .getProduct("Планшет Lenovo Tab M10 Plus FHD 4/128GB Wi-Fi Iron Grey (ZA5T0095UA)")
                 .addToListOfComparisons();
 
+        String searchSecondTerm = "Планшет";
         ComparisonPage comparisonPage = header
                 .openComparisonModal()
                 .openComparisonPage(searchSecondTerm);
@@ -46,7 +47,7 @@ public class AddFunctionInComparisonTest extends TestRunner {
 
         comparisonPage
                 .addMoreModels()
-                .getProduct(3)
+                .getProduct("Планшет Lenovo Tab P11 Wi-Fi 64 GB Slate Grey (ZA7R0172UA)")
                 .addToListOfComparisons();
         productList = header
                 .openComparisonModal()
