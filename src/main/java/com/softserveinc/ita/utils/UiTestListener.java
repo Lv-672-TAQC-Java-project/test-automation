@@ -8,9 +8,10 @@ import org.testng.ITestResult;
 
 import java.util.Base64;
 
-public class TestNGListener implements ITestListener {
+public class UiTestListener implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
+        ITestListener.super.onTestFailure(result);
         screenshot();
     }
 

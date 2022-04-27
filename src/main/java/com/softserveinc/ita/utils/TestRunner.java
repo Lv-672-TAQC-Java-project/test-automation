@@ -6,7 +6,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
-@Listeners(TestNGListener.class)
+@Listeners(UiTestListener.class)
 public class TestRunner {
 
     protected final HomePage homePage = new HomePage();
