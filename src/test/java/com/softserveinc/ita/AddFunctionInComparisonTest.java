@@ -1,6 +1,9 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.*;
+import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
+import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
