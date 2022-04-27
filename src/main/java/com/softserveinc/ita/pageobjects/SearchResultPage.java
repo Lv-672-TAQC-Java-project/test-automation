@@ -8,7 +8,6 @@ import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -65,14 +64,5 @@ public class SearchResultPage {
         $x("//select").selectOptionByValue(order.getSortOrderOption());
 
         return this;
-    }
-
-    public List<Integer> getProductPrices(List<Product> productsList) {
-        List<Integer> productPricesList = new ArrayList<>();
-        for (Product product : productsList) {
-            productPricesList.add(product.getPrice());
-        }
-
-        return productPricesList;
     }
 }
