@@ -15,14 +15,14 @@ public class RecommendedProduct {
 
     @Step("Added product from recommended list to cart")
     public Cart addToCart() {
-        $x(String.format("%s%s", rootElementPath,
-                "//button[@class='buy-button lite-tile__buy-button ng-star-inserted']")).click();
+        $x(String.format("%s//button[@class='buy-button " +
+                        "lite-tile__buy-button ng-star-inserted']", rootElementPath)).click();
 
         return new Cart();
     }
 
     public int getPrice() {
-        String price = $x(String.format("%s%s", rootElementPath, "//span[@class = 'lite-tile__price-value']"))
+        String price = $x(String.format("%s//span[@class = 'lite-tile__price-value']", rootElementPath))
                 .text()
                 .replace(" ", "");
 

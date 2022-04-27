@@ -82,7 +82,6 @@ public class CartTest extends TestRunner {
     @Issue("https://jira.softserve.academy/projects/LVTAQC672/issues/LVTAQC672-10")
     @Test
     public void verifyAddingProductFromRecommendationsSection() {
-//      Test precondition
         homePage.emptyCart();
 
         Header header = homePage.getHeader();
