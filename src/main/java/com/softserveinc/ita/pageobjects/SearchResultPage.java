@@ -66,13 +66,4 @@ public class SearchResultPage {
 
         return this;
     }
-
-    public List<Integer> getProductPrices(List<Product> productsList) {
-        List<Integer> productPricesList = new ArrayList<>();
-        for (Product product : productsList) {
-            productPricesList.add(product.getPrice());
-        }
-
-        return productPricesList;
-    }
 }
