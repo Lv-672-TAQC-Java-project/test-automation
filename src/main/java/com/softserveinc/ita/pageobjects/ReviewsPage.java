@@ -34,41 +34,24 @@ public class ReviewsPage {
     }
 
     @Step("Choose {option} and get sorted reviews on the Reviews page")
-    public ReviewsPage sortBy(ReviewSortingOption option, List<Review> reviews) {
-        String firstComment = reviews
-                .stream()
-                .findFirst()
-                .get()
-                .getComment();
+    public ReviewsPage sortBy(ReviewSortingOption option) {
+        String firstCommentTextPath = "(//div[@class='comment'])[1]/div[@class='comment__inner']//div/p";
+        String lastCommentTextPath = "(//div[@class='comment'])[last()]/div[@class='comment__inner']//div/p";
 
-        String lastComment = reviews
-                .stream()
-                .reduce((first, second) -> second)
-                .get()
-                .getComment();
+        String firstCommentTextBeforeSorting = $x(firstCommentTextPath)
+                .shouldBe(visible)
+                .text();
+
+        String lastCommentTextBeforeSorting = $x(lastCommentTextPath)
+                .shouldBe(visible)
+                .text();
 
         String sortOptionPath = String.format("//select/option[@value='%s']", option.getOptionName());
         $x(sortOptionPath).click();
         $x(sortOptionPath).shouldBe(selected);
 
-        String firstCommentAfterSoring = reviews
-                .stream()
-                .findFirst()
-                .get()
-                .getComment();
-
-        String lastCommentAfterSorting = reviews
-                .stream()
-                .reduce((first, second) -> second)
-                .get()
-                .getComment();
-
-        int count = 0;
-        while (count < 1) {
-            if (!firstComment.equals(firstCommentAfterSoring) || !lastComment.equals(lastCommentAfterSorting)) {
-                count++;
-            }
-        }
+        $x(firstCommentTextPath).shouldNotHave(text(firstCommentTextBeforeSorting), Duration.ofSeconds(20));
+        $x(lastCommentTextPath).shouldNotHave(text(lastCommentTextBeforeSorting), Duration.ofSeconds(20));
 
         return this;
     }

@@ -35,7 +35,7 @@ public class ReviewsTest extends TestRunner {
                 .sorted(Collections.reverseOrder())
                 .collect(Collectors.toList());
 
-        reviewsPage.sortBy(ReviewSortingOption.HELPFUL, reviews);
+        reviewsPage.sortBy(ReviewSortingOption.HELPFUL);
 
         List<Integer> reviewsRatingByMostHelpful = reviews
                 .stream()
