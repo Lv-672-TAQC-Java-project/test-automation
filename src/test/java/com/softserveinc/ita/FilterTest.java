@@ -1,7 +1,6 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.ProductAvailability;
-import com.softserveinc.ita.pageobjects.models.CategoryName;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -10,6 +9,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -39,9 +39,9 @@ public class FilterTest extends TestRunner {
         List<Product> filteredProducts = homePage
                 .getHeader()
                 .openCatalog()
-                .openSubCategoryPage(CategoryName.HOUSEHOLD_APPLIANCES, "Холодильники")
+                .openSubCategoryPage(HOUSEHOLD_APPLIANCES, "Холодильники")
                 .getFilter()
-                .filterByCategory("Статус товару","Закінчився")
+                .filterBySection(PRODUCT_STATUS,"Закінчився")
                 .getProducts();
 
         ProductAvailability expectedStatus = ProductAvailability.OUT_OF_STOCK;
