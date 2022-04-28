@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects.components;
 
+import com.softserveinc.ita.pageobjects.FilterCategory;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 
