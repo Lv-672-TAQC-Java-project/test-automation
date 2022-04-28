@@ -11,5 +11,5 @@ public enum ProductAvailability {
     UNAVAILABLE("unavailable"),
     OUT_OF_STOCK("out_of_stock");
 
-    private final String availabilityName;
+    private final String locatorPath;
 }

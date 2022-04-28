@@ -6,6 +6,8 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
+import java.util.Arrays;
+
 import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -22,9 +24,10 @@ public class Product {
 
     public ProductAvailability getAvailability() {
         for (ProductAvailability productAvailability : ProductAvailability.values()) {
-            if($x(String.format("%s//div[contains(@class, '%s')]", rootElementPath,
-                    productAvailability.getAvailabilityName())).is(exist))
+            String productAvailabilityPath = String.format("%s//div[contains(@class, '%s')]", rootElementPath, productAvailability.getLocatorPath());
+            if ($x(productAvailabilityPath).is(exist)) {
                 return productAvailability;
+            }
         }
         return null;
     }
