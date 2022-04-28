@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.lang.String.*;
 import static java.util.stream.IntStream.range;
 
 public class ProductQuestionPage {
@@ -28,9 +29,9 @@ public class ProductQuestionPage {
     }
 
     @Step("selected sort option in tab question")
-    public ProductQuestionPage sortSelectOption(SortOptionInTabQuestion sortOption) {
+    public ProductQuestionPage selectSortOption(SortOptionInTabQuestion sortOption) {
         String sortDefault = "//select[@id='sort-select']";
-        String sortSelect = String.format("//select/option[@value='%s']", sortOption.getSortOption());
+        String sortSelect = format("//select/option[@value='%s']", sortOption.getSortOption());
 
         if (!$x(sortDefault)
                 .getText()
@@ -44,7 +45,7 @@ public class ProductQuestionPage {
 
     public String getTimeOfQuestion(int numberQuestion) {
 
-        return $x(String.format("(//li[@class='product-questions__list-item ng-star-inserted'][%s]//time)[1]", numberQuestion))
+        return $x(format("(//li[@class='product-questions__list-item ng-star-inserted'][%s]//time)[1]", numberQuestion))
                 .getText();
     }
 

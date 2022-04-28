@@ -28,9 +28,9 @@ public class ProductDetailsPage {
     }
 
     @Step("Opened product question page")
-    public ProductQuestionPage openProductQuestionPage (String tabQuestion){
-
+    public ProductQuestionPage openQuestionPage (String tabQuestion){
         $x(String.format("//ul[@class='tabs__list']//a[starts-with(text(),' %s ')]", tabQuestion)).click();
+
         return new ProductQuestionPage();
     }
 }
