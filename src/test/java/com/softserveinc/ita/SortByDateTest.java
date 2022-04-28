@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.pageobjects.models.SortOptionInTabQuestion.DATE;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.InstanceOfAssertFactories.iterator;
 
 public class SortByDateTest extends TestRunner {
 
@@ -32,6 +33,23 @@ public class SortByDateTest extends TestRunner {
                     .after(productQuestionPage.getUniqueDate().get(i+1)))
                     .as("date should be sorted to fall down")
                     .isTrue();
+
+            
+
+//            productQuestionPage.getUniqueDate()
+//                    .stream()
+//                    .forEach(dateTest -> assertThat
+//                            (dateTest.after(productQuestionPage.getUniqueDate().get(i+1))));
+//
+
+//            assertThat(productQuestionPage.getUniqueDate())
+//                    .allSatisfy(dateQuestion ->
+//                            assertThat(dateQuestion.after())
+//                                    .as("date should be sorted to fall down")
+//                                    .isTrue());
+
+
+
         }
     }
 }

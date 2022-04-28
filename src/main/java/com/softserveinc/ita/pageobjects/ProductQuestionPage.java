@@ -71,4 +71,10 @@ public class ProductQuestionPage {
                 .distinct()
                 .collect(Collectors.toList());
     }
+
+    @Step("")
+    public Date getOneDate() {
+
+        return null;
+    }
 }
