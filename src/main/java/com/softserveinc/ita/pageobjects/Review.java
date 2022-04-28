@@ -1,6 +1,5 @@
 package com.softserveinc.ita.pageobjects;
 
-import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
 import static com.codeborne.selenide.CollectionCondition.sizeGreaterThanOrEqual;
@@ -12,7 +11,6 @@ public class Review {
 
     private final String rootElementPath;
 
-    @Step("Get a rating of the review")
     public int getRating() {
 
         return $$x(String.format("%s%s", rootElementPath, "//*[name()='path' and @fill='#ffa900']"))

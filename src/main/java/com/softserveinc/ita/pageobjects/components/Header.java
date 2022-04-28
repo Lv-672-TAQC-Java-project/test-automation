@@ -10,11 +10,16 @@ import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
 
 public class Header {
-    @Step("Searched for {term}")
-    public SearchResultPage search(String term) {
+
+    private void commonSearch(String term) {
         String inputFieldPath = "//*[@name='search']";
         $x(inputFieldPath).sendKeys(term);
         $x(inputFieldPath).sendKeys(ENTER);
+    }
+
+    @Step("Searched for {term}")
+    public SearchResultPage search(String term) {
+        commonSearch(term);
 
         return new SearchResultPage();
     }
@@ -40,11 +45,9 @@ public class Header {
         return new Cart();
     }
 
-    @Step("Searched for {nameOfProduct}")
-    public ProductDetailsPage searchBy(String nameOfProduct) {
-        String inputFieldPath = "//*[@name='search']";
-        $x(inputFieldPath).sendKeys(nameOfProduct);
-        $x(inputFieldPath).sendKeys(ENTER);
+    @Step("Searched for {fullProductName}")
+    public ProductDetailsPage strictSearch(String fullProductName) {
+        commonSearch(fullProductName);
 
         return new ProductDetailsPage();
     }
