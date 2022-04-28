@@ -34,7 +34,7 @@ public class SortByDateTest extends TestRunner {
                     .as("date should be sorted to fall down")
                     .isTrue();
 
-            
+
 
 //            productQuestionPage.getUniqueDate()
 //                    .stream()
