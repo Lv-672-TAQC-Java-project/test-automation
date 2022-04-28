@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects.product;
 
+import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
 import java.util.List;
@@ -16,11 +17,20 @@ public class ComparisonPageProduct {
         return $x(String.format("%s%s", rootElementPath, "//a[@class= 'product__heading']")).text();
     }
 
+ rvytrykush-rozetka-test
     public List<String> getCharacteristics() {
         String productName = getProductName();
         String characteristicsLocator = String.format("//*[contains(text(), '%s')]//following-sibling::dd", productName);
         return $$x(characteristicsLocator)
                 .shouldHave(sizeGreaterThan(0))
                 .texts();
+    }
+
+    @Step("removed product from comparison page")
+    public ComparisonPageProduct remove() {
+        $x("//rz-popup-menu[@class='product__actions']/button").click();
+        $x("//li[@class='popup-menu__item ng-star-inserted']//button").click();
+
+        return this;
     }
 }
