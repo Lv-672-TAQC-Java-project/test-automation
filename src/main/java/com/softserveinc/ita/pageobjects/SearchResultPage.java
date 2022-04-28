@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.components.FilterCategorySideBar;
 import com.softserveinc.ita.pageobjects.components.Filter;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.SortOrder;
@@ -23,6 +24,7 @@ public class SearchResultPage {
 
     private final Header header = new Header();
     private final Filter filter = new Filter();
+    private final FilterCategorySideBar categorySideBar = new FilterCategorySideBar();
 
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<>();
