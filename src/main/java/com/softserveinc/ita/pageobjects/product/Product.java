@@ -6,7 +6,7 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
-import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Condition.exist;
 import static com.codeborne.selenide.Selenide.$x;
 
 @AllArgsConstructor
@@ -20,11 +20,13 @@ public class Product {
                 "//span[@class = 'goods-tile__title']")).text();
     }
 
-    public String getAvailability(ProductAvailability productAvailability){
-
-        return $x(String.format("%s//div[contains(@class, '%s')]", rootElementPath, productAvailability.getAvailabilityName()))
-                .shouldBe(visible)
-                .text();
+    public ProductAvailability getAvailability() {
+        for (ProductAvailability productAvailability : ProductAvailability.values()) {
+            if($x(String.format("%s//div[contains(@class, '%s')]", rootElementPath,
+                    productAvailability.getAvailabilityName())).is(exist))
+                return productAvailability;
+        }
+        return null;
     }
 
     public int getPrice() {

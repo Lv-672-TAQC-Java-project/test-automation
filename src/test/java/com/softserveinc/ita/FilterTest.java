@@ -34,18 +34,18 @@ public class FilterTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-13")
     @Test(description = "LVTAQC672-13")
     public void verifyThatFilteredProductsContainExpectedStatus() {
-        String expectedStatus = "Закінчився";
 
         List<Product> filteredProducts = homePage
                 .getHeader()
                 .openCatalog()
                 .openSubCategoryPage(CategoryName.HOUSEHOLD_APPLIANCES, "Холодильники")
                 .getFilter()
-                .filterByCategory("Статус товару",expectedStatus)
+                .filterByCategory("Статус товару","Закінчився")
                 .getProducts();
 
-        filteredProducts.forEach(product -> assertThat(product.getAvailability(ProductAvailability.OUT_OF_STOCK))
+        ProductAvailability expectedStatus = ProductAvailability.OUT_OF_STOCK;
+        filteredProducts.forEach(product -> assertThat(product.getAvailability())
                 .as("Product name should contain " + expectedStatus)
-                .containsIgnoringCase(expectedStatus));
+                .isEqualTo(expectedStatus));
     }
 }
