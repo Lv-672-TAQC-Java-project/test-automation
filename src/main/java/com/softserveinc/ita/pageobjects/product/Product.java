@@ -57,4 +57,3 @@ public class Product {
         return new ReviewsPage();
     }
 }
-
