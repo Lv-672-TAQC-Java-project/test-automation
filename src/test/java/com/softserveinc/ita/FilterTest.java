@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class FilterTest extends TestRunner {
@@ -21,7 +22,7 @@ public class FilterTest extends TestRunner {
                 .getHeader()
                 .search("мобільний телефон")
                 .getFilter()
-                .filterByCategory("Виробник", "Apple")
+                .filterBySection(MANUFACTURER, "Apple")
                 .getProducts();
 
         String expectedTerm = "iPhone";
