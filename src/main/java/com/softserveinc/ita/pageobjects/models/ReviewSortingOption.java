@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum SortingOption {
+public enum ReviewSortingOption {
 
     FROM_BUYER("from_buyer"),
     HELPFUL("helpful"),
