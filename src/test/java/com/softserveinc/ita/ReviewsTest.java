@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.*;
+import com.softserveinc.ita.pageobjects.components.Review;
 import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -22,7 +23,7 @@ public class ReviewsTest extends TestRunner {
         String productName = "Ноутбук HP Pavilion Gaming 15-ec2013ua";
         ReviewsPage reviewsPage = homePage
                 .getHeader()
-                .strictSearch(productName)
+                .exactSearch(productName)
                 .openReviewsPage();
 
         String productTitleInReviews = reviewsPage.getTitle();

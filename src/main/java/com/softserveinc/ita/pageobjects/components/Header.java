@@ -46,7 +46,7 @@ public class Header {
     }
 
     @Step("Searched for {fullProductName}")
-    public ProductDetailsPage strictSearch(String fullProductName) {
+    public ProductDetailsPage exactSearch(String fullProductName) {
         commonSearch(fullProductName);
 
         return new ProductDetailsPage();
