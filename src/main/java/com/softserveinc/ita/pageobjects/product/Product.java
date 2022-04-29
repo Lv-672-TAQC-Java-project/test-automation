@@ -49,4 +49,3 @@ public class Product {
         return new ProductDetailsPage();
     }
 }
-

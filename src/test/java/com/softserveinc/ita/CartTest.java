@@ -1,5 +1,6 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.AdditionalProductService;
 import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
@@ -75,6 +76,43 @@ public class CartTest extends TestRunner {
                 .anySatisfy(product -> assertThat(product.getName())
                         .as(product.getName() + " should contain " + firstProductName)
                         .containsIgnoringCase(firstProductName));
+    }
+
+    @Description("Add test script to cover 'Additional services' functionality in Rozetka’s cart " +
+            "and that the total products price works correctly")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-14")
+    @Test(description = "LVTAQC672-14")
+    public void verifyThatTotalPriceChangedAfterAddingAdditionalService() {
+        Header header = homePage.getHeader();
+        String searchTerm = "Asus";
+        SearchResultPage searchResultPage = header.search(searchTerm);
+
+        assertThat(searchResultPage.getSearchTermLabel())
+                .as("Search result page should contain label with" + searchTerm)
+                .contains(searchTerm);
+
+        Product firstProduct = searchResultPage.getProduct(1);
+        firstProduct.addToCart();
+
+        Cart cart = header.openCart();
+        String firstProductName = firstProduct.getName();
+        InCartProduct cartProduct = cart.getProduct(firstProductName);
+        String cartProductName = cartProduct.getName();
+
+        assertThat(cartProductName)
+                .as("Product name in cart should be same as name of added product to it")
+                .contains(firstProductName);
+
+        int totalPrice = cart.getTotalPrice();
+        cartProduct.expandAdditionalServicesSection();
+        AdditionalProductService additionalProductService = cartProduct.getAdditionalProductService(cartProductName, 1);
+        additionalProductService.select();
+        int totalPriceUpdated = cart.getTotalPrice();
+        int additionalProductServiceCost = additionalProductService.getPrice();
+
+        assertThat(totalPriceUpdated)
+                .as("Total price should be increased by the cost of the first selected additional service")
+                .isEqualTo(totalPrice + additionalProductServiceCost);
     }
 
     @Description("Verify that product items quantity and summary price in the 'Кошик' pop-up window increased" +
