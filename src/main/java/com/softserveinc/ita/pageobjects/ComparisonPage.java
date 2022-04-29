@@ -5,11 +5,13 @@ import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
 import lombok.Getter;
 
 import java.time.Duration;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
+import static java.lang.String.*;
+import static java.util.stream.IntStream.*;
 
 @Getter
 public class ComparisonPage {
@@ -18,23 +20,21 @@ public class ComparisonPage {
 
     public ComparisonPageProduct getProduct(int index) {
         return new ComparisonPageProduct(
-                String.format("//*[@class='products-grid__cell ng-star-inserted'][%s]", index));
+                format("//*[@class='products-grid__cell ng-star-inserted'][%s]", index));
     }
 
     public ComparisonPageProduct getProduct(String name) {
         return new ComparisonPageProduct(
-                String.format("//a[normalize-space(text()) = '%s']//ancestor::li", name));
+                format("//a[normalize-space(text()) = '%s']//ancestor::li", name));
     }
 
     public List<ComparisonPageProduct> getAllComparisonPageProducts() {
-        List<ComparisonPageProduct> comparisonPageProducts = new LinkedList<>();
         String productsPath = "//*[@class='products-grid__cell ng-star-inserted']";
         int amountOfProducts = $$x(productsPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
-        for (int i = 1; i <= amountOfProducts; i++) {
-            comparisonPageProducts.add(new ComparisonPageProduct(String.format("(%s)[%s]", productsPath, i)));
-        }
-        return comparisonPageProducts;
+        return rangeClosed(1, amountOfProducts)
+                .mapToObj(i -> new ComparisonPageProduct(format("(%s)[%s]", productsPath, i)))
+                .collect(Collectors.toList());
     }
 }
