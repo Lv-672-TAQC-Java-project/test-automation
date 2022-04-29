@@ -52,7 +52,7 @@ public class Product {
 
     @Step("Opened product reviews page")
     public ReviewsPage openReviewsPage() {
-        $x(String.format("%s%s", rootElementPath, "//span[@class='goods-tile__reviews-link']")).click();
+        $x(String.format("%s//span[@class='goods-tile__reviews-link']", rootElementPath)).click();
 
         return new ReviewsPage();
     }
