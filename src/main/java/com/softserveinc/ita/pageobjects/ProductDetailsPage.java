@@ -27,6 +27,13 @@ public class ProductDetailsPage {
         return new Cart();
     }
 
+    @Step("Opened product reviews page")
+    public ReviewsPage openReviewsPage() {
+        $x("//li/a[contains(@href,'comments')]").click();
+
+        return new ReviewsPage();
+    }
+
     @Step("Opened product question page")
     public ProductQuestionPage openQuestionPage (String tabQuestion){
         $x(String.format("//ul[@class='tabs__list']//a[starts-with(text(),' %s ')]", tabQuestion)).click();

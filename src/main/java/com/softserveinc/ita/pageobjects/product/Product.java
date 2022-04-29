@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects.product;
 
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
+import com.softserveinc.ita.pageobjects.ReviewsPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
@@ -47,5 +48,12 @@ public class Product {
         $x(String.format("%s%s", rootElementPath, "//descendant::span[@class='goods-tile__title']")).click();
 
         return new ProductDetailsPage();
+    }
+
+    @Step("Opened product reviews page")
+    public ReviewsPage openReviewsPage() {
+        $x(String.format("%s//span[@class='goods-tile__reviews-link']", rootElementPath)).click();
+
+        return new ReviewsPage();
     }
 }
