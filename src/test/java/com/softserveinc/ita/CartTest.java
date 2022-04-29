@@ -17,7 +17,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartTest extends TestRunner {
 
-    @Test
+    @Description("Add a test script to cover the removal functionality in the cart")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-5")
+    @Test(description = "LVTAQC672-5")
     public void verifyRemovalFunctionalityInTheCart() {
         var header = homePage.getHeader();
 
