@@ -8,13 +8,15 @@ import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.time.Duration;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.lang.String.*;
+import static java.util.stream.Collectors.toList;
+import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
 public class SearchResultPage {
@@ -29,7 +31,7 @@ public class SearchResultPage {
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
         for (int i = 1; i <= amountOfProducts; i++) {
-            products.add(new Product(String.format("(%s)[%s]", productsPath, i)));
+            products.add(new Product(format("(%s)[%s]", productsPath, i)));
         }
 
         return products;
@@ -37,12 +39,29 @@ public class SearchResultPage {
 
     public Product getProduct(int index) {
 
-        return new Product(String.format("(//div[@class='goods-tile__inner'])[%s]", index));
+        return new Product(format("(//div[@class='goods-tile__inner'])[%s]", index));
+    }
+
+    @Step("added products to comparison")
+    public Header addProductsToComparison(List<String> productsNames) {
+        productsNames.forEach(productName -> getProduct(productName)
+                .addToListOfComparisons());
+
+        return new Header();
     }
 
     public Product getProduct(String name) {
 
-        return new Product(String.format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
+        return new Product(format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
+    }
+
+    public List<Integer> getProductsPrices(List<Product> products) {
+        SearchResultPage searchResultPage = this;
+        return rangeClosed(1, products.size())
+                .mapToObj(product -> searchResultPage
+                        .getProduct(product)
+                        .getPrice())
+                .collect(toList());
     }
 
     public String getSearchTermLabel() {
@@ -54,14 +73,5 @@ public class SearchResultPage {
         $x("//select").selectOptionByValue(order.getSortOrderOption());
 
         return this;
-    }
-
-    public List<Integer> getProductPrices(List<Product> productsList) {
-        List<Integer> productPricesList = new ArrayList<>();
-        for (Product product : productsList) {
-            productPricesList.add(product.getPrice());
-        }
-
-        return productPricesList;
     }
 }
