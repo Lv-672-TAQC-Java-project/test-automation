@@ -24,7 +24,7 @@ public class SearchResultPage {
 
     private final Header header = new Header();
     private final Filter filter = new Filter();
-    private final FilterCategorySideBar categorySideBar = new FilterCategorySideBar();
+    private final FilterCategorySideBar filterCategorySideBar = new FilterCategorySideBar();
 
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<>();

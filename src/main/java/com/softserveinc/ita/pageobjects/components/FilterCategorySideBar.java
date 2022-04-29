@@ -18,7 +18,7 @@ public class FilterCategorySideBar {
     }
 
     @Step("Filtered by {categoryName}")
-    public SearchResultPage filterByCategoryLink(FilterCategory categoryName) {
+    public SearchResultPage filterByCategory(FilterCategory categoryName) {
         $x(String.format(categoryPath, categoryName.getCategorySectionId())).click();
 
         return new SearchResultPage();

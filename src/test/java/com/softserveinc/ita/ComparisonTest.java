@@ -64,7 +64,7 @@ public class ComparisonTest extends TestRunner {
 
         SearchResultPage searchResultPage = header
                 .search(searchTerm)
-                .getCategorySideBar()
+                .getFilterCategorySideBar()
                 .filterBySubCategory("Планшети")
                 .getProduct("Планшет Lenovo Tab M10 FHD Plus (2nd Gen) Wi-Fi 64 GB Platinum Grey (ZA5T0417UA)")
                 .addToListOfComparisons()
@@ -82,11 +82,12 @@ public class ComparisonTest extends TestRunner {
                 .as("The 2 products should be in comparison")
                 .hasSize(2);
 
-        productList.forEach(product -> assertThat(product.getProductName())
-                .as("All products should contain " + searchTerm)
-                .containsIgnoringCase(searchTerm)
-                .as("All products should contain " + categoryName)
-                .containsIgnoringCase(categoryName));
+        productList
+                .forEach(product -> assertThat(product.getProductName())
+                        .as("All products should contain " + searchTerm)
+                        .containsIgnoringCase(searchTerm)
+                        .as("All products should contain " + categoryName)
+                        .containsIgnoringCase(categoryName));
 
         comparisonPage
                 .addMoreModels()
@@ -101,8 +102,9 @@ public class ComparisonTest extends TestRunner {
                 .as("The 3 products should be in comparison")
                 .hasSize(3);
 
-        productList.forEach(product -> assertThat(product.getProductName())
-                .as("All products should contain " + categoryName)
-                .containsIgnoringCase(categoryName));
+        productList
+                .forEach(product -> assertThat(product.getProductName())
+                        .as("All products should contain " + categoryName)
+                        .containsIgnoringCase(categoryName));
     }
 }
