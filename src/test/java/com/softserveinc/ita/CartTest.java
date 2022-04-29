@@ -131,7 +131,12 @@ public class CartTest extends TestRunner {
 
         Cart cart = header.openCart();
 
-        int productPrice = cart.getTotalPrice();
+        //Sometimes cart is opened as page instead of popup
+        assertThat(cart.isOpened())
+                .as("Cart should be displayed")
+                .isTrue();
+
+        int totalPrice = cart.getTotalPrice();
 
         RecommendedProduct recommendedProduct = cart.getRecommendedProduct(1);
 
@@ -144,6 +149,6 @@ public class CartTest extends TestRunner {
         assertThat(totalPriceAfterAddingRecommendedProduct)
                 .as("Total price after adding recommended product should increase " +
                         "in amount of recommended product price")
-                .isEqualTo(productPrice + recommendedProductPrice);
+                .isEqualTo(totalPrice + recommendedProductPrice);
     }
 }
