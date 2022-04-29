@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 import java.util.Date;
 import java.util.List;
 
-import static com.softserveinc.ita.pageobjects.models.SortOptionInTabQuestion.DATE;
+import static com.softserveinc.ita.pageobjects.models.SortQuestionType.DATE;
 import static java.util.stream.IntStream.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,7 +25,7 @@ public class SortByDateTest extends TestRunner {
                 .getProduct(1)
                 .openDetailsPage()
                 .openQuestionPage("Питання")
-                .selectSortOption(DATE);
+                .selectTypeSort(DATE);
 
         assertThat(productQuestionPage.getAmountQuestion())
                 .as("should be greater than four")

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum SortOptionInTabQuestion {
+public enum SortQuestionType {
     FROM_BUYER("0: Object"),
     DATE("1: Object"),
     HELPFUL("2: Object"),
