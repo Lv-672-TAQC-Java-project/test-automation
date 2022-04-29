@@ -41,12 +41,13 @@ public class FilterTest extends TestRunner {
                 .openCatalog()
                 .openSubCategoryPage(HOUSEHOLD_APPLIANCES, "Холодильники")
                 .getFilter()
-                .filterBySection(PRODUCT_STATUS,"Закінчився")
+                .filterBySection(PRODUCT_STATUS, "Закінчився")
                 .getProducts();
 
         ProductAvailability expectedStatus = ProductAvailability.OUT_OF_STOCK;
-        filteredProducts.forEach(product -> assertThat(product.getAvailability())
-                .as("Product name should contain " + expectedStatus)
-                .isEqualTo(expectedStatus));
+        filteredProducts
+                .forEach(product -> assertThat(product.getAvailability())
+                        .as("Product name should contain " + expectedStatus)
+                        .isEqualTo(expectedStatus));
     }
 }
