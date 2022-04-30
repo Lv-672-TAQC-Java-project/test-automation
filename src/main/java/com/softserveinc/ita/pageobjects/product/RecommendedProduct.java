@@ -1,9 +1,12 @@
 package com.softserveinc.ita.pageobjects.product;
 
 import com.softserveinc.ita.pageobjects.Cart;
+import com.softserveinc.ita.utils.WebElementUtil;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
+import static java.time.Duration.ofSeconds;
 
 public class RecommendedProduct {
     private final String rootElementPath;
@@ -22,6 +25,8 @@ public class RecommendedProduct {
     }
 
     public int getPrice() {
+        isDisplayed($x("//rz-cart-accessories//div[@class='simple-slider']"), ofSeconds(5));
+
         String price = $x(String.format("%s//span[@class = 'lite-tile__price-value']", rootElementPath))
                 .text()
                 .replace(" ", "");

@@ -123,32 +123,33 @@ public class CartTest extends TestRunner {
         homePage.emptyCart();
 
         Header header = homePage.getHeader();
-        header
+
+        Product product = header
                 .openCatalog()
                 .openSubCategoryPage(CategoryName.SPORTS_AND_HOBBIES, "Ракетки для настільного тенісу")
-                .getProduct(1)
-                .addToCart();
+                .getProduct(1);
+
+        int productPrice = product.getPrice();
+
+        product.addToCart();
 
         Cart cart = header.openCart();
-
-        //Sometimes cart is opened as page instead of popup
-        assertThat(cart.isOpened())
-                .as("Cart should be displayed")
-                .isTrue();
-
-        int totalPrice = cart.getTotalPrice();
 
         RecommendedProduct recommendedProduct = cart.getRecommendedProduct(1);
 
         int recommendedProductPrice = recommendedProduct.getPrice();
 
-        int totalPriceAfterAddingRecommendedProduct = recommendedProduct
-                .addToCart()
-                .getTotalPrice();
+        recommendedProduct.addToCart();
 
-        assertThat(totalPriceAfterAddingRecommendedProduct)
+        assertThat(cart.isOpened())
+                .as("Cart modal should be displayed")
+                .isTrue();
+
+        int totalPrice = cart.getTotalPrice();
+
+        assertThat(totalPrice)
                 .as("Total price after adding recommended product should increase " +
                         "in amount of recommended product price")
-                .isEqualTo(totalPrice + recommendedProductPrice);
+                .isEqualTo(productPrice + recommendedProductPrice);
     }
 }
