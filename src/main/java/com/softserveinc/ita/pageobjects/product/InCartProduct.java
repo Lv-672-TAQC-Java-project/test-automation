@@ -56,11 +56,11 @@ public class InCartProduct {
     public Cart addOneMoreProduct() {
         $x(String.format("%s//button[@data-testid='cart-counter-increment-button']", rootElementPath)).click();
         SelenideElement loadSpinner = $x("//div[@class='modal__content modal__content--locked']");
-        Duration tenSeconds = ofSeconds(10);
+        Duration timeout = ofSeconds(10);
 
         //sometimes page opens instead of popup
-        if (isDisplayed(loadSpinner, tenSeconds)) {
-            loadSpinner.shouldNotBe(visible, tenSeconds);
+        if (isDisplayed(loadSpinner, timeout)) {
+            loadSpinner.shouldNotBe(visible, timeout);
         }
 
         return new Cart();
