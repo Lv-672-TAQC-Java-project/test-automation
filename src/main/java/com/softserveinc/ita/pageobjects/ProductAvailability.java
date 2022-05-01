@@ -7,9 +7,7 @@ import lombok.Getter;
 @Getter
 public enum ProductAvailability {
 
-    AVAILABLE("available"),
-    UNAVAILABLE("unavailable"),
-    OUT_OF_STOCK("out_of_stock");
-
-    private final String locatorPath;
+    AVAILABLE,
+    UNAVAILABLE,
+    OUT_OF_STOCK;
 }
