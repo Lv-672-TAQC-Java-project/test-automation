@@ -1,0 +1,37 @@
+<suite name="Rozetka">
+    <test name="Cart" >
+        <classes>
+            <class name="com.softserveinc.ita.CartTest" />
+        </classes>
+    </test>
+
+    <test name="Comparison">
+        <classes>
+            <class name="com.softserveinc.ita.ComparisonTest"/>
+        </classes>
+    </test>
+
+    <test name="Search">
+        <classes>
+            <class name="com.softserveinc.ita.SearchTest"/>
+        </classes>
+    </test>
+
+    <test name="Sort">
+        <classes>
+            <class name="com.softserveinc.ita.SortTest"/>
+        </classes>
+    </test>
+
+    <test name="Filter">
+        <classes>
+            <class name="com.softserveinc.ita.FilterTest"/>
+        </classes>
+    </test>
+
+    <test name="Order">
+        <classes>
+            <class name="com.softserveinc.ita.OrderPlacementTest"/>
+        </classes>
+    </test>
+</suite>
