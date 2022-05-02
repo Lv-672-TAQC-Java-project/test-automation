@@ -1,5 +1,6 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.QuestionPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.SortOrder;
@@ -11,8 +12,14 @@ import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
+import static com.softserveinc.ita.pageobjects.models.QuestionSortingOption.DATE;
+import static com.softserveinc.ita.pageobjects.models.TabName.QUESTION;
+import static com.softserveinc.ita.utils.StringToDateConverter.convertStringToDate;
+import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class SortTest extends TestRunner {
@@ -40,5 +47,35 @@ public class SortTest extends TestRunner {
         assertThat(sortedProductsFromCheapPrices)
                 .as("Prices of sorted products (from cheap to expensive) should increase")
                 .isEqualTo(productPrices);
+    }
+
+    @Description("Add test script to cover sorting function in tab list 'Питання' by date in Rozetka")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-8")
+    @Test(description = "LVTAQC672-8")
+    public void verifySortingFunctionByDate() {
+        QuestionPage questions = homePage
+                .getHeader()
+                .search("iphone")
+                .getProduct(1)
+                .openDetailsPage()
+                .openQuestionPage(QUESTION)
+                .selectTypeSort(DATE);
+
+        List<Date> uniqueDates = range(1, questions.getAmountQuestion())
+                .mapToObj(i -> convertStringToDate(questions.getQuestion(i)
+                        .getTimeOfQuestion()))
+                .distinct()
+                .collect(Collectors.toList());
+
+        int amountQuestions = 4;
+
+        Assertions.assertThat(uniqueDates.size())
+                .as("should be greater than " + amountQuestions)
+                .isGreaterThan(amountQuestions);
+
+        range(1, amountQuestions).forEach(i -> Assertions.assertThat(uniqueDates.get(i)
+                        .after(uniqueDates.get(i + 1)))
+                .as("date should be sorted to fall down")
+                .isTrue());
     }
 }
