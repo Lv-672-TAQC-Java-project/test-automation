@@ -1,6 +1,6 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.ProductAvailability;
+import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -41,13 +41,13 @@ public class FilterTest extends TestRunner {
                 .openCatalog()
                 .openSubCategoryPage(HOUSEHOLD_APPLIANCES, "Холодильники")
                 .getFilter()
-                .filterBySection(PRODUCT_STATUS, "Закінчився")
+                .filterBySection(PRODUCT_AVAILABILITY, "Закінчився")
                 .getProducts();
 
-        ProductAvailability expectedStatus = ProductAvailability.OUT_OF_STOCK;
+        ProductAvailability expectedAvailability = ProductAvailability.OUT_OF_STOCK;
         filteredProducts
                 .forEach(product -> assertThat(product.getAvailability())
-                        .as("Product name should contain " + expectedStatus)
-                        .isEqualTo(expectedStatus));
+                        .as("Product name should contain " + expectedAvailability)
+                        .isEqualTo(expectedAvailability));
     }
 }

@@ -1,6 +1,6 @@
 package com.softserveinc.ita.pageobjects.product;
 
-import com.softserveinc.ita.pageobjects.ProductAvailability;
+import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
