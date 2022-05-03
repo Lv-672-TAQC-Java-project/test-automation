@@ -42,8 +42,7 @@ public class ComparisonPage {
 
     @Step("Showed only distinctive products characteristics")
     public ComparisonPage showOnlyDifferences() {
-        String showOnlyDifferencesLocator = "//*[@class = 'comparison-settings'] //*[@type = 'button'][1]";
-        $x(showOnlyDifferencesLocator).click();
+        $x("//*[@class = 'comparison-settings'] //*[@type = 'button'][1]").click();
         return this;
     }
 }
