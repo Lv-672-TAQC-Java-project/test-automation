@@ -11,6 +11,7 @@ import java.util.List;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
+import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class FilterTest extends TestRunner {
@@ -44,7 +45,7 @@ public class FilterTest extends TestRunner {
                 .filterBySection(PRODUCT_AVAILABILITY, "Закінчився")
                 .getProducts();
 
-        ProductAvailability expectedAvailability = ProductAvailability.OUT_OF_STOCK;
+        ProductAvailability expectedAvailability = OUT_OF_STOCK;
         filteredProducts
                 .forEach(product -> assertThat(product.getAvailability())
                         .as("Product name should contain " + expectedAvailability)
