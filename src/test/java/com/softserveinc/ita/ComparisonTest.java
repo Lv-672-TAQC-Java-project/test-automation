@@ -66,9 +66,9 @@ public class ComparisonTest extends TestRunner {
                 .search(searchTerm)
                 .getFilterCategorySideBar()
                 .filterBySubCategory("Планшети")
-                .getProduct("Планшет Lenovo Tab M10 FHD Plus (2nd Gen) Wi-Fi 64 GB Platinum Grey (ZA5T0417UA)")
+                .getProduct(1)
                 .addToListOfComparisons()
-                .getProduct("Планшет Lenovo Tab M10 Plus FHD 4/128GB Wi-Fi Iron Grey (ZA5T0095UA)")
+                .getProduct(2)
                 .addToListOfComparisons();
 
         String categoryName = "Планшет";
@@ -91,7 +91,7 @@ public class ComparisonTest extends TestRunner {
 
         comparisonPage
                 .addMoreModels()
-                .getProduct("Планшет Lenovo Tab P11 Wi-Fi 64 GB Slate Grey (ZA7R0172UA)")
+                .getProduct(3)
                 .addToListOfComparisons();
         productList = header
                 .openComparisonModal()
