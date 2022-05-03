@@ -25,8 +25,6 @@ public class RecommendedProduct {
     }
 
     public int getPrice() {
-        isDisplayed($x("//rz-cart-accessories//div[@class='simple-slider']"), ofSeconds(5));
-
         String price = $x(String.format("%s//span[@class = 'lite-tile__price-value']", rootElementPath))
                 .text()
                 .replace(" ", "");
