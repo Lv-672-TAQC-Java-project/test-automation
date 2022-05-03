@@ -1,12 +1,9 @@
 package com.softserveinc.ita.pageobjects.product;
 
 import com.softserveinc.ita.pageobjects.Cart;
-import com.softserveinc.ita.utils.WebElementUtil;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
-import static java.time.Duration.ofSeconds;
 
 public class RecommendedProduct {
     private final String rootElementPath;

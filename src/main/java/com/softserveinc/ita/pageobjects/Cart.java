@@ -61,8 +61,6 @@ public class Cart {
     }
 
     public RecommendedProduct getRecommendedProduct(int recommendedProductNumber) {
-        isDisplayed($x("//rz-cart-accessories//div[@class='simple-slider']"), ofSeconds(5));
-
         return new RecommendedProduct(recommendedProductNumber);
     }
 
