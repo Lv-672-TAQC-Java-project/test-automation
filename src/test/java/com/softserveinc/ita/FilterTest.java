@@ -21,14 +21,14 @@ public class FilterTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-11")
     @Test(description = "LVTAQC672-11")
     public void verifyThatFilteredProductsContainsExpectedTerm() {
-        List<Product> filteredProductsList = homePage
+        var filteredProductsList = homePage
                 .getHeader()
                 .search("мобільний телефон")
                 .getFilter()
                 .filterBySection(MANUFACTURER, "Apple")
                 .getProducts();
 
-        String expectedTerm = "iPhone";
+        var expectedTerm = "iPhone";
         filteredProductsList.forEach(product -> assertThat(product.getName())
                 .as("Product name should contains " + expectedTerm)
                 .containsIgnoringCase(expectedTerm));
