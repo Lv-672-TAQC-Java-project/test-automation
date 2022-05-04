@@ -1,6 +1,8 @@
 package com.softserveinc.ita.pageobjects.product;
 
+import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
+import com.softserveinc.ita.pageobjects.ReviewsPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
@@ -16,6 +18,15 @@ public class Product {
 
         return $x(String.format("%s%s", rootElementPath,
                 "//span[@class = 'goods-tile__title']")).text();
+    }
+
+    public ProductAvailability getAvailability() {
+        String classAttribute = $x(String.format("%s//div[contains(@class, 'goods-tile__availability')]",
+                rootElementPath)).getAttribute("class");
+        String productAvailability = classAttribute
+                .substring(classAttribute.indexOf("--") + 2, classAttribute.lastIndexOf(" "))
+                .toUpperCase();
+        return ProductAvailability.valueOf(productAvailability);
     }
 
     public int getPrice() {
@@ -47,5 +58,12 @@ public class Product {
         $x(String.format("%s%s", rootElementPath, "//descendant::span[@class='goods-tile__title']")).click();
 
         return new ProductDetailsPage();
+    }
+
+    @Step("Opened product reviews page")
+    public ReviewsPage openReviewsPage() {
+        $x(String.format("%s//span[@class='goods-tile__reviews-link']", rootElementPath)).click();
+
+        return new ReviewsPage();
     }
 }
