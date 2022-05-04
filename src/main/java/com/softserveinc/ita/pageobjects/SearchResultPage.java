@@ -44,6 +44,12 @@ public class SearchResultPage {
         return new Product(format("(//div[@class='goods-tile__inner'])[%s]", index));
     }
 
+    public Product getProductNotAddedToComparison(int index) {
+        String productPath = "div[@class='goods-tile__inner']";
+
+        return new Product(format("(//*[@class = 'compare-button ng-star-inserted'])[%s]//ancestor::%s", index, productPath));
+    }
+
     @Step("added products to comparison")
     public Header addProductsToComparison(List<String> productsNames) {
         productsNames.forEach(productName -> getProduct(productName)

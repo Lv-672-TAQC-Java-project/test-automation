@@ -6,7 +6,6 @@ import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.time.Duration;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,10 +26,10 @@ public class ComparisonPage {
     }
 
     @Step("add more models to the comparison")
-    public SearchResultPage addMoreModels() {
+    public SubCategoryPage addMoreModels() {
         $x("//a/span[@class = 'comparison-settings__label']").click();
 
-        return new SearchResultPage();
+        return new SubCategoryPage();
     }
 
     public ComparisonPageProduct getProduct(String name) {
@@ -39,7 +38,6 @@ public class ComparisonPage {
     }
 
     public List<ComparisonPageProduct> getAllComparisonPageProducts() {
-        List<ComparisonPageProduct> comparisonPageProducts = new LinkedList<>();
         String productsPath = "//*[@class='products-grid__cell ng-star-inserted']";
         int amountOfProducts = $$x(productsPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();

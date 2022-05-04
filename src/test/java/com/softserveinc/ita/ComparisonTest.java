@@ -91,7 +91,7 @@ public class ComparisonTest extends TestRunner {
 
         comparisonPage
                 .addMoreModels()
-                .getProduct(3)
+                .getProductNotAddedToComparison(1)
                 .addToListOfComparisons();
         productList = header
                 .openComparisonModal()
