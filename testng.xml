@@ -5,6 +5,7 @@
                 <methods>
                     <include name="verifyThatProductItemAddedToTheCart" />
                     <include name="verifyThatTotalPriceChangedAfterAddingAdditionalService" />
+                    <include name="verifyThatTotalProductsPriceHasDoubled" />
                 </methods>
             </class>
         </classes>

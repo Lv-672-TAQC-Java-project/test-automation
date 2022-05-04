@@ -5,6 +5,7 @@ import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.CategoryName;
+import com.softserveinc.ita.pageobjects.models.SortOrder;
 import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.pageobjects.product.RecommendedProduct;
@@ -163,17 +164,17 @@ public class CartTest extends TestRunner {
 
         Header header = homePage.getHeader();
         String searchTerm = "Asus";
-        String productName = "Ноутбук ASUS TUF Gaming F15 FX506HCB-HN161 (90NR0723-M04940) Eclipse Gray";
         header
                 .search(searchTerm)
-                .getProduct(productName)
+                .sort(SortOrder.FROM_EXPENSIVE)
+                .getProduct(1)
                 .addToCart();
 
         Cart cart = header.openCart();
         int totalPrice = cart.getTotalPrice();
 
         int totalPriceUpdated = cart
-                .getProduct(productName)
+                .getProduct(1)
                 .addOneMoreProduct()
                 .getTotalPrice();
 
