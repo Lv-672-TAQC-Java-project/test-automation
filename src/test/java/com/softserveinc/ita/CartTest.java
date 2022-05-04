@@ -5,6 +5,7 @@ import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.CategoryName;
+import com.softserveinc.ita.pageobjects.models.SortOrder;
 import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.pageobjects.product.RecommendedProduct;
@@ -153,5 +154,32 @@ public class CartTest extends TestRunner {
                 .as("Total price after adding recommended product should increase " +
                         "in amount of recommended product price")
                 .isEqualTo(productPrice + recommendedProductPrice);
+    }
+
+    @Description("Verify that the total products price has doubled after adding one more product from the cart.")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-4")
+    @Test(description = "LVTAQC672-4")
+    public void verifyThatTotalProductsPriceHasDoubled() {
+        homePage.emptyCart();
+
+        Header header = homePage.getHeader();
+        String searchTerm = "Asus";
+        header
+                .search(searchTerm)
+                .sort(SortOrder.FROM_EXPENSIVE)
+                .getProduct(1)
+                .addToCart();
+
+        Cart cart = header.openCart();
+        int totalPrice = cart.getTotalPrice();
+
+        int totalPriceUpdated = cart
+                .getProduct(1)
+                .addOneMoreProduct()
+                .getTotalPrice();
+
+        assertThat(totalPriceUpdated)
+                .as("Total products price should double")
+                .isEqualTo(totalPrice * 2);
     }
 }
