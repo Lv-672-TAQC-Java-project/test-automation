@@ -2,6 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
+import io.qameta.allure.Step;
 import lombok.Getter;
 import io.qameta.allure.Step;
 
@@ -23,6 +24,13 @@ public class ComparisonPage {
     public ComparisonPageProduct getProduct(int index) {
         return new ComparisonPageProduct(
                 format("//*[@class='products-grid__cell ng-star-inserted'][%s]", index));
+    }
+
+    @Step("add more models to the comparison")
+    public SubCategoryPage addMoreModels() {
+        $x("//a/span[@class = 'comparison-settings__label']").click();
+
+        return new SubCategoryPage();
     }
 
     public ComparisonPageProduct getProduct(String name) {
