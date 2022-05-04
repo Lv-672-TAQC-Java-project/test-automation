@@ -16,6 +16,8 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.softserveinc.ita.pageobjects.models.CategoryName.COTTAGE_GARDEN_AND_VEGETABLE_GARDEN;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartTest extends TestRunner {
@@ -163,10 +165,11 @@ public class CartTest extends TestRunner {
         homePage.emptyCart();
 
         Header header = homePage.getHeader();
-        String searchTerm = "Asus";
         header
-                .search(searchTerm)
-                .sort(SortOrder.FROM_EXPENSIVE)
+                .openCatalog()
+                .openSubCategoryPage(COTTAGE_GARDEN_AND_VEGETABLE_GARDEN, " Cаджанці дерев ")
+                .getFilter()
+                .filterBySection(PRODUCT_AVAILABILITY, "Є в наявності")
                 .getProduct(1)
                 .addToCart();
 
