@@ -69,7 +69,7 @@ public class SortTest extends TestRunner {
 
         int amountQuestions = 4;
 
-        Assertions.assertThat(uniqueDates.size())
+        assertThat(uniqueDates.size())
                 .as("should be greater than " + amountQuestions)
                 .isGreaterThan(amountQuestions);
 
