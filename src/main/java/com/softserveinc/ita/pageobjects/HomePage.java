@@ -2,7 +2,6 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.Selenide;
 import com.softserveinc.ita.pageobjects.components.Header;
-import com.softserveinc.ita.pageobjects.product.InSectionProduct;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
@@ -11,6 +10,7 @@ import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
+import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
@@ -49,7 +49,7 @@ public class HomePage {
                 .size();
 
         return rangeClosed(1, inSectionProductsAmount)
-                .mapToObj(i -> new InSectionProduct(format("(%s)[%s]", inSectionProductsPath, i)).getName())
+                .mapToObj(i -> $x(format("(%s)[%s]//a[@class='tile__title']", inSectionProductsPath, i)).text())
                 .collect(toList());
     }
 }

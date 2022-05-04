@@ -1,7 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.components.Header;
-import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
