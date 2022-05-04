@@ -20,6 +20,7 @@ public class OrderPlacementTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-2")
     @Test(description = "LVTAQC672-2")
     public void verifyThatImpossibleToPlaceAnOrderWithoutRequiredData() {
+        homePage.emptyCart();
         String searchTerm = "DeWALT";
         Header header = homePage.getHeader();
         SearchResultPage searchResultPage = header.search(searchTerm);
