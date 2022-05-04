@@ -124,9 +124,9 @@ public class CartTest extends TestRunner {
     public void verifyAddingProductFromRecommendationsSection() {
         homePage.emptyCart();
 
-        Header header = homePage.getHeader();
+        var header = homePage.getHeader();
 
-        Product product = header
+        var product = header
                 .openCatalog()
                 .openSubCategoryPage(CategoryName.SPORTS_AND_HOBBIES, "Ракетки для настільного тенісу")
                 .getProduct(1);
@@ -135,9 +135,9 @@ public class CartTest extends TestRunner {
 
         product.addToCart();
 
-        Cart cart = header.openCart();
+        var cart = header.openCart();
 
-        RecommendedProduct recommendedProduct = cart.getRecommendedProduct(1);
+        var recommendedProduct = cart.getRecommendedProduct(1);
 
         int recommendedProductPrice = recommendedProduct.getPrice();
 
