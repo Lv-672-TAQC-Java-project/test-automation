@@ -45,9 +45,9 @@ public class SearchResultPage {
     }
 
     public Product getProductNotAddedToComparison(int index) {
-        String productPath = "div[@class='goods-tile__inner']";
 
-        return new Product(format("(//*[@class = 'compare-button ng-star-inserted'])[%s]//ancestor::%s", index, productPath));
+        return new Product(format("(//*[@class = 'compare-button ng-star-inserted'])[%s]" +
+                "/ancestor::div[@class='goods-tile__inner']", index));
     }
 
     @Step("added products to comparison")
