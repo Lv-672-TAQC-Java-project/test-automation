@@ -7,7 +7,8 @@ import lombok.Getter;
 @Getter
 public enum FilterSectionName {
     MANUFACTURER("producer"),
-    DISPLAY_TYPE("31565");
+    DISPLAY_TYPE("31565"),
+    PRODUCT_AVAILABILITY("sell_status");
 
     private final String filterSectionPath;
 }
