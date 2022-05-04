@@ -75,4 +75,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="Section functionality">
+        <classes>
+            <class name="com.softserveinc.ita.SectionTest">
+                <methods>
+                    <include name="verifyThatTheLastWatchedProductsAreRememberedInTheRecentlyViewedProductsSection" />
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
