@@ -1,0 +1,78 @@
+<suite name="Rozetka Functional Test Suite">
+    <test name="Cart functionality">
+        <classes>
+            <class name="com.softserveinc.ita.CartTest">
+                <methods>
+                    <include name="verifyThatProductItemAddedToTheCart" />
+                    <include name="verifyThatTotalPriceChangedAfterAddingAdditionalService" />
+                    <include name="verifyThatTotalProductsPriceHasDoubled" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Removal functionality in the cart">
+        <classes>
+            <class name="com.softserveinc.ita.CartTest">
+                <methods>
+                    <include name="verifyRemovalFunctionalityInTheCart" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Removal functionality in the comparison page">
+        <classes>
+            <class name="com.softserveinc.ita.ComparisonTest">
+                <methods>
+                    <include name="verifyDeleteProductFromComparisonPage" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Search functionality">
+        <classes>
+            <class name="com.softserveinc.ita.SearchTest">
+                <methods>
+                    <include name="verifyThatProductsIncludeTheSearchTermInTheirNames" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Sort functionality">
+        <classes>
+            <class name="com.softserveinc.ita.SortTest">
+                <methods>
+                    <include name="verifyThatProductsAreSortedFromCheapToExpensive" />
+                </methods>
+            </class>
+            <class name="com.softserveinc.ita.ReviewsTest">
+                <methods>
+                    <include name="verifySortingReviewsByMostHelpful" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Filter functionality">
+        <classes>
+            <class name="com.softserveinc.ita.FilterTest">
+                <methods>
+                    <include name="verifyThatFilteredProductsContainsExpectedTerm" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Order functionality">
+        <classes>
+            <class name="com.softserveinc.ita.OrderPlacementTest">
+                <methods>
+                    <include name="verifyThatImpossibleToPlaceAnOrderWithoutRequiredData" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

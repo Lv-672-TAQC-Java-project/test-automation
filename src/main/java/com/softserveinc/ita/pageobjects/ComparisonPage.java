@@ -4,6 +4,7 @@ import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
 import io.qameta.allure.Step;
 import lombok.Getter;
+import io.qameta.allure.Step;
 
 import java.time.Duration;
 import java.util.List;
@@ -45,5 +46,11 @@ public class ComparisonPage {
         return rangeClosed(1, amountOfProducts)
                 .mapToObj(i -> new ComparisonPageProduct(format("(%s)[%s]", productsPath, i)))
                 .collect(Collectors.toList());
+    }
+
+    @Step("Showed only distinctive products characteristics")
+    public ComparisonPage showOnlyDifferences() {
+        $x("//*[@class = 'comparison-settings'] //*[@type = 'button'][1]").click();
+        return this;
     }
 }

@@ -4,8 +4,11 @@ import com.softserveinc.ita.pageobjects.AdditionalProductService;
 import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.models.CategoryName;
+import com.softserveinc.ita.pageobjects.models.SortOrder;
 import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.Product;
+import com.softserveinc.ita.pageobjects.product.RecommendedProduct;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -17,7 +20,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class CartTest extends TestRunner {
 
-    @Test
+    @Description("Add a test script to cover the removal functionality in the cart")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-5")
+    @Test(description = "LVTAQC672-5")
     public void verifyRemovalFunctionalityInTheCart() {
         var header = homePage.getHeader();
 
@@ -111,5 +116,70 @@ public class CartTest extends TestRunner {
         assertThat(totalPriceUpdated)
                 .as("Total price should be increased by the cost of the first selected additional service")
                 .isEqualTo(totalPrice + additionalProductServiceCost);
+    }
+
+    @Description("Verify that product items quantity and summary price in the 'Кошик' pop-up window increased" +
+            "after adding first product from 'Також рекомендуємо' section.")
+    @Issue("https://jira.softserve.academy/projects/LVTAQC672/issues/LVTAQC672-10")
+    @Test
+    public void verifyAddingProductFromRecommendationsSection() {
+        homePage.emptyCart();
+
+        var header = homePage.getHeader();
+
+        var product = header
+                .openCatalog()
+                .openSubCategoryPage(CategoryName.SPORTS_AND_HOBBIES, "Ракетки для настільного тенісу")
+                .getProduct(1);
+
+        int productPrice = product.getPrice();
+
+        product.addToCart();
+
+        var cart = header.openCart();
+
+        var recommendedProduct = cart.getRecommendedProduct(1);
+
+        int recommendedProductPrice = recommendedProduct.getPrice();
+
+        recommendedProduct.addToCart();
+
+        assertThat(cart.isOpened())
+                .as("Cart modal should be displayed")
+                .isTrue();
+
+        int totalPrice = cart.getTotalPrice();
+
+        assertThat(totalPrice)
+                .as("Total price after adding recommended product should increase " +
+                        "in amount of recommended product price")
+                .isEqualTo(productPrice + recommendedProductPrice);
+    }
+
+    @Description("Verify that the total products price has doubled after adding one more product from the cart.")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-4")
+    @Test(description = "LVTAQC672-4")
+    public void verifyThatTotalProductsPriceHasDoubled() {
+        homePage.emptyCart();
+
+        Header header = homePage.getHeader();
+        String searchTerm = "Asus";
+        header
+                .search(searchTerm)
+                .sort(SortOrder.FROM_EXPENSIVE)
+                .getProduct(1)
+                .addToCart();
+
+        Cart cart = header.openCart();
+        int totalPrice = cart.getTotalPrice();
+
+        int totalPriceUpdated = cart
+                .getProduct(1)
+                .addOneMoreProduct()
+                .getTotalPrice();
+
+        assertThat(totalPriceUpdated)
+                .as("Total products price should double")
+                .isEqualTo(totalPrice * 2);
     }
 }
