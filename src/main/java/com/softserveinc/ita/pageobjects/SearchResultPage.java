@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.components.FilterCategorySideBar;
 import com.softserveinc.ita.pageobjects.components.Filter;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.SortOrder;
@@ -23,6 +24,7 @@ public class SearchResultPage {
 
     private final Header header = new Header();
     private final Filter filter = new Filter();
+    private final FilterCategorySideBar filterCategorySideBar = new FilterCategorySideBar();
 
     public List<Product> getProducts() {
         List<Product> products = new LinkedList<>();
@@ -40,6 +42,12 @@ public class SearchResultPage {
     public Product getProduct(int index) {
 
         return new Product(format("(//div[@class='goods-tile__inner'])[%s]", index));
+    }
+
+    public Product getProductNotAddedToComparison(int index) {
+
+        return new Product(format("(//*[@class = 'compare-button ng-star-inserted'])[%s]" +
+                "/ancestor::div[@class='goods-tile__inner']", index));
     }
 
     @Step("added products to comparison")

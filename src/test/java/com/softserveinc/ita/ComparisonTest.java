@@ -3,6 +3,7 @@ package com.softserveinc.ita;
 import com.softserveinc.ita.pageobjects.ComparisonPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -54,6 +55,60 @@ public class ComparisonTest extends TestRunner {
                 .hasSize(2);
     }
 
+    @Description("Verify that products added to the comparison")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-12")
+    @Test(description = "LVTAQC672-12")
+    public void verifyThatProductsAddedToTheComparison() {
+        String searchTerm = "Lenovo";
+
+        Header header = homePage.getHeader();
+
+        SearchResultPage searchResultPage = header
+                .search(searchTerm)
+                .getFilterCategorySideBar()
+                .filterBySubCategory("Планшети")
+                .getProduct(1)
+                .addToListOfComparisons()
+                .getProduct(2)
+                .addToListOfComparisons();
+
+        String categoryName = "Планшет";
+        ComparisonPage comparisonPage = header
+                .openComparisonModal()
+                .openComparisonPage(categoryName);
+
+        List<ComparisonPageProduct> productList = comparisonPage.getAllComparisonPageProducts();
+
+        assertThat(productList)
+                .as("The 2 products should be in comparison")
+                .hasSize(2);
+
+        productList
+                .forEach(product -> assertThat(product.getProductName())
+                        .as("All products should contain " + searchTerm)
+                        .containsIgnoringCase(searchTerm)
+                        .as("All products should contain " + categoryName)
+                        .containsIgnoringCase(categoryName));
+
+        comparisonPage
+                .addMoreModels()
+                .getProductNotAddedToComparison(1)
+                .addToListOfComparisons();
+        productList = header
+                .openComparisonModal()
+                .openComparisonPage(categoryName)
+                .getAllComparisonPageProducts();
+
+        assertThat(productList)
+                .as("The 3 products should be in comparison")
+                .hasSize(3);
+
+        productList
+                .forEach(product -> assertThat(product.getProductName())
+                        .as("All products should contain " + categoryName)
+                        .containsIgnoringCase(categoryName));
+    }
+  
     @Description("Verify 'show only differences' functionality when comparing products")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-6")
     @Test(description = "LVTAQC672-6")
