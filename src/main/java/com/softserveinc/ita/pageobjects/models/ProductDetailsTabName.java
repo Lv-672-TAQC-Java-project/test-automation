@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum TabName {
-    ALL_ABUT_PRODUCT(1),
+public enum ProductDetailsTabName {
+    ALL_ABOUT_PRODUCT(1),
     CHARACTERISTIC(2),
     REVIEWS(3),
     QUESTION(4),
