@@ -48,10 +48,10 @@ public class FilterTest extends TestRunner {
                 .getFilter()
                 .filterByPrice(priceRangeMinimum, priceRangeMaximum);
 
-        List<Product> products = searchResultPage.getProducts();
-        List<Integer> pricesList = searchResultPage.getProductsPrices(products);
+        var products = searchResultPage.getProducts();
+        var prices = searchResultPage.getProductsPrices(products);
 
-        pricesList.forEach(productPrice -> Assertions.assertThat(productPrice)
+        prices.forEach(productPrice -> Assertions.assertThat(productPrice)
                 .as("products prices should not exceed or be lower than custom price range")
                 .isGreaterThanOrEqualTo(priceRangeMinimum)
                 .isLessThanOrEqualTo(priceRangeMaximum));
