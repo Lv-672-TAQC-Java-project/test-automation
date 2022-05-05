@@ -8,7 +8,10 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 
 @AllArgsConstructor
 public class Product {
@@ -58,6 +61,8 @@ public class Product {
     @Step("Opened product details page")
     public ProductDetailsPage openDetailsPage() {
         $x(String.format("%s%s", rootElementPath, "//descendant::span[@class='goods-tile__title']")).click();
+        //waiting for the product page to load
+        isDisplayed($x("//div[@class = 'product__heading']"), Duration.ofSeconds(20));
 
         return new ProductDetailsPage();
     }
