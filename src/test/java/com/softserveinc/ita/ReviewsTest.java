@@ -21,7 +21,7 @@ public class ReviewsTest extends TestRunner {
     @Test(description = "LVTAQC672-16")
     public void verifySortingReviewsByMostHelpful() {
         String productName = "Ноутбук HP Pavilion Gaming 15-ec2013ua";
-        ReviewsPage reviewsPage = homePage
+        var reviewsPage = homePage
                 .getHeader()
                 .exactSearch(productName)
                 .openReviewsPage();
@@ -32,7 +32,7 @@ public class ReviewsTest extends TestRunner {
                 .as("The title on the reviews page should contain " + productName)
                 .contains(productName);
 
-        List<Review> reviews = reviewsPage.getReviews();
+        var reviews = reviewsPage.getReviews();
 
         List<Integer> sortedReviewsRating = reviews
                 .stream()

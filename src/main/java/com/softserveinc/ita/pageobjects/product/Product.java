@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects.product;
 
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsPage;
@@ -39,8 +40,9 @@ public class Product {
 
     @Step("Added product to cart")
     public SearchResultPage addToCart() {
-        $x(String.format("%s%s", rootElementPath,
-                "//button[contains(@class, 'goods-tile__buy-button')]")).click();
+        $x(String.format("%s//button[contains(@class, 'goods-tile__buy-button')]", rootElementPath))
+                .scrollIntoView(false)
+                .click();
 
         return new SearchResultPage();
     }
