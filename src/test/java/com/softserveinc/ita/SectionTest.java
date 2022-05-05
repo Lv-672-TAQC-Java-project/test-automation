@@ -6,7 +6,7 @@ import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-
+//name test class will change
 public class SectionTest extends TestRunner {
     @Description("Verify that in the 'Останні переглянуті товари' products section are " +
             "three products that were watched before in this section.")
@@ -19,6 +19,7 @@ public class SectionTest extends TestRunner {
 
         var firstProduct = searchResultPage.getProduct(1);
         String firstProductName = firstProduct.getName();
+        //need to throw the product in the section
         firstProduct.openDetailsPage();
 
         header.search(searchTerm);
