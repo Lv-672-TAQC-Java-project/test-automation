@@ -5,7 +5,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
+import static com.softserveinc.ita.pageobjects.models.ProductsSectionName.LAST_VIEWED_PRODUCTS;
 import static org.assertj.core.api.Assertions.assertThat;
+
 //name test class will change
 public class SectionTest extends TestRunner {
     @Description("Verify that in the 'Останні переглянуті товари' products section are " +
@@ -19,7 +21,7 @@ public class SectionTest extends TestRunner {
 
         var firstProduct = searchResultPage.getProduct(1);
         String firstProductName = firstProduct.getName();
-        //need to throw the product in the section
+        //need that to add the product to the section
         firstProduct.openDetailsPage();
 
         header.search(searchTerm);
@@ -33,9 +35,11 @@ public class SectionTest extends TestRunner {
         thirdProduct.openDetailsPage();
 
         header.openHomePage();
-        var recentlyViewedProductsNames = homePage.getTheRecentlyViewedProductsNames();
+        var lastViewedProductsNames = homePage
+                .getProductsSection()
+                .getNames(LAST_VIEWED_PRODUCTS);
 
-        assertThat(recentlyViewedProductsNames)
+        assertThat(lastViewedProductsNames)
                 .as(firstProductName + " should be in the recently viewed products section")
                 .contains(firstProductName)
                 .as(secondProductName + " should be in the recently viewed products section")
