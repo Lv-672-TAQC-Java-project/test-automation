@@ -10,7 +10,7 @@ public enum PopularBrandName {
     SKECHERS("Skechers"),
     ECCO("Ecco"),
     LEVIS("Levi's"),
-    TRENDYOL("Trendyol "),
+    TRENDYOL("Trendyol"),
     TRAUM("Traum"),
     HM("H&M"),
     COLINS("Colin’s"),
