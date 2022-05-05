@@ -1,16 +1,20 @@
 package com.softserveinc.ita.utils;
 
+import lombok.experimental.UtilityClass;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
 
+@UtilityClass
 public class DateUtil {
 
     public static Date toDate(String date) {
         //Contains a re-check because today's date is written in
-        // word "today" and yesterday's "yesterday"
+        // word "сьогодні"("сегодня") and yesterday's - "вчора"("вчера")
+        // checked if word contain cyrillic letter "с"
         LocalDate localDate;
 
         if (date.matches(".*\\d.*")) {

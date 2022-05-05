@@ -2,16 +2,18 @@ package com.softserveinc.ita.pageobjects.components;
 
 import lombok.AllArgsConstructor;
 
+import java.util.Date;
+
 import static com.codeborne.selenide.Selenide.$x;
-import static java.lang.String.format;
+import static com.softserveinc.ita.utils.DateUtil.toDate;
 
 @AllArgsConstructor
 public class Question {
 
     private final String rootElementPath;
 
-    public String getQuestionDate() {
+    public Date getDate() {
 
-        return $x(format("%s//time[1]", rootElementPath)).text();
+        return toDate($x(rootElementPath+"//time[1]").text());
     }
 }

@@ -12,13 +12,10 @@ import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.softserveinc.ita.pageobjects.models.ProductDetailsTabName.QUESTION;
 import static com.softserveinc.ita.pageobjects.models.QuestionSortingOption.*;
-import static com.softserveinc.ita.utils.DateUtil.toDate;
 import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -63,11 +60,13 @@ public class SortTest extends TestRunner {
 
         int amountQuestions = 4;
 
-        List<Date> questionsDates = questionsTab.getQuestionsDates();
+        var questionsDates = questionsTab.getUniqueQuestionsDates();
 
-        assertThat(questionsDates.size())
+        assertThat(questionsDates).asList()
+                .as("should not contain duplicate")
+                .doesNotHaveDuplicates()
                 .as("should be greater than " + amountQuestions)
-                .isGreaterThan(amountQuestions);
+                .hasSizeGreaterThan(amountQuestions);
 
         range(1, amountQuestions).forEach(i -> assertThat(questionsDates.get(i))
                 .as("date should be sorted to fall down")
