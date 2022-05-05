@@ -8,8 +8,7 @@ import org.testng.annotations.Test;
 import static com.softserveinc.ita.pageobjects.models.ProductsSectionName.LAST_VIEWED_PRODUCTS;
 import static org.assertj.core.api.Assertions.assertThat;
 
-//name test class will change
-public class SectionTest extends TestRunner {
+public class ProductsMemorizationTest extends TestRunner {
     @Description("Verify that in the 'Останні переглянуті товари' products section are " +
             "three products that were watched before in this section.")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-33")

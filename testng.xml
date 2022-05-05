@@ -78,7 +78,7 @@
 
     <test name="Section functionality">
         <classes>
-            <class name="com.softserveinc.ita.SectionTest">
+            <class name="com.softserveinc.ita.ProductsMemorizationTest">
                 <methods>
                     <include name="verifyThatTheLastWatchedProductsAreRememberedInTheRecentlyViewedProductsSection" />
                 </methods>
