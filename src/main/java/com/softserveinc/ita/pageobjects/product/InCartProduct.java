@@ -6,7 +6,12 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
+import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
 public class InCartProduct {
@@ -45,5 +50,19 @@ public class InCartProduct {
     public AdditionalProductService getAdditionalProductService(String productName, int index) {
 
         return new AdditionalProductService(productName, index);
+    }
+
+    @Step("Add one more product from the cart")
+    public Cart addOneMoreProduct() {
+        $x(String.format("%s//button[@data-testid='cart-counter-increment-button']", rootElementPath)).click();
+        SelenideElement loadSpinner = $x("//div[@class='modal__content modal__content--locked']");
+        Duration timeout = ofSeconds(10);
+
+        //sometimes page opens instead of popup
+        if (isDisplayed(loadSpinner, timeout)) {
+            loadSpinner.shouldNotBe(visible, timeout);
+        }
+
+        return new Cart();
     }
 }
