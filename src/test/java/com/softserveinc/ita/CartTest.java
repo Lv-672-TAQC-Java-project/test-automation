@@ -23,9 +23,10 @@ public class CartTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-5")
     @Test(description = "LVTAQC672-5")
     public void verifyRemovalFunctionalityInTheCart() {
+        homePage.emptyCart();
         var header = homePage.getHeader();
 
-        Product firstProduct = header
+        var firstProduct = header
                 .search("Фотоапарати")
                 .getProduct(1);
 
@@ -33,7 +34,7 @@ public class CartTest extends TestRunner {
 
         firstProduct.addToCart();
 
-        InCartProduct productInCart = header
+        var productInCart = header
                 .openCart()
                 .getProduct(firstProductName);
 
@@ -43,7 +44,7 @@ public class CartTest extends TestRunner {
                 .as("The product name in the cart should be equal to the name of added product")
                 .isEqualTo(productNameInCart);
 
-        Cart cart = productInCart.remove();
+        var cart = productInCart.remove();
 
         assertThat(cart.isEmpty())
                 .as("Cart should be empty")
