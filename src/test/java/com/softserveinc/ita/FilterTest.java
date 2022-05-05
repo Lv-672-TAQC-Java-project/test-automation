@@ -1,6 +1,8 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.CategoryPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
@@ -11,6 +13,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+import static com.softserveinc.ita.pageobjects.models.CategoryName.CLOTHES_SHOES_AND_JEWELRY;
 import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
 import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
@@ -75,5 +78,19 @@ public class FilterTest extends TestRunner {
                 .forEach(product -> assertThat(product.getAvailability())
                         .as("Product name should contain " + expectedAvailability)
                         .isEqualTo(expectedAvailability));
+    }
+
+    @Description("Verify that the 'ASICS' checkbox in the 'Alphabetical index' filter section is checked and " +
+            "filtered products contains searching term “ASICS” in their names.")
+    @Issue("https://jira.softserve.academy/projects/LVTAQC672/issues/LVTAQC672-34")
+    @Test(description = "LVTAQC672-34")
+    public void verifyPopularBrandsBlockFunctionality() {
+        CategoryPage categoryPage = homePage
+                .getHeader()
+                .openCatalog()
+                .openCategoryPage(CLOTHES_SHOES_AND_JEWELRY);
+
+        assertThat(categoryPage)
+
     }
 }

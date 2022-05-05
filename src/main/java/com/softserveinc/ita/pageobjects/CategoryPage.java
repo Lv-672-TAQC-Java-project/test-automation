@@ -13,4 +13,10 @@ public class CategoryPage {
 
         return new SubCategoryPage();
     }
+
+    public SearchResultPage openPopularBrendProductsPage(String popularBrandName) {
+        $x("//a[@title='Asics']").click();
+
+        return new SearchResultPage();
+    }
 }
