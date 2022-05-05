@@ -54,12 +54,12 @@ public class Product {
         $x(rootElementPath +
                 "//*[@href = '#icon-compare']").shouldBe(Condition.visible);
 
-        $x(String.format("%s%s", rootElementPath,
-                "//button[contains(@class, 'compare-button')]")).click();
-
         //used productName because getProductNotAddedToComparison method doesn't find xpath 'button[contains(@class, 'active')]'
         String productName = $x(rootElementPath +
                 "//a[contains(@class,'goods-tile__h')]").getAttribute("title");
+
+        $x(String.format("%s%s", rootElementPath,
+                "//button[contains(@class, 'compare-button')]")).click();
 
         $x(String.format("//a[contains(@title,'%s')]/parent::div" +
                 "//button[contains(@class, 'active')]", productName)).shouldBe(Condition.visible, Duration.ofSeconds(10));
