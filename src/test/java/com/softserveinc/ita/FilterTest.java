@@ -62,7 +62,7 @@ public class FilterTest extends TestRunner {
     @Test(description = "LVTAQC672-13")
     public void verifyThatFilteredProductsContainExpectedStatus() {
 
-        List<Product> filteredProducts = homePage
+        var filteredProducts = homePage
                 .getHeader()
                 .openCatalog()
                 .openSubCategoryPage(HOUSEHOLD_APPLIANCES, "Холодильники")

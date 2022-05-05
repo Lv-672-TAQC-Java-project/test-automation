@@ -3,7 +3,6 @@ package com.softserveinc.ita;
 import com.softserveinc.ita.pageobjects.ComparisonPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
-import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
 import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -61,9 +60,9 @@ public class ComparisonTest extends TestRunner {
     public void verifyThatProductsAddedToTheComparison() {
         String searchTerm = "Lenovo";
 
-        Header header = homePage.getHeader();
+        var header = homePage.getHeader();
 
-        SearchResultPage searchResultPage = header
+        var searchResultPage = header
                 .search(searchTerm)
                 .getFilterCategorySideBar()
                 .filterBySubCategory("Планшети")
@@ -73,11 +72,11 @@ public class ComparisonTest extends TestRunner {
                 .addToListOfComparisons();
 
         String categoryName = "Планшет";
-        ComparisonPage comparisonPage = header
+        var comparisonPage = header
                 .openComparisonModal()
                 .openComparisonPage(categoryName);
 
-        List<ComparisonPageProduct> productList = comparisonPage.getAllComparisonPageProducts();
+        var productList = comparisonPage.getAllComparisonPageProducts();
 
         assertThat(productList)
                 .as("The 2 products should be in comparison")
