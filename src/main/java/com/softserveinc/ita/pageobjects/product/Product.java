@@ -55,6 +55,7 @@ public class Product {
                 "//*[@href = '#icon-compare']").shouldBe(Condition.visible);
 
         //used productName because getProductNotAddedToComparison method doesn't find xpath 'button[contains(@class, 'active')]'
+        //declared here because rootElementPath can change after click
         String productName = $x(rootElementPath +
                 "//a[contains(@class,'goods-tile__h')]").getAttribute("title");
 
