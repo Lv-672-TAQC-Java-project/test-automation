@@ -1,12 +1,9 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -17,7 +14,7 @@ public class SearchTest extends TestRunner {
     @Test(description = "LVTAQC672-3")
     public void verifyThatProductsIncludeTheSearchTermInTheirNames() {
         String searchTerm = "Asus";
-        List<Product> products = homePage
+        var products = homePage
                 .getHeader()
                 .search(searchTerm)
                 .getProducts();
