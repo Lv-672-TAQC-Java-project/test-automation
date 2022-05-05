@@ -1,9 +1,12 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.models.PopularBrandName;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.*;
+import static java.time.Duration.*;
 
 public class CategoryPage {
 
@@ -14,8 +17,9 @@ public class CategoryPage {
         return new SubCategoryPage();
     }
 
-    public SearchResultPage openPopularBrendProductsPage(String popularBrandName) {
-        $x("//a[@title='Asics']").click();
+    @Step("Opened {popularBrandName} products page")
+    public SearchResultPage openPopularBrendProductsPage(PopularBrandName popularBrandName) {
+        $x(String.format("//a[@title='%s']", popularBrandName.getPopularBrandName())).click();
 
         return new SearchResultPage();
     }

@@ -1,7 +1,9 @@
 package com.softserveinc.ita.pageobjects.components;
 
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.models.FilterSectionName;
+import com.softserveinc.ita.pageobjects.models.PopularBrandName;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
@@ -46,5 +48,18 @@ public class Filter {
         $x(filterPriceMaxPath).setValue(String.valueOf(filterPriceMaxNumber)).pressEnter();
 
         return new SearchResultPage();
+    }
+
+    public void setBrandName(PopularBrandName popularBrandName) {
+        SelenideElement filterManufacturerSearchField = $x("//div[@data-filter-name='producer']" +
+                "//input[@name='searchline']");
+        filterManufacturerSearchField.click();
+        filterManufacturerSearchField
+                .setValue(popularBrandName.getPopularBrandName())
+                .pressEnter();
+    }
+
+    public SelenideElement getCheckboxTag() {
+        return $x("//a[@class='catalog-selection__link']");
     }
 }

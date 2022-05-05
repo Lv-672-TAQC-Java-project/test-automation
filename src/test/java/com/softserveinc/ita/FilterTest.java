@@ -16,6 +16,8 @@ import java.util.List;
 import static com.softserveinc.ita.pageobjects.models.CategoryName.CLOTHES_SHOES_AND_JEWELRY;
 import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
+import static com.softserveinc.ita.pageobjects.models.PopularBrandName.ADIDAS;
+import static com.softserveinc.ita.pageobjects.models.PopularBrandName.ASICS;
 import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -85,12 +87,28 @@ public class FilterTest extends TestRunner {
     @Issue("https://jira.softserve.academy/projects/LVTAQC672/issues/LVTAQC672-34")
     @Test(description = "LVTAQC672-34")
     public void verifyPopularBrandsBlockFunctionality() {
-        CategoryPage categoryPage = homePage
+        var searchResultPage = homePage
                 .getHeader()
                 .openCatalog()
-                .openCategoryPage(CLOTHES_SHOES_AND_JEWELRY);
+                .openCategoryPage(CLOTHES_SHOES_AND_JEWELRY)
+                .openPopularBrendProductsPage(ASICS);
 
-        assertThat(categoryPage)
+        var filter = searchResultPage.getFilter();
+        filter.setBrandName(ASICS);
 
+        String brandName = ASICS.getPopularBrandName();
+
+        assertThat(filter
+                .getCheckboxTag()
+                .text()
+                .equalsIgnoreCase(brandName))
+                    .as("Brand name checkbox should be checked")
+                    .isTrue();
+
+        var brandProducts = searchResultPage.getProducts();
+
+        brandProducts.forEach(product -> assertThat(product.getName())
+                .as("Product name should contains " + brandName)
+                .containsIgnoringCase(brandName));
     }
 }

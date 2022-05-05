@@ -6,18 +6,18 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum PopularBrandName {
-    PUMA(""),
-    SKECHERS(),
-    ECCO(),
-    LEVIS(),
-    TRENDYOL(),
-    TRAUM(),
-    HM(),
-    COLINS(),
-    ASICS(),
-    ADIDAS(),
-    NIKE(),
-    NEWBALANCE();
+    PUMA("Puma"),
+    SKECHERS("Skechers"),
+    ECCO("Ecco"),
+    LEVIS("Levi's"),
+    TRENDYOL("Trendyol "),
+    TRAUM("Traum"),
+    HM("H&M"),
+    COLINS("Colin’s"),
+    ASICS("Asics"),
+    ADIDAS("Adidas"),
+    NIKE("Nike"),
+    NEWBALANCE("New Balance");
 
     private final String popularBrandName;
 }
