@@ -6,10 +6,10 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum QuestionSortingOption {
-    FROM_BUYER("0: Object"),
-    DATE("1: Object"),
-    HELPFUL("2: Object"),
-    WITH_ATTACHMENTS("3: Object");
+    FROM_BUYER(0),
+    DATE(1),
+    HELPFUL(2),
+    WITH_ATTACHMENTS(3);
 
-    private final String sortOption;
+    private final int sortOption;
 }

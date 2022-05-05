@@ -10,9 +10,8 @@ public class Question {
 
     private final String rootElementPath;
 
-    public String getTimeOfQuestion() {
+    public String getQuestionDate() {
 
-        return $x(format("%s%s",rootElementPath,"//time[1]")).getText();
+        return $x(format("%s//time[1]", rootElementPath)).text();
     }
-
 }
