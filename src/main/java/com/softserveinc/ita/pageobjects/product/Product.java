@@ -1,6 +1,5 @@
 package com.softserveinc.ita.pageobjects.product;
 
-import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsPage;
@@ -8,10 +7,9 @@ import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
-import java.time.Duration;
-
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
+import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
 public class Product {
@@ -60,9 +58,8 @@ public class Product {
 
     @Step("Opened product details page")
     public ProductDetailsPage openDetailsPage() {
-        $x(String.format("%s%s", rootElementPath, "//descendant::span[@class='goods-tile__title']")).click();
-        //waiting for the product page to load
-        isDisplayed($x("//div[@class = 'product__heading']"), Duration.ofSeconds(20));
+        $x(String.format("%s//descendant::span[@class='goods-tile__title']", rootElementPath)).click();
+        $x("//div[@class = 'product__heading']").shouldBe(visible, ofSeconds(30));
 
         return new ProductDetailsPage();
     }
