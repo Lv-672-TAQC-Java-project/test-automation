@@ -5,7 +5,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
-import static com.softserveinc.ita.pageobjects.models.ProductsSectionName.LAST_VIEWED_PRODUCTS;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ProductsMemorizationTest extends TestRunner {
@@ -35,8 +34,8 @@ public class ProductsMemorizationTest extends TestRunner {
 
         header.openHomePage();
         var lastViewedProductsNames = homePage
-                .getProductsSection()
-                .getNames(LAST_VIEWED_PRODUCTS);
+                .getLastViewedProductsSection()
+                .getNames();
 
         assertThat(lastViewedProductsNames)
                 .as(firstProductName + " should be in the recently viewed products section")
