@@ -16,7 +16,11 @@ public class PropertyUtil {
         return Integer.parseInt(bundle.getString("default.driver.timeout"));
     }
 
-    public static String getBrowser(BrowserName browserName) {
-        return browserName.getBrowserName();
+    public static String getChromeBrowser() {
+        return bundle.getString("chrome.browser");
+    }
+
+    public static String getFirefoxBrowser() {
+        return bundle.getString("firefox.browser");
     }
 }
