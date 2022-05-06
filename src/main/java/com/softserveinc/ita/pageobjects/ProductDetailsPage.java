@@ -38,7 +38,7 @@ public class ProductDetailsPage {
 
     @Step("Opened product characteristic tab")
     public CharacteristicTab openCharacteristicTab() {
-        $x(format("//ul[@class='tabs__list']/li[%s]", CHARACTERISTIC.getTabId())).click();
+        $x("//ul[@class='tabs__list']/li[2]").click();
 
         return new CharacteristicTab();
     }
