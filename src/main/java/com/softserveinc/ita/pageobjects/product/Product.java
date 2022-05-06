@@ -55,7 +55,7 @@ public class Product {
 
         //used productName because getProductNotAddedToComparison method doesn't find xpath 'button[contains(@class, 'active')]'
         //declared here because rootElementPath can change after click
-        String productName = $x(rootElementPath + "//a[contains(@class,'goods-tile__h')]").getAttribute("title");
+        var productName = $x(rootElementPath + "//a[contains(@class,'goods-tile__h')]").getAttribute("title");
 
         $x(rootElementPath + "//button[contains(@class, 'compare-button')]").click();
 
