@@ -51,16 +51,13 @@ public class Product {
 
     @Step("Added product to list of comparisons")
     public SearchResultPage addToListOfComparisons() {
-        $x(rootElementPath +
-                "//*[@href = '#icon-compare']").shouldBe(Condition.visible);
+        $x(rootElementPath + "//*[@href = '#icon-compare']").shouldBe(Condition.visible);
 
         //used productName because getProductNotAddedToComparison method doesn't find xpath 'button[contains(@class, 'active')]'
         //declared here because rootElementPath can change after click
-        String productName = $x(rootElementPath +
-                "//a[contains(@class,'goods-tile__h')]").getAttribute("title");
+        String productName = $x(rootElementPath + "//a[contains(@class,'goods-tile__h')]").getAttribute("title");
 
-        $x(String.format("%s%s", rootElementPath,
-                "//button[contains(@class, 'compare-button')]")).click();
+        $x(rootElementPath + "//button[contains(@class, 'compare-button')]").click();
 
         $x(String.format("//a[contains(@title,'%s')]/parent::div" +
                 "//button[contains(@class, 'active')]", productName)).shouldBe(Condition.visible, Duration.ofSeconds(10));
