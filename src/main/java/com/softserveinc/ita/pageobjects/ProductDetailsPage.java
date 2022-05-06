@@ -33,4 +33,11 @@ public class ProductDetailsPage {
 
         return new ReviewsPage();
     }
+
+    @Step("Opened product characteristic tab")
+    public CharacteristicTab openCharacteristicTab() {
+        $x("//ul[@class='tabs__list']/li[2]").click();
+
+        return new CharacteristicTab();
+    }
 }
