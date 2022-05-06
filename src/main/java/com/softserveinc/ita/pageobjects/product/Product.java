@@ -58,7 +58,7 @@ public class Product {
 
     @Step("Opened product details page")
     public ProductDetailsPage openDetailsPage() {
-        $x(String.format("%s//descendant::span[@class='goods-tile__title']", rootElementPath)).click();
+        $x(rootElementPath + "//descendant::span[@class='goods-tile__title']").click();
         $x("//div[@class = 'product__heading']").shouldBe(visible, ofSeconds(30));
 
         return new ProductDetailsPage();
