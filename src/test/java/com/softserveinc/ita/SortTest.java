@@ -17,7 +17,8 @@ import java.util.List;
 import static com.softserveinc.ita.pageobjects.models.ProductDetailsTabName.QUESTION;
 import static com.softserveinc.ita.pageobjects.models.QuestionSortingOption.*;
 import static java.util.stream.IntStream.range;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
+
 
 public class SortTest extends TestRunner {
     @Description("Add test script to cover 'From cheap to expensive' sort functionality in Rozetka")
@@ -58,17 +59,17 @@ public class SortTest extends TestRunner {
                 .openQuestionTab(QUESTION)
                 .sort(DATE);
 
-        int amountQuestions = 4;
+        int amountOfDates = 4;
 
         var questionsDates = questionsTab.getUniqueQuestionsDates();
 
-        assertThat(questionsDates).asList()
+        assertThat(questionsDates)
                 .as("should not contain duplicate")
                 .doesNotHaveDuplicates()
-                .as("should be greater than " + amountQuestions)
-                .hasSizeGreaterThan(amountQuestions);
+                .as("should be greater than " + amountOfDates)
+                .hasSizeGreaterThan(amountOfDates);
 
-        range(1, amountQuestions).forEach(i -> assertThat(questionsDates.get(i))
+        range(1, amountOfDates).forEach(i -> assertThat(questionsDates.get(i))
                 .as("date should be sorted to fall down")
                 .isAfter(questionsDates.get(i + 1)));
     }
