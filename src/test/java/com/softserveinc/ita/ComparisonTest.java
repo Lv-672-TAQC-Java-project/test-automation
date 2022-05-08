@@ -115,10 +115,10 @@ public class ComparisonTest extends TestRunner {
         Header header = homePage.getHeader();
         String searchTerm = "notebook";
 
-        SearchResultPage searchResultPage = header.search(searchTerm);
+        var searchResultPage = header.search(searchTerm);
 
-        Product firstProduct = searchResultPage.getProduct(1);
-        Product secondProduct = searchResultPage.getProduct(2);
+        var firstProduct = searchResultPage.getProduct(1);
+        var secondProduct = searchResultPage.getProduct(2);
 
         firstProduct.addToListOfComparisons();
         secondProduct.addToListOfComparisons();
@@ -127,7 +127,7 @@ public class ComparisonTest extends TestRunner {
         String secondProductName = secondProduct.getName();
 
         String productCategory = "Ноутбуки";
-        ComparisonPage comparisonPage =
+        var comparisonPage =
                 header
                         .openComparisonModal()
                         .openComparisonPage(productCategory);
