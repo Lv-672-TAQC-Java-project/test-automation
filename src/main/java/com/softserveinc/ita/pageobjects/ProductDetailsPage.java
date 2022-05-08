@@ -44,8 +44,8 @@ public class ProductDetailsPage {
     }
 
     @Step("Opened product question tab")
-    public QuestionTab openQuestionTab(ProductDetailsTabName tabId) {
-        $x(format("//ul[@class='tabs__list']/li[%s]", tabId.getTabId())).click();
+    public QuestionTab openQuestionTab() {
+        $x(format("//ul[@class='tabs__list']/li[4]")).click();
 
         return new QuestionTab();
     }

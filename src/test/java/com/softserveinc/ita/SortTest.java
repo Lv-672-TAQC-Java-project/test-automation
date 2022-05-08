@@ -14,7 +14,6 @@ import org.testng.annotations.Test;
 import java.util.Collections;
 import java.util.List;
 
-import static com.softserveinc.ita.pageobjects.models.ProductDetailsTabName.QUESTION;
 import static com.softserveinc.ita.pageobjects.models.QuestionSortingOption.*;
 import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -56,7 +55,7 @@ public class SortTest extends TestRunner {
                 .search("iphone")
                 .getProduct(1)
                 .openDetailsPage()
-                .openQuestionTab(QUESTION)
+                .openQuestionTab()
                 .sort(DATE);
 
         int amountOfDates = 4;

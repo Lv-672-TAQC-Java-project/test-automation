@@ -19,13 +19,15 @@ import static java.util.stream.IntStream.range;
 public class QuestionTab {
 
     public int getQuestionsAmount() {
-        String xpath = "//div[@class='comment']";
+        String questionPath = "//div[@class='comment']";
 
-        if ($x(xpath).is(visible)) {
-            return $$x(xpath)
+        if ($x(questionPath).is(visible)) {
+
+            return $$x(questionPath)
                     .shouldHave(sizeGreaterThan(0), Duration.ofSeconds(60))
                     .size();
         } else {
+
             return 0;
         }
     }
