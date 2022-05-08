@@ -15,7 +15,7 @@ public class TestRunner {
 
     @BeforeSuite
     public void driverConfigurationAndTimeout() {
-        Configuration.browser = getChromeBrowser();
+        Configuration.browser = getDefaultBrowser();
         Configuration.timeout = getDefaultTimeout() * 1000;
     }
 
