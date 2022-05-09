@@ -5,16 +5,12 @@ import com.softserveinc.ita.pageobjects.Cart;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.CategoryName;
-import com.softserveinc.ita.pageobjects.models.SortOrder;
 import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.Product;
-import com.softserveinc.ita.pageobjects.product.RecommendedProduct;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
-
-import java.util.List;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.COTTAGE_GARDEN_AND_VEGETABLE_GARDEN;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
@@ -58,26 +54,26 @@ public class CartTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-1")
     @Test(description = "LVTAQC672-1")
     public void verifyThatProductItemAddedToTheCart() {
-        String searchTerm = "DeWALT";
-        Header header = homePage.getHeader();
-        SearchResultPage searchResultPage = header.search(searchTerm);
+        var searchTerm = "DeWALT";
+        var header = homePage.getHeader();
+        var searchResultPage = header.search(searchTerm);
 
         assertThat(searchResultPage.getSearchTermLabel())
                 .as("Search term label should be displayed")
                 .contains(searchTerm);
 
-        Product firstProduct = searchResultPage.getProduct(1);
-        String firstProductName = firstProduct.getName();
+        var firstProduct = searchResultPage.getProduct(2);
+        var firstProductName = firstProduct.getName();
 
         firstProduct.addToCart();
 
-        Cart cart = header.openCart();
+        var cart = header.openCart();
 
         assertThat(cart.isOpened())
                 .as("Cart modal should be displayed")
                 .isTrue();
 
-        List<InCartProduct> inCartProducts = cart.getInCartProducts();
+        var inCartProducts = cart.getInCartProducts();
         assertThat(inCartProducts)
                 .anySatisfy(product -> assertThat(product.getName())
                         .as(product.getName() + " should contain " + firstProductName)
@@ -89,20 +85,27 @@ public class CartTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-14")
     @Test(description = "LVTAQC672-14")
     public void verifyThatTotalPriceChangedAfterAddingAdditionalService() {
-        Header header = homePage.getHeader();
+        homePage.emptyCart();
+
+        var header = homePage.getHeader();
         String searchTerm = "Asus";
-        SearchResultPage searchResultPage = header.search(searchTerm);
+        var searchResultPage = header.search(searchTerm);
 
         assertThat(searchResultPage.getSearchTermLabel())
                 .as("Search result page should contain label with" + searchTerm)
                 .contains(searchTerm);
 
-        Product firstProduct = searchResultPage.getProduct(1);
+        var firstProduct = searchResultPage.getProduct(1);
         firstProduct.addToCart();
 
-        Cart cart = header.openCart();
+        var cart = header.openCart();
+
+        assertThat(cart.isOpened())
+                .as("Cart modal should be displayed")
+                .isTrue();
+
         String firstProductName = firstProduct.getName();
-        InCartProduct cartProduct = cart.getProduct(firstProductName);
+        var cartProduct = cart.getProduct(firstProductName);
         String cartProductName = cartProduct.getName();
 
         assertThat(cartProductName)
@@ -111,7 +114,7 @@ public class CartTest extends TestRunner {
 
         int totalPrice = cart.getTotalPrice();
         cartProduct.expandAdditionalServicesSection();
-        AdditionalProductService additionalProductService = cartProduct.getAdditionalProductService(cartProductName, 1);
+        var additionalProductService = cartProduct.getAdditionalProductService(cartProductName, 1);
         additionalProductService.select();
         int totalPriceUpdated = cart.getTotalPrice();
         int additionalProductServiceCost = additionalProductService.getPrice();

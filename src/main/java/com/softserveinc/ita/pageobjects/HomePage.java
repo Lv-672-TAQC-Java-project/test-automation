@@ -5,6 +5,8 @@ import com.softserveinc.ita.pageobjects.components.Header;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
+import static com.softserveinc.ita.utils.PropertyUtil.getHomePageUrl;
+
 @Getter
 public class HomePage {
 
@@ -13,7 +15,7 @@ public class HomePage {
 
     @Step("Opened home page")
     public HomePage open() {
-        Selenide.open("https://rozetka.com.ua/ua/");
+        Selenide.open(getHomePageUrl());
 
         return this;
     }

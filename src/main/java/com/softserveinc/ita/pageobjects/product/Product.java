@@ -1,13 +1,17 @@
 package com.softserveinc.ita.pageobjects.product;
 
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
+import com.codeborne.selenide.Condition;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
 import static com.codeborne.selenide.Condition.visible;
+import java.time.Duration;
+
 import static com.codeborne.selenide.Selenide.$x;
 import static java.time.Duration.ofSeconds;
 
@@ -50,8 +54,16 @@ public class Product {
 
     @Step("Added product to list of comparisons")
     public SearchResultPage addToListOfComparisons() {
-        $x(String.format("%s%s", rootElementPath,
-                "//button[contains(@class, 'compare-button')]")).click();
+        $x(rootElementPath + "//*[@href = '#icon-compare']").shouldBe(Condition.visible);
+
+        //used productName because getProductNotAddedToComparison method doesn't find xpath 'button[contains(@class, 'active')]'
+        //declared here because rootElementPath can change after click
+        var productName = $x(rootElementPath + "//a[contains(@class,'goods-tile__h')]").getAttribute("title");
+
+        $x(rootElementPath + "//button[contains(@class, 'compare-button')]").click();
+
+        $x(String.format("//a[contains(@title,'%s')]/parent::div" +
+                "//button[contains(@class, 'active')]", productName)).shouldBe(Condition.visible, Duration.ofSeconds(10));
 
         return new SearchResultPage();
     }
