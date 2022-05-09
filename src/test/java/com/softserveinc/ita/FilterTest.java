@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
+import static com.softserveinc.ita.pageobjects.models.CategoryName.LAPTOPS_AND_COMPUTERS;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
 import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -75,5 +76,29 @@ public class FilterTest extends TestRunner {
                 .forEach(product -> assertThat(product.getAvailability())
                         .as("Product name should contain " + expectedAvailability)
                         .isEqualTo(expectedAvailability));
+    }
+
+    @Test
+    public void verifyThatFilteredProductsContainExpectedCharacteristics() {
+        String subCategoryName = "Acer";
+        var subCategoryPage = homePage
+                .getHeader()
+                .openCatalog()
+                .openSubCategoryPage(LAPTOPS_AND_COMPUTERS, subCategoryName);
+
+        assertThat(subCategoryPage.getTitle())
+                .as("The title on the subCategoryPage should contain " + subCategoryName)
+                .containsIgnoringCase(subCategoryName);
+
+        var productCharacteristics = subCategoryPage
+                .getFilter()
+                .filterBySection(PROCESSOR,"Intel Core i5")
+                .getFilter()
+                .filterBySection(SCREEN_DIAGONAL,"15\"-15.6\"")
+                .getFilter()
+                .filterBySection(RANDOM_ACCESS_MEMORY_AMOUNT,"16 - 24 ГБ")
+                .getProduct(1)
+                .openDetailsPage()
+                .openCharacteristicTab();
     }
 }

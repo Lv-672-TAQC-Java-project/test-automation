@@ -57,7 +57,8 @@ public class Product {
 
     @Step("Opened product details page")
     public ProductDetailsPage openDetailsPage() {
-        $x(String.format("%s%s", rootElementPath, "//descendant::span[@class='goods-tile__title']")).click();
+        $x(String.format("%s%s", rootElementPath, "//descendant::span[@class='goods-tile__title']"))
+                .scrollIntoView(false).click();
 
         return new ProductDetailsPage();
     }
