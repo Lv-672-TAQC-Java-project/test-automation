@@ -86,13 +86,13 @@ public class FilterTest extends TestRunner {
                 .openCategoryPage(TOOLS_AND_AUTOMOTIVE_PRODUCTS)
                 .openSubCategoryPage("Автошини та диски");
 
-        var filterSection = subCategoryPage.getTiresSubcategoryFilterSection();
-        assertThat(filterSection.isOpened())
-                .as("Filter section should be displayed")
+        var tiresSubcategoryFilterSection = subCategoryPage.getTiresSubcategoryFilterSection();
+        assertThat(tiresSubcategoryFilterSection.isOpened())
+                .as("Tires subcategory filter section should be displayed")
                 .isTrue();
 
         var expectedTireCharacteristic = "245/40 R19";
-        filterSection
+        tiresSubcategoryFilterSection
                 .setYear("2015")
                 .setBrand("Audi")
                 .setModel("A6")
