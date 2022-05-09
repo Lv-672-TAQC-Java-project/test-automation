@@ -4,9 +4,11 @@ import lombok.experimental.UtilityClass;
 
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Locale;
+
+import static java.time.LocalDate.*;
+import static java.time.format.DateTimeFormatter.*;
 
 @UtilityClass
 public class DateUtil {
@@ -18,15 +20,13 @@ public class DateUtil {
         LocalDate localDate;
 
         if (date.matches(".*\\d.*")) {
-            DateTimeFormatter dateTimeFormatter =
-                    DateTimeFormatter
-                            .ofPattern("dd MMMM uuuu")
-                            .withLocale(new Locale("uk"));
-            localDate = LocalDate.parse(date, dateTimeFormatter);
+            var dateTimeFormatter = ofPattern("dd MMMM uuuu")
+                    .withLocale(new Locale("uk"));
+            localDate = parse(date, dateTimeFormatter);
         } else if (date.contains("с")) {
-            localDate = LocalDate.now();
+            localDate = now();
         } else {
-            localDate = LocalDate.now().minusDays(1);
+            localDate = now().minusDays(1);
         }
 
         return Date.from(localDate

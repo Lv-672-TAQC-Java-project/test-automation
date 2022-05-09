@@ -49,7 +49,7 @@ public class QuestionTab {
 
         return range(1, getQuestionsAmount())
                 .mapToObj(i -> getQuestion(i).getDate())
-                .distinct()
+//                .distinct()
                 .collect(Collectors.toList());
     }
 }

@@ -12,9 +12,11 @@ import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.softserveinc.ita.pageobjects.models.QuestionSortingOption.*;
+import static java.util.Comparator.*;
 import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -55,21 +57,27 @@ public class SortTest extends TestRunner {
                 .search("iphone")
                 .getProduct(1)
                 .openDetailsPage()
-                .openQuestionTab()
-                .sort(DATE);
+                .openQuestionTab();
+//                .sort(DATE);
 
-        int amountOfDates = 4;
+        int amountOfDates = 3;
 
         var questionsDates = questionsTab.getUniqueQuestionsDates();
 
+//        System.out.println(questionsDates);
+
         assertThat(questionsDates)
-                .as("should not contain duplicate")
-                .doesNotHaveDuplicates()
+//                .as("should not contain duplicate")
+//                .doesNotHaveDuplicates()
                 .as("should be greater than " + amountOfDates)
                 .hasSizeGreaterThan(amountOfDates);
 
-        range(1, amountOfDates).forEach(i -> assertThat(questionsDates.get(i))
-                .as("date should be sorted to fall down")
-                .isAfter(questionsDates.get(i + 1)));
+        questionsTab.sort(DATE);
+
+        assertThat(questionsDates).isSortedAccordingTo(reverseOrder());
+
+//        range(1, amountOfDates).forEach(i -> assertThat(questionsDates.get(i))
+//                .as("date should be sorted to fall down")
+//                .isAfter(questionsDates.get(i + 1)));
     }
 }
