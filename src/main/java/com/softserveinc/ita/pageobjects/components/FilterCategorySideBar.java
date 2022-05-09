@@ -1,13 +1,13 @@
 package com.softserveinc.ita.pageobjects.components;
 
-import com.softserveinc.ita.pageobjects.models.FilterCategory;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.models.FilterCategory;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 
 public class FilterCategorySideBar {
-    private String categoryPath = "//li[contains(@class, 'categories-filter__item')]//a[contains(@href, '%s')]";
+    private final String categoryPath = "//li[contains(@class, 'categories-filter__item')]//a[contains(@href, '%s')]";
 
     @Step("Expanded all categories list")
     public FilterCategorySideBar expandAllCategoriesList() {

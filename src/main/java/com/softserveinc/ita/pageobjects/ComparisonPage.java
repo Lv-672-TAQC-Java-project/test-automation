@@ -4,7 +4,6 @@ import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
 import io.qameta.allure.Step;
 import lombok.Getter;
-import io.qameta.allure.Step;
 
 import java.time.Duration;
 import java.util.List;
@@ -13,8 +12,8 @@ import java.util.stream.Collectors;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-import static java.lang.String.*;
-import static java.util.stream.IntStream.*;
+import static java.lang.String.format;
+import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
 public class ComparisonPage {

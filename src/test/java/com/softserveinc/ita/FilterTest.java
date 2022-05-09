@@ -2,17 +2,15 @@ package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
-import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
-import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MANUFACTURER;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
 import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -56,7 +54,7 @@ public class FilterTest extends TestRunner {
                 .isGreaterThanOrEqualTo(priceRangeMinimum)
                 .isLessThanOrEqualTo(priceRangeMaximum));
     }
-  
+
     @Description("Verify that filtered products contain 'Закінчився' status")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-13")
     @Test(description = "LVTAQC672-13")
