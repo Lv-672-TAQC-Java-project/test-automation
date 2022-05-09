@@ -1,14 +1,18 @@
 package com.softserveinc.ita.pageobjects.product;
 
-import com.codeborne.selenide.SelenideElement;
-import com.softserveinc.ita.pageobjects.models.ProductAvailability;
+import com.codeborne.selenide.Condition;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsPage;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
+import java.time.Duration;
+
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
 public class Product {
@@ -49,16 +53,26 @@ public class Product {
 
     @Step("Added product to list of comparisons")
     public SearchResultPage addToListOfComparisons() {
-        $x(String.format("%s%s", rootElementPath,
-                "//button[contains(@class, 'compare-button')]")).click();
+        $x(rootElementPath + "//*[@href = '#icon-compare']").shouldBe(Condition.visible);
+
+        //used productName because getProductNotAddedToComparison method doesn't find xpath 'button[contains(@class, 'active')]'
+        //declared here because rootElementPath can change after click
+        var productName = $x(rootElementPath + "//a[contains(@class,'goods-tile__h')]").getAttribute("title");
+
+        $x(rootElementPath + "//button[contains(@class, 'compare-button')]").click();
+
+        $x(String.format("//a[contains(@title,'%s')]/parent::div" +
+                "//button[contains(@class, 'active')]", productName)).shouldBe(Condition.visible, Duration.ofSeconds(10));
 
         return new SearchResultPage();
     }
 
     @Step("Opened product details page")
     public ProductDetailsPage openDetailsPage() {
-        $x(String.format("%s%s", rootElementPath, "//descendant::span[@class='goods-tile__title']"))
-                .scrollIntoView(false).click();
+        $x(rootElementPath + "//descendant::span[@class='goods-tile__title']")
+                .scrollIntoView(false)
+                .click();
+        $x("//div[@class = 'product__heading']").shouldBe(visible, ofSeconds(30));
 
         return new ProductDetailsPage();
     }

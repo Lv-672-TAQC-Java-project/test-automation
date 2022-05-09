@@ -4,7 +4,7 @@ import com.softserveinc.ita.pageobjects.models.CategoryName;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static java.lang.String.*;
+import static java.lang.String.format;
 
 public class CategorySideBar {
 

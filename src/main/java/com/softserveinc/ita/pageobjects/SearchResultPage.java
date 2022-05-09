@@ -1,7 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.softserveinc.ita.pageobjects.components.FilterCategorySideBar;
 import com.softserveinc.ita.pageobjects.components.Filter;
+import com.softserveinc.ita.pageobjects.components.FilterCategorySideBar;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.SortOrder;
 import com.softserveinc.ita.pageobjects.product.Product;
@@ -15,7 +15,7 @@ import java.util.List;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
-import static java.lang.String.*;
+import static java.lang.String.format;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 

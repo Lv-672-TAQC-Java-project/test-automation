@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$x;
-import static java.time.Duration.*;
+import static java.time.Duration.ofSeconds;
 
 public class Filter {
     @Step("Filtered products by '{filterCheckboxName}' Checkbox")
