@@ -1,8 +1,11 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.components.FilterCategorySideBar;
 import com.softserveinc.ita.pageobjects.components.Filter;
 import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.models.AdulthoodConfirmation;
 import com.softserveinc.ita.pageobjects.models.SortOrder;
 import com.softserveinc.ita.pageobjects.product.Product;
 import io.qameta.allure.Step;
@@ -15,7 +18,9 @@ import java.util.List;
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.lang.String.*;
+import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
@@ -79,6 +84,20 @@ public class SearchResultPage {
     @Step("Sorted products {order}")
     public SearchResultPage sort(SortOrder order) {
         $x("//select").selectOptionByValue(order.getSortOrderOption());
+
+        return this;
+    }
+
+    public SearchResultPage confirmAdulthood(AdulthoodConfirmation answer) {
+        SelenideElement confirmationButton = $x(answer.toString());
+
+        //Sometimes adulthood confirmation modal doesn't appear on this page
+        if (isDisplayed(confirmationButton, ofSeconds(2))) {
+            confirmationButton.click();
+            confirmationButton.shouldNot(Condition.exist);
+        } else {
+            return this;
+        }
 
         return this;
     }

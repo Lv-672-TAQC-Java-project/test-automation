@@ -1,18 +1,19 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.SubCategoryPage;
+import com.softserveinc.ita.pageobjects.models.AdulthoodConfirmation;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
-import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
+import static com.softserveinc.ita.pageobjects.models.CategoryName.ALCOHOLIC_BEVERAGES_AND_PRODUCTS;
 import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MATURATION_PERIOD;
 import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -75,5 +76,29 @@ public class FilterTest extends TestRunner {
                 .forEach(product -> assertThat(product.getAvailability())
                         .as("Product name should contain " + expectedAvailability)
                         .isEqualTo(expectedAvailability));
+    }
+
+    @Description("Add test script to cover the 'Витримка' section of the filter functionality")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-30")
+    @Test(description = "LVTAQC672-30")
+    public void verifyThatProductsAreFilteredByMaturationPeriod() {
+        String category = "Віскі";
+
+        var subCategoryPage = homePage
+                .getCategorySideBar()
+                .openCategoryPage(ALCOHOLIC_BEVERAGES_AND_PRODUCTS)
+                .confirmAdulthood(AdulthoodConfirmation.CONFIRM)
+                .openSubCategoryPage(category)
+                .confirmAdulthood(AdulthoodConfirmation.CONFIRM);
+
+        subCategoryPage.getFilter()
+                .filterBySection(MATURATION_PERIOD, "до 30 років")
+                .confirmAdulthood(AdulthoodConfirmation.CONFIRM);
+
+        var filteredProductsList = subCategoryPage.getProducts();
+
+        filteredProductsList.forEach(product -> assertThat(product.getMaturationPeriod((SubCategoryPage) subCategoryPage))
+                .as("Products should be filtered by maturation period from 21 to 30 years")
+                .isBetween(21, 30));
     }
 }

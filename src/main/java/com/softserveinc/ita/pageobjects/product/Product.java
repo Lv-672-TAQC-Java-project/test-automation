@@ -1,6 +1,8 @@
 package com.softserveinc.ita.pageobjects.product;
 
-import com.codeborne.selenide.SelenideElement;
+import com.codeborne.selenide.Condition;
+import com.softserveinc.ita.pageobjects.SubCategoryPage;
+import com.softserveinc.ita.pageobjects.models.AdulthoodConfirmation;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsPage;
@@ -67,5 +69,25 @@ public class Product {
         $x(String.format("%s//span[@class='goods-tile__reviews-link']", rootElementPath)).click();
 
         return new ReviewsPage();
+    }
+
+    public Integer getMaturationPeriod(SubCategoryPage subCategoryPage) {
+        //To get the product description about maturation period you need to hover the product
+        $x(rootElementPath).hover();
+
+        //Sometimes adulthood confirmation modal appears second time when hover the product
+        var adulthoodConfirmation = AdulthoodConfirmation.CONFIRM;
+        if ($x(adulthoodConfirmation.toString()).exists()) {
+            subCategoryPage.confirmAdulthood(adulthoodConfirmation);
+            $x(rootElementPath).hover();
+        }
+
+        String period = $x(String.format(rootElementPath + "//a[@class='goods-tile__description-control ng-star-inserted']"))
+                .shouldBe(Condition.exist)
+                .shouldNotBe(Condition.empty)
+                .text()
+                .replaceAll("[^0-9]", "");
+
+        return Integer.parseInt(period);
     }
 }
