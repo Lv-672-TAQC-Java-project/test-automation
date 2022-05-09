@@ -43,14 +43,14 @@ public class Cart {
 
     public boolean isOpened() {
         Duration time = ofSeconds(5);
-        boolean isModalView = isDisplayed($x("//div[@class='modal__header']"), time);
-        boolean isFullScreenView = isDisplayed($x("//h1[@class='cart-page__heading']"), time);
+        var isModalView = isDisplayed($x("//div[@class='modal__header']"), time);
+        var isFullScreenView = isDisplayed($x("//h1[@class='cart-page__heading']"), time);
 
         return isModalView || isFullScreenView;
     }
 
     public List<InCartProduct> getInCartProducts() {
-        String inCartProductsPath = "//div[@class='cart-product ng-star-inserted']";
+        var inCartProductsPath = "//div[@class='cart-product ng-star-inserted']";
         int amountOfInCartProducts = $$x(inCartProductsPath)
                 .shouldHave(sizeNotEqual(0), ofSeconds(10))
                 .size();
