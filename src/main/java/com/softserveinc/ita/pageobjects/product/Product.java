@@ -1,6 +1,5 @@
 package com.softserveinc.ita.pageobjects.product;
 
-import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.codeborne.selenide.Condition;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsPage;
@@ -9,9 +8,9 @@ import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
-import static com.codeborne.selenide.Condition.visible;
 import java.time.Duration;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.time.Duration.ofSeconds;
 

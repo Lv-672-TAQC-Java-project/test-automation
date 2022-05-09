@@ -6,7 +6,7 @@ import java.util.ResourceBundle;
 
 @UtilityClass
 public class PropertyUtil {
-    private static ResourceBundle bundle = ResourceBundle.getBundle("config");
+    private static final ResourceBundle bundle = ResourceBundle.getBundle("config");
 
     public static String getHomePageUrl() {
         return bundle.getString("home.page.url");

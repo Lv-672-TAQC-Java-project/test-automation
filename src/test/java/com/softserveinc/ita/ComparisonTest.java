@@ -1,9 +1,7 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.ComparisonPage;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
-import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -107,7 +105,7 @@ public class ComparisonTest extends TestRunner {
                         .as("All products should contain " + categoryName)
                         .containsIgnoringCase(categoryName));
     }
-  
+
     @Description("Verify 'show only differences' functionality when comparing products")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-6")
     @Test(description = "LVTAQC672-6")

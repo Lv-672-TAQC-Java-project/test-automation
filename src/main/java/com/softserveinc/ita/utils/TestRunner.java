@@ -6,7 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
-import static com.softserveinc.ita.utils.PropertyUtil.*;
+import static com.softserveinc.ita.utils.PropertyUtil.getDefaultBrowser;
+import static com.softserveinc.ita.utils.PropertyUtil.getDefaultTimeout;
 
 @Listeners(UiTestListener.class)
 public class TestRunner {
