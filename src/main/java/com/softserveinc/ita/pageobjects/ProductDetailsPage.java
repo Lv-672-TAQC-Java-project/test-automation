@@ -4,9 +4,7 @@ import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
-import static com.softserveinc.ita.pageobjects.models.ProductDetailsTabName.CHARACTERISTIC;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
-import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
 public class ProductDetailsPage {
@@ -38,7 +36,7 @@ public class ProductDetailsPage {
 
     @Step("Opened product characteristic tab")
     public CharacteristicTab openCharacteristicTab() {
-        $x(format("//ul[@class='tabs__list']/li[%s]", CHARACTERISTIC.getTabId())).click();
+        $x("//ul[@class='tabs__list']/li[2]").click();
 
         return new CharacteristicTab();
     }

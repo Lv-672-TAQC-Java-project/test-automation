@@ -1,11 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.Cart;
-import com.softserveinc.ita.pageobjects.OrderPlacementPage;
-import com.softserveinc.ita.pageobjects.ProductDetailsPage;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
-import com.softserveinc.ita.pageobjects.components.Header;
-import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -20,25 +14,26 @@ public class OrderPlacementTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-2")
     @Test(description = "LVTAQC672-2")
     public void verifyThatImpossibleToPlaceAnOrderWithoutRequiredData() {
-        String searchTerm = "DeWALT";
-        Header header = homePage.getHeader();
-        SearchResultPage searchResultPage = header.search(searchTerm);
+        homePage.emptyCart();
+        var searchTerm = "DeWALT";
+        var header = homePage.getHeader();
+        var searchResultPage = header.search(searchTerm);
 
         assertThat(searchResultPage.getSearchTermLabel())
                 .as("Search term label should be displayed")
                 .contains(searchTerm);
 
-        Product firstProduct = searchResultPage.getProduct(1);
-        String firstProductName = firstProduct.getName();
+        var firstProduct = searchResultPage.getProduct(2);
+        var firstProductName = firstProduct.getName();
 
-        ProductDetailsPage productDetailsPage = firstProduct.openDetailsPage();
-        String productName = productDetailsPage.getProductName();
+        var productDetailsPage = firstProduct.openDetailsPage();
+        var productName = productDetailsPage.getProductName();
 
         assertThat(productName)
                 .as("Product name should be the same for search result page and product details page")
                 .isEqualTo(firstProductName);
 
-        Cart cart = productDetailsPage.addToCart();
+        var cart = productDetailsPage.addToCart();
 
         //Sometimes cart is not opened automatically after adding product to cart from details page
         if (!cart.isOpened()) {
@@ -49,7 +44,7 @@ public class OrderPlacementTest extends TestRunner {
                 .as("Cart modal should be displayed")
                 .isTrue();
 
-        OrderPlacementPage orderPlacementPage = cart.submitOrder();
+        var orderPlacementPage = cart.submitOrder();
 
         assertThat(orderPlacementPage.isOpened())
                 .as("Order placement page should be displayed")
@@ -61,18 +56,18 @@ public class OrderPlacementTest extends TestRunner {
                 .as("Order placement page should still be displayed")
                 .isTrue();
 
-        String requiredFieldErrorMessage = "%s field should be required";
-        String surnameFieldTittle = "surname";
+        var requiredFieldErrorMessage = "%s field should be required";
+        var surnameFieldTittle = "surname";
         assertThat(orderPlacementPage.isFieldRequired(surnameFieldTittle))
                 .as(format(requiredFieldErrorMessage, surnameFieldTittle))
                 .isTrue();
 
-        String nameFieldTittle = "name";
+        var nameFieldTittle = "name";
         assertThat(orderPlacementPage.isFieldRequired(nameFieldTittle))
                 .as(format(requiredFieldErrorMessage, nameFieldTittle))
                 .isTrue();
 
-        String phoneFieldTittle = "phone";
+        var phoneFieldTittle = "phone";
         assertThat(orderPlacementPage.isFieldRequired(phoneFieldTittle))
                 .as(format(requiredFieldErrorMessage, phoneFieldTittle))
                 .isTrue();

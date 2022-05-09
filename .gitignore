@@ -3,6 +3,5 @@
 target/*
 build/*
 *.xml
-!testng.xml
 .allure
 allure-results

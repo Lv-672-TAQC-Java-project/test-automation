@@ -1,10 +1,7 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.ComparisonPage;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.components.Header;
-import com.softserveinc.ita.pageobjects.product.ComparisonPageProduct;
-import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -61,9 +58,9 @@ public class ComparisonTest extends TestRunner {
     public void verifyThatProductsAddedToTheComparison() {
         String searchTerm = "Lenovo";
 
-        Header header = homePage.getHeader();
+        var header = homePage.getHeader();
 
-        SearchResultPage searchResultPage = header
+        var searchResultPage = header
                 .search(searchTerm)
                 .getFilterCategorySideBar()
                 .filterBySubCategory("Планшети")
@@ -73,11 +70,11 @@ public class ComparisonTest extends TestRunner {
                 .addToListOfComparisons();
 
         String categoryName = "Планшет";
-        ComparisonPage comparisonPage = header
+        var comparisonPage = header
                 .openComparisonModal()
                 .openComparisonPage(categoryName);
 
-        List<ComparisonPageProduct> productList = comparisonPage.getAllComparisonPageProducts();
+        var productList = comparisonPage.getAllComparisonPageProducts();
 
         assertThat(productList)
                 .as("The 2 products should be in comparison")
@@ -108,7 +105,7 @@ public class ComparisonTest extends TestRunner {
                         .as("All products should contain " + categoryName)
                         .containsIgnoringCase(categoryName));
     }
-  
+
     @Description("Verify 'show only differences' functionality when comparing products")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-6")
     @Test(description = "LVTAQC672-6")
@@ -116,10 +113,10 @@ public class ComparisonTest extends TestRunner {
         Header header = homePage.getHeader();
         String searchTerm = "notebook";
 
-        SearchResultPage searchResultPage = header.search(searchTerm);
+        var searchResultPage = header.search(searchTerm);
 
-        Product firstProduct = searchResultPage.getProduct(1);
-        Product secondProduct = searchResultPage.getProduct(2);
+        var firstProduct = searchResultPage.getProduct(1);
+        var secondProduct = searchResultPage.getProduct(2);
 
         firstProduct.addToListOfComparisons();
         secondProduct.addToListOfComparisons();
@@ -128,7 +125,7 @@ public class ComparisonTest extends TestRunner {
         String secondProductName = secondProduct.getName();
 
         String productCategory = "Ноутбуки";
-        ComparisonPage comparisonPage =
+        var comparisonPage =
                 header
                         .openComparisonModal()
                         .openComparisonPage(productCategory);

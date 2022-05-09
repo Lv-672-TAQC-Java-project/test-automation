@@ -16,7 +16,7 @@ public class RecommendedProduct {
     @Step("Added product from recommended list to cart")
     public Cart addToCart() {
         $x(String.format("%s//button[@class='buy-button " +
-                        "lite-tile__buy-button ng-star-inserted']", rootElementPath)).click();
+                "lite-tile__buy-button ng-star-inserted']", rootElementPath)).click();
 
         return new Cart();
     }

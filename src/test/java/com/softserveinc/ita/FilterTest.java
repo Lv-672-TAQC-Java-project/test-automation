@@ -1,22 +1,19 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.SearchResultPage;
-import com.softserveinc.ita.pageobjects.components.FilterBlock;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
-import com.softserveinc.ita.pageobjects.product.Product;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
 import static com.softserveinc.ita.pageobjects.models.CategoryName.TOOLS_AND_AUTOMOTIVE_PRODUCTS;
-import static com.softserveinc.ita.pageobjects.models.FilterBlockDropdown.*;
-import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MANUFACTURER;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
 import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
+import static java.lang.String.format;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class FilterTest extends TestRunner {
@@ -51,21 +48,21 @@ public class FilterTest extends TestRunner {
                 .getFilter()
                 .filterByPrice(priceRangeMinimum, priceRangeMaximum);
 
-        List<Product> products = searchResultPage.getProducts();
-        List<Integer> pricesList = searchResultPage.getProductsPrices(products);
+        var products = searchResultPage.getProducts();
+        var prices = searchResultPage.getProductsPrices(products);
 
-        pricesList.forEach(productPrice -> Assertions.assertThat(productPrice)
+        prices.forEach(productPrice -> Assertions.assertThat(productPrice)
                 .as("products prices should not exceed or be lower than custom price range")
                 .isGreaterThanOrEqualTo(priceRangeMinimum)
                 .isLessThanOrEqualTo(priceRangeMaximum));
     }
-  
+
     @Description("Verify that filtered products contain 'Закінчився' status")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-13")
     @Test(description = "LVTAQC672-13")
     public void verifyThatFilteredProductsContainExpectedStatus() {
 
-        List<Product> filteredProducts = homePage
+        var filteredProducts = homePage
                 .getHeader()
                 .openCatalog()
                 .openSubCategoryPage(HOUSEHOLD_APPLIANCES, "Холодильники")
@@ -89,19 +86,19 @@ public class FilterTest extends TestRunner {
                 .openCategoryPage(TOOLS_AND_AUTOMOTIVE_PRODUCTS)
                 .openSubCategoryPage("Автошини та диски");
 
-        var filterBlock = new FilterBlock();
-        assertThat(filterBlock.isOpened())
-                .as("Filter block should be displayed")
+        assertThat(subCategoryPage.isOpenedFilterSection())
+                .as("Filter section should be displayed")
                 .isTrue();
 
         var tireCharacteristic = "245/40 R19";
-        filterBlock
-                .setDropdownOption(YEAR, "2015")
-                .setDropdownOption(BRAND, "Audi")
-                .setDropdownOption(MODEL, "A6")
-                .setDropdownOption(COMPLETE_SET, "2.0 TDi")
+        subCategoryPage
+                .getTiresSubcategoryFilterSection()
+                .setYear("2015")
+                .setBrand("Audi")
+                .setModel("A6")
+                .setCompleteSet("2.0 TDi")
                 .selectTireSize(tireCharacteristic)
-                .submitFilterParameters();
+                .filter();
 
         var firstProduct = subCategoryPage.getProduct(1);
         var firstProductName = firstProduct.getName();
@@ -113,9 +110,16 @@ public class FilterTest extends TestRunner {
                 .as("Product name should be the same for subcategory page and product details page")
                 .isEqualTo(firstProductName);
 
-        var actualTireCharacteristic = productDetailsPage
+        var actualTireCharacteristics = productDetailsPage
                 .openCharacteristicTab()
-                .getTireCharacteristic();
+                .getProductCharacteristics();
+
+        var tireWidth = actualTireCharacteristics
+                .get("Ширина шини")
+                .split(" ")[0];
+        var tireProfile = actualTireCharacteristics.get("Профіль");
+        var tireDiameter = actualTireCharacteristics.get("Діаметр");
+        var actualTireCharacteristic = format("%s/%s %s", tireWidth, tireProfile, tireDiameter);
 
         assertThat(tireCharacteristic)
                 .as("Tire characteristic should be " + tireCharacteristic)
