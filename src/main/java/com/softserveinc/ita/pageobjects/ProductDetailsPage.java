@@ -28,10 +28,10 @@ public class ProductDetailsPage {
     }
 
     @Step("Opened product reviews page")
-    public ReviewsPage openReviewsPage() {
+    public ReviewsTab openReviewsTab() {
         $x("//li/a[contains(@href,'comments')]").click();
 
-        return new ReviewsPage();
+        return new ReviewsTab();
     }
 
     @Step("Opened product characteristic tab")
