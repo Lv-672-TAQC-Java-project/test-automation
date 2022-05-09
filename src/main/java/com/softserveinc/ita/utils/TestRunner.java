@@ -6,6 +6,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Listeners;
 
+import static com.softserveinc.ita.utils.PropertyUtil.*;
+
 @Listeners(UiTestListener.class)
 public class TestRunner {
 
@@ -13,8 +15,8 @@ public class TestRunner {
 
     @BeforeSuite
     public void driverConfigurationAndTimeout() {
-        Configuration.browser = "chrome";
-        Configuration.timeout = 60 * 1000;
+        Configuration.browser = getDefaultBrowser();
+        Configuration.timeout = getDefaultTimeout() * 1000;
     }
 
     @BeforeMethod
