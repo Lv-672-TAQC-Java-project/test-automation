@@ -86,18 +86,18 @@ public class FilterTest extends TestRunner {
                 .openCategoryPage(TOOLS_AND_AUTOMOTIVE_PRODUCTS)
                 .openSubCategoryPage("Автошини та диски");
 
-        assertThat(subCategoryPage.isOpenedFilterSection())
+        var filterSection = subCategoryPage.getTiresSubcategoryFilterSection();
+        assertThat(filterSection.isOpened())
                 .as("Filter section should be displayed")
                 .isTrue();
 
-        var tireCharacteristic = "245/40 R19";
-        subCategoryPage
-                .getTiresSubcategoryFilterSection()
+        var expectedTireCharacteristic = "245/40 R19";
+        filterSection
                 .setYear("2015")
                 .setBrand("Audi")
                 .setModel("A6")
-                .setCompleteSet("2.0 TDi")
-                .selectTireSize(tireCharacteristic)
+                .setCarConfiguration("2.0 TDi")
+                .selectTireSize(expectedTireCharacteristic)
                 .filter();
 
         var firstProduct = subCategoryPage.getProduct(1);
@@ -121,8 +121,8 @@ public class FilterTest extends TestRunner {
         var tireDiameter = actualTireCharacteristics.get("Діаметр");
         var actualTireCharacteristic = format("%s/%s %s", tireWidth, tireProfile, tireDiameter);
 
-        assertThat(tireCharacteristic)
-                .as("Tire characteristic should be " + tireCharacteristic)
+        assertThat(expectedTireCharacteristic)
+                .as("Tire characteristic should be " + expectedTireCharacteristic)
                 .isEqualTo(actualTireCharacteristic);
     }
 }
