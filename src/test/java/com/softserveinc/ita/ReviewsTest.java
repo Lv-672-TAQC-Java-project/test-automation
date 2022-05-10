@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.*;
 import com.softserveinc.ita.pageobjects.components.Review;
 import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
 import com.softserveinc.ita.utils.TestRunner;

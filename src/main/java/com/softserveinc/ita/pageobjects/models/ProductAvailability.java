@@ -9,5 +9,5 @@ public enum ProductAvailability {
 
     AVAILABLE,
     UNAVAILABLE,
-    OUT_OF_STOCK;
+    OUT_OF_STOCK
 }
