@@ -21,7 +21,7 @@ public class QuestionTab {
     public int getQuestionsAmount() {
         String questionPath = "//div[@class='comment']";
 
-        if ($x("//div[@class='comment']").is(visible)) {
+        if ($x(questionPath).is(visible)) {
 
             return $$x(questionPath)
                     .shouldHave(sizeGreaterThan(0), ofSeconds(60))
