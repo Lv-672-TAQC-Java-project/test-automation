@@ -1,8 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.QuestionTab;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
-import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.SortOrder;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -11,14 +8,10 @@ import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
 import static com.softserveinc.ita.pageobjects.models.QuestionSortingOption.*;
 import static java.util.Comparator.*;
-import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 public class SortTest extends TestRunner {
     @Description("Add test script to cover 'From cheap to expensive' sort functionality in Rozetka")
@@ -51,32 +44,21 @@ public class SortTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-8")
     @Test(description = "LVTAQC672-8")
     public void verifySortingFunctionByDate() {
-        QuestionTab questionsTab = homePage
+        var questionsTab = homePage
                 .getHeader()
                 .search("iphone")
                 .getProduct(1)
                 .openDetailsPage()
                 .openQuestionTab();
-//                .sort(DATE);
 
-        int amountOfDates = 3;
-
-        var questionsDates = questionsTab.getUniqueQuestionsDates();
-
-//        System.out.println(questionsDates);
-
-        assertThat(questionsDates)
-//                .as("should not contain duplicate")
-//                .doesNotHaveDuplicates()
-                .as("should be greater than " + amountOfDates)
-                .hasSizeGreaterThan(amountOfDates);
+        assertThat(questionsTab.getQuestionsAmount())
+                .as("should be greater than three")
+                .isGreaterThan(3);
 
         questionsTab.sort(DATE);
 
-        assertThat(questionsDates).isSortedAccordingTo(reverseOrder());
-
-//        range(1, amountOfDates).forEach(i -> assertThat(questionsDates.get(i))
-//                .as("date should be sorted to fall down")
-//                .isAfter(questionsDates.get(i + 1)));
+        assertThat(questionsTab.getQuestionsDates())
+                .as("date should be sorted to fall down")
+                .isSortedAccordingTo(reverseOrder());
     }
 }
