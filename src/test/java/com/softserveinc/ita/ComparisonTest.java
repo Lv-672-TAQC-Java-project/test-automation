@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.ComparisonPage;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -19,14 +18,14 @@ public class ComparisonTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-9")
     @Test(description = "LVTAQC672-9")
     public void verifyDeleteProductFromComparisonPage() {
-        List<String> productNames = new ArrayList<>();
+        var productNames = new ArrayList<String>();
         productNames.add("Ванна акрилова CERSANIT VIRGO 170 +");
         productNames.add("Ванна акрилова BESCO Modern 130х70");
         productNames.add("Ванна акрилова SERENA SE-4001 150x70");
 
         String category = "Ванни";
 
-        ComparisonPage comparisonProducts = homePage
+        var comparisonProducts = homePage
                 .getCategorySideBar()
                 .openCategoryPage(PLUMBING_AND_REPAIR)
                 .openSubCategoryPage(category)
