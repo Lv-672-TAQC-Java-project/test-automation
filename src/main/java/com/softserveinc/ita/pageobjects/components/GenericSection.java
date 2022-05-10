@@ -17,6 +17,8 @@ abstract class GenericSection {
         var inSectionProductsPath = format("(//ul[@class='main-goods__grid ng-star-inserted'])[%s]//div[@class='tile']",
                 getSectionIndex());
 
+        //has not changed rangeClosed to $$x().stream()
+        //to pass to the constructor of class xpath instead of SelenideElement
         return rangeClosed(1, $$x(inSectionProductsPath)
                 .shouldHave(sizeGreaterThanOrEqual(0), ofSeconds(20))
                 .size())
@@ -27,8 +29,9 @@ abstract class GenericSection {
     public List<String> getNames() {
         var productsInSection = getProducts();
 
-        return rangeClosed(0, productsInSection.size() - 1)
-                .mapToObj(i -> productsInSection.get(i).getName())
+        return productsInSection
+                .stream()
+                .map(InSectionProduct::getName)
                 .collect(toList());
     }
 
