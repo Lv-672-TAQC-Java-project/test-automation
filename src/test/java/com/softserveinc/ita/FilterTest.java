@@ -1,10 +1,12 @@
 package com.softserveinc.ita;
 
+
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import org.apache.commons.lang.math.Range;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
@@ -77,27 +79,61 @@ public class FilterTest extends TestRunner {
                         .isEqualTo(expectedAvailability));
     }
 
-    @Test
-    public void verifyThatFilteredProductsContainExpectedCharacteristics() {
-        String subCategoryName = "Acer";
+    @Description("Add a test script to cover a set of filters: 'Процесор', 'Обсяг оперативної пам'яті', 'Діагональ екрана' in the 'Ноутбуки' category")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-32")
+    @Test(description = "LVTAQC672-32")
+    public void verifyThatFilteredProductContainExpectedCharacteristics() {
         var subCategoryPage = homePage
                 .getHeader()
                 .openCatalog()
-                .openSubCategoryPage(LAPTOPS_AND_COMPUTERS, subCategoryName);
+                .openSubCategoryPage(LAPTOPS_AND_COMPUTERS, " HP (Hewlett Packard) ");
 
         assertThat(subCategoryPage.getTitle())
-                .as("The title on the subCategoryPage should contain " + subCategoryName)
-                .containsIgnoringCase(subCategoryName);
+                .as("The title of the subCategory page should contain HP")
+                .containsIgnoringCase("HP");
+
+        var processor = "Intel Core i5";
+        var screenDiagonal = "15\"-15.6\"";
+        var randomAccessMemoryAmount = "16 - 24 ГБ";
 
         var productCharacteristics = subCategoryPage
                 .getFilter()
-                .filterBySection(PROCESSOR,"Intel Core i5")
+                .filterBySection(PROCESSOR, processor)
                 .getFilter()
-                .filterBySection(SCREEN_DIAGONAL,"15\"-15.6\"")
+                .filterBySection(SCREEN_DIAGONAL, screenDiagonal)
                 .getFilter()
-                .filterBySection(RANDOM_ACCESS_MEMORY_AMOUNT,"16 - 24 ГБ")
+                .filterBySection(RANDOM_ACCESS_MEMORY_AMOUNT, randomAccessMemoryAmount)
                 .getProduct(1)
                 .openDetailsPage()
-                .openCharacteristicTab();
+                .openCharacteristicTab()
+                .getProductCharacteristics();
+
+        assertThat(productCharacteristics.get("Процесор"))
+                .as("The processor name must contain a value from the filter " + processor)
+                .containsIgnoringCase(processor);
+
+        var screenDiagonalAmount = productCharacteristics.get("Діагональ екрана");
+        var screenDiagonalValueFromCharacteristics = Double.parseDouble(screenDiagonalAmount.substring(0, 4));
+
+        screenDiagonal = screenDiagonal.replaceAll("[^\\d-.]", "");
+        String[] amount = screenDiagonal.split("-");
+        var firstScreenDiagonalValue = Double.parseDouble(amount[0]);
+        var secondScreenDiagonalValue = Double.parseDouble(amount[1]);
+
+        assertThat(screenDiagonalValueFromCharacteristics)
+                .as("Screen diagonal value on the characteristics tab should be within the range of values of the selected filter")
+                .isBetween(firstScreenDiagonalValue, secondScreenDiagonalValue);
+
+        var memoryAmount = productCharacteristics.get("Обсяг оперативної пам'яті");
+        int memoryAmountFromCharacteristics = Integer.parseInt(memoryAmount.replaceAll("[^\\d]", ""));
+
+        memoryAmount = memoryAmount.replaceAll("[^\\d-]", "");
+        String[] parts = memoryAmount.split("-");
+        int firstMemoryValue = Integer.parseInt(parts[0]);
+        int secondMemoryValue = Integer.parseInt(parts[1]);
+
+        assertThat(memoryAmountFromCharacteristics)
+                .as("The amount of RAM on the characteristics tab should be within the range of values of the selected filter")
+                .isBetween(firstMemoryValue, secondMemoryValue);
     }
 }
