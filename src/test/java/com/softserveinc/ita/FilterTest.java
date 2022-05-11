@@ -6,7 +6,6 @@ import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import org.apache.commons.lang.math.Range;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
@@ -79,61 +78,55 @@ public class FilterTest extends TestRunner {
                         .isEqualTo(expectedAvailability));
     }
 
-    @Description("Add a test script to cover a set of filters: 'Процесор', 'Обсяг оперативної пам'яті', 'Діагональ екрана' in the 'Ноутбуки' category")
+    @Description("Add a test script to cover a set of filters: 'Процесор', 'Бренд', 'Обсяг оперативної пам'яті' in the 'Ноутбуки' subcategory")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-32")
     @Test(description = "LVTAQC672-32")
-    public void verifyThatFilteredProductContainExpectedCharacteristics() {
+    public void verifyThatFilteredProductContainsExpectedCharacteristics() {
         var subCategoryPage = homePage
-                .getHeader()
-                .openCatalog()
-                .openSubCategoryPage(LAPTOPS_AND_COMPUTERS, " HP (Hewlett Packard) ");
+                .getCategorySideBar()
+                .openCategoryPage(LAPTOPS_AND_COMPUTERS)
+                .openSubCategoryPage("Ноутбуки");
 
-        assertThat(subCategoryPage.getTitle())
-                .as("The title of the subCategory page should contain HP")
-                .containsIgnoringCase("HP");
-
+        var manufacturer = "HP";
         var processor = "Intel Core i5";
-        var screenDiagonal = "15\"-15.6\"";
-        var randomAccessMemoryAmount = "16 - 24 ГБ";
+        var memoryValue = "16 - 24 ГБ";
 
-        var productCharacteristics = subCategoryPage
+        var filteredProduct = subCategoryPage
+                .getFilter()
+                .filterBySection(MANUFACTURER, manufacturer)
                 .getFilter()
                 .filterBySection(PROCESSOR, processor)
                 .getFilter()
-                .filterBySection(SCREEN_DIAGONAL, screenDiagonal)
-                .getFilter()
-                .filterBySection(RANDOM_ACCESS_MEMORY_AMOUNT, randomAccessMemoryAmount)
-                .getProduct(1)
+                .filterBySection(RAM_SIZE, memoryValue)
+                .getProduct(1);
+
+        assertThat(filteredProduct.getName())
+                .as("Product name should contain " + manufacturer)
+                .containsIgnoringCase(manufacturer);
+
+        var productCharacteristics = filteredProduct
                 .openDetailsPage()
                 .openCharacteristicTab()
                 .getProductCharacteristics();
 
         assertThat(productCharacteristics.get("Процесор"))
-                .as("The processor name must contain a value from the filter " + processor)
+                .as("The processor name should contain a value from the filter " + processor)
                 .containsIgnoringCase(processor);
 
-        var screenDiagonalAmount = productCharacteristics.get("Діагональ екрана");
-        var screenDiagonalValueFromCharacteristics = Double.parseDouble(screenDiagonalAmount.substring(0, 4));
+        var memoryValueInCharacteristics = productCharacteristics.get("Обсяг оперативної пам'яті");
+        int memorySize = Integer.parseInt(memoryValueInCharacteristics.replaceAll("[^\\d]", ""));
 
-        screenDiagonal = screenDiagonal.replaceAll("[^\\d-.]", "");
-        String[] amount = screenDiagonal.split("-");
-        var firstScreenDiagonalValue = Double.parseDouble(amount[0]);
-        var secondScreenDiagonalValue = Double.parseDouble(amount[1]);
+        int firstMemorySizeFromFilter = parseStringIntoNumbers(memoryValue, 0);
+        int secondMemorySizeFromFilter = parseStringIntoNumbers(memoryValue, 1);
 
-        assertThat(screenDiagonalValueFromCharacteristics)
-                .as("Screen diagonal value on the characteristics tab should be within the range of values of the selected filter")
-                .isBetween(firstScreenDiagonalValue, secondScreenDiagonalValue);
+        assertThat(memorySize)
+                .as("The size of RAM on the characteristics tab should be within the range of values of the selected filter")
+                .isBetween(firstMemorySizeFromFilter, secondMemorySizeFromFilter);
+    }
 
-        var memoryAmount = productCharacteristics.get("Обсяг оперативної пам'яті");
-        int memoryAmountFromCharacteristics = Integer.parseInt(memoryAmount.replaceAll("[^\\d]", ""));
-
-        memoryAmount = memoryAmount.replaceAll("[^\\d-]", "");
-        String[] parts = memoryAmount.split("-");
-        int firstMemoryValue = Integer.parseInt(parts[0]);
-        int secondMemoryValue = Integer.parseInt(parts[1]);
-
-        assertThat(memoryAmountFromCharacteristics)
-                .as("The amount of RAM on the characteristics tab should be within the range of values of the selected filter")
-                .isBetween(firstMemoryValue, secondMemoryValue);
+    private int parseStringIntoNumbers(String text, int index) {
+        text = text.replaceAll("[^\\d-]", "");
+        String[] parts = text.split("-");
+        return Integer.parseInt(parts[index]);
     }
 }
