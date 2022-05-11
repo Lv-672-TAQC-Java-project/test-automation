@@ -27,11 +27,11 @@ public class ProductDetailsPage {
         return new Cart();
     }
 
-    @Step("Opened product reviews page")
-    public ReviewsPage openReviewsPage() {
+    @Step("Opened product reviews tab")
+    public ReviewsTab openReviewsTab() {
         $x("//li/a[contains(@href,'comments')]").click();
 
-        return new ReviewsPage();
+        return new ReviewsTab();
     }
 
     @Step("Opened product characteristic tab")
