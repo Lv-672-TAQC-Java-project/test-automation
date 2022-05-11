@@ -27,9 +27,8 @@ abstract class GenericSection {
     }
 
     public List<String> getNames() {
-        var productsInSection = getProducts();
 
-        return productsInSection
+        return getProducts()
                 .stream()
                 .map(InSectionProduct::getName)
                 .collect(toList());

@@ -13,27 +13,27 @@ public class ProductsMemorizationTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-33")
     @Test(description = "LVTAQC672-33")
     public void verifyThatTheLastWatchedProductsAreRememberedInTheRecentlyViewedProductsSection() {
-        String searchTerm = "Стілець";
+        var searchTerm = "Стілець";
         var header = homePage.getHeader();
         var searchResultPage = header.search(searchTerm);
 
         var firstProduct = searchResultPage.getProduct(1);
-        String firstProductName = firstProduct.getName();
+        var firstProductName = firstProduct.getName();
         //need that to add the product to the section
         firstProduct.openDetailsPage();
 
         header.search(searchTerm);
         var secondProduct = searchResultPage.getProduct(2);
-        String secondProductName = secondProduct.getName();
+        var secondProductName = secondProduct.getName();
         secondProduct.openDetailsPage();
 
         header.search(searchTerm);
         var thirdProduct = searchResultPage.getProduct(3);
-        String thirdProductName = thirdProduct.getName();
+        var thirdProductName = thirdProduct.getName();
         thirdProduct.openDetailsPage();
 
-        header.openHomePage();
-        var lastViewedProductsNames = homePage
+        var lastViewedProductsNames = header
+                .openHomePage()
                 .getLastViewedProductsSection()
                 .getNames();
 
