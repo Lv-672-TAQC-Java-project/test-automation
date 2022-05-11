@@ -27,7 +27,7 @@ public class ProductDetailsPage {
         return new Cart();
     }
 
-    @Step("Opened product reviews page")
+    @Step("Opened product reviews tab")
     public ReviewsTab openReviewsTab() {
         $x("//li/a[contains(@href,'comments')]").click();
 
