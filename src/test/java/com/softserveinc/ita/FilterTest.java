@@ -80,7 +80,7 @@ public class FilterTest extends TestRunner {
     @Description("Verified that product characteristic contains searched value")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-29")
     @Test(description = "LVTAQC672-29")
-    public void verifyThatProductCharacteristicContainsSearchedValue() {
+    public void verifyThatProductCharacteristicContainsValueSearchedUsingAdditionalFilterSection() {
         var subCategoryPage = homePage
                 .getCategorySideBar()
                 .openCategoryPage(TOOLS_AND_AUTOMOTIVE_PRODUCTS)
