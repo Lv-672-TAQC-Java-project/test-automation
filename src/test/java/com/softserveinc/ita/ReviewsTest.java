@@ -8,7 +8,6 @@ import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
-import java.util.List;
 import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
