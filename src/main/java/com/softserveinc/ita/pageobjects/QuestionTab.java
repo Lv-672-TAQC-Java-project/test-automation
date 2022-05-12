@@ -8,29 +8,15 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static com.codeborne.selenide.CollectionCondition.sizeGreaterThan;
+import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.*;
 import static java.time.Duration.*;
-import static java.util.stream.IntStream.range;
+import static java.util.stream.IntStream.rangeClosed;
 
 public class QuestionTab {
-
-    public int getQuestionsAmount() {
-        String questionPath = "//div[@class='comment']";
-
-        if ($x(questionPath).is(visible)) {
-
-            return $$x(questionPath)
-                    .shouldHave(sizeGreaterThan(0), ofSeconds(60))
-                    .size();
-        } else {
-
-            return 0;
-        }
-    }
 
     @Step("selected sort option in tab question")
     public QuestionTab sort(QuestionSortingOption sortOption) {
@@ -46,8 +32,18 @@ public class QuestionTab {
     }
 
     public List<Date> getQuestionsDates() {
+        var questionPath = "//div[@class='comment']";
+        int questionsAmount;
 
-        return range(1, getQuestionsAmount())
+        if ($x(questionPath).is(visible)) {
+            questionsAmount = $$x(questionPath)
+                    .shouldHave(sizeNotEqual(0), ofSeconds(60))
+                    .size();
+        } else {
+            questionsAmount = 0;
+        }
+
+        return rangeClosed(1, questionsAmount)
                 .mapToObj(i -> getQuestion(i).getDate())
                 .collect(Collectors.toList());
     }

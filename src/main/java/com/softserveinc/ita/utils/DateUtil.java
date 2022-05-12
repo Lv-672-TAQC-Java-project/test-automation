@@ -16,14 +16,13 @@ public class DateUtil {
     public static Date toDate(String date) {
         //Contains a re-check because today's date is written in
         // word "сьогодні"("сегодня") and yesterday's - "вчора"("вчера")
-        // checked if word contain cyrillic letter "с"
         LocalDate localDate;
 
         if (date.matches(".*\\d.*")) {
             var dateTimeFormatter = ofPattern("dd MMMM uuuu")
                     .withLocale(new Locale("uk"));
             localDate = parse(date, dateTimeFormatter);
-        } else if (date.contains("с")) {
+        } else if (date.equals("сегодня") || date.equals("сьогодні")) {
             localDate = now();
         } else {
             localDate = now().minusDays(1);

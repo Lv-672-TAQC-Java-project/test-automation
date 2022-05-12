@@ -14,6 +14,6 @@ public class Question {
 
     public Date getDate() {
 
-        return toDate($x(rootElementPath+"//time[1]").text());
+        return toDate($x(rootElementPath + "//time[1]").text());
     }
 }

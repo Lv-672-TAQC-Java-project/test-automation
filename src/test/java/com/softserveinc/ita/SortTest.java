@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import java.util.Collections;
 
 import static com.softserveinc.ita.pageobjects.models.QuestionSortingOption.*;
-import static java.util.Comparator.*;
+import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SortTest extends TestRunner {
@@ -43,7 +43,7 @@ public class SortTest extends TestRunner {
     @Description("Add test script to cover sorting function in tab list 'Питання' by date in Rozetka")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-8")
     @Test(description = "LVTAQC672-8")
-    public void verifySortingFunctionByDate() {
+    public void verifySortingFunctionByDateInQuestionTab() {
         var questionsTab = homePage
                 .getHeader()
                 .search("iphone")
@@ -51,14 +51,17 @@ public class SortTest extends TestRunner {
                 .openDetailsPage()
                 .openQuestionTab();
 
-        assertThat(questionsTab.getQuestionsAmount())
-                .as("should be greater than three")
-                .isGreaterThan(3);
+        var questionsDates = questionsTab.getQuestionsDates();
+
+        assertThat(questionsDates)
+                .as("should be greater three dates in the list")
+                .hasSizeGreaterThan(3);
 
         questionsTab.sort(DATE);
 
-        assertThat(questionsTab.getQuestionsDates())
-                .as("date should be sorted to fall down")
-                .isSortedAccordingTo(reverseOrder());
+        range(1, (questionsDates.size() - 1))
+                .forEach(i -> assertThat(questionsDates.get(i))
+                        .as("date should be sorted to fall down")
+                        .isAfterOrEqualTo(questionsDates.get(i + 1)));
     }
 }
