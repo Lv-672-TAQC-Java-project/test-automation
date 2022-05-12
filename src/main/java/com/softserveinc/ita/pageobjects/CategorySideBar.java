@@ -18,8 +18,8 @@ public class CategorySideBar {
 
         return new CategoryPage();
     }
-//    I've made is as a separate method and page class, because page with flawed products is build slightly differently
-//    is build slightly differently than any other page written in CategoryName
+//    I've made this as a separate method and page class, because page with flawed products
+//    is built slightly differently than any other page written in CategoryName enum
     @Step("Opened flawed products page")
     public FlawedProductsPage openFlawedProductsPage() {
         $x("//*[@class = 'menu-categories__link' and contains(@href, 'rasprodaja')]").click();
