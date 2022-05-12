@@ -11,6 +11,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
+import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
@@ -20,12 +21,14 @@ public class InCartProduct {
 
     public String getName() {
 
-        return $x(String.format("%s%s", rootElementPath, "//div[@class='cart-product__main']/a")).text();
+        return $x(format("%s%s", rootElementPath, "//div[@class='cart-product__main']/a"))
+                .shouldBe(visible)
+                .text();
     }
 
     @Step("Removed product from the cart")
     public Cart remove() {
-        $x(String.format("%s%s", rootElementPath, "//rz-popup-menu/button")).click();
+        $x(format("%s%s", rootElementPath, "//rz-popup-menu/button")).click();
         $x("//li[@class='popup-menu__item ng-star-inserted']//button").click();
 
         return new Cart();
@@ -33,9 +36,9 @@ public class InCartProduct {
 
     @Step("Opened additional services")
     public Cart expandAdditionalServicesSection() {
-        SelenideElement additionalServicesButton = $x(String.format("%s%s", rootElementPath,
+        SelenideElement additionalServicesButton = $x(format("%s%s", rootElementPath,
                 "//button[contains(@class, 'cart-services__toggle')]"));
-        SelenideElement hiddenAdditionalServicesList = $x(String.format("%s%s", rootElementPath,
+        SelenideElement hiddenAdditionalServicesList = $x(format("%s%s", rootElementPath,
                 "//ul[@Class='cart-services__list display-none']"));
 
         //If there is more than one product in the cart, the sections of additional services are hidden and need to be
@@ -54,7 +57,7 @@ public class InCartProduct {
 
     @Step("Add one more product from the cart")
     public Cart addOneMoreProduct() {
-        $x(String.format("%s//button[@data-testid='cart-counter-increment-button']", rootElementPath)).click();
+        $x(format("%s//button[@data-testid='cart-counter-increment-button']", rootElementPath)).click();
         SelenideElement loadSpinner = $x("//div[@class='modal__content modal__content--locked']");
         Duration timeout = ofSeconds(10);
 

@@ -81,4 +81,13 @@ public class Product {
 
         return new ReviewsPage();
     }
+
+    public boolean isDefectDescriptionVisible() {
+        $x(rootElementPath)
+                .shouldBe(visible)
+                .hover();
+        return $x(String.format(rootElementPath + "//*[@class = 'goods-tile__description goods-tile__description_type_text ng-star-inserted']"))
+                .shouldBe(visible)
+                .isDisplayed();
+    }
 }
