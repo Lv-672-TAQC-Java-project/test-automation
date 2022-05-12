@@ -1,13 +1,17 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.utils.TestRunner;
+import io.qameta.allure.Description;
+import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class FlawedProductsTest extends TestRunner {
 
-    @Test
+    @Description("Add test script to verify that flawed products have additional field with defect description.")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-38")
+    @Test(description = "LVTAQC672-38")
     public void verifyThatWrittenOffProductsHaveAdditionalDescription() {
         var header = homePage.getHeader();
         var flawedProductsPage =
