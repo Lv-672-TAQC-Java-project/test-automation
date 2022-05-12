@@ -1,10 +1,8 @@
 package com.softserveinc.ita.pageobjects.components;
 
-import com.softserveinc.ita.pageobjects.Cart;
-import com.softserveinc.ita.pageobjects.ComparisonModal;
-import com.softserveinc.ita.pageobjects.ProductDetailsPage;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.*;
 import io.qameta.allure.Step;
+import org.checkerframework.checker.index.qual.PolyUpperBound;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
@@ -50,5 +48,12 @@ public class Header {
         commonSearch(fullProductName);
 
         return new ProductDetailsPage();
+    }
+
+    @Step("Opened menu modal")
+    public MenuModal openMenuModal(){
+        $x("//rz-mobile-user-menu//button").click();
+
+        return new MenuModal();
     }
 }

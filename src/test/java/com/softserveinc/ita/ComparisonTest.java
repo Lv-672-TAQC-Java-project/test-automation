@@ -155,4 +155,43 @@ public class ComparisonTest extends TestRunner {
                 .hasSizeGreaterThan(secondProductCharacteristicsAfterChange
                         .size());
     }
+
+    @Test
+    public void verifyThatItemDeletedFromComparisonModal() {
+        var header = homePage.getHeader();
+        //method for deleting all items from comparison modal is in progress
+        var filterCategorySideBar = header
+                .search("lenovo")
+                .getFilterCategorySideBar();
+
+        //required in order to fill the comparison modal
+        filterCategorySideBar
+                .filterBySubCategory("Чохли для мобільних телефонів")
+                .getProduct(1)
+                .addToListOfComparisons();
+
+        filterCategorySideBar
+                .filterBySubCategory("Блоки живлення для ноутбуків")
+                .getProduct(1)
+                .addToListOfComparisons();
+
+        var comparisonModal = header
+                .openMenuModal()
+                .openComparisonModal();
+
+        var items = comparisonModal.getItems();
+
+        assertThat(items)
+                .as("The 2 items should be in comparison modal")
+                .hasSize(2);
+
+        items = comparisonModal
+                .getItem("Блоки живлення для ноутбуків")
+                .remove()
+                .getItems();
+
+        assertThat(items)
+                .as("The 1 items should be in comparison modal")
+                .hasSize(1);
+    }
 }
