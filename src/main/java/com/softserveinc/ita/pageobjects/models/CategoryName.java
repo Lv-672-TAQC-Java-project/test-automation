@@ -21,8 +21,7 @@ public enum CategoryName {
     PET_PRODUCTS("zootovary/c3520929/"),
     STATIONERY_AND_BOOKS("office-school-books/c4625734/"),
     ALCOHOLIC_BEVERAGES_AND_PRODUCTS("alkoholnie-napitki-i-produkty/c4626923/"),
-    GOODS_FOR_BUSINESS_AND_SERVICES("tovary-dlya-biznesa/c4627851/"),
-    WRITTEN_OFF_PRODUCTS("rasprodaja/c83850/");
+    GOODS_FOR_BUSINESS_AND_SERVICES("tovary-dlya-biznesa/c4627851/");
 
     private final String categoryPath;
 }

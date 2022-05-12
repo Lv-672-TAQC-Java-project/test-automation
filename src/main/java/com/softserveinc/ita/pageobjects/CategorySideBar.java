@@ -18,4 +18,11 @@ public class CategorySideBar {
 
         return new CategoryPage();
     }
+
+    @Step("Opened flawed products page")
+    public FlawedProductsPage openFlawedProductsPage() {
+        $x("//*[@class = 'menu-categories__link' and contains(@href, 'rasprodaja')]").click();
+
+        return new FlawedProductsPage();
+    }
 }
