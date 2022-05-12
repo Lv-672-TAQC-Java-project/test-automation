@@ -20,9 +20,7 @@ public class InCartProduct {
 
     public String getName() {
 
-        return $x(String.format("%s%s", rootElementPath, "//div[@class='cart-product__main']/a"))
-                .shouldBe(visible)
-                .text();
+        return $x(String.format("%s%s", rootElementPath, "//div[@class='cart-product__main']/a")).text();
     }
 
     @Step("Removed product from the cart")
