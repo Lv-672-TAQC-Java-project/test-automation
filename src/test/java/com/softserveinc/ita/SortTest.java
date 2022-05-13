@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 import java.util.Collections;
 
 import static com.softserveinc.ita.pageobjects.models.QuestionSortingOption.*;
+import static java.util.Collections.reverseOrder;
 import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -43,7 +44,7 @@ public class SortTest extends TestRunner {
     @Description("Add test script to cover sorting function in tab list 'Питання' by date in Rozetka")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-8")
     @Test(description = "LVTAQC672-8")
-    public void verifySortingFunctionByDateInQuestionTab() {
+    public void verifySortingQuestionByDateInQuestionTab() {
         var questionsTab = homePage
                 .getHeader()
                 .search("iphone")
@@ -63,5 +64,9 @@ public class SortTest extends TestRunner {
                 .forEach(i -> assertThat(questionsDates.get(i))
                         .as("date should be sorted to fall down")
                         .isAfterOrEqualTo(questionsDates.get(i + 1)));
+
+        assertThat(questionsDates)
+                .as("date should be sorted to grow up")
+                .isSortedAccordingTo(reverseOrder());
     }
 }
