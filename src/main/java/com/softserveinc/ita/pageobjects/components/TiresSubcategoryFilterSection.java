@@ -2,10 +2,11 @@ package com.softserveinc.ita.pageobjects.components;
 
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.enabled;
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.lang.String.format;
-import static com.codeborne.selenide.Condition.*;
 import static java.time.Duration.ofSeconds;
 
 public class TiresSubcategoryFilterSection {
