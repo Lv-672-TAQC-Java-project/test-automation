@@ -1,6 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.softserveinc.ita.pageobjects.product.Product;
+import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 
 import java.time.Duration;
@@ -23,23 +23,37 @@ public class ComparisonModal {
         return new ComparisonPage();
     }
 
-    public ComparisonModalItem getItem(String name){
-        String categoryLinkPath = format("//a[contains(text(), '%s')]//ancestor::*[contains(@class, 'comparison-modal__list')]", name);
-        $x(categoryLinkPath).click();
+    public ItemComparisonModal getItem(String name) {
+        String itemsPath = format("//a[contains(text(), '%s')]//ancestor::*[contains(@class, 'comparison-modal__list')]", name);
+        $x(itemsPath).click();
 
-        return new ComparisonModalItem(categoryLinkPath);
+        return new ItemComparisonModal(itemsPath);
     }
 
-    public List<ComparisonModalItem> getItems() {
-        List<ComparisonModalItem> products = new LinkedList<>();
-        String productsPath = "//*[contains(@class, 'comparison-modal__list')]//li";
-        int amountOfProducts = $$x(productsPath)
+    public ItemComparisonModal getItem(int index) {
+        String itemsPath = format("//*[contains(@class, 'comparison-modal__list')]//li[%s]", index);
+        $x(itemsPath).click();
+
+        return new ItemComparisonModal(itemsPath);
+    }
+
+    public List<ItemComparisonModal> getItems() {
+        List<ItemComparisonModal> items = new LinkedList<>();
+        String itemsPath = "//*[contains(@class, 'comparison-modal__list')]//li";
+        int itemsCount = $$x(itemsPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
-        for (int i = 1; i <= amountOfProducts; i++) {
-            products.add(new ComparisonModalItem(format("(%s)[%s]", productsPath, i)));
+        for (int i = 1; i <= itemsCount; i++) {
+            items.add(new ItemComparisonModal(format("(%s)[%s]", itemsPath, i)));
         }
 
-        return products;
+        return items;
+    }
+
+    @Step("Closed comparison modal")
+    public HomePage close() {
+        $x("//button[@class = 'modal__close']").click();
+
+        return new HomePage();
     }
 }

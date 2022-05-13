@@ -4,8 +4,9 @@ import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 
 import static com.codeborne.selenide.Selenide.$x;
+
 @AllArgsConstructor
-public class ComparisonModalItem {
+public class ItemComparisonModal {
     private final String rootElementPath;
 
     @Step("Opened Comparison Page")
@@ -16,7 +17,7 @@ public class ComparisonModalItem {
     }
 
     @Step("Removed from comparison modal")
-    public ComparisonModal remove(){
+    public ComparisonModal remove() {
         $x(rootElementPath + "//button").click();
 
         return new ComparisonModal();

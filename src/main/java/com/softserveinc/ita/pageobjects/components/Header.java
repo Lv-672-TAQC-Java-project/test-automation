@@ -2,7 +2,6 @@ package com.softserveinc.ita.pageobjects.components;
 
 import com.softserveinc.ita.pageobjects.*;
 import io.qameta.allure.Step;
-import org.checkerframework.checker.index.qual.PolyUpperBound;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static org.openqa.selenium.Keys.ENTER;
@@ -51,7 +50,7 @@ public class Header {
     }
 
     @Step("Opened menu modal")
-    public MenuModal openMenuModal(){
+    public MenuModal openMenuModal() {
         $x("//rz-mobile-user-menu//button").click();
 
         return new MenuModal();
