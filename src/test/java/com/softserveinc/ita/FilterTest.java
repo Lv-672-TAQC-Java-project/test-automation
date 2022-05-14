@@ -91,12 +91,10 @@ public class FilterTest extends TestRunner {
         var processor = "Intel Core i5";
         var memoryValue = "16 - 24 ГБ";
 
-        var filteredProduct = subCategoryPage
-                .getFilter()
-                .filterBySection(MANUFACTURER, manufacturer)
-                .getFilter()
-                .filterBySection(PROCESSOR, processor)
-                .getFilter()
+        var filter = subCategoryPage.getFilter();
+        filter.filterBySection(MANUFACTURER, manufacturer);
+        filter.filterBySection(PROCESSOR, processor);
+        var filteredProduct = filter
                 .filterBySection(RAM_SIZE, memoryValue)
                 .getProduct(1);
 
