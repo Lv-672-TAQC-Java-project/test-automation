@@ -78,9 +78,9 @@
 
     <test name="Products memorization functionality">
         <classes>
-            <class name="com.softserveinc.ita.ProductsMemorizationTest">
+            <class name="com.softserveinc.ita.LastViewedProductsRememberedTest">
                 <methods>
-                    <include name="verifyThatTheLastWatchedProductsAreRememberedInTheRecentlyViewedProductsSection" />
+                    <include name="verifyThatTheLastViewedProductsAreRememberedInTheLastViewedProductsSection" />
                 </methods>
             </class>
         </classes>
