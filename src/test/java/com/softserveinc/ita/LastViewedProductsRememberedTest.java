@@ -7,12 +7,12 @@ import org.testng.annotations.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ProductsMemorizationTest extends TestRunner {
+public class LastViewedProductsRememberedTest extends TestRunner {
     @Description("Verify that in the 'Останні переглянуті товари' products section are " +
-            "three products that were watched before in this section.")
+            "three products that were viewed before in this section.")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-33")
     @Test(description = "LVTAQC672-33")
-    public void verifyThatTheLastWatchedProductsAreRememberedInTheRecentlyViewedProductsSection() {
+    public void verifyThatTheLastViewedProductsAreRememberedInTheLastViewedProductsSection() {
         var searchTerm = "Стілець";
         var header = homePage.getHeader();
         var searchResultPage = header.search(searchTerm);
