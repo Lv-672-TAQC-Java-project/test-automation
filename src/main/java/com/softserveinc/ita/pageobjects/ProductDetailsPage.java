@@ -1,9 +1,9 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
-import com.softserveinc.ita.pageobjects.models.ProductDetailsTabName;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.lang.String.format;
@@ -48,5 +48,19 @@ public class ProductDetailsPage {
         $x(format("//ul[@class='tabs__list']/li[4]")).click();
 
         return new QuestionTab();
+    }
+
+    public DeliveryLocationModal openDeliveryLocationModal() {
+        productNameLabel.scrollIntoView(true);
+        $x("//rz-delivery-in//button").click();
+
+        return new DeliveryLocationModal();
+    }
+
+    public String getDeliveryCityName() {
+
+        return $x("//rz-delivery-in//span")
+                .shouldBe(visible)
+                .text();
     }
 }
