@@ -29,7 +29,7 @@ public class DeliveryLocationTest extends TestRunner {
                 .searchLocation(city, region);
 
         assertThat(productDetailsPage.getDeliveryCityName())
-                .as("Delivery location on the product details page should contain chosen " + city + "and " + region)
+                .as("Delivery location on the product details page should contain selected " + city + "and " + region)
                 .contains(city, region);
     }
 }
