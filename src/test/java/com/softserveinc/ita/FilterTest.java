@@ -92,8 +92,10 @@ public class FilterTest extends TestRunner {
         var memoryValue = "16 - 24 ГБ";
 
         var filter = subCategoryPage.getFilter();
-        filter.filterBySection(MANUFACTURER, manufacturer);
-        filter.filterBySection(PROCESSOR, processor);
+        filter
+                .filterBySection(MANUFACTURER, manufacturer);
+        filter
+                .filterBySection(PROCESSOR, processor);
         var filteredProduct = filter
                 .filterBySection(RAM_SIZE, memoryValue)
                 .getProduct(1);
