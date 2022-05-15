@@ -50,6 +50,7 @@ public class ProductDetailsPage {
         return new QuestionTab();
     }
 
+    @Step("Opened delivery location modal")
     public DeliveryLocationModal openDeliveryLocationModal() {
         productNameLabel.scrollIntoView(true);
         $x("//rz-delivery-in//button").click();

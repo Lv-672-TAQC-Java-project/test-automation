@@ -1,9 +1,12 @@
 package com.softserveinc.ita.pageobjects;
 
+import io.qameta.allure.Step;
+
 import static com.codeborne.selenide.Selenide.$x;
 
 public class DeliveryLocationModal {
 
+    @Step("Searched delivery location for {city} and {region}")
     public ProductDetailsPage searchLocation(String city, String region) {
         String inputFieldPath = "//div[@class='autocomplete']/input[@name='search']";
         $x(inputFieldPath).clear();
