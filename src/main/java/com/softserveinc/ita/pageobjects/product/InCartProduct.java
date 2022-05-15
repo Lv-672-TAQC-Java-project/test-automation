@@ -65,4 +65,9 @@ public class InCartProduct {
 
         return new Cart();
     }
+
+    public String getAlertMessage() {
+
+        return $x("//*[@role = 'alert']").text();
+    }
 }

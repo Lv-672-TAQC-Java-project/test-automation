@@ -19,40 +19,58 @@ public class FlawedProductsTest extends TestRunner {
                         .getCategorySideBar()
                         .openFlawedProductsPage();
 
+        String flawedProductsCategory = "телевізори та монітори";
+        flawedProductsPage.openFlawedProductsCategoryPage(flawedProductsCategory);
+
         var firstFlawedProduct = flawedProductsPage.getProduct(1);
-        var secondFlawedProduct = flawedProductsPage.getProduct(2);
+//        var secondFlawedProduct = flawedProductsPage.getProduct(2);
 
         boolean firstProductDefect = firstFlawedProduct.isDefectDescriptionVisible();
-        boolean secondProductDefect = secondFlawedProduct.isDefectDescriptionVisible();
+//        boolean secondProductDefect = secondFlawedProduct.isDefectDescriptionVisible();
 
         assertThat(firstProductDefect)
-                .as("Red description message should be visible after hovering mouse over product")
+                .as("Red description message should be visible after hovering mouse over flawed product")
                 .isTrue();
 
-        assertThat(secondProductDefect)
-                .as("Red description message should be visible after hovering mouse over product")
-                .isTrue();
+//        assertThat(secondProductDefect)
+//                .as("Red description message should be visible after hovering mouse over flawed product")
+//                .isTrue();
 
         firstFlawedProduct.addToCart();
-        secondFlawedProduct.addToCart();
+//        secondFlawedProduct.addToCart();
 
         var cart = header.openCart();
 
-        String firstProductName = cart
-                .getProduct(1)
-                .getName();
-        String secondProductName = cart
-                .getProduct(2)
-                .getName();
+        var firstCartProduct = cart.getProduct(1);
+//        var secondCartProduct = cart.getProduct(2);
+
+        String firstCartProductName = firstCartProduct.getName();
+//        String secondCartProductName = secondCartProduct.getName();
 
         String expectedWord = "Уцінка";
 
-        assertThat(firstProductName)
+        assertThat(firstCartProductName)
                 .as("Flawed product name should have word 'Уцінка' in its name")
                 .endsWith(expectedWord);
 
-        assertThat(secondProductName)
-                .as("Flawed product name should have word 'Уцінка' in its name")
-                .endsWith(expectedWord);
+//        assertThat(secondCartProductName)
+//                .as("Flawed product name should have word 'Уцінка' in its name")
+//                .endsWith(expectedWord);
+
+        firstCartProduct.addOneMoreProduct();
+        String firstAlertMessage = firstCartProduct.getAlertMessage();
+
+        String expectedAlert = "Недостатньо товару для покупки";
+
+        assertThat(firstAlertMessage)
+                .as("It is not possible to buy more than one same flawed product")
+                .isEqualTo(expectedAlert);
+
+//        secondCartProduct.addOneMoreProduct();
+//        String secondAlertMessage = secondCartProduct.getAlertMessage();
+//
+//        assertThat(secondAlertMessage)
+//                .as("It is not possible to buy more than one same flawed product")
+//                .isEqualTo(expectedAlert);
     }
 }

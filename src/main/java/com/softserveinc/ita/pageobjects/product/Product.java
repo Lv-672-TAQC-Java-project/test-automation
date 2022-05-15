@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 
 import java.time.Duration;
 
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.time.Duration.ofSeconds;
@@ -86,8 +87,9 @@ public class Product {
         $x(rootElementPath)
                 .shouldBe(visible)
                 .hover();
-        return $x(String.format(rootElementPath + "//*[@class = 'goods-tile__description goods-tile__description_type_text ng-star-inserted']"))
-                .shouldBe(visible)
-                .isDisplayed();
+        String flawDescription = rootElementPath + "//*[@class = 'goods-tile__hidden-content ng-star-inserted']";
+        var isFlawTextDisplayed = isDisplayed($x(flawDescription), Duration.ofSeconds(5));
+
+        return isFlawTextDisplayed;
     }
 }
