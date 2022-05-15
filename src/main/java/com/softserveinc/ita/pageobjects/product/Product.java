@@ -10,9 +10,9 @@ import lombok.AllArgsConstructor;
 
 import java.time.Duration;
 
-import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
@@ -88,7 +88,7 @@ public class Product {
                 .shouldBe(visible)
                 .hover();
         String flawDescription = rootElementPath + "//*[@class = 'goods-tile__hidden-content ng-star-inserted']";
-        var isFlawTextDisplayed = isDisplayed($x(flawDescription), Duration.ofSeconds(5));
+        var isFlawTextDisplayed = isDisplayed($x(flawDescription), ofSeconds(5));
 
         return isFlawTextDisplayed;
     }

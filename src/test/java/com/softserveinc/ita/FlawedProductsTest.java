@@ -22,55 +22,36 @@ public class FlawedProductsTest extends TestRunner {
         String flawedProductsCategory = "телевізори та монітори";
         flawedProductsPage.openFlawedProductsCategoryPage(flawedProductsCategory);
 
-        var firstFlawedProduct = flawedProductsPage.getProduct(1);
-//        var secondFlawedProduct = flawedProductsPage.getProduct(2);
+        var flawedProduct = flawedProductsPage.getProduct(1);
 
-        boolean firstProductDefect = firstFlawedProduct.isDefectDescriptionVisible();
-//        boolean secondProductDefect = secondFlawedProduct.isDefectDescriptionVisible();
+        boolean isProductDefectVisible = flawedProduct.isDefectDescriptionVisible();
 
-        assertThat(firstProductDefect)
+        assertThat(isProductDefectVisible)
                 .as("Red description message should be visible after hovering mouse over flawed product")
                 .isTrue();
 
-//        assertThat(secondProductDefect)
-//                .as("Red description message should be visible after hovering mouse over flawed product")
-//                .isTrue();
-
-        firstFlawedProduct.addToCart();
-//        secondFlawedProduct.addToCart();
+        flawedProduct.addToCart();
 
         var cart = header.openCart();
 
-        var firstCartProduct = cart.getProduct(1);
-//        var secondCartProduct = cart.getProduct(2);
+        var cartProduct = cart.getProduct(1);
 
-        String firstCartProductName = firstCartProduct.getName();
-//        String secondCartProductName = secondCartProduct.getName();
+        String cartProductName = cartProduct.getName();
 
         String expectedWord = "Уцінка";
 
-        assertThat(firstCartProductName)
+        assertThat(cartProductName)
                 .as("Flawed product name should have word 'Уцінка' in its name")
                 .endsWith(expectedWord);
 
-//        assertThat(secondCartProductName)
-//                .as("Flawed product name should have word 'Уцінка' in its name")
-//                .endsWith(expectedWord);
-
-        firstCartProduct.addOneMoreProduct();
-        String firstAlertMessage = firstCartProduct.getAlertMessage();
+        cartProduct.addOneMoreProduct();
+        String firstAlertMessage = cartProduct.getAlertMessage();
 
         String expectedAlert = "Недостатньо товару для покупки";
 
         assertThat(firstAlertMessage)
-                .as("It is not possible to buy more than one same flawed product")
+                .as("It is not possible to buy more than one of the same flawed product.")
                 .isEqualTo(expectedAlert);
 
-//        secondCartProduct.addOneMoreProduct();
-//        String secondAlertMessage = secondCartProduct.getAlertMessage();
-//
-//        assertThat(secondAlertMessage)
-//                .as("It is not possible to buy more than one same flawed product")
-//                .isEqualTo(expectedAlert);
     }
 }
