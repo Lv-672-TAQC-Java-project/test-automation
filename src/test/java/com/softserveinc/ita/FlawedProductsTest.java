@@ -9,35 +9,35 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class FlawedProductsTest extends TestRunner {
 
-    @Description("Add test script to verify that flawed products have additional field with defect description.")
+    @Description("Add test script to verify that user can't add more than one same flawed product to the cart.")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-38")
     @Test(description = "LVTAQC672-38")
-    public void verifyThatWrittenOffProductsHaveAdditionalDescription() {
+    public void verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart() {
         var header = homePage.getHeader();
-        var flawedProductsPage =
+        String flawedProductsCategory = "телевізори та монітори";
+
+        var subCategoryPage =
                 homePage
                         .getCategorySideBar()
-                        .openFlawedProductsPage();
+                        .openFlawedProductsPage()
+                        .openFlawedProductsCategoryPage(flawedProductsCategory);
 
-        String flawedProductsCategory = "телевізори та монітори";
-        flawedProductsPage.openFlawedProductsCategoryPage(flawedProductsCategory);
+        assertThat(subCategoryPage.getCategoryLabel())
+                .as("Search result page category label should contain " + flawedProductsCategory)
+                .contains(flawedProductsCategory);
 
-        var flawedProduct = flawedProductsPage.getProduct(1);
-
-        boolean isProductDefectVisible = flawedProduct.isDefectDescriptionVisible();
+        var flawedProduct = subCategoryPage.getProduct(1);
+        var isProductDefectVisible = flawedProduct.isDefectDescriptionVisible();
 
         assertThat(isProductDefectVisible)
                 .as("Red description message should be visible after hovering mouse over flawed product")
                 .isTrue();
 
         flawedProduct.addToCart();
-
         var cart = header.openCart();
-
         var cartProduct = cart.getProduct(1);
 
         String cartProductName = cartProduct.getName();
-
         String expectedWord = "Уцінка";
 
         assertThat(cartProductName)
@@ -45,13 +45,19 @@ public class FlawedProductsTest extends TestRunner {
                 .endsWith(expectedWord);
 
         cartProduct.addOneMoreProduct();
-        String firstAlertMessage = cartProduct.getAlertMessage();
-
+        String alertMessage = cartProduct.getAlertMessage();
         String expectedAlert = "Недостатньо товару для покупки";
 
-        assertThat(firstAlertMessage)
+        assertThat(alertMessage)
                 .as("It is not possible to buy more than one of the same flawed product.")
                 .isEqualTo(expectedAlert);
+
+        int productQuantity = cartProduct.getProductsQuantity();
+
+        assertThat(productQuantity)
+                .as("Quantity of same flawed product added to the cart can't exceed 1")
+                .isEqualTo(1);
+
 
     }
 }
