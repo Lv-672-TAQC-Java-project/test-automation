@@ -25,8 +25,7 @@ public class DeliveryLocationTest extends TestRunner {
         String city = "Чернівці";
         String region = "Чернівецька обл.";
 
-        productDetailsPage
-                .openDeliveryLocationModal()
+        productDetailsPage.openDeliveryLocationModal()
                 .searchLocation(city, region);
 
         assertThat(productDetailsPage.getDeliveryCityName())
