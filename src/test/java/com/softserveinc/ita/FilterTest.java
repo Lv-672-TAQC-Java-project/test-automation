@@ -92,10 +92,8 @@ public class FilterTest extends TestRunner {
         var memoryValue = "16 - 24 ГБ";
 
         var filter = subCategoryPage.getFilter();
-        filter
-                .filterBySection(MANUFACTURER, manufacturer);
-        filter
-                .filterBySection(PROCESSOR, processor);
+        filter.filterBySection(MANUFACTURER, manufacturer);
+        filter.filterBySection(PROCESSOR, processor);
         var filteredProduct = filter
                 .filterBySection(RAM_SIZE, memoryValue)
                 .getProduct(1);
@@ -113,13 +111,13 @@ public class FilterTest extends TestRunner {
                 .as("The processor name should contain a value from the filter " + processor)
                 .containsIgnoringCase(processor);
 
-        var memoryValueInCharacteristics = productCharacteristics.get("Обсяг оперативної пам'яті");
-        int memorySize = Integer.parseInt(memoryValueInCharacteristics.replaceAll("[^\\d]", ""));
+        int memorySizeInCharacteristics = Integer.parseInt(productCharacteristics.get("Обсяг оперативної пам'яті")
+                .replaceAll("[^\\d]", ""));
 
         int firstMemorySizeFromFilter = parseStringIntoNumbers(memoryValue, 0);
         int secondMemorySizeFromFilter = parseStringIntoNumbers(memoryValue, 1);
 
-        assertThat(memorySize)
+        assertThat(memorySizeInCharacteristics)
                 .as("The size of RAM on the characteristics tab should be within the range of values of the selected filter")
                 .isBetween(firstMemorySizeFromFilter, secondMemorySizeFromFilter);
     }
