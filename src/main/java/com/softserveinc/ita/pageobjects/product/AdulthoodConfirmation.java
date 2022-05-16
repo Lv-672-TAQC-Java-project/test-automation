@@ -11,7 +11,7 @@ public class AdulthoodConfirmation {
 
     @Step("Confirmed adulthood")
     public SearchResultPage confirmAdulthood() {
-        SelenideElement confirmationButton = $x("//div[contains(@class, 'rz-btn_blue')]");
+        var confirmationButton = $x("//div[contains(@class, 'rz-btn_blue')]");
 
         confirmationButton.click();
         confirmationButton.shouldNot(Condition.exist);
@@ -21,7 +21,7 @@ public class AdulthoodConfirmation {
 
     @Step("Declined adulthood")
     public SearchResultPage declineAdulthood() {
-        SelenideElement declineButton = $x("//div[contains(@class, 'rz-btn_gray')]");
+        var declineButton = $x("//div[contains(@class, 'rz-btn_gray')]");
 
         declineButton.click();
         declineButton.shouldNot(Condition.exist);

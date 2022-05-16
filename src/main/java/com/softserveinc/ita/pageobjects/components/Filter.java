@@ -49,7 +49,7 @@ public class Filter {
     }
 
     public int getProductsAmountInFilterCheckbox(FilterSectionName filterSectionName, String filterCheckboxName) {
-        String productsAmount = $x(String.format("//div[@data-filter-name='%s']//a[@data-id='%s']/span",
+        var productsAmount = $x(String.format("//div[@data-filter-name='%s']//a[@data-id='%s']/span",
                 filterSectionName.getFilterSectionPath(), filterCheckboxName))
                 .text()
                 .replaceAll("\\D+", "");
