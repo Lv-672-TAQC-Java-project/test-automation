@@ -3,10 +3,10 @@
         <classes>
             <class name="com.softserveinc.ita.CartTest">
                 <methods>
-                    <include name="verifyThatProductItemAddedToTheCart" />
-                    <include name="verifyThatTotalPriceChangedAfterAddingAdditionalService" />
-                    <include name="verifyThatTotalProductsPriceHasDoubled" />
-                    <include name="verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart" />
+                    <include name="verifyThatProductItemAddedToTheCart"/>
+                    <include name="verifyThatTotalPriceChangedAfterAddingAdditionalService"/>
+                    <include name="verifyThatTotalProductsPriceHasDoubled"/>
+                    <include name="verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart"/>
                 </methods>
             </class>
         </classes>
