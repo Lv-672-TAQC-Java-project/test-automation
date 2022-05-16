@@ -1,7 +1,6 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.SearchResultPage;
-import com.softserveinc.ita.pageobjects.models.AdulthoodConfirmation;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -86,21 +85,21 @@ public class FilterTest extends TestRunner {
         var searchResultPage = homePage
                 .getHeader()
                 .search(searchTerm)
-                .getAdulthoodConfirmationModal()
-                .confirmAdulthood(AdulthoodConfirmation.CONFIRM);
+                .getAdulthoodConfirmation()
+                .confirmAdulthood();
 
         var filter = searchResultPage.getFilter();
 
         String filterCheckboxName = "до 45 років";
-        int filterCheckboxProductsAmount = filter
-                .getFilterCheckboxProductsAmount(MATURATION_PERIOD, filterCheckboxName);
+        int productsAmountInFilterCheckbox = filter
+                .getProductsAmountInFilterCheckbox(MATURATION_PERIOD, filterCheckboxName);
 
         var filteredProductsList = filter
                 .filterBySection(MATURATION_PERIOD, filterCheckboxName)
                 .getProducts();
 
-        assertThat(filterCheckboxProductsAmount)
+        Assertions.assertThat(filteredProductsList)
                 .as("Amount of filtered products should be equal to number of products in filter checkbox")
-                .isEqualTo(filteredProductsList.size());
+                .hasSize(productsAmountInFilterCheckbox);
     }
 }

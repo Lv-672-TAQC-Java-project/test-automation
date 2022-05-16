@@ -48,7 +48,7 @@ public class Filter {
         return new SearchResultPage();
     }
 
-    public int getFilterCheckboxProductsAmount(FilterSectionName filterSectionName, String filterCheckboxName) {
+    public int getProductsAmountInFilterCheckbox(FilterSectionName filterSectionName, String filterCheckboxName) {
         String productsAmount = $x(String.format("//div[@data-filter-name='%s']//a[@data-id='%s']/span",
                 filterSectionName.getFilterSectionPath(), filterCheckboxName))
                 .text()
