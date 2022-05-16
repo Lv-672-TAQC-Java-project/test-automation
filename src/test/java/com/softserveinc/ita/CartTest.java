@@ -191,7 +191,7 @@ public class CartTest extends TestRunner {
     @Test(description = "LVTAQC672-38")
     public void verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart() {
         var header = homePage.getHeader();
-        String flawedProductsCategory = "телевізори та монітори";
+        var flawedProductsCategory = "телевізори та монітори";
 
         var subCategoryPage =
                 homePage
@@ -214,16 +214,16 @@ public class CartTest extends TestRunner {
         var cart = header.openCart();
         var cartProduct = cart.getProduct(1);
 
-        String cartProductName = cartProduct.getName();
-        String expectedWord = "Уцінка";
+        var cartProductName = cartProduct.getName();
+        var expectedWord = "Уцінка";
 
         assertThat(cartProductName)
                 .as("Flawed product name should have word 'Уцінка' in its name")
                 .endsWith(expectedWord);
 
         cartProduct.addOneMoreProduct();
-        String alertMessage = cartProduct.getAlertMessage();
-        String expectedAlert = "Недостатньо товару для покупки";
+        var alertMessage = cartProduct.getAlertMessage();
+        var expectedAlert = "Недостатньо товару для покупки";
 
         assertThat(alertMessage)
                 .as("It is not possible to buy more than one of the same flawed product.")
