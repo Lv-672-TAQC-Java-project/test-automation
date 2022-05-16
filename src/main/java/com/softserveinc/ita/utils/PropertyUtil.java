@@ -21,7 +21,7 @@ public class PropertyUtil {
     }
 
     private static String getProperty(String name) {
-        String systemEnvVariable = System.getProperty(name);
+        var systemEnvVariable = System.getProperty(name);
         if (systemEnvVariable != null && !systemEnvVariable.isEmpty() && !systemEnvVariable.isBlank()) {
             return systemEnvVariable;
         } else {
