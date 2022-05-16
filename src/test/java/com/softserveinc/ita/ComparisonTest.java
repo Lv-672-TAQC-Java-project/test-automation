@@ -156,10 +156,14 @@ public class ComparisonTest extends TestRunner {
                         .size());
     }
 
-    @Test
+    @Description("Add test script to cover delete function in comparison modal")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-39")
+    @Test(description = "LVTAQC672-39")
     public void verifyThatItemDeletedFromComparisonModal() {
-        var header = homePage.getHeader();
-        //method for deleting all items from comparison modal is in progress
+        var header = homePage
+                .emptyComparisonModal()
+                .getHeader();
+
         var filterCategorySideBar = header
                 .search("lenovo")
                 .getFilterCategorySideBar();
@@ -179,19 +183,19 @@ public class ComparisonTest extends TestRunner {
                 .openMenuModal()
                 .openComparisonModal();
 
-        var items = comparisonModal.getItems();
+        var categories = comparisonModal.getCategories();
 
-        assertThat(items)
-                .as("The 2 items should be in comparison modal")
+        assertThat(categories)
+                .as("The 2 categories should be in comparison modal")
                 .hasSize(2);
 
-        items = comparisonModal
-                .getItem("Блоки живлення для ноутбуків")
+        categories = comparisonModal
+                .getCategory("Блоки живлення для ноутбуків")
                 .remove()
-                .getItems();
+                .getCategories();
 
-        assertThat(items)
-                .as("The 1 items should be in comparison modal")
+        assertThat(categories)
+                .as("The 1 categories should be in comparison modal")
                 .hasSize(1);
     }
 }

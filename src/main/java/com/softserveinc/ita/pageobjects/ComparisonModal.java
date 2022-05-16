@@ -1,6 +1,5 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.codeborne.selenide.Condition;
 import io.qameta.allure.Step;
 
 import java.time.Duration;
@@ -23,28 +22,26 @@ public class ComparisonModal {
         return new ComparisonPage();
     }
 
-    public ItemComparisonModal getItem(String name) {
-        String itemsPath = format("//a[contains(text(), '%s')]//ancestor::*[contains(@class, 'comparison-modal__list')]", name);
-        $x(itemsPath).click();
+    public CategoryComparisonModal getCategory(String category) {
+        String categoryPath = format("//a[contains(text(), '%s')]//ancestor::*[contains(@class, 'comparison-modal__list')]", category);
 
-        return new ItemComparisonModal(itemsPath);
+        return new CategoryComparisonModal(categoryPath);
     }
 
-    public ItemComparisonModal getItem(int index) {
-        String itemsPath = format("//*[contains(@class, 'comparison-modal__list')]//li[%s]", index);
-        $x(itemsPath).click();
+    public CategoryComparisonModal getCategory(int index) {
+        String categoryPath = format("//*[contains(@class, 'comparison-modal__list')]//li[%s]", index);
 
-        return new ItemComparisonModal(itemsPath);
+        return new CategoryComparisonModal(categoryPath);
     }
 
-    public List<ItemComparisonModal> getItems() {
-        List<ItemComparisonModal> items = new LinkedList<>();
+    public List<CategoryComparisonModal> getCategories() {
+        List<CategoryComparisonModal> items = new LinkedList<>();
         String itemsPath = "//*[contains(@class, 'comparison-modal__list')]//li";
         int itemsCount = $$x(itemsPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
         for (int i = 1; i <= itemsCount; i++) {
-            items.add(new ItemComparisonModal(format("(%s)[%s]", itemsPath, i)));
+            items.add(new CategoryComparisonModal(format("(%s)[%s]", itemsPath, i)));
         }
 
         return items;
@@ -55,5 +52,16 @@ public class ComparisonModal {
         $x("//button[@class = 'modal__close']").click();
 
         return new HomePage();
+    }
+
+    @Step("Removed all items from comparison modal")
+    public ComparisonModal removeAllItems() {
+        while($x("//rz-comparison-modal/*")
+                .getAttribute("class")
+                .contains("list")) {
+            getCategory(1).remove();
+        }
+
+        return this;
     }
 }

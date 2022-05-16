@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import static com.codeborne.selenide.Selenide.$x;
 
 @AllArgsConstructor
-public class ItemComparisonModal {
+public class CategoryComparisonModal {
     private final String rootElementPath;
 
     @Step("Opened Comparison Page")
