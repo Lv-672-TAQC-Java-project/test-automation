@@ -87,7 +87,7 @@ public class Product {
         $x(rootElementPath)
                 .shouldBe(visible)
                 .hover();
-        String flawDescription = rootElementPath + "//*[@class = 'goods-tile__hidden-content ng-star-inserted']";
+        var flawDescription = rootElementPath + "//*[@class = 'goods-tile__hidden-content ng-star-inserted']";
         var isFlawTextDisplayed = isDisplayed($x(flawDescription), ofSeconds(5));
 
         return isFlawTextDisplayed;

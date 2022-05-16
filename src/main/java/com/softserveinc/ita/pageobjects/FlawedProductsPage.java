@@ -9,7 +9,7 @@ public class FlawedProductsPage extends SearchResultPage {
 
     @Step("Opened flawed {productsCategoryName} products page")
     public SubCategoryPage openFlawedProductsCategoryPage(String productsCategoryName) {
-        String categoryLocator = format("//*[@class = 'portal-navigation__link-text' and contains(text(), '%s')]", productsCategoryName);
+        var categoryLocator = format("//*[@class = 'portal-navigation__link-text' and contains(text(), '%s')]", productsCategoryName);
         $x(categoryLocator)
                 .hover()
                 .click();

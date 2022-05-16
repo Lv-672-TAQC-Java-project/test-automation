@@ -72,7 +72,7 @@ public class InCartProduct {
     }
 
     public int getProductsQuantity() {
-        String quantityValue = $x("//*[@class = 'cart-counter']//child::input").getValue();
+        var quantityValue = $x("//*[@class = 'cart-counter']//child::input").getValue();
         int quantity = Integer.valueOf(quantityValue);
 
         return quantity;
