@@ -91,8 +91,8 @@ public class CartTest extends TestRunner {
                 .as("Search result page should contain label with" + searchTerm)
                 .contains(searchTerm);
 
-        var product = searchResultPage.getProduct(2);
-        product.addToCart();
+        var firstProduct = searchResultPage.getProduct(1);
+        firstProduct.addToCart();
 
         var cart = header.openCart();
 
@@ -100,13 +100,13 @@ public class CartTest extends TestRunner {
                 .as("Cart modal should be displayed")
                 .isTrue();
 
-        String productName = product.getName();
-        var cartProduct = cart.getProduct(productName);
+        String firstProductName = firstProduct.getName();
+        var cartProduct = cart.getProduct(firstProductName);
         String cartProductName = cartProduct.getName();
 
         assertThat(cartProductName)
                 .as("Product name in cart should be same as name of added product to it")
-                .contains(productName);
+                .contains(firstProductName);
 
         int totalPrice = cart.getTotalPrice();
         cartProduct.expandAdditionalServicesSection();
