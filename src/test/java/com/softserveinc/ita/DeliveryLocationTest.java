@@ -6,6 +6,7 @@ import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.SMARTPHONES_TV_AND_ELECTRONICS;
+import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class DeliveryLocationTest extends TestRunner {
@@ -29,7 +30,7 @@ public class DeliveryLocationTest extends TestRunner {
                 .searchLocation(city, region);
 
         assertThat(productDetailsPage.getDeliveryCityName())
-                .as("Delivery location on the product details page should contain selected " + city + "and " + region)
+                .as(format("Delivery location on the product details page should contain %s and %s", city, region))
                 .contains(city, region);
     }
 }

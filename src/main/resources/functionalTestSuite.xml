@@ -76,4 +76,14 @@
             </class>
         </classes>
     </test>
+
+    <test name="Delivery location selection functionality">
+        <classes>
+            <class name="com.softserveinc.ita.DeliveryLocationTest">
+                <methods>
+                    <include name="verifyDeliveryLocationSelectionFunctionality"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 </suite>
