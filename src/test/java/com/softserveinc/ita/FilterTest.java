@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.utils.TestRunner;
@@ -10,11 +9,13 @@ import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
+import static com.softserveinc.ita.pageobjects.models.CategoryName.TOOLS_AND_AUTOMOTIVE_PRODUCTS;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MANUFACTURER;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
 import static com.softserveinc.ita.pageobjects.models.CategoryName.LAPTOPS_AND_COMPUTERS;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
 import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
+import static java.lang.String.format;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class FilterTest extends TestRunner {
@@ -76,6 +77,55 @@ public class FilterTest extends TestRunner {
                 .forEach(product -> assertThat(product.getAvailability())
                         .as("Product name should contain " + expectedAvailability)
                         .isEqualTo(expectedAvailability));
+    }
+
+    @Description("Verified that product characteristic contains searched value")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-29")
+    @Test(description = "LVTAQC672-29")
+    public void verifyThatProductCharacteristicContainsValueSearchedUsingAdditionalFilterSection() {
+        var subCategoryPage = homePage
+                .getCategorySideBar()
+                .openCategoryPage(TOOLS_AND_AUTOMOTIVE_PRODUCTS)
+                .openSubCategoryPage("Автошини та диски");
+
+        var tiresSubcategoryFilterSection = subCategoryPage.getTiresSubcategoryFilterSection();
+        assertThat(tiresSubcategoryFilterSection.isOpened())
+                .as("Tires subcategory filter section should be displayed")
+                .isTrue();
+
+        var expectedTireCharacteristic = "245/40 R19";
+        tiresSubcategoryFilterSection
+                .setYear("2015")
+                .setBrand("Audi")
+                .setModel("A6")
+                .setCarConfiguration("2.0 TDi")
+                .selectTireSize(expectedTireCharacteristic)
+                .filter();
+
+        var firstProduct = subCategoryPage.getProduct(1);
+        var firstProductName = firstProduct.getName();
+
+        var productDetailsPage = firstProduct.openDetailsPage();
+        var productName = productDetailsPage.getProductName();
+
+        assertThat(productName)
+                .as("Product name should be the same for subcategory page and product details page")
+                .isEqualTo(firstProductName);
+
+        var actualTireCharacteristics = productDetailsPage
+                .openCharacteristicTab()
+                .getProductCharacteristics();
+
+        var tireWidth = actualTireCharacteristics
+                .get("Ширина шини")
+                .split(" ")[0];
+        var tireProfile = actualTireCharacteristics.get("Профіль");
+        var tireDiameter = actualTireCharacteristics.get("Діаметр");
+        var actualTireCharacteristic = format("%s/%s %s", tireWidth, tireProfile, tireDiameter);
+
+        assertThat(expectedTireCharacteristic)
+                .as("Tire characteristic should be " + expectedTireCharacteristic)
+                .isEqualTo(actualTireCharacteristic);
     }
 
     @Description("Add a test script to cover a set of filters: 'Процесор', 'Бренд', 'Обсяг оперативної пам'яті' in the 'Ноутбуки' subcategory")
