@@ -2,7 +2,7 @@ package com.softserveinc.ita.pageobjects.product;
 
 import com.codeborne.selenide.Condition;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
-import com.softserveinc.ita.pageobjects.ReviewsPage;
+import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import io.qameta.allure.Step;
@@ -76,11 +76,11 @@ public class Product {
         return new ProductDetailsPage();
     }
 
-    @Step("Opened product reviews page")
-    public ReviewsPage openReviewsPage() {
+    @Step("Opened product reviews tab")
+    public ReviewsTab openReviewsTab() {
         $x(String.format("%s//span[@class='goods-tile__reviews-link']", rootElementPath)).click();
 
-        return new ReviewsPage();
+        return new ReviewsTab();
     }
 
     public boolean isDefectDescriptionVisible() {

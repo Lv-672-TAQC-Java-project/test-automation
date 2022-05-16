@@ -1,4 +1,4 @@
-<suite name="Rozetka Functional Test Suite">
+<suite name="Rozetka Functional Test Suite" parallel="methods" thread-count="3">
     <test name="Cart functionality">
         <classes>
             <class name="com.softserveinc.ita.CartTest">
@@ -16,7 +16,7 @@
         <classes>
             <class name="com.softserveinc.ita.CartTest">
                 <methods>
-                    <include name="verifyRemovalFunctionalityInTheCart" />
+                    <include name="verifyRemovalFunctionalityInTheCart"/>
                 </methods>
             </class>
         </classes>
@@ -26,7 +26,7 @@
         <classes>
             <class name="com.softserveinc.ita.ComparisonTest">
                 <methods>
-                    <include name="verifyDeleteProductFromComparisonPage" />
+                    <include name="verifyDeleteProductFromComparisonPage"/>
                 </methods>
             </class>
         </classes>
@@ -36,7 +36,7 @@
         <classes>
             <class name="com.softserveinc.ita.SearchTest">
                 <methods>
-                    <include name="verifyThatProductsIncludeTheSearchTermInTheirNames" />
+                    <include name="verifyThatProductsIncludeTheSearchTermInTheirNames"/>
                 </methods>
             </class>
         </classes>
@@ -46,12 +46,12 @@
         <classes>
             <class name="com.softserveinc.ita.SortTest">
                 <methods>
-                    <include name="verifyThatProductsAreSortedFromCheapToExpensive" />
+                    <include name="verifyThatProductsAreSortedFromCheapToExpensive"/>
                 </methods>
             </class>
             <class name="com.softserveinc.ita.ReviewsTest">
                 <methods>
-                    <include name="verifySortingReviewsByMostHelpful" />
+                    <include name="verifySortingReviewsByMostHelpful"/>
                 </methods>
             </class>
         </classes>
@@ -61,7 +61,8 @@
         <classes>
             <class name="com.softserveinc.ita.FilterTest">
                 <methods>
-                    <include name="verifyThatFilteredProductsContainsExpectedTerm" />
+                    <include name="verifyThatFilteredProductsContainsExpectedTerm"/>
+                    <include name="verifyThatProductCharacteristicContainsValueSearchedUsingAdditionalFilterSection"/>
                 </methods>
             </class>
         </classes>
@@ -71,7 +72,17 @@
         <classes>
             <class name="com.softserveinc.ita.OrderPlacementTest">
                 <methods>
-                    <include name="verifyThatImpossibleToPlaceAnOrderWithoutRequiredData" />
+                    <include name="verifyThatImpossibleToPlaceAnOrderWithoutRequiredData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Products memorization functionality">
+        <classes>
+            <class name="com.softserveinc.ita.LastViewedProductsRememberedTest">
+                <methods>
+                    <include name="verifyThatTheLastViewedProductsAreRememberedInTheLastViewedProductsSection" />
                 </methods>
             </class>
         </classes>
