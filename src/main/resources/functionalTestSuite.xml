@@ -61,7 +61,7 @@
             <class name="com.softserveinc.ita.FilterTest">
                 <methods>
                     <include name="verifyThatFilteredProductsContainsExpectedTerm"/>
-                    <include name="verifyThatProductCharacteristicContainsSearchedValue"/>
+                    <include name="verifyThatProductCharacteristicContainsValueSearchedUsingAdditionalFilterSection"/>
                 </methods>
             </class>
         </classes>
