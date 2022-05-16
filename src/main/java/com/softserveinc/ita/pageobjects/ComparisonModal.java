@@ -23,7 +23,7 @@ public class ComparisonModal {
     }
 
     public CategoryComparisonModal getCategory(String category) {
-        String categoryPath = format("//a[contains(text(), '%s')]//ancestor::*[contains(@class, 'comparison-modal__list')]", category);
+        String categoryPath = format("//a[contains(text(), '%s')]//ancestor::*[contains(@class, 'comparison-modal__item')]", category);
 
         return new CategoryComparisonModal(categoryPath);
     }
@@ -35,16 +35,16 @@ public class ComparisonModal {
     }
 
     public List<CategoryComparisonModal> getCategories() {
-        List<CategoryComparisonModal> items = new LinkedList<>();
-        String itemsPath = "//*[contains(@class, 'comparison-modal__list')]//li";
-        int itemsCount = $$x(itemsPath)
+        List<CategoryComparisonModal> categories = new LinkedList<>();
+        String categoriesPath = "//*[contains(@class, 'comparison-modal__list')]//li";
+        int categoriesCount = $$x(categoriesPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
-        for (int i = 1; i <= itemsCount; i++) {
-            items.add(new CategoryComparisonModal(format("(%s)[%s]", itemsPath, i)));
+        for (int i = 1; i <= categoriesCount; i++) {
+            categories.add(new CategoryComparisonModal(format("%s[%s]", categoriesPath, i)));
         }
 
-        return items;
+        return categories;
     }
 
     @Step("Closed comparison modal")
@@ -56,6 +56,7 @@ public class ComparisonModal {
 
     @Step("Removed all items from comparison modal")
     public ComparisonModal removeAllItems() {
+        //verify if categories list is not empty
         while ($x("//rz-comparison-modal/*")
                 .getAttribute("class")
                 .contains("list")) {
