@@ -27,7 +27,7 @@ public class Cart {
 
     public InCartProduct getProduct(String name) {
 
-        return new InCartProduct(format("//a[@title=%s]/ancestor::div[@class='cart-product ng-star-inserted']", "\""+name+"\""));
+        return new InCartProduct(format("//a[@title=%s]/ancestor::div[@class='cart-product ng-star-inserted']", "\"" + name + "\""));
     }
 
     public boolean isEmpty() {
