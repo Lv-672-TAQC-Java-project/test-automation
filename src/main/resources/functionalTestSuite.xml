@@ -1,4 +1,4 @@
-<suite name="Rozetka Functional Test Suite">
+<suite name="Rozetka Functional Test Suite" parallel="methods" thread-count="3">
     <test name="Cart functionality">
         <classes>
             <class name="com.softserveinc.ita.CartTest">
@@ -61,7 +61,7 @@
             <class name="com.softserveinc.ita.FilterTest">
                 <methods>
                     <include name="verifyThatFilteredProductsContainsExpectedTerm"/>
-                    <include name="verifyThatProductCharacteristicContainsSearchedValue"/>
+                    <include name="verifyThatProductCharacteristicContainsValueSearchedUsingAdditionalFilterSection"/>
                 </methods>
             </class>
         </classes>
@@ -72,6 +72,16 @@
             <class name="com.softserveinc.ita.OrderPlacementTest">
                 <methods>
                     <include name="verifyThatImpossibleToPlaceAnOrderWithoutRequiredData"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test name="Products memorization functionality">
+        <classes>
+            <class name="com.softserveinc.ita.LastViewedProductsRememberedTest">
+                <methods>
+                    <include name="verifyThatTheLastViewedProductsAreRememberedInTheLastViewedProductsSection" />
                 </methods>
             </class>
         </classes>
