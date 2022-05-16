@@ -36,7 +36,7 @@ public class QuestionTab {
         int questionsAmount;
 
         $x("//product-buyers-questions[@class='ng-star-inserted']")
-                .should(visible, ofSeconds(60));
+                .shouldBe(visible, ofSeconds(60));
 
         if ($x(questionPath).is(visible)) {
             questionsAmount = $$x(questionPath)
