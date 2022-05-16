@@ -13,7 +13,7 @@ public class MenuModal {
         return new ComparisonModal();
     }
 
-    public HomePage close(){
+    public HomePage close() {
         $x("//button[contains(@class, 'side-menu__close')]").click();
 
         return new HomePage();

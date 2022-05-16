@@ -56,7 +56,7 @@ public class ComparisonModal {
 
     @Step("Removed all items from comparison modal")
     public ComparisonModal removeAllItems() {
-        while($x("//rz-comparison-modal/*")
+        while ($x("//rz-comparison-modal/*")
                 .getAttribute("class")
                 .contains("list")) {
             getCategory(1).remove();
