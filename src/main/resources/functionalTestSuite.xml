@@ -6,6 +6,7 @@
                     <include name="verifyThatProductItemAddedToTheCart"/>
                     <include name="verifyThatTotalPriceChangedAfterAddingAdditionalService"/>
                     <include name="verifyThatTotalProductsPriceHasDoubled"/>
+                    <include name="verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart"/>
                 </methods>
             </class>
         </classes>
