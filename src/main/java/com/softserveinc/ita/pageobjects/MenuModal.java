@@ -13,6 +13,7 @@ public class MenuModal {
         return new ComparisonModal();
     }
 
+    @Step("Closed menu modal")
     public HomePage close() {
         $x("//button[contains(@class, 'side-menu__close')]").click();
 

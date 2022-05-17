@@ -1,8 +1,11 @@
 package com.softserveinc.ita.pageobjects.components;
 
+import com.codeborne.selenide.Condition;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.models.FilterCategory;
 import io.qameta.allure.Step;
+
+import java.time.Duration;
 
 import static com.codeborne.selenide.Selenide.$x;
 
@@ -38,6 +41,8 @@ public class FilterCategorySideBar {
         // used \" to make the locator work correctly
         String subCategoryLinkPath = String.format("//li[contains(@class, 'categories-filter__item')]/ul//span[text() = \"%s\"]", subCategoryName);
         $x(subCategoryLinkPath).click();
+        //in progress
+        $x("//div[@class = 'rz-search-result-qnty']/a").shouldHave(Condition.text(subCategoryName), Duration.ofSeconds(10));
 
         return new SearchResultPage();
     }

@@ -29,7 +29,7 @@ public class ComparisonModal {
     }
 
     public CategoryComparisonModal getCategory(int index) {
-        String categoryPath = format("//*[contains(@class, 'comparison-modal__list')]//li[%s]", index);
+        String categoryPath = format("(//*[contains(@class, 'comparison-modal__item')])[%s]", index);
 
         return new CategoryComparisonModal(categoryPath);
     }
@@ -56,7 +56,7 @@ public class ComparisonModal {
 
     @Step("Removed all items from comparison modal")
     public ComparisonModal removeAllItems() {
-        //verify if categories list is not empty
+        //loop to check if categories list is not empty
         while ($x("//rz-comparison-modal/*")
                 .getAttribute("class")
                 .contains("list")) {
