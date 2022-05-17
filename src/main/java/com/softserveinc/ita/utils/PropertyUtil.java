@@ -9,14 +9,23 @@ public class PropertyUtil {
     private static final ResourceBundle bundle = ResourceBundle.getBundle("config");
 
     public static String getHomePageUrl() {
-        return bundle.getString("home.page.url");
+        return getProperty("home.page.url");
     }
 
     public static int getDefaultTimeout() {
-        return Integer.parseInt(bundle.getString("default.driver.timeout"));
+        return Integer.parseInt(getProperty("default.driver.timeout"));
     }
 
     public static String getDefaultBrowser() {
-        return bundle.getString("default.browser");
+        return getProperty("default.browser");
+    }
+
+    private static String getProperty(String name) {
+        var systemEnvVariable = System.getProperty(name);
+        if (systemEnvVariable != null && !systemEnvVariable.isEmpty() && !systemEnvVariable.isBlank()) {
+            return systemEnvVariable;
+        } else {
+            return bundle.getString(name);
+        }
     }
 }
