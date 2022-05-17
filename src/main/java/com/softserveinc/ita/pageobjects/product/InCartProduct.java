@@ -65,4 +65,13 @@ public class InCartProduct {
 
         return new Cart();
     }
+
+    public int getPrice() {
+        var price = $x(rootElementPath + "//p[@data-testid='cost']")
+                .text()
+                .replace("₴", "")
+                .replace(" ", "");
+
+        return Integer.parseInt(price);
+    }
 }

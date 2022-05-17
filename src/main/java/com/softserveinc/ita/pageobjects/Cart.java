@@ -86,6 +86,7 @@ public class Cart {
     @Step("Submitted an order")
     public OrderPlacementPage submitOrder() {
         $x("//div[@class='cart-receipt ng-star-inserted']/a").click();
+        $x("//legend[@class = 'checkout-block__title']").shouldBe(visible, ofSeconds(30));
 
         return new OrderPlacementPage();
     }

@@ -5,6 +5,10 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
+import java.util.LinkedList;
+
+import static com.softserveinc.ita.pageobjects.models.CategoryName.BEAUTY_AND_HEALTH;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -71,5 +75,59 @@ public class OrderPlacementTest extends TestRunner {
         assertThat(orderPlacementPage.isFieldRequired(phoneFieldTittle))
                 .as(format(requiredFieldErrorMessage, phoneFieldTittle))
                 .isTrue();
+    }
+
+    @Description("Verify that in the order all product names and prices match with the names and prices from the cart")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-44")
+    @Test(description = "LVTAQC672-44")
+    public void verifyThatInTheOrderAllProductNamesAndPricesMatchWithTheNamesAndPricesFromTheCart() {
+        homePage.emptyCart();
+        var header = homePage.getHeader();
+        header
+                .openCatalog()
+                //TODO to remove the spaces
+                .openSubCategoryPage(BEAUTY_AND_HEALTH, " Триммери ")
+                .getFilter()
+                .filterBySection(PRODUCT_AVAILABILITY, "Є в наявності")
+                .getProduct(1)
+                .addToCart()
+                .getProduct(2)
+                .addToCart()
+                .getProduct(3)
+                .addToCart();
+
+        var cart = header.openCart();
+        var productsInCart = cart.getInCartProducts();
+
+        var productsInCartNames = new LinkedList<String>();
+        for (var productInCart : productsInCart) {
+            productsInCartNames.add(productInCart.getName());
+        }
+
+        var productsInCartPrices = new LinkedList<Integer>();
+        for (var productInCart : productsInCart) {
+            productsInCartPrices.add(productInCart.getPrice());
+        }
+
+        var productsInOrder = cart
+                .submitOrder()
+                .getProducts();
+
+        var productsInOrderNames = new LinkedList<String>();
+        for (var productInOrder : productsInOrder) {
+            productsInOrderNames.add(productInOrder.getName());
+        }
+
+        var productsInOrderPrices = new LinkedList<Integer>();
+        for (var productInOrder : productsInOrder) {
+            productsInOrderPrices.add(productInOrder.getPrice());
+        }
+
+        assertThat(productsInOrderNames)
+                .as("In the order all product names should match with the names from the cart")
+                .containsAll(productsInCartNames);
+        assertThat(productsInOrderPrices)
+                .as("In the order all product prices should match with the prices from the cart")
+                .containsAll(productsInCartPrices);
     }
 }
