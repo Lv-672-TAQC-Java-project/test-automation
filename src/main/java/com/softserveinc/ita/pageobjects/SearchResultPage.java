@@ -76,6 +76,10 @@ public class SearchResultPage {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
     }
 
+    public String getCategoryLabel() {
+        return $x("//*[@class='catalog-heading ng-star-inserted']").text();
+    }
+
     @Step("Sorted products {order}")
     public SearchResultPage sort(SortOrder order) {
         $x("//select").selectOptionByValue(order.getSortOrderOption());

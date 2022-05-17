@@ -35,6 +35,9 @@ public class QuestionTab {
         var questionPath = "//div[@class='comment']";
         int questionsAmount;
 
+        $x("//product-buyers-questions[@class='ng-star-inserted']")
+                .shouldBe(visible, ofSeconds(60));
+
         if ($x(questionPath).is(visible)) {
             questionsAmount = $$x(questionPath)
                     .shouldHave(sizeNotEqual(0), ofSeconds(60))
