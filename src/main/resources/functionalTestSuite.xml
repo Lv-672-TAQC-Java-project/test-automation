@@ -62,6 +62,7 @@
                 <methods>
                     <include name="verifyThatFilteredProductsContainsExpectedTerm"/>
                     <include name="verifyThatProductCharacteristicContainsValueSearchedUsingAdditionalFilterSection"/>
+                    <include name="verifyThatFilteredProductContainsExpectedCharacteristics" />
                 </methods>
             </class>
         </classes>

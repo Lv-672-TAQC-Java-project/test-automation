@@ -69,7 +69,9 @@ public class Product {
 
     @Step("Opened product details page")
     public ProductDetailsPage openDetailsPage() {
-        $x(rootElementPath + "//descendant::span[@class='goods-tile__title']").click();
+        $x(rootElementPath + "//descendant::span[@class='goods-tile__title']")
+                .scrollIntoView(false)
+                .click();
         $x("//div[@class = 'product__heading']").shouldBe(visible, ofSeconds(30));
 
         return new ProductDetailsPage();
