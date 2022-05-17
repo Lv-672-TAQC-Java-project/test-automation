@@ -12,6 +12,7 @@ import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
@@ -69,7 +70,9 @@ public class Product {
 
     @Step("Opened product details page")
     public ProductDetailsPage openDetailsPage() {
-        $x(rootElementPath + "//descendant::span[@class='goods-tile__title']").click();
+        $x(rootElementPath + "//descendant::span[@class='goods-tile__title']")
+                .scrollIntoView(false)
+                .click();
         $x("//div[@class = 'product__heading']").shouldBe(visible, ofSeconds(30));
 
         return new ProductDetailsPage();
@@ -80,5 +83,15 @@ public class Product {
         $x(String.format("%s//span[@class='goods-tile__reviews-link']", rootElementPath)).click();
 
         return new ReviewsTab();
+    }
+
+    public boolean isDefectDescriptionVisible() {
+        $x(rootElementPath)
+                .shouldBe(visible)
+                .hover();
+        var flawDescription = rootElementPath + "//*[@class = 'goods-tile__hidden-content ng-star-inserted']";
+        var isFlawTextDisplayed = isDisplayed($x(flawDescription), ofSeconds(5));
+
+        return isFlawTextDisplayed;
     }
 }

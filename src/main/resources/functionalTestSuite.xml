@@ -6,6 +6,7 @@
                     <include name="verifyThatProductItemAddedToTheCart"/>
                     <include name="verifyThatTotalPriceChangedAfterAddingAdditionalService"/>
                     <include name="verifyThatTotalProductsPriceHasDoubled"/>
+                    <include name="verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart"/>
                 </methods>
             </class>
         </classes>
@@ -62,6 +63,7 @@
                 <methods>
                     <include name="verifyThatFilteredProductsContainsExpectedTerm"/>
                     <include name="verifyThatProductCharacteristicContainsValueSearchedUsingAdditionalFilterSection"/>
+                    <include name="verifyThatFilteredProductContainsExpectedCharacteristics" />
                 </methods>
             </class>
         </classes>
