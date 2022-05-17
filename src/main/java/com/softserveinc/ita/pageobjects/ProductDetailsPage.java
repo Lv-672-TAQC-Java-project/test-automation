@@ -1,7 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
-import com.softserveinc.ita.pageobjects.models.ProductDetailsTabName;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -14,7 +13,7 @@ public class ProductDetailsPage {
     private final SelenideElement productNameLabel = $x("//div[@class='product__heading']/child::h1");
 
     public boolean isOpened() {
-        return isDisplayed($x("//product-tab-main[@class='ng-star-inserted']"), ofSeconds(5));
+        return isDisplayed($x("//div[@class='product__heading']"), ofSeconds(5));
     }
 
     public String getProductName() {
@@ -48,5 +47,11 @@ public class ProductDetailsPage {
         $x(format("//ul[@class='tabs__list']/li[4]")).click();
 
         return new QuestionTab();
+    }
+
+    public String getProductCode() {
+        return $x("//p[@class='product__code detail-code']")
+                .getText()
+                .split(" ")[2];
     }
 }
