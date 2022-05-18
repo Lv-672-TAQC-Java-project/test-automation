@@ -1,11 +1,14 @@
 package com.softserveinc.ita;
 
+import com.codeborne.selenide.Selenide;
+import com.softserveinc.ita.pageobjects.product.InCartProduct;
+import com.softserveinc.ita.pageobjects.product.InOrderProduct;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
-import java.util.LinkedList;
+import java.util.stream.Collectors;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.BEAUTY_AND_HEALTH;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
@@ -99,29 +102,29 @@ public class OrderPlacementTest extends TestRunner {
         var cart = header.openCart();
         var productsInCart = cart.getInCartProducts();
 
-        var productsInCartNames = new LinkedList<String>();
-        for (var productInCart : productsInCart) {
-            productsInCartNames.add(productInCart.getName());
-        }
+        var productsInCartNames = productsInCart
+                .stream()
+                .map(InCartProduct::getName)
+                .collect(Collectors.toList());
 
-        var productsInCartPrices = new LinkedList<Integer>();
-        for (var productInCart : productsInCart) {
-            productsInCartPrices.add(productInCart.getPrice());
-        }
+        var productsInCartPrices = productsInCart
+                .stream()
+                .map(InCartProduct::getPrice)
+                .collect(Collectors.toList());
 
         var productsInOrder = cart
                 .submitOrder()
                 .getProducts();
 
-        var productsInOrderNames = new LinkedList<String>();
-        for (var productInOrder : productsInOrder) {
-            productsInOrderNames.add(productInOrder.getName());
-        }
+        var productsInOrderNames = productsInOrder
+                .stream()
+                .map(InOrderProduct::getName)
+                .collect(Collectors.toList());
 
-        var productsInOrderPrices = new LinkedList<Integer>();
-        for (var productInOrder : productsInOrder) {
-            productsInOrderPrices.add(productInOrder.getPrice());
-        }
+        var productsInOrderPrices =  productsInOrder
+                .stream()
+                .map(InOrderProduct::getPrice)
+                .collect(Collectors.toList());
 
         assertThat(productsInOrderNames)
                 .as("In the order all product names should match with the names from the cart")
