@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import static com.codeborne.selenide.Selenide.$x;
 
 @AllArgsConstructor
-public class AdditionalProductService {
+public class AdditionalProductService extends BasePage {
     private String rootElementPath;
 
     public AdditionalProductService(String productName, int index) {
