@@ -1,6 +1,7 @@
 package com.softserveinc.ita.pageobjects.product;
 
 import com.codeborne.selenide.Condition;
+import com.codeborne.selenide.HoverOptions;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
@@ -87,11 +88,12 @@ public class Product {
 
     public boolean isDefectDescriptionVisible() {
         $x(rootElementPath)
-                .shouldBe(visible)
+                .shouldBe(visible, ofSeconds(10))
                 .hover();
         var flawDescription = rootElementPath + "//*[@class = 'goods-tile__hidden-content ng-star-inserted']";
-        var isFlawTextDisplayed = isDisplayed($x(flawDescription), ofSeconds(5));
+        $x(flawDescription).hover();
 
-        return isFlawTextDisplayed;
+        return isDisplayed($x(flawDescription), ofSeconds(10));
+
     }
 }

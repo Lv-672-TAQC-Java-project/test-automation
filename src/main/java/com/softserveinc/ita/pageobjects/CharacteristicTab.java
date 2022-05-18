@@ -7,7 +7,7 @@ import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 
-public class CharacteristicTab {
+public class CharacteristicTab extends BasePage {
 
     public Map<String, String> getProductCharacteristics() {
         var productCharacteristicsMap = new HashMap<String, String>();

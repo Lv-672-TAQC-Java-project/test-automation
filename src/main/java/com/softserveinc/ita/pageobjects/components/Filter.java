@@ -47,4 +47,13 @@ public class Filter {
 
         return new SearchResultPage();
     }
+
+    public int getProductsAmountInFilterCheckbox(FilterSectionName filterSectionName, String filterCheckboxName) {
+        var productsAmount = $x(String.format("//div[@data-filter-name='%s']//a[@data-id='%s']/span",
+                filterSectionName.getFilterSectionPath(), filterCheckboxName))
+                .text()
+                .replaceAll("\\D+", "");
+
+        return Integer.parseInt(productsAmount);
+    }
 }
