@@ -4,7 +4,7 @@ import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class MenuModal {
+public class MenuSideBar {
 
     @Step("Opened comparison modal")
     public ComparisonModal openComparisonModal() {

@@ -36,19 +36,27 @@ public class HomePage {
         return this;
     }
 
+    /**
+     * Comparison modal testing precondition.
+     * Use this method before the test to open menu
+     * and remove all elements from comparison modal if it is filled
+     * or close menu if comparison modal is not filled.
+     */
     @Step("Emptied comparison modal and close popup")
     public HomePage emptyComparisonModal() {
-        MenuModal menuModal = header.openMenuModal();
-        //verify if comparison button is visible
-        if ($$x("//ul[contains(@class, 'side-menu__list--top')]//li")
+        MenuSideBar menuSideBar = header.openMenuSideBar();
+        //Catalog button has index 1
+        //Card button has index 2
+        //Comparison modal button has index 3 if it is filled
+        if ($$x("//ul[contains(@class, 'side-menu__list--top')]//button")
                 .shouldHave(sizeNotEqual(0))
                 .size() == 3) {
-            menuModal
+            menuSideBar
                     .openComparisonModal()
-                    .removeAllItems()
+                    .removeAllSubCategories()
                     .close();
         } else {
-            menuModal.close();
+            menuSideBar.close();
         }
 
         return this;

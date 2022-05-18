@@ -22,29 +22,31 @@ public class ComparisonModal {
         return new ComparisonPage();
     }
 
-    public CategoryComparisonModal getCategory(String category) {
-        String categoryPath = format("//a[contains(text(), '%s')]//ancestor::*[contains(@class, 'comparison-modal__item')]", category);
+    public SubCategoryComparisonModal getSubCategory(String subCategory) {
+        String subCategoryPath = format("//a[contains(text(), '%s')]" +
+                "//ancestor::*[contains(@class, 'comparison-modal__item')]", subCategory);
 
-        return new CategoryComparisonModal(categoryPath);
+        return new SubCategoryComparisonModal(subCategoryPath);
     }
 
-    public CategoryComparisonModal getCategory(int index) {
-        String categoryPath = format("(//*[contains(@class, 'comparison-modal__item')])[%s]", index);
+    public SubCategoryComparisonModal getSubCategory(int index) {
+        String subCategoryPath = format("(//*[contains(@class, 'comparison-modal__item')])[%s]", index);
 
-        return new CategoryComparisonModal(categoryPath);
+        return new SubCategoryComparisonModal(subCategoryPath);
     }
 
-    public List<CategoryComparisonModal> getCategories() {
-        List<CategoryComparisonModal> categories = new LinkedList<>();
-        String categoriesPath = "//*[contains(@class, 'comparison-modal__list')]//li";
-        int categoriesCount = $$x(categoriesPath)
-                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
+    public List<SubCategoryComparisonModal> getSubCategories() {
+        List<SubCategoryComparisonModal> subCategories = new LinkedList<>();
+        String subCategoriesPath = "//*[contains(@class, 'comparison-modal__list')]//li";
+        int subCategoriesCount = $$x(subCategoriesPath)
+                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10))
+                .size();
 
-        for (int i = 1; i <= categoriesCount; i++) {
-            categories.add(new CategoryComparisonModal(format("%s[%s]", categoriesPath, i)));
+        for (int i = 1; i <= subCategoriesCount; i++) {
+            subCategories.add(new SubCategoryComparisonModal(format("%s[%s]", subCategoriesPath, i)));
         }
 
-        return categories;
+        return subCategories;
     }
 
     @Step("Closed comparison modal")
@@ -54,13 +56,13 @@ public class ComparisonModal {
         return new HomePage();
     }
 
-    @Step("Removed all items from comparison modal")
-    public ComparisonModal removeAllItems() {
+    @Step("Removed all sub categories from comparison modal")
+    public ComparisonModal removeAllSubCategories() {
         //loop to check if categories list is not empty
         while ($x("//rz-comparison-modal/*")
                 .getAttribute("class")
                 .contains("list")) {
-            getCategory(1).remove();
+            getSubCategory(1).remove();
         }
 
         return this;

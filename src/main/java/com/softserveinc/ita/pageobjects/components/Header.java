@@ -50,9 +50,9 @@ public class Header {
     }
 
     @Step("Opened menu modal")
-    public MenuModal openMenuModal() {
+    public MenuSideBar openMenuSideBar() {
         $x("//rz-mobile-user-menu//button").click();
 
-        return new MenuModal();
+        return new MenuSideBar();
     }
 }
