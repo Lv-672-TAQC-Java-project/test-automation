@@ -49,4 +49,20 @@ public class ProductDetailsPage extends BasePage {
 
         return new QuestionTab();
     }
+
+    @Step("Opened product credit modal")
+    public CreditModal openCreditModal() {
+        productNameLabel.scrollIntoView(true);
+        $x("//button[@class='button button--medium button--navy ng-star-inserted']")
+                .click();
+
+        return new CreditModal();
+    }
+
+    public int getPrice() {
+
+        return Integer.parseInt($x("//div[@class='product-prices__inner ng-star-inserted']/p[1]")
+                .getText()
+                .replaceAll("\\D+", ""));
+    }
 }
