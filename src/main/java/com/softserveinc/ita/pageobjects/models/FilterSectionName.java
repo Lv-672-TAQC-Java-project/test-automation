@@ -10,7 +10,8 @@ public enum FilterSectionName {
     DISPLAY_TYPE("31565"),
     PRODUCT_AVAILABILITY("sell_status"),
     PROCESSOR("processor"),
-    RAM_SIZE("20863");
+    RAM_SIZE("20863"),
+    MATURATION_PERIOD("viderjka-krepkie-napitki");
 
     private final String filterSectionPath;
 }

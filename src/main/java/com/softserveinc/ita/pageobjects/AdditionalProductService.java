@@ -17,8 +17,7 @@ public class AdditionalProductService {
 
     @Step("Selected additional service")
     public Cart select() {
-        $x(rootElementPath)
-                .scrollIntoView(true)
+        $x(rootElementPath + "/div/label")
                 .click();
 
         return new Cart();
