@@ -7,7 +7,7 @@ import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
-public class OrderPlacementPage {
+public class OrderPlacementPage extends BasePage {
 
     @Step("Submitted an order")
     public OrderPlacementPage submitOrder() {

@@ -21,7 +21,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
-public class SearchResultPage {
+public class SearchResultPage extends BasePage {
 
     private final Header header = new Header();
     private final Filter filter = new Filter();

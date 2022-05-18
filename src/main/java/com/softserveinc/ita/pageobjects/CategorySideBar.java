@@ -6,7 +6,7 @@ import io.qameta.allure.Step;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 
-public class CategorySideBar {
+public class CategorySideBar extends BasePage {
 
     @Step("Opened category page")
     public CategoryPage openCategoryPage(CategoryName categoryName) {
