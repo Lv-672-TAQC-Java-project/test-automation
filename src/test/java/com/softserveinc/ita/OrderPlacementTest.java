@@ -23,7 +23,7 @@ public class OrderPlacementTest extends TestRunner {
                 .as("Search term label should be displayed")
                 .contains(searchTerm);
 
-        var firstProduct = searchResultPage.getProduct(2);
+        var firstProduct = searchResultPage.getProduct(1);
         var firstProductName = firstProduct.getName();
 
         var productDetailsPage = firstProduct.openDetailsPage();

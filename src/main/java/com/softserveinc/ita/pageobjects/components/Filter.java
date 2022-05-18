@@ -22,7 +22,7 @@ public class Filter {
                 filterCheckboxName)).click();
 
         $x(String.format("//a[@class='catalog-selection__link' and contains(text(), '%s')]",
-                filterCheckboxName)).shouldBe(visible, ofSeconds(10));
+                filterCheckboxName)).shouldBe(visible, ofSeconds(20));
 
         return new SearchResultPage();
     }

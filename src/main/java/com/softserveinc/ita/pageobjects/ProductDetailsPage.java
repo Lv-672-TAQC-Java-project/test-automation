@@ -1,10 +1,12 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
+import com.softserveinc.ita.pageobjects.models.ProductDetailsTabName;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
+import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
 public class ProductDetailsPage {
@@ -39,5 +41,12 @@ public class ProductDetailsPage {
         $x("//ul[@class='tabs__list']/li[2]").click();
 
         return new CharacteristicTab();
+    }
+
+    @Step("Opened product question tab")
+    public QuestionTab openQuestionTab() {
+        $x(format("//ul[@class='tabs__list']/li[4]")).click();
+
+        return new QuestionTab();
     }
 }
