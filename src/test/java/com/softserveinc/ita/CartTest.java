@@ -205,14 +205,16 @@ public class CartTest extends TestRunner {
                         .openFlawedProductsPage()
                         .openFlawedProductsCategoryPage(flawedProductsCategory);
 
-        assertThat(subCategoryPage.getCategoryLabel())
+        var softAssert = new SoftAssertions();
+
+        softAssert.assertThat(subCategoryPage.getSubCategoryLabel())
                 .as("Search result page category label should contain " + flawedProductsCategory)
                 .contains(flawedProductsCategory);
 
         var flawedProduct = subCategoryPage.getProduct(1);
         var isProductDefectVisible = flawedProduct.isDefectDescriptionVisible();
 
-        assertThat(isProductDefectVisible)
+        softAssert.assertThat(isProductDefectVisible)
                 .as("Red description message should be visible after hovering mouse over flawed product")
                 .isTrue();
 
@@ -223,9 +225,11 @@ public class CartTest extends TestRunner {
         var cartProductName = cartProduct.getName();
         var expectedWord = "Уцінка";
 
-        assertThat(cartProductName)
+        softAssert.assertThat(cartProductName)
                 .as("Flawed product name should have word 'Уцінка' in its name")
                 .endsWith(expectedWord);
+
+        softAssert.assertAll();
 
         cartProduct.addOneMoreProduct();
         var alertMessage = cartProduct.getAlertMessage();
