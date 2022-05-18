@@ -6,6 +6,7 @@ import com.softserveinc.ita.pageobjects.models.CategoryName;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.COTTAGE_GARDEN_AND_VEGETABLE_GARDEN;
@@ -84,27 +85,25 @@ public class CartTest extends TestRunner {
         homePage.emptyCart();
 
         var header = homePage.getHeader();
-        String searchTerm = "Asus";
+        var searchTerm = "Asus";
         var searchResultPage = header.search(searchTerm);
 
-        assertThat(searchResultPage.getSearchTermLabel())
+        var softAssert = new SoftAssertions();
+
+        softAssert.assertThat(searchResultPage.getSearchTermLabel())
                 .as("Search result page should contain label with" + searchTerm)
                 .contains(searchTerm);
 
         var firstProduct = searchResultPage.getProduct(1);
+        var firstProductName = firstProduct.getName();
         firstProduct.addToCart();
 
         var cart = header.openCart();
 
-        assertThat(cart.isOpened())
-                .as("Cart modal should be displayed")
-                .isTrue();
-
-        String firstProductName = firstProduct.getName();
         var cartProduct = cart.getProduct(firstProductName);
-        String cartProductName = cartProduct.getName();
+        var cartProductName = cartProduct.getName();
 
-        assertThat(cartProductName)
+        softAssert.assertThat(cartProductName)
                 .as("Product name in cart should be same as name of added product to it")
                 .contains(firstProductName);
 
@@ -112,8 +111,15 @@ public class CartTest extends TestRunner {
         cartProduct.expandAdditionalServicesSection();
         var additionalProductService = cartProduct.getAdditionalProductService(cartProductName, 1);
         additionalProductService.select();
-        int totalPriceUpdated = cart.getTotalPrice();
         int additionalProductServiceCost = additionalProductService.getPrice();
+
+        softAssert.assertThat(cart.isOpened())
+                .as("Cart modal should be displayed")
+                .isTrue();
+
+        softAssert.assertAll();
+
+        int totalPriceUpdated = cart.getTotalPrice();
 
         assertThat(totalPriceUpdated)
                 .as("Total price should be increased by the cost of the first selected additional service")
