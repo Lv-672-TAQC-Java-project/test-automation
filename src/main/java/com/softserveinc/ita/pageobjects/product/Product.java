@@ -90,8 +90,8 @@ public class Product {
                 .hover();
         var flawDescription = rootElementPath + "//*[@class = 'goods-tile__hidden-content ng-star-inserted']";
         $x(flawDescription).hover();
-        var isFlawTextDisplayed = isDisplayed($x(flawDescription), ofSeconds(10));
 
-        return isFlawTextDisplayed;
+        return isDisplayed($x(flawDescription), ofSeconds(10));
+
     }
 }
