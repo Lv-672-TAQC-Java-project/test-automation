@@ -45,12 +45,7 @@ public class HomePage {
     @Step("Emptied comparison modal and close popup")
     public HomePage emptyComparisonModal() {
         MenuSideBar menuSideBar = header.openMenuSideBar();
-        //Catalog button has index 1
-        //Card button has index 2
-        //Comparison modal button has index 3 if it is filled
-        if ($$x("//ul[contains(@class, 'side-menu__list--top')]//button")
-                .shouldHave(sizeNotEqual(0))
-                .size() == 3) {
+        if (menuSideBar.areThereProductsInComparison()) {
             menuSideBar
                     .openComparisonModal()
                     .removeAllSubCategories()

@@ -16,28 +16,28 @@ public class ComparisonModal {
     @Step("Opened Comparison Page {category}")
     public ComparisonPage openComparisonPage(String category) {
 
-        String categoryLinkPath = format("//*[contains(@class, 'comparison-modal__list')]//a[contains(text(), '%s')]", category);
+        var categoryLinkPath = format("//*[contains(@class, 'comparison-modal__list')]//a[contains(text(), '%s')]", category);
         $x(categoryLinkPath).click();
 
         return new ComparisonPage();
     }
 
     public SubCategoryComparisonModal getSubCategory(String subCategory) {
-        String subCategoryPath = format("//a[contains(text(), '%s')]" +
+        var subCategoryPath = format("//a[contains(text(), '%s')]" +
                 "//ancestor::*[contains(@class, 'comparison-modal__item')]", subCategory);
 
         return new SubCategoryComparisonModal(subCategoryPath);
     }
 
     public SubCategoryComparisonModal getSubCategory(int index) {
-        String subCategoryPath = format("(//*[contains(@class, 'comparison-modal__item')])[%s]", index);
+        var subCategoryPath = format("(//*[contains(@class, 'comparison-modal__item')])[%s]", index);
 
         return new SubCategoryComparisonModal(subCategoryPath);
     }
 
     public List<SubCategoryComparisonModal> getSubCategories() {
         List<SubCategoryComparisonModal> subCategories = new LinkedList<>();
-        String subCategoriesPath = "//*[contains(@class, 'comparison-modal__list')]//li";
+        var subCategoriesPath = "//*[contains(@class, 'comparison-modal__list')]//li";
         int subCategoriesCount = $$x(subCategoriesPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10))
                 .size();

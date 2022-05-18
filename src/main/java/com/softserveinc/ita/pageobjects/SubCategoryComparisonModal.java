@@ -22,7 +22,7 @@ public class SubCategoryComparisonModal {
     @Step("Removed from comparison modal")
     public ComparisonModal remove() {
         //save the name of the current category
-        String subCategoryName = $x(rootElementPath + "//a")
+        var subCategoryName = $x(rootElementPath + "//a")
                 .text()
                 .replaceAll("\\s[0-9]", "");
 
