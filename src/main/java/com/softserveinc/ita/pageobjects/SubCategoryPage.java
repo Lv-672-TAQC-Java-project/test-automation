@@ -13,6 +13,10 @@ public class SubCategoryPage extends SearchResultPage {
         return new TiresSubcategoryFilterSection();
     }
 
+    public String getSubCategoryLabel() {
+        return $x("//*[@class='catalog-heading ng-star-inserted']").text();
+    }
+
     public boolean isOpened() {
         return isDisplayed($x("//div[@class='ng-star-inserted']/h1"), ofSeconds(5));
     }

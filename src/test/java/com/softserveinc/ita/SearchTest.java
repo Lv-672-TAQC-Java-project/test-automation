@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-import com.codeborne.selenide.Selenide;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
@@ -51,7 +50,7 @@ public class SearchTest extends TestRunner {
 
         var productName = productDetailsPage.getProductName();
         var productCode = productDetailsPage.getProductCode();
-        Selenide.back();
+        productDetailsPage.goBack();
 
         assertThat(subCategoryPage.isOpened())
                 .as("Subcategory page should be displayed")

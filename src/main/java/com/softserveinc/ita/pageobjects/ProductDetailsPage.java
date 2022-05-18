@@ -8,7 +8,7 @@ import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
-public class ProductDetailsPage {
+public class ProductDetailsPage extends BasePage {
 
     private final SelenideElement productNameLabel = $x("//div[@class='product__heading']/child::h1");
 
