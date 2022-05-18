@@ -1,13 +1,12 @@
 package com.softserveinc.ita.pageobjects.product;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
 
-public class AdulthoodConfirmation {
+public class AdulthoodConfirmationModal {
 
     @Step("Confirmed adulthood")
     public SearchResultPage confirmAdulthood() {

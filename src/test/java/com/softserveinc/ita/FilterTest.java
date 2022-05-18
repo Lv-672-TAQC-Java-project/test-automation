@@ -80,19 +80,18 @@ public class FilterTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-30")
     @Test(description = "LVTAQC672-30")
     public void verifyThatFilteredProductsAmountIsEqualToAmountInFilterCheckbox() {
-        String searchTerm = "Віскі";
+        var searchTerm = "Віскі";
 
         var searchResultPage = homePage
                 .getHeader()
                 .search(searchTerm)
-                .getAdulthoodConfirmation()
+                .getAdulthoodConfirmationModal()
                 .confirmAdulthood();
 
         var filter = searchResultPage.getFilter();
 
-        String filterCheckboxName = "до 45 років";
-        int productsAmountInFilterCheckbox = filter
-                .getProductsAmountInFilterCheckbox(MATURATION_PERIOD, filterCheckboxName);
+        var filterCheckboxName = "до 45 років";
+        int productsAmountInFilterCheckbox = filter.getProductsAmountInFilterCheckbox(MATURATION_PERIOD, filterCheckboxName);
 
         var filteredProductsList = filter
                 .filterBySection(MATURATION_PERIOD, filterCheckboxName)

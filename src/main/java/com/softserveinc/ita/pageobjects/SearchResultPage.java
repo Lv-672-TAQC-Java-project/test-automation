@@ -4,7 +4,7 @@ import com.softserveinc.ita.pageobjects.components.Filter;
 import com.softserveinc.ita.pageobjects.components.FilterCategorySideBar;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.SortOrder;
-import com.softserveinc.ita.pageobjects.product.AdulthoodConfirmation;
+import com.softserveinc.ita.pageobjects.product.AdulthoodConfirmationModal;
 import com.softserveinc.ita.pageobjects.product.Product;
 import io.qameta.allure.Step;
 import lombok.Getter;
@@ -25,7 +25,7 @@ public class SearchResultPage {
 
     private final Header header = new Header();
     private final Filter filter = new Filter();
-    private final AdulthoodConfirmation adulthoodConfirmation = new AdulthoodConfirmation();
+    private final AdulthoodConfirmationModal adulthoodConfirmationModal = new AdulthoodConfirmationModal();
     private final FilterCategorySideBar filterCategorySideBar = new FilterCategorySideBar();
 
     public List<Product> getProducts() {
