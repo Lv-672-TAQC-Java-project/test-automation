@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum PopularBrandName {
+public enum BrandName {
     PUMA("Puma"),
     SKECHERS("Skechers"),
     ECCO("Ecco"),

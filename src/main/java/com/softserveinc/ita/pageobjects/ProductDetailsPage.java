@@ -49,4 +49,9 @@ public class ProductDetailsPage {
 
         return new QuestionTab();
     }
+
+    public String getActiveFootSize() {
+        return $x("//a[@class='var-options__block var-options__block_state_active ng-star-inserted']" +
+                "/span").getText();
+    }
 }

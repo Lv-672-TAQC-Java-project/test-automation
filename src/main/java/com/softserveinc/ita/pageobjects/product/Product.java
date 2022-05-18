@@ -4,6 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.models.FootSize;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
@@ -93,5 +94,13 @@ public class Product {
         var isFlawTextDisplayed = isDisplayed($x(flawDescription), ofSeconds(5));
 
         return isFlawTextDisplayed;
+    }
+
+    public ProductDetailsPage getFootSize(FootSize footSize) {
+        $x(rootElementPath).hover();
+        $x(String.format("%s//li[@class='goods-tile__param ng-star-inserted']/a[contains(text(), '%s')]",
+                rootElementPath, footSize.getFootSize())).click();
+
+        return new ProductDetailsPage();
     }
 }
