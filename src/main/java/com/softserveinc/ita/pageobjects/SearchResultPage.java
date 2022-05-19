@@ -9,6 +9,7 @@ import com.softserveinc.ita.pageobjects.product.Product;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
+import java.time.Duration;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class SearchResultPage extends BasePage {
         List<Product> products = new LinkedList<>();
         String productsPath = "//div[@class='goods-tile__inner']";
         int amountOfProducts = $$x(productsPath)
-                .shouldHave(sizeNotEqual(0), ofSeconds(10)).size();
+                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
         for (int i = 1; i <= amountOfProducts; i++) {
             products.add(new Product(format("(%s)[%s]", productsPath, i)));
