@@ -52,11 +52,9 @@ public class FilterTest extends TestRunner {
                 .getFilter()
                 .filterByPrice(priceRangeMinimum, priceRangeMaximum);
 
-        var isCustomPriceTagVisible = searchResultPage.isCustomPriceTagVisible();
-
         SoftAssertions softAssert = new SoftAssertions();
 
-        softAssert.assertThat(isCustomPriceTagVisible)
+        softAssert.assertThat(searchResultPage.isCustomPriceTagVisible())
                 .as("Tag with lowest and highest desirable price boundaries should be visible")
                 .isTrue();
 
