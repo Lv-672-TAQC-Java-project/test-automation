@@ -1,5 +1,7 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.components;
 
+import com.softserveinc.ita.pageobjects.ComparisonModal;
+import com.softserveinc.ita.pageobjects.ComparisonPage;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 

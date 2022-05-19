@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.components.SubCategoryComparisonModal;
 import io.qameta.allure.Step;
 
 import java.time.Duration;
