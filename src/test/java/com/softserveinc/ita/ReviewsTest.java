@@ -1,5 +1,6 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.components.Rating;
 import com.softserveinc.ita.pageobjects.components.Review;
 import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
 import com.softserveinc.ita.utils.TestRunner;
@@ -10,6 +11,8 @@ import org.testng.annotations.Test;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+import static com.softserveinc.ita.pageobjects.models.CategoryName.LAPTOPS_AND_COMPUTERS;
+import static com.softserveinc.ita.pageobjects.models.RatingNumber.FOUR;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ReviewsTest extends TestRunner {
@@ -49,5 +52,38 @@ public class ReviewsTest extends TestRunner {
         assertThat(sortedReviewsRating)
                 .as("The sorted reviews should be equal to the sorted reviews by 'Most helpful'")
                 .isEqualTo(reviewsRatingByMostHelpful);
+    }
+
+    @Description("Add a test script to cover reviews filter function by rating in common rating section")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-37")
+    @Test(description = "LVTAQC672-37")
+    public void VerifyReviewsFilterFunctionByRating() {
+        var product = homePage
+                .getHeader()
+                .openCatalog()
+                .openSubCategoryPage(LAPTOPS_AND_COMPUTERS, "Монітори")
+                .getProduct(1);
+        var productName = product.getName();
+
+        var reviewsTab = product.openReviewsTab();
+        var productTitleInReviews = reviewsTab.getTitle();
+
+        assertThat(productTitleInReviews)
+                .as("The title on the reviews page should contain " + productName)
+                .containsIgnoringCase(productName);
+
+        Rating rating = reviewsTab
+                .getCommonRating()
+                .getRating(FOUR);
+
+        var filteredReviews = rating
+                .filterReviews()
+                .getReviews();
+
+        var countRating = rating.getCount();
+
+        assertThat(filteredReviews)
+                .as("filtered reviews should have size " + countRating)
+                .hasSize(countRating);
     }
 }

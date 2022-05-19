@@ -1,8 +1,10 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.components.CommonRatingSection;
 import com.softserveinc.ita.pageobjects.components.Review;
 import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
 import io.qameta.allure.Step;
+import lombok.Getter;
 
 import java.util.List;
 
@@ -15,7 +17,10 @@ import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
+@Getter
 public class ReviewsTab {
+
+    private final CommonRatingSection commonRating = new CommonRatingSection();
 
     public List<Review> getReviews() {
         String reviewPath = "//div[@class='comment']";
