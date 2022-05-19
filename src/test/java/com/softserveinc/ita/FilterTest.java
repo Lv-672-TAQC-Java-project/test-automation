@@ -12,6 +12,9 @@ import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APP
 import static com.softserveinc.ita.pageobjects.models.CategoryName.TOOLS_AND_AUTOMOTIVE_PRODUCTS;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MANUFACTURER;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
+import static com.softserveinc.ita.pageobjects.models.CategoryName.LAPTOPS_AND_COMPUTERS;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MATURATION_PERIOD;
 import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
 import static java.lang.String.format;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -124,5 +127,82 @@ public class FilterTest extends TestRunner {
         assertThat(expectedTireCharacteristic)
                 .as("Tire characteristic should be " + expectedTireCharacteristic)
                 .isEqualTo(actualTireCharacteristic);
+    }
+
+    @Description("Add a test script to cover a set of filters: 'Процесор', 'Бренд', 'Обсяг оперативної пам'яті' in the 'Ноутбуки' subcategory")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-32")
+    @Test(description = "LVTAQC672-32")
+    public void verifyThatFilteredProductContainsExpectedCharacteristics() {
+        var subCategoryPage = homePage
+                .getCategorySideBar()
+                .openCategoryPage(LAPTOPS_AND_COMPUTERS)
+                .openSubCategoryPage("Ноутбуки");
+
+        var manufacturer = "HP";
+        var processor = "Intel Core i5";
+        var memoryValue = "16 - 24 ГБ";
+
+        var filter = subCategoryPage.getFilter();
+        filter.filterBySection(MANUFACTURER, manufacturer);
+        filter.filterBySection(PROCESSOR, processor);
+        var filteredProduct = filter
+                .filterBySection(RAM_SIZE, memoryValue)
+                .getProduct(1);
+
+        assertThat(filteredProduct.getName())
+                .as("Product name should contain " + manufacturer)
+                .containsIgnoringCase(manufacturer);
+
+        var productCharacteristics = filteredProduct
+                .openDetailsPage()
+                .openCharacteristicTab()
+                .getProductCharacteristics();
+
+        assertThat(productCharacteristics.get("Процесор"))
+                .as("The processor name should contain a value from the filter " + processor)
+                .containsIgnoringCase(processor);
+
+        int memorySizeInCharacteristics = Integer.parseInt(productCharacteristics.get("Обсяг оперативної пам'яті")
+                .replaceAll("[^\\d]", ""));
+
+        int firstMemorySizeFromFilter = parseStringIntoNumbers(memoryValue, 0);
+        int secondMemorySizeFromFilter = parseStringIntoNumbers(memoryValue, 1);
+
+        assertThat(memorySizeInCharacteristics)
+                .as("The size of RAM on the characteristics tab should be within the range of values of the selected filter")
+                .isBetween(firstMemorySizeFromFilter, secondMemorySizeFromFilter);
+    }
+
+    private int parseStringIntoNumbers(String text, int index) {
+        text = text.replaceAll("[^\\d-]", "");
+        String[] parts = text.split("-");
+        return Integer.parseInt(parts[index]);
+    }
+
+    @Description("Add test script to verify that amount of filtered products is equal to the number \n" +
+            "of products in the filter checkbox")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-30")
+    @Test(description = "LVTAQC672-30")
+    public void verifyThatFilteredProductsAmountIsEqualToAmountInFilterCheckbox() {
+        var searchTerm = "Віскі";
+
+        var searchResultPage = homePage
+                .getHeader()
+                .search(searchTerm)
+                .getAdulthoodConfirmationModal()
+                .confirmAdulthood();
+
+        var filter = searchResultPage.getFilter();
+
+        var filterCheckboxName = "до 45 років";
+        int productsAmountInFilterCheckbox = filter.getProductsAmountInFilterCheckbox(MATURATION_PERIOD, filterCheckboxName);
+
+        var filteredProductsList = filter
+                .filterBySection(MATURATION_PERIOD, filterCheckboxName)
+                .getProducts();
+
+        Assertions.assertThat(filteredProductsList)
+                .as("Amount of filtered products should be equal to number of products in filter checkbox")
+                .hasSize(productsAmountInFilterCheckbox);
     }
 }

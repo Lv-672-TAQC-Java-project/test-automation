@@ -4,6 +4,7 @@ import com.softserveinc.ita.pageobjects.components.Filter;
 import com.softserveinc.ita.pageobjects.components.FilterCategorySideBar;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.SortOrder;
+import com.softserveinc.ita.pageobjects.product.AdulthoodConfirmationModal;
 import com.softserveinc.ita.pageobjects.product.Product;
 import io.qameta.allure.Step;
 import lombok.Getter;
@@ -20,10 +21,11 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
-public class SearchResultPage {
+public class SearchResultPage extends BasePage {
 
     private final Header header = new Header();
     private final Filter filter = new Filter();
+    private final AdulthoodConfirmationModal adulthoodConfirmationModal = new AdulthoodConfirmationModal();
     private final FilterCategorySideBar filterCategorySideBar = new FilterCategorySideBar();
 
     public List<Product> getProducts() {
@@ -74,6 +76,10 @@ public class SearchResultPage {
 
     public String getSearchTermLabel() {
         return $x("//div[@class='search-header ng-star-inserted']/h1").getText();
+    }
+
+    public String getCategoryLabel() {
+        return $x("//*[@class='catalog-heading ng-star-inserted']").text();
     }
 
     @Step("Sorted products {order}")

@@ -16,7 +16,7 @@ import static java.lang.String.format;
 import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
-public class ComparisonPage {
+public class ComparisonPage extends BasePage {
 
     private final Header header = new Header();
 

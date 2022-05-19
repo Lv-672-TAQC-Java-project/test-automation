@@ -65,4 +65,16 @@ public class InCartProduct {
 
         return new Cart();
     }
+
+    public String getAlertMessage() {
+
+        return $x("//*[@role = 'alert']").text();
+    }
+
+    public int getProductsQuantity() {
+        var quantityValue = $x("//*[@class = 'cart-counter']//child::input").getValue();
+        int quantity = Integer.valueOf(quantityValue);
+
+        return quantity;
+    }
 }
