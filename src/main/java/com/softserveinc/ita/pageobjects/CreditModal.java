@@ -8,18 +8,18 @@ import static java.time.Duration.ofSeconds;
 
 public class CreditModal {
 
-    public int getAmountOfPayments() {
+    public int getAmountCreditsTypes() {
 
         return $$x("//option[@class='ng-star-inserted']")
                 .shouldHave(sizeNotEqual(0), ofSeconds(60))
                 .size();
     }
 
-    public int getCreditPeriod(int periods) {
+    public int getAmountCreditPayments(int indexPaymentChoice) {
+        var selectPeriod = format("//option[@class='ng-star-inserted'][%s]", indexPaymentChoice);
+        $x(selectPeriod).click();
 
-        $x(format("//option[@class='ng-star-inserted'][%s]", periods)).click();
-
-        return Integer.parseInt($x(format("//option[@class='ng-star-inserted'][%s]", periods))
+        return Integer.parseInt($x(selectPeriod)
                 .getText()
                 .replaceAll("\\D+", ""));
     }

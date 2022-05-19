@@ -7,7 +7,6 @@ import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
-import static com.softserveinc.ita.utils.RoundingDivisionUtil.getRoundingDivision;
 import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,12 +25,11 @@ public class CreditTest extends TestRunner {
                 .getProduct(1)
                 .openDetailsPage();
 
-        var creditModal = detailsPage
-                .openCreditModal();
+        var creditModal = detailsPage.openCreditModal();
 
-        range(1, creditModal.getAmountOfPayments())
+        range(1, creditModal.getAmountCreditsTypes())
                 .forEach(i -> assertThat(
-                        getRoundingDivision(detailsPage.getPrice(), creditModal.getCreditPeriod(i)))
+                        (int) Math.ceil((double) detailsPage.getPrice() / creditModal.getAmountCreditPayments(i)))
                         .as("price division to periods of payment should equal credit price for period")
                         .isEqualTo(creditModal.getCreditPrice()));
     }

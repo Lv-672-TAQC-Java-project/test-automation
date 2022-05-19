@@ -73,8 +73,7 @@ public class ProductDetailsPage extends BasePage {
     @Step("Opened product credit modal")
     public CreditModal openCreditModal() {
         productNameLabel.scrollIntoView(true);
-        $x("//button[@class='button button--medium button--navy ng-star-inserted']")
-                .click();
+        $x("//button[@class='button button--medium button--navy ng-star-inserted']").click();
 
         return new CreditModal();
     }
