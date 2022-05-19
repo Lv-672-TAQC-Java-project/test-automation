@@ -196,7 +196,6 @@ public class CartTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-38")
     @Test(description = "LVTAQC672-38")
     public void verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart() {
-        homePage.emptyCart();
         var header = homePage.getHeader();
         var flawedProductsCategory = "телевізори та монітори";
 
