@@ -196,6 +196,7 @@ public class CartTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-38")
     @Test(description = "LVTAQC672-38")
     public void verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart() {
+        homePage.emptyCart();
         var header = homePage.getHeader();
         var flawedProductsCategory = "телевізори та монітори";
 
@@ -223,10 +224,12 @@ public class CartTest extends TestRunner {
                 .as("Red description message should be visible after hovering mouse over flawed product")
                 .isTrue();
 
+        var productName = flawedProduct.getName();
+
         flawedProduct.addToCart();
         var cart = header.openCart();
-        var cartProduct = cart.getProduct(1);
 
+        var cartProduct = cart.getProduct(productName);
         var cartProductName = cartProduct.getName();
         var expectedWord = "Уцінка";
 
