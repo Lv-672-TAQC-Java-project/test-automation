@@ -14,7 +14,7 @@ public class ProductDetailsPage extends BasePage {
     private final SelenideElement productNameLabel = $x("//div[@class='product__heading']/child::h1");
 
     public boolean isOpened() {
-        return isDisplayed($x("//product-tab-main[@class='ng-star-inserted']"), ofSeconds(5));
+        return isDisplayed($x("//div[@class='product__heading']"), ofSeconds(5));
     }
 
     public String getProductName() {
@@ -59,9 +59,14 @@ public class ProductDetailsPage extends BasePage {
     }
 
     public String getDeliveryCityName() {
-
         return $x("//rz-delivery-in//span")
                 .shouldBe(visible)
                 .text();
+    }
+  
+    public String getProductCode() {
+        return $x("//p[@class='product__code detail-code']")
+                .getText()
+                .split(" ")[2];
     }
 }

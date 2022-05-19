@@ -41,7 +41,7 @@ public class FilterTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-7")
     @Test(description = "LVTAQC672-7")
     public void verifyCustomPriceFilteringFunctionality() {
-        String searchTerm = "Asus";
+        var searchTerm = "Asus";
         int priceRangeMinimum = 2000;
         int priceRangeMaximum = 24000;
 
