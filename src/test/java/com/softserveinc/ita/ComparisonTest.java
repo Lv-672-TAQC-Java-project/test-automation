@@ -109,7 +109,7 @@ public class ComparisonTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-6")
     @Test(description = "LVTAQC672-6")
     public void verifyShowOnlyDifferencesFunctionality() {
-        Header header = homePage.getHeader();
+        var header = homePage.getHeader();
         var searchTerm = "notebook";
 
         var searchResultPage = header.search(searchTerm);
