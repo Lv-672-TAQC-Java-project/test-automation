@@ -44,7 +44,7 @@ public class HomePage {
      */
     @Step("Emptied comparison modal and close popup")
     public HomePage emptyComparisonModal() {
-        MenuSideBar menuSideBar = header.openMenuSideBar();
+        var menuSideBar = header.openMenuSideBar();
         if (menuSideBar.areThereProductsInComparison()) {
             menuSideBar
                     .openComparisonModal()

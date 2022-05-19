@@ -168,7 +168,6 @@ public class ComparisonTest extends TestRunner {
                 .search("lenovo")
                 .getFilterCategorySideBar();
 
-        //needed to fill the comparison modal
         filterCategorySideBar
                 .filterBySubCategory("Чохли для мобільних телефонів")
                 .getProduct(1)

@@ -23,7 +23,7 @@ public class MenuSideBar {
     }
 
     public boolean areThereProductsInComparison() {
-        //Comparison modal button has index 3 and visible if it is filled
+        //Comparison modal button has index 3 and be visible if it is filled
         return $$x("//ul[contains(@class, 'side-menu__list--top')]//button")
                 .shouldHave(sizeNotEqual(0))
                 .size() == 3;
