@@ -16,7 +16,7 @@ import static java.lang.String.*;
 import static java.time.Duration.*;
 import static java.util.stream.IntStream.rangeClosed;
 
-public class QuestionTab {
+public class QuestionTab extends BasePage {
 
     @Step("selected sort option in tab question")
     public QuestionTab sort(QuestionSortingOption sortOption) {

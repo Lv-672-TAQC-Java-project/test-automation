@@ -5,6 +5,7 @@ import com.softserveinc.ita.pageobjects.product.InOrderProduct;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import java.util.stream.Collectors;
@@ -64,19 +65,23 @@ public class OrderPlacementTest extends TestRunner {
 
         var requiredFieldErrorMessage = "%s field should be required";
         var surnameFieldTittle = "surname";
-        assertThat(orderPlacementPage.isFieldRequired(surnameFieldTittle))
+
+        var softAssert = new SoftAssertions();
+        softAssert.assertThat(orderPlacementPage.isFieldRequired(surnameFieldTittle))
                 .as(format(requiredFieldErrorMessage, surnameFieldTittle))
                 .isTrue();
 
         var nameFieldTittle = "name";
-        assertThat(orderPlacementPage.isFieldRequired(nameFieldTittle))
+        softAssert.assertThat(orderPlacementPage.isFieldRequired(nameFieldTittle))
                 .as(format(requiredFieldErrorMessage, nameFieldTittle))
                 .isTrue();
 
         var phoneFieldTittle = "phone";
-        assertThat(orderPlacementPage.isFieldRequired(phoneFieldTittle))
+        softAssert.assertThat(orderPlacementPage.isFieldRequired(phoneFieldTittle))
                 .as(format(requiredFieldErrorMessage, phoneFieldTittle))
                 .isTrue();
+
+        softAssert.assertAll();
     }
 
     //may fall due to a bug

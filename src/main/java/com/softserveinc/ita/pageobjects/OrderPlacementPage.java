@@ -14,7 +14,7 @@ import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
-public class OrderPlacementPage {
+public class OrderPlacementPage extends BasePage {
 
     @Step("Submitted an order")
     public OrderPlacementPage submitOrder() {
