@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-import com.codeborne.selenide.Selenide;
 import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.InOrderProduct;
 import com.softserveinc.ita.utils.TestRunner;
@@ -80,6 +79,7 @@ public class OrderPlacementTest extends TestRunner {
                 .isTrue();
     }
 
+    //may fall due to a bug
     @Description("Verify that in the order all product names and prices match with the names and prices from the cart")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-44")
     @Test(description = "LVTAQC672-44")
@@ -88,8 +88,7 @@ public class OrderPlacementTest extends TestRunner {
         var header = homePage.getHeader();
         header
                 .openCatalog()
-                //TODO to remove the spaces
-                .openSubCategoryPage(BEAUTY_AND_HEALTH, " Триммери ")
+                .openSubCategoryPage(BEAUTY_AND_HEALTH, "Триммери")
                 .getFilter()
                 .filterBySection(PRODUCT_AVAILABILITY, "Є в наявності")
                 .getProduct(1)
