@@ -3,6 +3,7 @@ package com.softserveinc.ita.pageobjects;
 import com.codeborne.selenide.SelenideElement;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.lang.String.format;
@@ -49,6 +50,20 @@ public class ProductDetailsPage extends BasePage {
         return new QuestionTab();
     }
 
+    @Step("Opened delivery location modal")
+    public DeliveryLocationModal openDeliveryLocationModal() {
+        productNameLabel.scrollIntoView(true);
+        $x("//rz-delivery-in//button").click();
+
+        return new DeliveryLocationModal();
+    }
+
+    public String getDeliveryCityName() {
+        return $x("//rz-delivery-in//span")
+                .shouldBe(visible)
+                .text();
+    }
+  
     public String getProductCode() {
         return $x("//p[@class='product__code detail-code']")
                 .getText()

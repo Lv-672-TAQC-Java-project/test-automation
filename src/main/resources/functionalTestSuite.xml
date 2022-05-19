@@ -41,4 +41,10 @@
             <class name="com.softserveinc.ita.LastViewedProductsRememberedTest"/>
         </classes>
     </test>
+
+    <test name="Delivery location selection functionality">
+        <classes>
+            <class name="com.softserveinc.ita.DeliveryLocationTest"/>
+        </classes>
+    </test>
 </suite>
