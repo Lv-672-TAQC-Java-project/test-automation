@@ -117,6 +117,7 @@ public class OrderPlacementTest extends TestRunner {
                 .collect(Collectors.toList());
 
         var productsInOrder = cart
+                //here may be NoSuchElementException due to bag
                 .submitOrder()
                 .getProducts();
 
