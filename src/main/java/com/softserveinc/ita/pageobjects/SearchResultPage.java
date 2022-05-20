@@ -95,4 +95,12 @@ public class SearchResultPage extends BasePage {
 
         return isDisplayed($x("//*[@class = 'catalog-selection__link' and contains(@href, 'producer')]"), ofSeconds(10));
     }
+  
+    public int getFoundProductsAmountInCategory() {
+        var amount = $x("//div[@class='rz-search-result-qnty']")
+                .text()
+                .replaceAll("\\D+", "");
+
+        return Integer.parseInt(amount);
+    }
 }
