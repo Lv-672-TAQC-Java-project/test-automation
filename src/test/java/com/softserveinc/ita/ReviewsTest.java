@@ -72,7 +72,7 @@ public class ReviewsTest extends TestRunner {
                 .as("The title on the reviews page should contain " + productName)
                 .containsIgnoringCase(productName);
 
-        CommonRatingSection commonRatingSection = reviewsTab.getCommonRatingSection();
+        var commonRatingSection = reviewsTab.getCommonRatingSection();
 
         var filteredReviews = commonRatingSection
                 .filterReviews(FOUR)
