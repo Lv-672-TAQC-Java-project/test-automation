@@ -27,7 +27,7 @@ public class Product {
     }
 
     public ProductState getState() {
-        String classAttribute = $x(String.format("%s//ancestor::div[contains(@class, 'goods-tile') and @data-tile = 'small']",
+        var classAttribute = $x(String.format("%s//ancestor::div[contains(@class, 'goods-tile') and @data-tile = 'small']",
                 rootElementPath)).getAttribute("class");
 
         return classAttribute.contains("state") ? ProductState.UNAVAILABLE : ProductState.AVAILABLE;
