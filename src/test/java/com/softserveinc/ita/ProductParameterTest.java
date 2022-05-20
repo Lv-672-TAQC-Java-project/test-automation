@@ -1,15 +1,12 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.models.FootSize;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.CLOTHES_SHOES_AND_JEWELRY;
-import static com.softserveinc.ita.pageobjects.models.BrandName.*;
-import static com.softserveinc.ita.pageobjects.models.FootSize.*;
+import static com.softserveinc.ita.pageobjects.models.ShoeSize.*;
 import static org.assertj.core.api.Assertions.*;
 
 public class ProductParameterTest extends TestRunner {
@@ -21,15 +18,15 @@ public class ProductParameterTest extends TestRunner {
                 .getHeader()
                 .openCatalog()
                 .openCategoryPage(CLOTHES_SHOES_AND_JEWELRY)
-                .openBrandProductsPage(ASICS)
-                .getProduct(2)
-                .getFootSize(SIZE_44_5);
+                .openBrandProductsPage("Asics")
+                .getProduct("Кросівки Asics Gel-Kayano 28 1011B189-400 Сині")
+                .getShoeSize(SHOE_SIZE_44_5);
 
-        var activeFootSize = productDetailsPage.getActiveFootSize();
+        var selectedShoeSize = productDetailsPage.getSelectedShoeSize();
 
-        assertThat(activeFootSize)
+        assertThat(selectedShoeSize)
                 .as("active foot size should be equal to selected size")
-                .isEqualTo(productDetailsPage.getActiveFootSize());
+                .isEqualTo(productDetailsPage.getSelectedShoeSize());
     }
 
 }

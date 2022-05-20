@@ -1,6 +1,5 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.softserveinc.ita.pageobjects.models.BrandName;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -16,8 +15,8 @@ public class CategoryPage {
     }
 
     @Step("Opened {brandName} products page")
-    public SearchResultPage openBrandProductsPage(BrandName brandName) {
-        $x(String.format("//a[@title='%s']", brandName.getName())).click();
+    public SearchResultPage openBrandProductsPage(String shoeBrandName) {
+        $x(String.format("//a[@title='%s']", shoeBrandName)).click();
 
         return new SearchResultPage();
     }

@@ -4,7 +4,7 @@ import com.codeborne.selenide.Condition;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
-import com.softserveinc.ita.pageobjects.models.FootSize;
+import com.softserveinc.ita.pageobjects.models.ShoeSize;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
@@ -14,6 +14,7 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
+import static java.time.Duration.of;
 import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
@@ -96,10 +97,10 @@ public class Product {
         return isFlawTextDisplayed;
     }
 
-    public ProductDetailsPage getFootSize(FootSize footSize) {
+    public ProductDetailsPage getShoeSize(ShoeSize shoeSize) {
         $x(rootElementPath).hover();
-        $x(String.format("%s//li[@class='goods-tile__param ng-star-inserted']/a[contains(text(), '%s')]",
-                rootElementPath, footSize.getFootSize())).click();
+        $x(String.format("//li[@class='goods-tile__param ng-star-inserted']/a[contains(text(), '%s')]",
+                shoeSize.getPath())).click();
 
         return new ProductDetailsPage();
     }
