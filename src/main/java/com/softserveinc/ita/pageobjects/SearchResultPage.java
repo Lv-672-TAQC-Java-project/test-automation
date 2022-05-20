@@ -88,4 +88,12 @@ public class SearchResultPage extends BasePage {
 
         return this;
     }
+
+    public int getFoundProductsAmountInCategory() {
+        var amount = $x("//div[@class='rz-search-result-qnty']")
+                .text()
+                .replaceAll("\\D+", "");
+
+        return Integer.parseInt(amount);
+    }
 }

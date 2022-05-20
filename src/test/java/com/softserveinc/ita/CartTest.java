@@ -26,7 +26,7 @@ public class CartTest extends TestRunner {
                 .search("Фотоапарати")
                 .getProduct(1);
 
-        String firstProductName = firstProduct.getName();
+        var firstProductName = firstProduct.getName();
 
         firstProduct.addToCart();
 
@@ -34,7 +34,7 @@ public class CartTest extends TestRunner {
                 .openCart()
                 .getProduct(firstProductName);
 
-        String productNameInCart = productInCart.getName();
+        var productNameInCart = productInCart.getName();
 
         assertThat(firstProductName)
                 .as("The product name in the cart should be equal to the name of added product")
