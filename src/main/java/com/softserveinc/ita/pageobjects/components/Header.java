@@ -1,9 +1,6 @@
 package com.softserveinc.ita.pageobjects.components;
 
-import com.softserveinc.ita.pageobjects.Cart;
-import com.softserveinc.ita.pageobjects.ComparisonModal;
-import com.softserveinc.ita.pageobjects.ProductDetailsPage;
-import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.*;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
@@ -50,5 +47,12 @@ public class Header {
         commonSearch(fullProductName);
 
         return new ProductDetailsPage();
+    }
+
+    @Step("Opened home page")
+    public HomePage openHomePage() {
+        $x("//a[@class='header__logo']").click();
+
+        return new HomePage();
     }
 }

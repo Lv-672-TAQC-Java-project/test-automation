@@ -22,7 +22,7 @@ public class Filter {
                 filterCheckboxName)).click();
 
         $x(String.format("//a[@class='catalog-selection__link' and contains(text(), '%s')]",
-                filterCheckboxName)).shouldBe(visible, ofSeconds(10));
+                filterCheckboxName)).shouldBe(visible, ofSeconds(20));
 
         return new SearchResultPage();
     }
@@ -46,5 +46,14 @@ public class Filter {
         $x(filterPriceMaxPath).setValue(String.valueOf(filterPriceMaxNumber)).pressEnter();
 
         return new SearchResultPage();
+    }
+
+    public int getProductsAmountInFilterCheckbox(FilterSectionName filterSectionName, String filterCheckboxName) {
+        var productsAmount = $x(String.format("//div[@data-filter-name='%s']//a[@data-id='%s']/span",
+                filterSectionName.getFilterSectionPath(), filterCheckboxName))
+                .text()
+                .replaceAll("\\D+", "");
+
+        return Integer.parseInt(productsAmount);
     }
 }

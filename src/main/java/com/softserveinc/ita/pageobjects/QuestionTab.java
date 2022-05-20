@@ -16,7 +16,7 @@ import static java.lang.String.*;
 import static java.time.Duration.*;
 import static java.util.stream.IntStream.rangeClosed;
 
-public class QuestionTab {
+public class QuestionTab extends BasePage {
 
     @Step("selected sort option in tab question")
     public QuestionTab sort(QuestionSortingOption sortOption) {
@@ -34,6 +34,9 @@ public class QuestionTab {
     public List<Date> getQuestionsDates() {
         var questionPath = "//div[@class='comment']";
         int questionsAmount;
+
+        $x("//product-buyers-questions[@class='ng-star-inserted']")
+                .shouldBe(visible, ofSeconds(60));
 
         if ($x(questionPath).is(visible)) {
             questionsAmount = $$x(questionPath)

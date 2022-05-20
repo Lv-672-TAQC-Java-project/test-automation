@@ -1,11 +1,11 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.components.CommonRatingSection;
 import com.softserveinc.ita.pageobjects.components.Review;
 import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
@@ -30,7 +30,8 @@ public class ReviewsTest extends TestRunner {
 
         var productTitleInReviews = reviewsTab.getTitle();
 
-        assertThat(productTitleInReviews)
+        var softAssert = new SoftAssertions();
+        softAssert.assertThat(productTitleInReviews)
                 .as("The title on the reviews page should contain " + productName)
                 .contains(productName);
 
@@ -49,9 +50,11 @@ public class ReviewsTest extends TestRunner {
                 .map(Review::getRating)
                 .collect(Collectors.toList());
 
-        assertThat(sortedReviewsRating)
+        softAssert.assertThat(sortedReviewsRating)
                 .as("The sorted reviews should be equal to the sorted reviews by 'Most helpful'")
                 .isEqualTo(reviewsRatingByMostHelpful);
+
+        softAssert.assertAll();
     }
 
     @Description("Add a test script to cover filter function for reviews by rating in common rating section")

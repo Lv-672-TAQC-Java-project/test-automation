@@ -18,7 +18,7 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
 @Getter
-public class ReviewsTab {
+public class ReviewsTab extends BasePage {
 
     private final CommonRatingSection commonRatingSection = new CommonRatingSection();
 
