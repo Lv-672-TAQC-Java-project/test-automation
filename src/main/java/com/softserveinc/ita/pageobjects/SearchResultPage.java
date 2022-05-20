@@ -91,7 +91,7 @@ public class SearchResultPage extends BasePage {
         return this;
     }
 
-    public boolean isCustomPriceTagVisible() {
+    public boolean isCustomPriceTagDisplayed() {
 
         return isDisplayed($x("//*[@class = 'catalog-selection__link' and contains(@href, 'producer')]"), ofSeconds(10));
     }
