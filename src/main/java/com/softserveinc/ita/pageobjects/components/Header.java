@@ -49,7 +49,7 @@ public class Header {
         return new ProductDetailsPage();
     }
 
-    @Step("Opened menu modal")
+    @Step("Opened menu sidebar")
     public MenuSideBar openMenuSideBar() {
         $x("//rz-mobile-user-menu//button").click();
 
