@@ -32,12 +32,12 @@ public class SortTest extends TestRunner {
         var productPrices = searchResultPage.getProductsPrices(products);
         Collections.sort(productPrices);
 
-        int productsQuantity = searchResultPage.getSearchedProductsQuantityInCategoryLabel();
+        int productsAmount = searchResultPage.getFoundProductsAmountInCategory();
         searchResultPage.sort(SortOrder.FROM_CHEAP);
 
-        softAssert.assertThat(searchResultPage.getSearchedProductsQuantityInCategoryLabel())
-                .as("Quantity of searched products that are displayed in category label should not change after sort")
-                .isEqualTo(productsQuantity);
+        softAssert.assertThat(searchResultPage.getFoundProductsAmountInCategory())
+                .as("Amount of found products that are displayed under category label should not change after sort")
+                .isEqualTo(productsAmount);
 
         softAssert.assertAll();
 
