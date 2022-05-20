@@ -20,7 +20,7 @@ import static java.util.stream.IntStream.rangeClosed;
 @Getter
 public class ReviewsTab {
 
-    private final CommonRatingSection commonRating = new CommonRatingSection();
+    private final CommonRatingSection commonRatingSection = new CommonRatingSection();
 
     public List<Review> getReviews() {
         String reviewPath = "//div[@class='comment']";

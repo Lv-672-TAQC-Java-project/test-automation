@@ -1,6 +1,6 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.components.Rating;
+import com.softserveinc.ita.pageobjects.components.CommonRatingSection;
 import com.softserveinc.ita.pageobjects.components.Review;
 import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
 import com.softserveinc.ita.utils.TestRunner;
@@ -54,10 +54,10 @@ public class ReviewsTest extends TestRunner {
                 .isEqualTo(reviewsRatingByMostHelpful);
     }
 
-    @Description("Add a test script to cover reviews filter function by rating in common rating section")
+    @Description("Add a test script to cover filter function for reviews by rating in common rating section")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-37")
     @Test(description = "LVTAQC672-37")
-    public void VerifyReviewsFilterFunctionByRating() {
+    public void VerifyFilterFunctionForReviewsByRating() {
         var product = homePage
                 .getHeader()
                 .openCatalog()
@@ -72,15 +72,13 @@ public class ReviewsTest extends TestRunner {
                 .as("The title on the reviews page should contain " + productName)
                 .containsIgnoringCase(productName);
 
-        Rating rating = reviewsTab
-                .getCommonRating()
-                .getRating(FOUR);
+        CommonRatingSection commonRatingSection = reviewsTab.getCommonRatingSection();
 
-        var filteredReviews = rating
-                .filterReviews()
+        var filteredReviews = commonRatingSection
+                .filterReviews(FOUR)
                 .getReviews();
 
-        var countRating = rating.getCount();
+        var countRating = commonRatingSection.getCount(FOUR);
 
         assertThat(filteredReviews)
                 .as("filtered reviews should have size " + countRating)
