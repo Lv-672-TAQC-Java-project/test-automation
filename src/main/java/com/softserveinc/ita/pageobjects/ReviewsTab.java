@@ -17,6 +17,7 @@ import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
+
 @Getter
 public class ReviewsTab extends BasePage {
 
