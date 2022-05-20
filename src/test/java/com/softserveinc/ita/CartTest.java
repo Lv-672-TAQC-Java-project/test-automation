@@ -197,21 +197,21 @@ public class CartTest extends TestRunner {
     @Test(description = "LVTAQC672-38")
     public void verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart() {
         var header = homePage.getHeader();
-        var flawedProductsCategory = "телевізори та монітори";
+        var flawedProductsSubCategory = "телевізори та монітори";
 
         var subCategoryPage =
                 homePage
                         .getCategorySideBar()
                         .openFlawedProductsPage()
-                        .openFlawedProductsCategoryPage(flawedProductsCategory);
+                        .openFlawedProductsCategoryPage(flawedProductsSubCategory);
 
-        var subCategoryPageLabel = subCategoryPage.getFlawedProductsSubCategoryLabel(flawedProductsCategory);
+        var subCategoryPageLabel = subCategoryPage.getFlawedProductsSubCategoryLabel(flawedProductsSubCategory);
 
         var softAssert = new SoftAssertions();
 
         softAssert.assertThat(subCategoryPageLabel)
-                .as("Flawed products subcategory page label should contain " + flawedProductsCategory)
-                .contains(flawedProductsCategory);
+                .as("Flawed products subcategory page label should contain " + flawedProductsSubCategory)
+                .contains(flawedProductsSubCategory);
 
         var flawedProduct = subCategoryPage.getProduct(1);
         var isProductDefectVisible = flawedProduct.isDefectDescriptionVisible();
