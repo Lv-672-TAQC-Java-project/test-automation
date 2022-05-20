@@ -21,12 +21,11 @@ public class SubCategoryPage extends SearchResultPage {
     public boolean isOpened() {
         return isDisplayed($x("//div[@class='ng-star-inserted']/h1"), ofSeconds(5));
     }
-    
-//    I created this method since category name locator on flawed products page
-//    and subcategory name locator on flawed subcategory products are the same
-    public String getFlawedProductsSubCategoryLabel(String previousValue) {
-        return $x("//*[@class='catalog-heading ng-star-inserted']")
-                .shouldNotHave(text(previousValue))
+    //    I created this method because category name locator on flawed products page
+    //    and subcategory name locator on flawed subcategory products page are the same
+    public String getFlawedProductsSubCategoryLabel(String expectedSubCategoryName) {
+     return $x("//*[@class='catalog-heading ng-star-inserted']")
+                .shouldHave(text(expectedSubCategoryName))
                 .text();
     }
 }

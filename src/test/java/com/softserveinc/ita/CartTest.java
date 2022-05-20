@@ -199,21 +199,18 @@ public class CartTest extends TestRunner {
         var header = homePage.getHeader();
         var flawedProductsCategory = "телевізори та монітори";
 
-        var flawedProductsPage =
+        var subCategoryPage =
                 homePage
                         .getCategorySideBar()
-                        .openFlawedProductsPage();
+                        .openFlawedProductsPage()
+                        .openFlawedProductsCategoryPage(flawedProductsCategory);
 
-        var flawedProductsPageLabel = flawedProductsPage.getCategoryLabel();
-
-        var subCategoryPage = flawedProductsPage.openFlawedProductsCategoryPage(flawedProductsCategory);
-
-        var subCategoryPageLabel = subCategoryPage.getFlawedProductsSubCategoryLabel(flawedProductsPageLabel);
+        var subCategoryPageLabel = subCategoryPage.getFlawedProductsSubCategoryLabel(flawedProductsCategory);
 
         var softAssert = new SoftAssertions();
 
         softAssert.assertThat(subCategoryPageLabel)
-                .as("Search result page category label should contain " + flawedProductsCategory)
+                .as("Flawed products subcategory page label should contain " + flawedProductsCategory)
                 .contains(flawedProductsCategory);
 
         var flawedProduct = subCategoryPage.getProduct(1);
