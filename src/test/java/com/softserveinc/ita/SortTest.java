@@ -62,9 +62,12 @@ public class SortTest extends TestRunner {
 
         var questionsDates = questionsTab.getQuestionsDates();
 
-        assertThat(questionsDates)
+        var softAssert = new SoftAssertions();
+        softAssert.assertThat(questionsDates)
                 .as("should be greater three dates in the list")
                 .hasSizeGreaterThan(3);
+
+        softAssert.assertAll();
 
         questionsTab.sort(DATE);
 
