@@ -216,6 +216,12 @@ public class CartTest extends TestRunner {
         var flawedProduct = subCategoryPage.getProduct(1);
         var isProductDefectVisible = flawedProduct.isDefectDescriptionVisible();
 
+        /**
+         * This assert may fail due to a bug one the flawed products page, and it's subcategory pages:
+         * The additional red description field, visible only
+         * when hovering mouse on a flawed product, may not load.
+         * The bug is sometimes reproduced when running this test
+         */
         softAssert.assertThat(isProductDefectVisible)
                 .as("Red description message should be visible after hovering mouse over flawed product")
                 .isTrue();
