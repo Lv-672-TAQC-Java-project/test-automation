@@ -37,7 +37,7 @@ public class ComparisonModal {
     }
 
     public List<SubCategoryComparisonModal> getSubCategories() {
-        List<SubCategoryComparisonModal> subCategories = new LinkedList<>();
+        var subCategories = new LinkedList<SubCategoryComparisonModal>();
         var subCategoriesPath = "//*[contains(@class, 'comparison-modal__list')]//li";
         int subCategoriesCount = $$x(subCategoriesPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10))
