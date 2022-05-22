@@ -36,7 +36,6 @@ public class OrderPlacementPage extends BasePage {
     public List<InOrderProduct> getProducts() {
         var inOrderProductsPath = "//div[@class = 'checkout-product']";
 
-        //not used $$x().Stream() instead of rangeClosed because here need an index
         return rangeClosed(1, $$x(inOrderProductsPath)
                 .shouldHave(sizeGreaterThanOrEqual(0), ofSeconds(20))
                 .size())
