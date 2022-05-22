@@ -6,6 +6,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
+import static com.softserveinc.ita.pageobjects.models.CreditTypeNumber.*;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
 import static java.util.stream.IntStream.range;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -29,7 +30,7 @@ public class CreditTest extends TestRunner {
 
         range(1, creditModal.getAmountCreditsTypes())
                 .forEach(i -> assertThat(
-                        (int) Math.ceil((double) detailsPage.getPrice() / creditModal.getAmountCreditPayments(i)))
+                        (int) Math.ceil((double) detailsPage.getPrice() / creditModal.getCreditPaymentsAmount(values()[i])))
                         .as("price division to periods of payment should equal credit price for period")
                         .isEqualTo(creditModal.getCreditPrice()));
     }

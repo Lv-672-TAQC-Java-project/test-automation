@@ -1,0 +1,34 @@
+package com.softserveinc.ita.pageobjects.models;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public enum CreditTypeNumber {
+
+    FIRST_CREDIT_TYPE(1),
+    SECOND_CREDIT_TYPE(2),
+    THIRD_CREDIT_TYPE(3),
+    FOURTH_CREDIT_TYPE(4),
+    FIFTH_CREDIT_TYPE(5),
+    SIXTH_CREDIT_TYPE(6),
+    SEVENTH_CREDIT_TYPE(7),
+    EIGHT_CREDIT_TYPE(8),
+    NINTH_CREDIT_TYPE(9),
+    TENTH_CREDIT_TYPE(10),
+    ELEVENTH_CREDIT_TYPE(11),
+    TWELFTH_CREDIT_TYPE(12),
+    THIRTEENTH_CREDIT_TYPE(13),
+    FOURTEENTH_CREDIT_TYPE(14),
+    FIFTEENTH_CREDIT_TYPE(15),
+    SIXTEENTH_CREDIT_TYPE(16),
+    SEVENTEENTH_CREDIT_TYPE(17),
+    EIGHTEENTH_CREDIT_TYPE(18),
+    NINETEENTH_CREDIT_TYPE(19),
+    TWENTIETH_CREDIT_TYPE(21),
+    TWENTY_FIRST_CREDIT_TYPE(22),
+    TWENTY_SECOND_CREDIT_TYPE(23);
+
+    private final int creditTypeNumber;
+}

@@ -1,5 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.models.CreditTypeNumber;
+
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
@@ -15,8 +17,8 @@ public class CreditModal {
                 .size();
     }
 
-    public int getAmountCreditPayments(int indexPaymentChoice) {
-        var selectPeriod = format("//option[@class='ng-star-inserted'][%s]", indexPaymentChoice);
+    public int getCreditPaymentsAmount(CreditTypeNumber creditTypeNumber) {
+        var selectPeriod = format("//option[@class='ng-star-inserted'][%s]", creditTypeNumber.getCreditTypeNumber());
         $x(selectPeriod).click();
 
         return Integer.parseInt($x(selectPeriod)
