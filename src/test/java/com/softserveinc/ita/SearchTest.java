@@ -15,7 +15,7 @@ public class SearchTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-3")
     @Test(description = "LVTAQC672-3")
     public void verifyThatProductsIncludeTheSearchTermInTheirNames() {
-        String searchTerm = "Asus";
+        var searchTerm = "Asus";
         var products = homePage
                 .getHeader()
                 .search(searchTerm)
