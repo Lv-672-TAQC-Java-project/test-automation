@@ -84,7 +84,14 @@ public class OrderPlacementTest extends TestRunner {
         softAssert.assertAll();
     }
 
-    //may fall due to a bug
+    /** May fall due to a bug: the "Оформити замовлення" page does not load.
+     * The bug is reproduced when the "LVTAQC672-2" test runs before the "LVTAQC672-44" test.<p>
+     * Playback steps:<p>
+     * - to place an order without populating required data (any number of products)<p>
+     * - return to the cart <p>
+     * - delete one product (delete all products and add new ones, or delete some products, not all) <p>
+     * - click on the "Оформити замовлення" button.
+     */
     @Description("Verify that in the order all product names and prices match with the names and prices from the cart")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-44")
     @Test(description = "LVTAQC672-44")
@@ -117,7 +124,6 @@ public class OrderPlacementTest extends TestRunner {
                 .collect(Collectors.toList());
 
         var productsInOrder = cart
-                //here may be NoSuchElementException due to bag
                 .submitOrder()
                 .getProducts();
 
