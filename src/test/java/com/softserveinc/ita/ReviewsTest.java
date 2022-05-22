@@ -81,10 +81,10 @@ public class ReviewsTest extends TestRunner {
                 .filterReviews(FOUR)
                 .getReviews();
 
-        var countRating = commonRatingSection.getCount(FOUR);
+        var filteredReviewsCount = commonRatingSection.getFilteredReviewsCount(FOUR);
 
         assertThat(filteredReviews)
-                .as("filtered reviews should have size " + countRating)
-                .hasSize(countRating);
+                .as("filtered reviews should have size " + filteredReviewsCount)
+                .hasSize(filteredReviewsCount);
     }
 }
