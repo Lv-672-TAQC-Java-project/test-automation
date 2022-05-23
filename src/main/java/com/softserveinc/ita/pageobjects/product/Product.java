@@ -22,8 +22,7 @@ public class Product {
 
     public String getName() {
 
-        return $x(String.format("%s%s", rootElementPath,
-                "//span[@class = 'goods-tile__title']")).text();
+        return $x(rootElementPath + "//span[@class = 'goods-tile__title']").text();
     }
 
     public ProductState getState() {
