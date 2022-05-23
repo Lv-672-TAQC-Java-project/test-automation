@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.RecommendedProduct;
@@ -86,6 +87,7 @@ public class Cart extends BasePage {
     @Step("Submitted an order")
     public OrderPlacementPage submitOrder() {
         $x("//div[@class='cart-receipt ng-star-inserted']/a").click();
+        $x("//legend[@class = 'checkout-block__title']").shouldBe(visible, ofSeconds(30));
 
         return new OrderPlacementPage();
     }
