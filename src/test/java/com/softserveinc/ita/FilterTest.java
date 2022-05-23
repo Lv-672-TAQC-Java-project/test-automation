@@ -1,21 +1,15 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.SearchResultPage;
-import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
-import static com.softserveinc.ita.pageobjects.models.CategoryName.HOUSEHOLD_APPLIANCES;
-import static com.softserveinc.ita.pageobjects.models.CategoryName.TOOLS_AND_AUTOMOTIVE_PRODUCTS;
-import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MANUFACTURER;
-import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
-import static com.softserveinc.ita.pageobjects.models.CategoryName.LAPTOPS_AND_COMPUTERS;
+import static com.softserveinc.ita.pageobjects.models.CategoryName.*;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
-import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MATURATION_PERIOD;
-import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
+import static com.softserveinc.ita.pageobjects.models.ProductState.UNAVAILABLE;
 import static java.lang.String.format;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -60,11 +54,10 @@ public class FilterTest extends TestRunner {
                 .isLessThanOrEqualTo(priceRangeMaximum));
     }
 
-    @Description("Verify that filtered products contain 'Закінчився' status")
+    @Description("Verify that filtered products have expected state")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-13")
     @Test(description = "LVTAQC672-13")
-    public void verifyThatFilteredProductsContainExpectedStatus() {
-
+    public void verifyThatFilteredProductsHaveExpectedState() {
         var filteredProducts = homePage
                 .getHeader()
                 .openCatalog()
@@ -73,11 +66,11 @@ public class FilterTest extends TestRunner {
                 .filterBySection(PRODUCT_AVAILABILITY, "Закінчився")
                 .getProducts();
 
-        ProductAvailability expectedAvailability = OUT_OF_STOCK;
+        var expectedState = UNAVAILABLE;
         filteredProducts
-                .forEach(product -> assertThat(product.getAvailability())
-                        .as("Product name should contain " + expectedAvailability)
-                        .isEqualTo(expectedAvailability));
+                .forEach(product -> assertThat(product.getState())
+                        .as("Product name should be " + expectedState)
+                        .isEqualTo(expectedState));
     }
 
     @Description("Verified that product characteristic contains searched value")
