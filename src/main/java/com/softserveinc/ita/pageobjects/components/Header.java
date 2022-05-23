@@ -51,6 +51,13 @@ public class Header {
         return new ProductDetailsPage();
     }
 
+    @Step("Opened menu sidebar")
+    public MenuSideBar openMenuSideBar() {
+        $x("//rz-mobile-user-menu//button").click();
+
+        return new MenuSideBar();
+    }
+  
     @Step("Opened home page")
     public HomePage openHomePage() {
         $x("//a[@class='header__logo']").click();
