@@ -16,8 +16,10 @@ import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
+import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
+import static com.softserveinc.ita.utils.WebElementUtil.*;
 
 @Getter
 public class SearchResultPage extends BasePage {
@@ -85,6 +87,11 @@ public class SearchResultPage extends BasePage {
         return this;
     }
 
+    public boolean isCustomPriceTagDisplayed() {
+
+        return isDisplayed($x("//*[@class = 'catalog-selection__link' and contains(@href, 'producer')]"), ofSeconds(10));
+    }
+  
     public int getFoundProductsAmountInCategory() {
         var amount = $x("//div[@class='rz-search-result-qnty']")
                 .text()

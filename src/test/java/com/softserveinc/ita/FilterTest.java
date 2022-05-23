@@ -5,6 +5,7 @@ import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.assertj.core.api.Assertions;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.*;
@@ -45,6 +46,12 @@ public class FilterTest extends TestRunner {
                 .getFilter()
                 .filterByPrice(priceRangeMinimum, priceRangeMaximum);
 
+        var softAssert = new SoftAssertions();
+
+        softAssert.assertThat(searchResultPage.isCustomPriceTagDisplayed())
+                .as("Tag with lowest and highest desirable price boundaries should be visible")
+                .isTrue();
+
         var products = searchResultPage.getProducts();
         var prices = searchResultPage.getProductsPrices(products);
 
@@ -52,6 +59,8 @@ public class FilterTest extends TestRunner {
                 .as("products prices should not exceed or be lower than custom price range")
                 .isGreaterThanOrEqualTo(priceRangeMinimum)
                 .isLessThanOrEqualTo(priceRangeMaximum));
+
+        softAssert.assertAll();
     }
 
     @Description("Verify that filtered products have expected state")
