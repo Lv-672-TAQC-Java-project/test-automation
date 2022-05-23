@@ -14,6 +14,7 @@ import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MANUFACT
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
 import static com.softserveinc.ita.pageobjects.models.CategoryName.LAPTOPS_AND_COMPUTERS;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.*;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.MATURATION_PERIOD;
 import static com.softserveinc.ita.pageobjects.models.ProductAvailability.OUT_OF_STOCK;
 import static java.lang.String.format;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -40,7 +41,7 @@ public class FilterTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-7")
     @Test(description = "LVTAQC672-7")
     public void verifyCustomPriceFilteringFunctionality() {
-        String searchTerm = "Asus";
+        var searchTerm = "Asus";
         int priceRangeMinimum = 2000;
         int priceRangeMaximum = 24000;
 
@@ -176,5 +177,32 @@ public class FilterTest extends TestRunner {
         text = text.replaceAll("[^\\d-]", "");
         String[] parts = text.split("-");
         return Integer.parseInt(parts[index]);
+    }
+
+    @Description("Add test script to verify that amount of filtered products is equal to the number \n" +
+            "of products in the filter checkbox")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-30")
+    @Test(description = "LVTAQC672-30")
+    public void verifyThatFilteredProductsAmountIsEqualToAmountInFilterCheckbox() {
+        var searchTerm = "Віскі";
+
+        var searchResultPage = homePage
+                .getHeader()
+                .search(searchTerm)
+                .getAdulthoodConfirmationModal()
+                .confirmAdulthood();
+
+        var filter = searchResultPage.getFilter();
+
+        var filterCheckboxName = "до 45 років";
+        int productsAmountInFilterCheckbox = filter.getProductsAmountInFilterCheckbox(MATURATION_PERIOD, filterCheckboxName);
+
+        var filteredProductsList = filter
+                .filterBySection(MATURATION_PERIOD, filterCheckboxName)
+                .getProducts();
+
+        Assertions.assertThat(filteredProductsList)
+                .as("Amount of filtered products should be equal to number of products in filter checkbox")
+                .hasSize(productsAmountInFilterCheckbox);
     }
 }

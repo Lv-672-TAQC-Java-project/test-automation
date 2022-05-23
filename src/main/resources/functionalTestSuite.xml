@@ -1,91 +1,50 @@
 <suite name="Rozetka Functional Test Suite" parallel="methods" thread-count="3">
     <test name="Cart functionality">
         <classes>
-            <class name="com.softserveinc.ita.CartTest">
-                <methods>
-                    <include name="verifyThatProductItemAddedToTheCart"/>
-                    <include name="verifyThatTotalPriceChangedAfterAddingAdditionalService"/>
-                    <include name="verifyThatTotalProductsPriceHasDoubled"/>
-                    <include name="verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart"/>
-                </methods>
-            </class>
+            <class name="com.softserveinc.ita.CartTest"/>
         </classes>
     </test>
 
-    <test name="Removal functionality in the cart">
+    <test name="Comparison functionality">
         <classes>
-            <class name="com.softserveinc.ita.CartTest">
-                <methods>
-                    <include name="verifyRemovalFunctionalityInTheCart"/>
-                </methods>
-            </class>
-        </classes>
-    </test>
-
-    <test name="Removal functionality in the comparison page">
-        <classes>
-            <class name="com.softserveinc.ita.ComparisonTest">
-                <methods>
-                    <include name="verifyDeleteProductFromComparisonPage"/>
-                </methods>
-            </class>
+            <class name="com.softserveinc.ita.ComparisonTest"/>
         </classes>
     </test>
 
     <test name="Search functionality">
         <classes>
-            <class name="com.softserveinc.ita.SearchTest">
-                <methods>
-                    <include name="verifyThatProductsIncludeTheSearchTermInTheirNames"/>
-                </methods>
-            </class>
+            <class name="com.softserveinc.ita.SearchTest"/>
         </classes>
     </test>
 
     <test name="Sort functionality">
         <classes>
-            <class name="com.softserveinc.ita.SortTest">
-                <methods>
-                    <include name="verifyThatProductsAreSortedFromCheapToExpensive"/>
-                </methods>
-            </class>
-            <class name="com.softserveinc.ita.ReviewsTest">
-                <methods>
-                    <include name="verifySortingReviewsByMostHelpful"/>
-                </methods>
-            </class>
+            <class name="com.softserveinc.ita.SortTest"/>
+            <class name="com.softserveinc.ita.ReviewsTest"/>
         </classes>
     </test>
 
     <test name="Filter functionality">
         <classes>
-            <class name="com.softserveinc.ita.FilterTest">
-                <methods>
-                    <include name="verifyThatFilteredProductsContainsExpectedTerm"/>
-                    <include name="verifyThatProductCharacteristicContainsValueSearchedUsingAdditionalFilterSection"/>
-                    <include name="verifyThatFilteredProductContainsExpectedCharacteristics" />
-                </methods>
-            </class>
+            <class name="com.softserveinc.ita.FilterTest"/>
         </classes>
     </test>
 
     <test name="Order functionality">
         <classes>
-            <class name="com.softserveinc.ita.OrderPlacementTest">
-                <methods>
-                    <include name="verifyThatImpossibleToPlaceAnOrderWithoutRequiredData"/>
-                </methods>
-            </class>
+            <class name="com.softserveinc.ita.OrderPlacementTest"/>
         </classes>
     </test>
 
     <test name="Products memorization functionality">
         <classes>
-            <class name="com.softserveinc.ita.LastViewedProductsRememberedTest">
-                <methods>
-                    <include name="verifyThatTheLastViewedProductsAreRememberedInTheLastViewedProductsSection" />
-                </methods>
-            </class>
+            <class name="com.softserveinc.ita.LastViewedProductsRememberedTest"/>
+        </classes>
+    </test>
+
+    <test name="Delivery location selection functionality">
+        <classes>
+            <class name="com.softserveinc.ita.DeliveryLocationTest"/>
         </classes>
     </test>
 </suite>

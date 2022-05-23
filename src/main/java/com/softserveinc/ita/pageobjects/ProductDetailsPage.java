@@ -1,20 +1,20 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
-import com.softserveinc.ita.pageobjects.models.ProductDetailsTabName;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
 import static java.lang.String.format;
 import static java.time.Duration.ofSeconds;
 
-public class ProductDetailsPage {
+public class ProductDetailsPage extends BasePage {
 
     private final SelenideElement productNameLabel = $x("//div[@class='product__heading']/child::h1");
 
     public boolean isOpened() {
-        return isDisplayed($x("//product-tab-main[@class='ng-star-inserted']"), ofSeconds(5));
+        return isDisplayed($x("//div[@class='product__heading']"), ofSeconds(5));
     }
 
     public String getProductName() {
@@ -50,8 +50,29 @@ public class ProductDetailsPage {
         return new QuestionTab();
     }
 
+<<<<<<< mromanyshyn-product-param-test
     public String getSelectedShoeSize() {
         return $x("//a[@class='var-options__block var-options__block_state_active ng-star-inserted']" +
                 "/span").getText();
+=======
+    @Step("Opened delivery location modal")
+    public DeliveryLocationModal openDeliveryLocationModal() {
+        productNameLabel.scrollIntoView(true);
+        $x("//rz-delivery-in//button").click();
+
+        return new DeliveryLocationModal();
+    }
+
+    public String getDeliveryCityName() {
+        return $x("//rz-delivery-in//span")
+                .shouldBe(visible)
+                .text();
+    }
+  
+    public String getProductCode() {
+        return $x("//p[@class='product__code detail-code']")
+                .getText()
+                .split(" ")[2];
+>>>>>>> main
     }
 }
