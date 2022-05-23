@@ -1,5 +1,4 @@
-<!--<suite name="Rozetka Functional Test Suite" parallel="methods" thread-count="3">-->
-<suite name="Rozetka Functional Test Suite">
+<suite name="Rozetka Functional Test Suite" parallel="methods" thread-count="3">
     <test name="Cart functionality">
         <classes>
             <class name="com.softserveinc.ita.CartTest"/>
