@@ -5,6 +5,7 @@ import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.models.RatingNumber;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
 import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
@@ -21,22 +22,29 @@ public class CommonRatingSection {
         return new ReviewsTab();
     }
 
+    public int getReviewsCount() {
+        return $$x("//div[@class='comment']")
+                .shouldHave(sizeNotEqual(0), ofSeconds(10))
+                .size();
+    }
+
     public int getFilteredReviewsCount(RatingNumber number) {
 
-        return getReviewsCountBy(number) == 0 ? getTotalReviews() : getReviewsCountBy(number);
+        return getReviewsCountBy(number) == 0 ? getTotalReviewsCount() : getReviewsCountBy(number);
     }
 
     public int getReviewsCountBy(RatingNumber number) {
-        int count = Integer.parseInt($x(format("(//span[@class = 'detailed__count'])[%s]", number.ordinal() + 1)).text());
+        int reviewCountByRatingNumber = Integer.parseInt($x(format("(//span[@class = 'detailed__count'])" +
+                "[%s]", number.ordinal() + 1)).text());
 
-        return count;
+        return reviewCountByRatingNumber;
     }
 
-    public int getTotalReviews() {
-        var totalEvaluations = $x("//div[contains(@class, 'rating-total__evaluations')]")
+    public int getTotalReviewsCount() {
+        var totalReviewsCount = $x("//div[contains(@class, 'rating-total__evaluations')]")
                 .text()
                 .replaceAll("[^0-9]", "");
 
-        return Integer.parseInt(totalEvaluations);
+        return Integer.parseInt(totalReviewsCount);
     }
 }
