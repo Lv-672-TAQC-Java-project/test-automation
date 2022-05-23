@@ -196,31 +196,41 @@ public class CartTest extends TestRunner {
     @Test(description = "LVTAQC672-38")
     public void verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart() {
         var header = homePage.getHeader();
-        var flawedProductsCategory = "телевізори та монітори";
+        var flawedProductsSubCategory = "телевізори та монітори";
 
         var subCategoryPage =
                 homePage
                         .getCategorySideBar()
                         .openFlawedProductsPage()
-                        .openFlawedProductsCategoryPage(flawedProductsCategory);
+                        .openFlawedProductsCategoryPage(flawedProductsSubCategory);
+
+        var subCategoryPageLabel = subCategoryPage.getFlawedProductsSubCategoryLabel(flawedProductsSubCategory);
 
         var softAssert = new SoftAssertions();
 
-        softAssert.assertThat(subCategoryPage.getSubCategoryLabel())
-                .as("Search result page category label should contain " + flawedProductsCategory)
-                .contains(flawedProductsCategory);
+        softAssert.assertThat(subCategoryPageLabel)
+                .as("Flawed products subcategory page label should contain " + flawedProductsSubCategory)
+                .contains(flawedProductsSubCategory);
 
         var flawedProduct = subCategoryPage.getProduct(1);
         var isProductDefectVisible = flawedProduct.isDefectDescriptionVisible();
 
+        /**
+         * This assert may fail due to a bug one the flawed products page, and it's subcategory pages:
+         * The additional red description field, visible only
+         * when hovering mouse on a flawed product, may not load.
+         * The bug is sometimes reproduced when running this test
+         */
         softAssert.assertThat(isProductDefectVisible)
                 .as("Red description message should be visible after hovering mouse over flawed product")
                 .isTrue();
 
+        var productName = flawedProduct.getName();
+
         flawedProduct.addToCart();
         var cart = header.openCart();
-        var cartProduct = cart.getProduct(1);
 
+        var cartProduct = cart.getProduct(productName);
         var cartProductName = cartProduct.getName();
         var expectedWord = "Уцінка";
 
