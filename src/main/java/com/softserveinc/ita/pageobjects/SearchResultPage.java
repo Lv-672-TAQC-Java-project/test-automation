@@ -10,7 +10,6 @@ import io.qameta.allure.Step;
 import lombok.Getter;
 
 import java.time.Duration;
-import java.util.LinkedList;
 import java.util.List;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
@@ -29,16 +28,13 @@ public class SearchResultPage extends BasePage {
     private final FilterCategorySideBar filterCategorySideBar = new FilterCategorySideBar();
 
     public List<Product> getProducts() {
-        List<Product> products = new LinkedList<>();
         String productsPath = "//div[@class='goods-tile__inner']";
-        int amountOfProducts = $$x(productsPath)
-                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
-        for (int i = 1; i <= amountOfProducts; i++) {
-            products.add(new Product(format("(%s)[%s]", productsPath, i)));
-        }
-
-        return products;
+        return rangeClosed(1, $$x(productsPath)
+                .shouldHave(sizeNotEqual(0), Duration.ofSeconds(30))
+                .size())
+                .mapToObj(i -> new Product(format("(%s)[%s]", productsPath, i)))
+                .collect(toList());
     }
 
     public Product getProduct(int index) {

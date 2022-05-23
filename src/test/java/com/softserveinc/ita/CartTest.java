@@ -169,17 +169,16 @@ public class CartTest extends TestRunner {
     @Test(description = "LVTAQC672-4")
     public void verifyThatTotalProductsPriceHasDoubled() {
         homePage.emptyCart();
-
-        Header header = homePage.getHeader();
+        var header = homePage.getHeader();
         header
                 .openCatalog()
-                .openSubCategoryPage(COTTAGE_GARDEN_AND_VEGETABLE_GARDEN, " Cаджанці дерев ")
+                .openSubCategoryPage(COTTAGE_GARDEN_AND_VEGETABLE_GARDEN, "Cаджанці дерев")
                 .getFilter()
                 .filterBySection(PRODUCT_AVAILABILITY, "Є в наявності")
                 .getProduct(1)
                 .addToCart();
 
-        Cart cart = header.openCart();
+        var cart = header.openCart();
         int totalPrice = cart.getTotalPrice();
 
         int totalPriceUpdated = cart
