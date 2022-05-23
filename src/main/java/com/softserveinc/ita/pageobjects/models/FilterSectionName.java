@@ -11,7 +11,8 @@ public enum FilterSectionName {
     PRODUCT_AVAILABILITY("sell_status"),
     PROCESSOR("processor"),
     RAM_SIZE("20863"),
-    MATURATION_PERIOD("viderjka-krepkie-napitki");
+    MATURATION_PERIOD("viderjka-krepkie-napitki"),
+    SELLER("seller");
 
     private final String filterSectionPath;
 }

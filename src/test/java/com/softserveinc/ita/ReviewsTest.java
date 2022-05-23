@@ -1,6 +1,7 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.components.Review;
+import com.softserveinc.ita.pageobjects.models.FilterSectionName;
 import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -14,6 +15,7 @@ import java.util.stream.Collectors;
 import static com.softserveinc.ita.pageobjects.models.CategoryName.LAPTOPS_AND_COMPUTERS;
 import static com.softserveinc.ita.pageobjects.models.RatingNumber.FOUR;
 import static org.assertj.core.api.Assertions.assertThat;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.SELLER;
 
 public class ReviewsTest extends TestRunner {
 
@@ -25,6 +27,8 @@ public class ReviewsTest extends TestRunner {
         var reviewsTab = homePage
                 .getHeader()
                 .search("Ноутбук HP Pavilion")
+                .getFilter()
+                .filterBySection(SELLER, "Rozetka")
                 .getProduct(productName)
                 .openReviewsTab();
 
