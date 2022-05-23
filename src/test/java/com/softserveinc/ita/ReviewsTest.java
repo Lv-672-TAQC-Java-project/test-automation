@@ -60,7 +60,7 @@ public class ReviewsTest extends TestRunner {
     @Description("Add a test script to cover filter function for reviews by rating in common rating section")
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-37")
     @Test(description = "LVTAQC672-37")
-    public void VerifyFilterFunctionForReviewsByRating() {
+    public void verifyFilterFunctionForReviewsByRating() {
         var product = homePage
                 .getHeader()
                 .openCatalog()
