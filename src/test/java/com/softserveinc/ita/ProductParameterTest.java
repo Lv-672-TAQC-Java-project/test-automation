@@ -14,17 +14,18 @@ public class ProductParameterTest extends TestRunner {
     @Issue("https://jira.softserve.academy/projects/LVTAQC672/issues/LVTAQC672-34")
     @Test(description = "LVTAQC672-34")
     public void verifyPopularBrandsBlockFunctionality() {
-        var productDetailsPage = homePage
+        var product = homePage
                 .getHeader()
                 .openCatalog()
                 .openCategoryPage(CLOTHES_SHOES_AND_JEWELRY)
                 .openPopularBrandProductsPage("Asics")
-                .getProduct("Кросівки Asics Gel-Kayano 28 1011B189-400 Сині")
-                .getProductDetailsPageWithSelectedShoeSize(SHOE_SIZE_44_5);
+                .getProduct("Кросівки Asics Gel-Kayano 28 1011B189-400 Сині");
 
-        var selectedShoeSize = productDetailsPage.getSelectedShoeSize();
+        var shoeSize = SHOE_SIZE_44_5;
 
-        assertThat(selectedShoeSize)
+        var productDetailsPage = product.getProductDetailsPageWithSelectedShoeSize(shoeSize);
+
+        assertThat(shoeSize.getPath())
                 .as("active shoe size on the product details page should be equal to selected size")
                 .isEqualTo(productDetailsPage.getSelectedShoeSize());
     }
