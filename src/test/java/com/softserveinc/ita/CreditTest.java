@@ -28,9 +28,11 @@ public class CreditTest extends TestRunner {
 
         var creditModal = detailsPage.openCreditModal();
 
+        var productPrice = (double) detailsPage.getPrice();
+
         range(1, creditModal.getAmountCreditsTypes())
                 .forEach(i -> assertThat(
-                        (int) Math.ceil((double) detailsPage.getPrice() / creditModal.getCreditPaymentsAmount(values()[i])))
+                        (int) Math.ceil(productPrice / creditModal.getCreditPaymentsAmount(values()[i])))
                         .as("price division to periods of payment should equal credit price for period")
                         .isEqualTo(creditModal.getCreditPrice()));
     }
