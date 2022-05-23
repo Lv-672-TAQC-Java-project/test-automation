@@ -1,10 +1,17 @@
 package com.softserveinc.ita;
 
+import com.softserveinc.ita.pageobjects.product.InCartProduct;
+import com.softserveinc.ita.pageobjects.product.InOrderProduct;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
+import java.util.stream.Collectors;
+
+import static com.softserveinc.ita.pageobjects.models.CategoryName.BEAUTY_AND_HEALTH;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.PRODUCT_AVAILABILITY;
 import static java.lang.String.format;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,7 +30,7 @@ public class OrderPlacementTest extends TestRunner {
                 .as("Search term label should be displayed")
                 .contains(searchTerm);
 
-        var firstProduct = searchResultPage.getProduct(2);
+        var firstProduct = searchResultPage.getProduct(1);
         var firstProductName = firstProduct.getName();
 
         var productDetailsPage = firstProduct.openDetailsPage();
@@ -58,18 +65,83 @@ public class OrderPlacementTest extends TestRunner {
 
         var requiredFieldErrorMessage = "%s field should be required";
         var surnameFieldTittle = "surname";
-        assertThat(orderPlacementPage.isFieldRequired(surnameFieldTittle))
+
+        var softAssert = new SoftAssertions();
+        softAssert.assertThat(orderPlacementPage.isFieldRequired(surnameFieldTittle))
                 .as(format(requiredFieldErrorMessage, surnameFieldTittle))
                 .isTrue();
 
         var nameFieldTittle = "name";
-        assertThat(orderPlacementPage.isFieldRequired(nameFieldTittle))
+        softAssert.assertThat(orderPlacementPage.isFieldRequired(nameFieldTittle))
                 .as(format(requiredFieldErrorMessage, nameFieldTittle))
                 .isTrue();
 
         var phoneFieldTittle = "phone";
-        assertThat(orderPlacementPage.isFieldRequired(phoneFieldTittle))
+        softAssert.assertThat(orderPlacementPage.isFieldRequired(phoneFieldTittle))
                 .as(format(requiredFieldErrorMessage, phoneFieldTittle))
                 .isTrue();
+
+        softAssert.assertAll();
+    }
+
+    /** May fall due to a bug: the "Оформити замовлення" page does not load.
+     * The bug is reproduced when the "LVTAQC672-2" test runs before the "LVTAQC672-44" test.<p>
+     * Playback steps:<p>
+     * - to place an order without populating required data (any number of products)<p>
+     * - return to the cart <p>
+     * - delete one product (delete all products and add new ones, or delete some products, not all) <p>
+     * - click on the "Оформити замовлення" button.
+     */
+    @Description("Verify that in the order all product names and prices match with the names and prices from the cart")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-44")
+    @Test(description = "LVTAQC672-44")
+    public void verifyThatInTheOrderAllProductNamesAndPricesMatchWithTheNamesAndPricesFromTheCart() {
+        homePage.emptyCart();
+        var header = homePage.getHeader();
+        header
+                .openCatalog()
+                .openSubCategoryPage(BEAUTY_AND_HEALTH, "Триммери")
+                .getFilter()
+                .filterBySection(PRODUCT_AVAILABILITY, "Є в наявності")
+                .getProduct(1)
+                .addToCart()
+                .getProduct(2)
+                .addToCart()
+                .getProduct(3)
+                .addToCart();
+
+        var cart = header.openCart();
+        var productsInCart = cart.getInCartProducts();
+
+        var productsInCartNames = productsInCart
+                .stream()
+                .map(InCartProduct::getName)
+                .collect(Collectors.toList());
+
+        var productsInCartPrices = productsInCart
+                .stream()
+                .map(InCartProduct::getPrice)
+                .collect(Collectors.toList());
+
+        var productsInOrder = cart
+                .submitOrder()
+                .getProducts();
+
+        var productsInOrderNames = productsInOrder
+                .stream()
+                .map(InOrderProduct::getName)
+                .collect(Collectors.toList());
+
+        var productsInOrderPrices =  productsInOrder
+                .stream()
+                .map(InOrderProduct::getPrice)
+                .collect(Collectors.toList());
+
+        assertThat(productsInOrderNames)
+                .as("In the order all product names should match with the names from the cart")
+                .containsAll(productsInCartNames);
+        assertThat(productsInOrderPrices)
+                .as("In the order all product prices should match with the prices from the cart")
+                .containsAll(productsInCartPrices);
     }
 }

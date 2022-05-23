@@ -6,6 +6,7 @@ import com.softserveinc.ita.pageobjects.models.CategoryName;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.COTTAGE_GARDEN_AND_VEGETABLE_GARDEN;
@@ -25,7 +26,7 @@ public class CartTest extends TestRunner {
                 .search("Фотоапарати")
                 .getProduct(1);
 
-        String firstProductName = firstProduct.getName();
+        var firstProductName = firstProduct.getName();
 
         firstProduct.addToCart();
 
@@ -33,7 +34,7 @@ public class CartTest extends TestRunner {
                 .openCart()
                 .getProduct(firstProductName);
 
-        String productNameInCart = productInCart.getName();
+        var productNameInCart = productInCart.getName();
 
         assertThat(firstProductName)
                 .as("The product name in the cart should be equal to the name of added product")
@@ -58,7 +59,7 @@ public class CartTest extends TestRunner {
                 .as("Search term label should be displayed")
                 .contains(searchTerm);
 
-        var firstProduct = searchResultPage.getProduct(2);
+        var firstProduct = searchResultPage.getProduct(1);
         var firstProductName = firstProduct.getName();
 
         firstProduct.addToCart();
@@ -84,27 +85,25 @@ public class CartTest extends TestRunner {
         homePage.emptyCart();
 
         var header = homePage.getHeader();
-        String searchTerm = "Asus";
+        var searchTerm = "Asus";
         var searchResultPage = header.search(searchTerm);
 
-        assertThat(searchResultPage.getSearchTermLabel())
+        var softAssert = new SoftAssertions();
+
+        softAssert.assertThat(searchResultPage.getSearchTermLabel())
                 .as("Search result page should contain label with" + searchTerm)
                 .contains(searchTerm);
 
         var firstProduct = searchResultPage.getProduct(1);
+        var firstProductName = firstProduct.getName();
         firstProduct.addToCart();
 
         var cart = header.openCart();
 
-        assertThat(cart.isOpened())
-                .as("Cart modal should be displayed")
-                .isTrue();
-
-        String firstProductName = firstProduct.getName();
         var cartProduct = cart.getProduct(firstProductName);
-        String cartProductName = cartProduct.getName();
+        var cartProductName = cartProduct.getName();
 
-        assertThat(cartProductName)
+        softAssert.assertThat(cartProductName)
                 .as("Product name in cart should be same as name of added product to it")
                 .contains(firstProductName);
 
@@ -112,8 +111,15 @@ public class CartTest extends TestRunner {
         cartProduct.expandAdditionalServicesSection();
         var additionalProductService = cartProduct.getAdditionalProductService(cartProductName, 1);
         additionalProductService.select();
-        int totalPriceUpdated = cart.getTotalPrice();
         int additionalProductServiceCost = additionalProductService.getPrice();
+
+        softAssert.assertThat(cart.isOpened())
+                .as("Cart modal should be displayed")
+                .isTrue();
+
+        softAssert.assertAll();
+
+        int totalPriceUpdated = cart.getTotalPrice();
 
         assertThat(totalPriceUpdated)
                 .as("Total price should be increased by the cost of the first selected additional service")
@@ -163,17 +169,16 @@ public class CartTest extends TestRunner {
     @Test(description = "LVTAQC672-4")
     public void verifyThatTotalProductsPriceHasDoubled() {
         homePage.emptyCart();
-
-        Header header = homePage.getHeader();
+        var header = homePage.getHeader();
         header
                 .openCatalog()
-                .openSubCategoryPage(COTTAGE_GARDEN_AND_VEGETABLE_GARDEN, " Cаджанці дерев ")
+                .openSubCategoryPage(COTTAGE_GARDEN_AND_VEGETABLE_GARDEN, "Cаджанці дерев")
                 .getFilter()
                 .filterBySection(PRODUCT_AVAILABILITY, "Є в наявності")
                 .getProduct(1)
                 .addToCart();
 
-        Cart cart = header.openCart();
+        var cart = header.openCart();
         int totalPrice = cart.getTotalPrice();
 
         int totalPriceUpdated = cart
@@ -184,5 +189,69 @@ public class CartTest extends TestRunner {
         assertThat(totalPriceUpdated)
                 .as("Total products price should double")
                 .isEqualTo(totalPrice * 2);
+    }
+
+    @Description("Add test script to verify that user can't add more than one same flawed product to the cart.")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-38")
+    @Test(description = "LVTAQC672-38")
+    public void verifyThatUserCanAddOnlyOneSameFlawedProductToTheCart() {
+        var header = homePage.getHeader();
+        var flawedProductsSubCategory = "телевізори та монітори";
+
+        var subCategoryPage =
+                homePage
+                        .getCategorySideBar()
+                        .openFlawedProductsPage()
+                        .openFlawedProductsCategoryPage(flawedProductsSubCategory);
+
+        var subCategoryPageLabel = subCategoryPage.getFlawedProductsSubCategoryLabel(flawedProductsSubCategory);
+
+        var softAssert = new SoftAssertions();
+
+        softAssert.assertThat(subCategoryPageLabel)
+                .as("Flawed products subcategory page label should contain " + flawedProductsSubCategory)
+                .contains(flawedProductsSubCategory);
+
+        var flawedProduct = subCategoryPage.getProduct(1);
+        var isProductDefectVisible = flawedProduct.isDefectDescriptionVisible();
+
+        /**
+         * This assert may fail due to a bug one the flawed products page, and it's subcategory pages:
+         * The additional red description field, visible only
+         * when hovering mouse on a flawed product, may not load.
+         * The bug is sometimes reproduced when running this test
+         */
+        softAssert.assertThat(isProductDefectVisible)
+                .as("Red description message should be visible after hovering mouse over flawed product")
+                .isTrue();
+
+        var productName = flawedProduct.getName();
+
+        flawedProduct.addToCart();
+        var cart = header.openCart();
+
+        var cartProduct = cart.getProduct(productName);
+        var cartProductName = cartProduct.getName();
+        var expectedWord = "Уцінка";
+
+        softAssert.assertThat(cartProductName)
+                .as("Flawed product name should have word 'Уцінка' in its name")
+                .endsWith(expectedWord);
+
+        softAssert.assertAll();
+
+        cartProduct.addOneMoreProduct();
+        var alertMessage = cartProduct.getAlertMessage();
+        var expectedAlert = "Недостатньо товару для покупки";
+
+        assertThat(alertMessage)
+                .as("It is not possible to buy more than one of the same flawed product.")
+                .isEqualTo(expectedAlert);
+
+        int productQuantity = cartProduct.getProductsQuantity();
+
+        assertThat(productQuantity)
+                .as("Quantity of same flawed product added to the cart can't exceed 1")
+                .isEqualTo(1);
     }
 }

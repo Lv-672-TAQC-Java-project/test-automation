@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.product.InCartProduct;
 import com.softserveinc.ita.pageobjects.product.RecommendedProduct;
@@ -18,7 +19,7 @@ import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
-public class Cart {
+public class Cart extends BasePage {
 
     public InCartProduct getProduct(int index) {
 
@@ -27,7 +28,7 @@ public class Cart {
 
     public InCartProduct getProduct(String name) {
 
-        return new InCartProduct(format("//a[@title='%s']/ancestor::div[@class='cart-product ng-star-inserted']", name));
+        return new InCartProduct(format("//a[@title=%s]/ancestor::div[@class='cart-product ng-star-inserted']", "\"" + name + "\""));
     }
 
     public boolean isEmpty() {
@@ -86,6 +87,7 @@ public class Cart {
     @Step("Submitted an order")
     public OrderPlacementPage submitOrder() {
         $x("//div[@class='cart-receipt ng-star-inserted']/a").click();
+        $x("//legend[@class = 'checkout-block__title']").shouldBe(visible, ofSeconds(30));
 
         return new OrderPlacementPage();
     }

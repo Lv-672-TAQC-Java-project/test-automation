@@ -2,6 +2,7 @@ package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.Selenide;
 import com.softserveinc.ita.pageobjects.components.Header;
+import com.softserveinc.ita.pageobjects.components.LastViewedProductsSection;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
@@ -14,6 +15,7 @@ public class HomePage {
 
     private final CategorySideBar categorySideBar = new CategorySideBar();
     private final Header header = new Header();
+    private final LastViewedProductsSection lastViewedProductsSection = new LastViewedProductsSection();
 
     @Step("Opened home page")
     public HomePage open() {

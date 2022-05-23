@@ -3,7 +3,9 @@ package com.softserveinc.ita.pageobjects.components;
 import com.softserveinc.ita.pageobjects.*;
 import io.qameta.allure.Step;
 
+import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
+import static java.time.Duration.ofSeconds;
 import static org.openqa.selenium.Keys.ENTER;
 
 public class Header {
@@ -54,5 +56,13 @@ public class Header {
         $x("//rz-mobile-user-menu//button").click();
 
         return new MenuSideBar();
+    }
+  
+    @Step("Opened home page")
+    public HomePage openHomePage() {
+        $x("//a[@class='header__logo']").click();
+        $x("//h2[@class = 'main-goods__heading ng-star-inserted']").shouldBe(visible, ofSeconds(30));
+
+        return new HomePage();
     }
 }

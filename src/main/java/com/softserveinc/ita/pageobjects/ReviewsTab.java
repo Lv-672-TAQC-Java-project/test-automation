@@ -15,7 +15,7 @@ import static java.time.Duration.ofSeconds;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.IntStream.rangeClosed;
 
-public class ReviewsPage {
+public class ReviewsTab extends BasePage {
 
     public List<Review> getReviews() {
         String reviewPath = "//div[@class='comment']";
@@ -35,8 +35,8 @@ public class ReviewsPage {
                 .text();
     }
 
-    @Step("Choose {option} and get sorted reviews on the Reviews page")
-    public ReviewsPage sortBy(ReviewSortingOption option) {
+    @Step("Choose {option} and get sorted reviews on the Reviews tab")
+    public ReviewsTab sortBy(ReviewSortingOption option) {
         var timeOut = ofSeconds(20);
         String firstCommentTextPath = "(//div[@class='comment'])[1]/div[@class='comment__inner']//div/p";
         String lastCommentTextPath = "(//div[@class='comment'])[last()]/div[@class='comment__inner']//div/p";

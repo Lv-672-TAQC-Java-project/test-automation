@@ -6,19 +6,18 @@ import lombok.AllArgsConstructor;
 import static com.codeborne.selenide.Selenide.$x;
 
 @AllArgsConstructor
-public class AdditionalProductService {
+public class AdditionalProductService extends BasePage {
     private String rootElementPath;
 
     public AdditionalProductService(String productName, int index) {
-        String product = String.format("//a[@title='%s']/ancestor::div[@class='cart-product ng-star-inserted']", productName);
+        String product = String.format("//a[@title=%s]/ancestor::div[@class='cart-product ng-star-inserted']", "\"" + productName + "\"");
 
         this.rootElementPath = String.format("%s%s", product, String.format("//li[%s]/rz-service-item", index));
     }
 
     @Step("Selected additional service")
     public Cart select() {
-        $x(rootElementPath)
-                .scrollIntoView(true)
+        $x(rootElementPath + "/div/label")
                 .click();
 
         return new Cart();

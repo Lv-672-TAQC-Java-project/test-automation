@@ -1,6 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.ComparisonPage;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
@@ -19,14 +18,14 @@ public class ComparisonTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-9")
     @Test(description = "LVTAQC672-9")
     public void verifyDeleteProductFromComparisonPage() {
-        List<String> productNames = new ArrayList<>();
+        var productNames = new ArrayList<String>();
         productNames.add("Ванна акрилова CERSANIT VIRGO 170 +");
         productNames.add("Ванна акрилова BESCO Modern 130х70");
         productNames.add("Ванна акрилова SERENA SE-4001 150x70");
 
         String category = "Ванни";
 
-        ComparisonPage comparisonProducts = homePage
+        var comparisonProducts = homePage
                 .getCategorySideBar()
                 .openCategoryPage(PLUMBING_AND_REPAIR)
                 .openSubCategoryPage(category)
@@ -110,8 +109,8 @@ public class ComparisonTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-6")
     @Test(description = "LVTAQC672-6")
     public void verifyShowOnlyDifferencesFunctionality() {
-        Header header = homePage.getHeader();
-        String searchTerm = "notebook";
+        var header = homePage.getHeader();
+        var searchTerm = "notebook";
 
         var searchResultPage = header.search(searchTerm);
 
@@ -121,10 +120,10 @@ public class ComparisonTest extends TestRunner {
         firstProduct.addToListOfComparisons();
         secondProduct.addToListOfComparisons();
 
-        String firstProductName = firstProduct.getName();
-        String secondProductName = secondProduct.getName();
+        var firstProductName = firstProduct.getName();
+        var secondProductName = secondProduct.getName();
 
-        String productCategory = "Ноутбуки";
+        var productCategory = "Ноутбуки";
         var comparisonPage =
                 header
                         .openComparisonModal()
@@ -133,13 +132,13 @@ public class ComparisonTest extends TestRunner {
         var firstComparableProduct = comparisonPage.getProduct(firstProductName);
         var secondComparableProduct = comparisonPage.getProduct(secondProductName);
 
-        List<String> firstProductCharacteristics = firstComparableProduct.getCharacteristics();
-        List<String> secondProductCharacteristics = secondComparableProduct.getCharacteristics();
+        var firstProductCharacteristics = firstComparableProduct.getCharacteristics();
+        var secondProductCharacteristics = secondComparableProduct.getCharacteristics();
 
         comparisonPage.showOnlyDifferences();
 
-        List<String> firstProductCharacteristicsAfterChange = firstComparableProduct.getCharacteristics();
-        List<String> secondProductCharacteristicsAfterChange = secondComparableProduct.getCharacteristics();
+        var firstProductCharacteristicsAfterChange = firstComparableProduct.getCharacteristics();
+        var secondProductCharacteristicsAfterChange = secondComparableProduct.getCharacteristics();
 
         assertThat(firstProductCharacteristicsAfterChange)
                 .as("After change products characteristics lists should display only distinctive characteristics")

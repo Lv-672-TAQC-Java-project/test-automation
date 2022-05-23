@@ -12,7 +12,7 @@ import static com.codeborne.selenide.Selenide.$$x;
 import static com.codeborne.selenide.Selenide.$x;
 import static java.lang.String.format;
 
-public class ComparisonModal {
+public class ComparisonModal extends BasePage {
 
     @Step("Opened Comparison Page {category}")
     public ComparisonPage openComparisonPage(String category) {
