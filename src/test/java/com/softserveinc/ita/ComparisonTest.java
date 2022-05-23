@@ -31,7 +31,8 @@ public class ComparisonTest extends TestRunner {
                 .openSubCategoryPage(subCategory)
                 .addProductsToComparison(productNames)
                 .openComparisonModal()
-                .openComparisonPage(subCategory);
+                .getSubCategory(subCategory)
+                .openComparisonPage();
 
         var expectedString = "Ванна";
 
