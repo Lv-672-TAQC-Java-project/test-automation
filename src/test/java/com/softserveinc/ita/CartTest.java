@@ -1,7 +1,5 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.Cart;
-import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.models.CategoryName;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;

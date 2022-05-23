@@ -1,6 +1,8 @@
 package com.softserveinc.ita.pageobjects.components;
 
 import com.softserveinc.ita.pageobjects.*;
+import com.softserveinc.ita.pageobjects.modal.Cart;
+import com.softserveinc.ita.pageobjects.modal.ComparisonModal;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;

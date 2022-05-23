@@ -1,6 +1,8 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.SelenideElement;
+import com.softserveinc.ita.pageobjects.modal.Cart;
+import com.softserveinc.ita.pageobjects.modal.DeliveryLocationModal;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Condition.visible;

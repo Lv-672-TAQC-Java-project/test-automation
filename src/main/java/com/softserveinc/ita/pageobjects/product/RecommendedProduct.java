@@ -1,6 +1,6 @@
 package com.softserveinc.ita.pageobjects.product;
 
-import com.softserveinc.ita.pageobjects.Cart;
+import com.softserveinc.ita.pageobjects.modal.Cart;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;
