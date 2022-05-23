@@ -59,8 +59,8 @@ public class SearchResultPage {
     }
 
     public Product getProduct(String name) {
-
-        return new Product(format("//span[contains(text(),'%s')]/ancestor::div[@class='goods-tile__inner']", name));
+        return new Product(format("//span[@class='goods-tile__title' and contains(string(),'%s')]" +
+                "/ancestor::div[@class='goods-tile__inner']", name));
     }
 
     public List<Integer> getProductsPrices(List<Product> products) {

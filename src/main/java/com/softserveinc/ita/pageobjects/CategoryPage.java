@@ -15,8 +15,8 @@ public class CategoryPage {
     }
 
     @Step("Opened {brandName} products page")
-    public SearchResultPage openBrandProductsPage(String shoeBrandName) {
-        $x(String.format("//a[@title='%s']", shoeBrandName)).click();
+    public SearchResultPage openPopularBrandProductsPage(String popularBrandName) {
+        $x(String.format("//a[@title='%s']", popularBrandName)).click();
 
         return new SearchResultPage();
     }

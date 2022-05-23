@@ -18,14 +18,14 @@ public class ProductParameterTest extends TestRunner {
                 .getHeader()
                 .openCatalog()
                 .openCategoryPage(CLOTHES_SHOES_AND_JEWELRY)
-                .openBrandProductsPage("Asics")
+                .openPopularBrandProductsPage("Asics")
                 .getProduct("Кросівки Asics Gel-Kayano 28 1011B189-400 Сині")
-                .getShoeSize(SHOE_SIZE_44_5);
+                .getProductDetailsPageWithSelectedShoeSize(SHOE_SIZE_44_5);
 
         var selectedShoeSize = productDetailsPage.getSelectedShoeSize();
 
         assertThat(selectedShoeSize)
-                .as("active foot size should be equal to selected size")
+                .as("active shoe size on the product details page should be equal to selected size")
                 .isEqualTo(productDetailsPage.getSelectedShoeSize());
     }
 
