@@ -33,7 +33,7 @@ public class ComparisonTest extends TestRunner {
                 .openComparisonModal()
                 .openComparisonPage(subCategory);
 
-        String expectedString = "Ванна";
+        var expectedString = "Ванна";
 
         comparisonProducts.getAllComparisonPageProducts()
                 .forEach(product -> assertThat(product.getProductName())
