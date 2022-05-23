@@ -23,15 +23,15 @@ public class ComparisonTest extends TestRunner {
         productNames.add("Ванна акрилова BESCO Modern 130х70");
         productNames.add("Ванна акрилова SERENA SE-4001 150x70");
 
-        String category = "Ванни";
+        var subCategory = "Ванни";
 
         var comparisonProducts = homePage
                 .getCategorySideBar()
                 .openCategoryPage(PLUMBING_AND_REPAIR)
-                .openSubCategoryPage(category)
+                .openSubCategoryPage(subCategory)
                 .addProductsToComparison(productNames)
                 .openComparisonModal()
-                .openComparisonPage(category);
+                .openComparisonPage(subCategory);
 
         String expectedString = "Ванна";
 
