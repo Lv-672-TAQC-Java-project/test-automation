@@ -129,7 +129,7 @@ public class CartTest extends TestRunner {
     @Description("Verify that product items quantity and summary price in the 'Кошик' pop-up window increased" +
             "after adding first product from 'Також рекомендуємо' section.")
     @Issue("https://jira.softserve.academy/projects/LVTAQC672/issues/LVTAQC672-10")
-    @Test
+    @Test(description = "LVTAQC672-10")
     public void verifyAddingProductFromRecommendationsSection() {
         homePage.emptyCart();
 
