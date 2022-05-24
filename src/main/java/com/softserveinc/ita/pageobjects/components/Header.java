@@ -16,7 +16,7 @@ public class Header {
         $x(inputFieldPath).sendKeys(ENTER);
     }
 
-    @Step("Searched for {term}")
+    @Step("Searched for '{term}'")
     public SearchResultPage search(String term) {
         commonSearch(term);
 
