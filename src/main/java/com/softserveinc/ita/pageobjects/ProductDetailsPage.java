@@ -50,11 +50,11 @@ public class ProductDetailsPage extends BasePage {
         return new QuestionTab();
     }
 
-<<<<<<< mromanyshyn-product-param-test
     public String getSelectedShoeSize() {
         return $x("//a[@class='var-options__block var-options__block_state_active ng-star-inserted']" +
                 "/span").getText();
-=======
+    }
+
     @Step("Opened delivery location modal")
     public DeliveryLocationModal openDeliveryLocationModal() {
         productNameLabel.scrollIntoView(true);
@@ -73,6 +73,5 @@ public class ProductDetailsPage extends BasePage {
         return $x("//p[@class='product__code detail-code']")
                 .getText()
                 .split(" ")[2];
->>>>>>> main
     }
 }
