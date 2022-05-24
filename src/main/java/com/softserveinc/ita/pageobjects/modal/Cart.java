@@ -1,6 +1,5 @@
 package com.softserveinc.ita.pageobjects.modal;
 
-import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.BasePage;
 import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.OrderPlacementPage;
@@ -69,7 +68,7 @@ public class Cart extends BasePage {
 
     @Step("Closed cart")
     public HomePage close() {
-        SelenideElement closeButton = $x("//button[@class='modal__close']");
+        var closeButton = $x("//button[@class='modal__close']");
         //sometimes page opens instead of popup
         if (isDisplayed(closeButton, ofSeconds(5))) {
             closeButton.click();

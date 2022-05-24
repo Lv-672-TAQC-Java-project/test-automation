@@ -1,13 +1,11 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.PLUMBING_AND_REPAIR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -23,17 +21,18 @@ public class ComparisonTest extends TestRunner {
         productNames.add("Ванна акрилова BESCO Modern 130х70");
         productNames.add("Ванна акрилова SERENA SE-4001 150x70");
 
-        String category = "Ванни";
+        var subCategory = "Ванни";
 
         var comparisonProducts = homePage
                 .getCategorySideBar()
                 .openCategoryPage(PLUMBING_AND_REPAIR)
-                .openSubCategoryPage(category)
+                .openSubCategoryPage(subCategory)
                 .addProductsToComparison(productNames)
                 .openComparisonModal()
-                .openComparisonPage(category);
+                .getSubCategory(subCategory)
+                .openComparisonPage();
 
-        String expectedString = "Ванна";
+        var expectedString = "Ванна";
 
         comparisonProducts.getAllComparisonPageProducts()
                 .forEach(product -> assertThat(product.getProductName())
@@ -55,7 +54,7 @@ public class ComparisonTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-12")
     @Test(description = "LVTAQC672-12")
     public void verifyThatProductsAddedToTheComparison() {
-        String searchTerm = "Lenovo";
+        var searchTerm = "Lenovo";
 
         var header = homePage.getHeader();
 
@@ -68,7 +67,7 @@ public class ComparisonTest extends TestRunner {
                 .getProduct(2)
                 .addToListOfComparisons();
 
-        String categoryName = "Планшет";
+        var categoryName = "Планшет";
         var comparisonPage = header
                 .openComparisonModal()
                 .openComparisonPage(categoryName);
@@ -127,7 +126,8 @@ public class ComparisonTest extends TestRunner {
         var comparisonPage =
                 header
                         .openComparisonModal()
-                        .openComparisonPage(productCategory);
+                        .getSubCategory(productCategory)
+                        .openComparisonPage();
 
         var firstComparableProduct = comparisonPage.getProduct(firstProductName);
         var secondComparableProduct = comparisonPage.getProduct(secondProductName);
