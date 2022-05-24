@@ -125,7 +125,8 @@ public class ComparisonTest extends TestRunner {
         var comparisonPage =
                 header
                         .openComparisonModal()
-                        .openComparisonPage(productCategory);
+                        .getSubCategory(productCategory)
+                        .openComparisonPage();
 
         var firstComparableProduct = comparisonPage.getProduct(firstProductName);
         var secondComparableProduct = comparisonPage.getProduct(secondProductName);
