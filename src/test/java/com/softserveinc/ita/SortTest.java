@@ -4,7 +4,7 @@ import com.softserveinc.ita.pageobjects.models.SortOrder;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
-import org.assertj.core.api.Assertions;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
 import java.util.Collections;
@@ -20,10 +20,11 @@ public class SortTest extends TestRunner {
     @Test(description = "LVTAQC672-15")
     public void verifyThatProductsAreSortedFromCheapToExpensive() {
         var header = homePage.getHeader();
-        String searchTerm = "Декоративна штукатурка RZTK";
+        var searchTerm = "Декоративна штукатурка RZTK";
         var searchResultPage = header.search(searchTerm);
 
-        Assertions.assertThat(searchResultPage.getSearchTermLabel())
+        var softAssert = new SoftAssertions();
+        softAssert.assertThat(searchResultPage.getSearchTermLabel())
                 .as("Search result page should contain label with" + searchTerm)
                 .contains(searchTerm);
 
@@ -31,9 +32,16 @@ public class SortTest extends TestRunner {
         var productPrices = searchResultPage.getProductsPrices(products);
         Collections.sort(productPrices);
 
-        var sortedProductsFromCheap = searchResultPage
-                .sort(SortOrder.FROM_CHEAP)
-                .getProducts();
+        int productsAmount = searchResultPage.getFoundProductsAmountInCategory();
+        searchResultPage.sort(SortOrder.FROM_CHEAP);
+
+        softAssert.assertThat(searchResultPage.getFoundProductsAmountInCategory())
+                .as("Amount of found products that are displayed under category label should not change after sort")
+                .isEqualTo(productsAmount);
+
+        softAssert.assertAll();
+
+        var sortedProductsFromCheap = searchResultPage.getProducts();
         var sortedProductsFromCheapPrices = searchResultPage.getProductsPrices(sortedProductsFromCheap);
 
         assertThat(sortedProductsFromCheapPrices)
