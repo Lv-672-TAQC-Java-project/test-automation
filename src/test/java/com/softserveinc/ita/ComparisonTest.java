@@ -1,13 +1,11 @@
 package com.softserveinc.ita;
 
-import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.PLUMBING_AND_REPAIR;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -55,7 +53,7 @@ public class ComparisonTest extends TestRunner {
     @Issue("https://jira.softserve.academy/browse/LVTAQC672-12")
     @Test(description = "LVTAQC672-12")
     public void verifyThatProductsAddedToTheComparison() {
-        String searchTerm = "Lenovo";
+        var searchTerm = "Lenovo";
 
         var header = homePage.getHeader();
 
@@ -68,7 +66,7 @@ public class ComparisonTest extends TestRunner {
                 .getProduct(2)
                 .addToListOfComparisons();
 
-        String categoryName = "Планшет";
+        var categoryName = "Планшет";
         var comparisonPage = header
                 .openComparisonModal()
                 .openComparisonPage(categoryName);
