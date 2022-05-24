@@ -1,5 +1,7 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.components;
 
+import com.softserveinc.ita.pageobjects.modal.ComparisonModal;
+import com.softserveinc.ita.pageobjects.HomePage;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;

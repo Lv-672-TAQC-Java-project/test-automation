@@ -1,13 +1,12 @@
 package com.softserveinc.ita.pageobjects;
 
 import com.codeborne.selenide.Selenide;
+import com.softserveinc.ita.pageobjects.components.CategorySideBar;
 import com.softserveinc.ita.pageobjects.components.Header;
 import com.softserveinc.ita.pageobjects.components.LastViewedProductsSection;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
-import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
-import static com.codeborne.selenide.Selenide.$$x;
 import static com.softserveinc.ita.utils.PropertyUtil.getHomePageUrl;
 
 @Getter

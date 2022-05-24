@@ -2,7 +2,7 @@ package com.softserveinc.ita.pageobjects.product;
 
 import com.codeborne.selenide.SelenideElement;
 import com.softserveinc.ita.pageobjects.AdditionalProductService;
-import com.softserveinc.ita.pageobjects.Cart;
+import com.softserveinc.ita.pageobjects.modal.Cart;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 

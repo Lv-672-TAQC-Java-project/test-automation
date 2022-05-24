@@ -1,5 +1,8 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.modal;
 
+import com.softserveinc.ita.pageobjects.BasePage;
+import com.softserveinc.ita.pageobjects.ComparisonPage;
+import com.softserveinc.ita.pageobjects.HomePage;
 import com.softserveinc.ita.pageobjects.components.SubCategoryComparisonModal;
 import io.qameta.allure.Step;
 

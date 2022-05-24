@@ -1,5 +1,6 @@
 package com.softserveinc.ita.pageobjects;
 
+import com.softserveinc.ita.pageobjects.modal.Cart;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 

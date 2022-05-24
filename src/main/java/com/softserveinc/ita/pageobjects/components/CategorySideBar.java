@@ -1,5 +1,7 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.components;
 
+import com.softserveinc.ita.pageobjects.CategoryPage;
+import com.softserveinc.ita.pageobjects.FlawedProductsPage;
 import com.softserveinc.ita.pageobjects.models.CategoryName;
 import io.qameta.allure.Step;
 
