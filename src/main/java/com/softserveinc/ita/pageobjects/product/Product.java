@@ -1,7 +1,6 @@
 package com.softserveinc.ita.pageobjects.product;
 
 import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.HoverOptions;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
@@ -15,7 +14,6 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.visible;
 import static com.codeborne.selenide.Selenide.$x;
 import static com.softserveinc.ita.utils.WebElementUtil.isDisplayed;
-import static java.time.Duration.of;
 import static java.time.Duration.ofSeconds;
 
 @AllArgsConstructor
