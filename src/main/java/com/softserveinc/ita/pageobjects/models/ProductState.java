@@ -5,9 +5,8 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public enum ProductAvailability {
+public enum ProductState {
 
     AVAILABLE,
-    UNAVAILABLE,
-    OUT_OF_STOCK
+    UNAVAILABLE;
 }

@@ -6,6 +6,8 @@ import com.softserveinc.ita.pageobjects.components.LastViewedProductsSection;
 import io.qameta.allure.Step;
 import lombok.Getter;
 
+import static com.codeborne.selenide.CollectionCondition.sizeNotEqual;
+import static com.codeborne.selenide.Selenide.$$x;
 import static com.softserveinc.ita.utils.PropertyUtil.getHomePageUrl;
 
 @Getter
@@ -32,6 +34,27 @@ public class HomePage {
                 .openCart()
                 .empty()
                 .close();
+
+        return this;
+    }
+
+    /**
+     * Comparison modal testing precondition.
+     * Use this method before the test to open menu
+     * and remove all elements from comparison modal if it is filled
+     * or close menu if comparison modal is not filled.
+     */
+    @Step("Emptied comparison modal and close popup")
+    public HomePage emptyComparisonModal() {
+        var menuSideBar = header.openMenuSideBar();
+        if (menuSideBar.areThereProductsInComparison()) {
+            menuSideBar
+                    .openComparisonModal()
+                    .removeAllSubCategories()
+                    .close();
+        } else {
+            menuSideBar.close();
+        }
 
         return this;
     }

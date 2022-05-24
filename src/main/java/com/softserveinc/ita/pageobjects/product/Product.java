@@ -6,9 +6,9 @@ import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.models.ShoeSize;
 import com.softserveinc.ita.pageobjects.models.ProductAvailability;
+import com.softserveinc.ita.pageobjects.models.ProductState;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
-
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -27,13 +27,11 @@ public class Product {
                 "//span[@class = 'goods-tile__title']")).text();
     }
 
-    public ProductAvailability getAvailability() {
-        String classAttribute = $x(String.format("%s//div[contains(@class, 'goods-tile__availability')]",
+    public ProductState getState() {
+        var classAttribute = $x(String.format("%s//ancestor::div[contains(@class, 'goods-tile') and @data-tile = 'small']",
                 rootElementPath)).getAttribute("class");
-        String productAvailability = classAttribute
-                .substring(classAttribute.indexOf("--") + 2, classAttribute.lastIndexOf(" "))
-                .toUpperCase();
-        return ProductAvailability.valueOf(productAvailability);
+
+        return classAttribute.contains("state") ? ProductState.UNAVAILABLE : ProductState.AVAILABLE;
     }
 
     public int getPrice() {
