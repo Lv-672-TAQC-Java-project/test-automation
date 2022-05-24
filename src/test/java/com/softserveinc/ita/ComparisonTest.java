@@ -154,4 +154,47 @@ public class ComparisonTest extends TestRunner {
                 .hasSizeGreaterThan(secondProductCharacteristicsAfterChange
                         .size());
     }
+
+    @Description("Add test script to cover delete function in comparison modal")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-39")
+    @Test(description = "LVTAQC672-39")
+    public void verifyThatSubCategoryDeletedFromComparisonModal() {
+        var header = homePage
+                .emptyComparisonModal()
+                .getHeader();
+
+        var filterCategorySideBar = header
+                .search("lenovo")
+                .getFilterCategorySideBar();
+
+        filterCategorySideBar
+                .filterBySubCategory("Чохли для мобільних телефонів")
+                .getProduct(1)
+                .addToListOfComparisons();
+
+        var subCategoryName = "Блоки живлення для ноутбуків";
+        filterCategorySideBar
+                .filterBySubCategory(subCategoryName)
+                .getProduct(1)
+                .addToListOfComparisons();
+
+        var comparisonModal = header
+                .openMenuSideBar()
+                .openComparisonModal();
+
+        var subCategories = comparisonModal.getSubCategories();
+
+        assertThat(subCategories)
+                .as("The 2 subCategories should be in comparison modal")
+                .hasSize(2);
+
+        subCategories = comparisonModal
+                .getSubCategory(subCategoryName)
+                .remove()
+                .getSubCategories();
+
+        assertThat(subCategories)
+                .as("The 1 subCategories should be in comparison modal")
+                .hasSize(1);
+    }
 }
