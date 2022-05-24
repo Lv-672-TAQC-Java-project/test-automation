@@ -23,7 +23,7 @@ public class ProductParameterTest extends TestRunner {
 
         var shoeSize = SHOE_SIZE_44_5;
 
-        var productDetailsPage = product.getProductDetailsPageWithSelectedShoeSize(shoeSize);
+        var productDetailsPage = product.openDetailsPageWithSelectedShoeSize(shoeSize);
 
         assertThat(shoeSize.getPath())
                 .as("active shoe size on the product details page should be equal to selected size")

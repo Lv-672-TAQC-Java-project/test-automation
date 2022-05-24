@@ -14,7 +14,7 @@ public class CategoryPage {
         return new SubCategoryPage();
     }
 
-    @Step("Opened {brandName} products page")
+    @Step("Opened '{popularBrandName}' products page")
     public SearchResultPage openPopularBrandProductsPage(String popularBrandName) {
         $x(String.format("//a[@title='%s']", popularBrandName)).click();
 

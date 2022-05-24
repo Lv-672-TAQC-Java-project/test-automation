@@ -97,7 +97,8 @@ public class Product {
         return isFlawTextDisplayed;
     }
 
-    public ProductDetailsPage getProductDetailsPageWithSelectedShoeSize(ShoeSize shoeSize) {
+    @Step("Opened product details page by selected shoe size")
+    public ProductDetailsPage openDetailsPageWithSelectedShoeSize(ShoeSize shoeSize) {
         $x(rootElementPath).hover();
         $x(String.format("//li[@class='goods-tile__param ng-star-inserted']/a[contains(text(), '%s')]",
                 shoeSize.getPath())).click();
