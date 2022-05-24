@@ -36,7 +36,7 @@ public class ReviewsTab extends BasePage {
 
     public String getTitle() {
 
-        return $x("//h2[@class='product-tabs__heading']")
+        return $x("//h1[@class='product__title']")
                 .shouldBe(visible)
                 .text();
     }
