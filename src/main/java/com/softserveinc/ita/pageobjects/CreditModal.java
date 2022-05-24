@@ -10,7 +10,7 @@ import static java.time.Duration.ofSeconds;
 
 public class CreditModal {
 
-    public int getAmountCreditsTypes() {
+    public int getCreditsTypesAmount() {
 
         return $$x("//option[@class='ng-star-inserted']")
                 .shouldHave(sizeNotEqual(0), ofSeconds(60))
