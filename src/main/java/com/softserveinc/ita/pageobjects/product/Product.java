@@ -5,7 +5,6 @@ import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.models.ShoeSize;
-import com.softserveinc.ita.pageobjects.models.ProductAvailability;
 import com.softserveinc.ita.pageobjects.models.ProductState;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
