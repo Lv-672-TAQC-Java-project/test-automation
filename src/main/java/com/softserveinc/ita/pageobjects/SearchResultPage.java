@@ -30,7 +30,7 @@ public class SearchResultPage extends BasePage {
     private final FilterCategorySideBar filterCategorySideBar = new FilterCategorySideBar();
 
     public List<Product> getProducts() {
-        String productsPath = "//div[@class='goods-tile__inner']";
+        var productsPath = "//div[@class='goods-tile__inner']";
 
         return rangeClosed(1, $$x(productsPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(30))

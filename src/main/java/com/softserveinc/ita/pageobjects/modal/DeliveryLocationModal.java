@@ -1,5 +1,6 @@
-package com.softserveinc.ita.pageobjects;
+package com.softserveinc.ita.pageobjects.modal;
 
+import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import io.qameta.allure.Step;
 
 import static com.codeborne.selenide.Selenide.$x;

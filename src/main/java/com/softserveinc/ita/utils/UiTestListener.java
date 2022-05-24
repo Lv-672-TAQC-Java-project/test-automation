@@ -17,7 +17,7 @@ public class UiTestListener implements ITestListener {
 
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] screenshot() {
-        String screenshotAsBase64 = Selenide.screenshot(OutputType.BASE64);
+        var screenshotAsBase64 = Selenide.screenshot(OutputType.BASE64);
 
         return Base64
                 .getDecoder()

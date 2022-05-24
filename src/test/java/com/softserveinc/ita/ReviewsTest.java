@@ -12,6 +12,9 @@ import org.testng.annotations.Test;
 import java.util.Collections;
 import java.util.stream.Collectors;
 
+import static com.softserveinc.ita.pageobjects.models.CategoryName.LAPTOPS_AND_COMPUTERS;
+import static com.softserveinc.ita.pageobjects.models.RatingNumber.FOUR;
+import static org.assertj.core.api.Assertions.assertThat;
 import static com.softserveinc.ita.pageobjects.models.FilterSectionName.SELLER;
 
 public class ReviewsTest extends TestRunner {
@@ -56,5 +59,36 @@ public class ReviewsTest extends TestRunner {
                 .isEqualTo(reviewsRatingByMostHelpful);
 
         softAssert.assertAll();
+    }
+
+    @Description("Add a test script to cover filter function for reviews by rating in common rating section")
+    @Issue("https://jira.softserve.academy/browse/LVTAQC672-37")
+    @Test(description = "LVTAQC672-37")
+    public void verifyFilterFunctionForReviewsByRating() {
+        var product = homePage
+                .getHeader()
+                .openCatalog()
+                .openSubCategoryPage(LAPTOPS_AND_COMPUTERS, "Монітори")
+                .getProduct(1);
+        var productName = product.getName();
+
+        var reviewsTab = product.openReviewsTab();
+        var productTitleInReviews = reviewsTab.getTitle();
+
+        assertThat(productTitleInReviews)
+                .as("The title on the reviews page should contain " + productName)
+                .containsIgnoringCase(productName);
+
+        var commonRatingSection = reviewsTab.getCommonRatingSection();
+
+        var filteredReviews = commonRatingSection
+                .filterReviews(FOUR)
+                .getReviews();
+
+        int reviewsCount = commonRatingSection.getReviewsCount();
+
+        assertThat(filteredReviews)
+                .as("filtered reviews should have size " + reviewsCount)
+                .hasSize(reviewsCount);
     }
 }
