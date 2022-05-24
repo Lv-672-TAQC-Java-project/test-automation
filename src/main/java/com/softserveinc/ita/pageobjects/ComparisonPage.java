@@ -38,7 +38,7 @@ public class ComparisonPage extends BasePage {
     }
 
     public List<ComparisonPageProduct> getAllComparisonPageProducts() {
-        String productsPath = "//*[@class='products-grid__cell ng-star-inserted']";
+        var productsPath = "//*[@class='products-grid__cell ng-star-inserted']";
         int amountOfProducts = $$x(productsPath)
                 .shouldHave(sizeNotEqual(0), Duration.ofSeconds(10)).size();
 
