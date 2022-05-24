@@ -67,10 +67,11 @@ public class ComparisonTest extends TestRunner {
                 .getProduct(2)
                 .addToListOfComparisons();
 
-        var categoryName = "Планшет";
+        var subCategoryName = "Планшет";
         var comparisonPage = header
                 .openComparisonModal()
-                .openComparisonPage(categoryName);
+                .getSubCategory(subCategoryName)
+                .openComparisonPage();
 
         var productList = comparisonPage.getAllComparisonPageProducts();
 
@@ -82,16 +83,18 @@ public class ComparisonTest extends TestRunner {
                 .forEach(product -> assertThat(product.getProductName())
                         .as("All products should contain " + searchTerm)
                         .containsIgnoringCase(searchTerm)
-                        .as("All products should contain " + categoryName)
-                        .containsIgnoringCase(categoryName));
+                        .as("All products should contain " + subCategoryName)
+                        .containsIgnoringCase(subCategoryName));
 
         comparisonPage
                 .addMoreModels()
                 .getProductNotAddedToComparison(1)
                 .addToListOfComparisons();
+
         productList = header
                 .openComparisonModal()
-                .openComparisonPage(categoryName)
+                .getSubCategory(subCategoryName)
+                .openComparisonPage()
                 .getAllComparisonPageProducts();
 
         assertThat(productList)
@@ -100,8 +103,8 @@ public class ComparisonTest extends TestRunner {
 
         productList
                 .forEach(product -> assertThat(product.getProductName())
-                        .as("All products should contain " + categoryName)
-                        .containsIgnoringCase(categoryName));
+                        .as("All products should contain " + subCategoryName)
+                        .containsIgnoringCase(subCategoryName));
     }
 
     @Description("Verify 'show only differences' functionality when comparing products")

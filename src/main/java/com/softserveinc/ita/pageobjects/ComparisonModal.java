@@ -14,15 +14,6 @@ import static java.lang.String.format;
 
 public class ComparisonModal extends BasePage {
 
-    @Step("Opened Comparison Page {category}")
-    public ComparisonPage openComparisonPage(String category) {
-
-        var categoryLinkPath = format("//*[contains(@class, 'comparison-modal__list')]//a[contains(text(), '%s')]", category);
-        $x(categoryLinkPath).click();
-
-        return new ComparisonPage();
-    }
-
     public SubCategoryComparisonModal getSubCategory(String subCategory) {
         var subCategoryPath = format("//a[contains(text(), '%s')]" +
                 "//ancestor::*[contains(@class, 'comparison-modal__item')]", subCategory);
