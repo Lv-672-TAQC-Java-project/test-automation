@@ -21,13 +21,12 @@ public class ProductParameterTest extends TestRunner {
                 .openPopularBrandProductsPage("Asics")
                 .getProduct("Кросівки Asics Gel-Kayano 28 1011B189-400 Сині");
 
-        var shoeSize = SHOE_SIZE_44_5;
+        var shoeSize = SIZE_44_5;
 
-        var productDetailsPage = product.openDetailsPageWithSelectedShoeSize(shoeSize);
+        var productDetailsPage = product.selectShoeSize(shoeSize);
 
-        assertThat(shoeSize.getPath())
+        assertThat(String.valueOf(shoeSize.getSizeNumber()))
                 .as("active shoe size on the product details page should be equal to selected size")
                 .isEqualTo(productDetailsPage.getSelectedShoeSize());
     }
-
 }

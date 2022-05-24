@@ -5,6 +5,7 @@ import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
 import com.softserveinc.ita.pageobjects.models.ShoeSize;
+import com.softserveinc.ita.pageobjects.models.ProductState;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
 import java.time.Duration;
@@ -23,6 +24,13 @@ public class Product {
 
         return $x(String.format("%s%s", rootElementPath,
                 "//span[@class = 'goods-tile__title']")).text();
+    }
+
+    public ProductState getState() {
+        var classAttribute = $x(String.format("%s//ancestor::div[contains(@class, 'goods-tile') and @data-tile = 'small']",
+                rootElementPath)).getAttribute("class");
+
+        return classAttribute.contains("state") ? ProductState.UNAVAILABLE : ProductState.AVAILABLE;
     }
 
     public int getPrice() {
@@ -87,10 +95,10 @@ public class Product {
     }
 
     @Step("Opened product details page by selected shoe size")
-    public ProductDetailsPage openDetailsPageWithSelectedShoeSize(ShoeSize shoeSize) {
+    public ProductDetailsPage selectShoeSize(ShoeSize shoeSize) {
         $x(rootElementPath).hover();
         $x(String.format("//li[@class='goods-tile__param ng-star-inserted']/a[contains(text(), '%s')]",
-                shoeSize.getPath())).click();
+                shoeSize.getSizeNumber())).click();
 
         return new ProductDetailsPage();
     }
