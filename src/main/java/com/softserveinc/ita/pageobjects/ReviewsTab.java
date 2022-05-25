@@ -21,6 +21,7 @@ import static java.util.stream.IntStream.rangeClosed;
 @Getter
 public class ReviewsTab extends BasePage {
 
+    @Step("Opened reviews filtering modal")
     public ReviewsFilteringModal openReviewsFilteringModal(){
 
         $x("//button[contains(@class,'button_with_icon button_size_medium button_color_navy')]").click();
