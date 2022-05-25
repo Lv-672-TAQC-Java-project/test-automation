@@ -4,10 +4,10 @@ import com.codeborne.selenide.Condition;
 import com.softserveinc.ita.pageobjects.ProductDetailsPage;
 import com.softserveinc.ita.pageobjects.ReviewsTab;
 import com.softserveinc.ita.pageobjects.SearchResultPage;
+import com.softserveinc.ita.pageobjects.models.ShoeSize;
 import com.softserveinc.ita.pageobjects.models.ProductState;
 import io.qameta.allure.Step;
 import lombok.AllArgsConstructor;
-
 import java.time.Duration;
 
 import static com.codeborne.selenide.Condition.visible;
@@ -91,5 +91,14 @@ public class Product {
 
         return isDisplayed($x(flawDescription), ofSeconds(10));
 
+    }
+
+    @Step("Opened product details page by selected shoe size")
+    public ProductDetailsPage selectShoeSize(ShoeSize shoeSize) {
+        $x(rootElementPath).hover();
+        $x(String.format("//li[@class='goods-tile__param ng-star-inserted']/a[contains(text(), '%s')]",
+                shoeSize.getSizeNumber())).click();
+
+        return new ProductDetailsPage();
     }
 }

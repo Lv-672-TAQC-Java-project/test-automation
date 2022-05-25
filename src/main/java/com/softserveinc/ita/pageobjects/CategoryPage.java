@@ -13,4 +13,11 @@ public class CategoryPage extends BasePage {
 
         return new SubCategoryPage();
     }
+
+    @Step("Opened '{popularBrandName}' products page")
+    public SearchResultPage openPopularBrandProductsPage(String popularBrandName) {
+        $x(String.format("//a[@title='%s']", popularBrandName)).click();
+
+        return new SearchResultPage();
+    }
 }
