@@ -27,4 +27,8 @@ public enum ShoeSize {
     SIZE_46(46);
 
     private final double sizeNumber;
+
+    public String getSizeNumber() {
+        return String.valueOf(sizeNumber);
+    }
 }
