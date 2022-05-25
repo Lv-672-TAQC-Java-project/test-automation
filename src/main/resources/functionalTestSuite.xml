@@ -47,4 +47,10 @@
             <class name="com.softserveinc.ita.DeliveryLocationTest"/>
         </classes>
     </test>
+
+    <test name="Credit functionality">
+        <classes>
+            <class name="com.softserveinc.ita.CreditTest"/>
+        </classes>
+    </test>
 </suite>
