@@ -1,11 +1,11 @@
 package com.softserveinc.ita;
 
 import com.softserveinc.ita.pageobjects.components.Review;
-import com.softserveinc.ita.pageobjects.models.FilterSectionName;
 import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
 import com.softserveinc.ita.utils.TestRunner;
 import io.qameta.allure.Description;
 import io.qameta.allure.Issue;
+import org.assertj.core.api.AssertionsForClassTypes;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.annotations.Test;
 
@@ -13,9 +13,9 @@ import java.util.Collections;
 import java.util.stream.Collectors;
 
 import static com.softserveinc.ita.pageobjects.models.CategoryName.LAPTOPS_AND_COMPUTERS;
+import static com.softserveinc.ita.pageobjects.models.FilterSectionName.SELLER;
 import static com.softserveinc.ita.pageobjects.models.RatingNumber.FOUR;
 import static org.assertj.core.api.Assertions.assertThat;
-import static com.softserveinc.ita.pageobjects.models.FilterSectionName.SELLER;
 
 public class ReviewsTest extends TestRunner {
 
@@ -79,16 +79,17 @@ public class ReviewsTest extends TestRunner {
                 .as("The title on the reviews page should contain " + productName)
                 .containsIgnoringCase(productName);
 
-        var commonRatingSection = reviewsTab.getCommonRatingSection();
+        var reviewsFilteringModal = reviewsTab.openReviewsFilteringModal();
 
-        var filteredReviews = commonRatingSection
+        var filteredReviews = reviewsFilteringModal
                 .filterReviews(FOUR)
+                .openReviewsTab()
                 .getReviews();
 
-        int reviewsCount = commonRatingSection.getReviewsCount();
-
-        assertThat(filteredReviews)
-                .as("filtered reviews should have size " + reviewsCount)
-                .hasSize(reviewsCount);
+        int expectedRatingNumber = 4;
+        filteredReviews
+                .forEach(review -> AssertionsForClassTypes.assertThat(review.getRating())
+                        .as("Product name should be " + expectedRatingNumber)
+                        .isEqualTo(expectedRatingNumber));
     }
 }

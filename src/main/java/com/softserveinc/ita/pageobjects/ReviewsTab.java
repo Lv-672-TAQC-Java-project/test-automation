@@ -1,7 +1,7 @@
 package com.softserveinc.ita.pageobjects;
 
-import com.softserveinc.ita.pageobjects.components.CommonRatingSection;
 import com.softserveinc.ita.pageobjects.components.Review;
+import com.softserveinc.ita.pageobjects.components.ReviewsFilteringModal;
 import com.softserveinc.ita.pageobjects.models.ReviewSortingOption;
 import io.qameta.allure.Step;
 import lombok.Getter;
@@ -21,7 +21,11 @@ import static java.util.stream.IntStream.rangeClosed;
 @Getter
 public class ReviewsTab extends BasePage {
 
-    private final CommonRatingSection commonRatingSection = new CommonRatingSection();
+    public ReviewsFilteringModal openReviewsFilteringModal(){
+
+        $x("//button[contains(@class,'button_with_icon button_size_medium button_color_navy')]").click();
+        return new ReviewsFilteringModal();
+    }
 
     public List<Review> getReviews() {
         String reviewPath = "//div[@class='comment']";
