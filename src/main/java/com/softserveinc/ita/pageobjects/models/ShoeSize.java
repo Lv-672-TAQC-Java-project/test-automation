@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-@Getter
 public enum ShoeSize {
     SIZE_37(37),
     SIZE_37_5(37.5),
